@@ -1062,6 +1062,14 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Templates\ContactEmailTemplate.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Templates\OfferAcceptedEmailTemplate.cshtml" />
+    <Content Include="Templates\OfferRejectedEmailTemplate.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Templates\QuestionEmailTemplate.cshtml" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.IO;
 using System.Net.Mime;
+using System.Reflection;
 using Models;
 using Models.ApplicationModels;
 using Models.ViewModels;
@@ -86,7 +87,7 @@ namespace Services.Home.EmailService
         {
             string template =
                 File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    "Services/Home/EmailService/Templates/OfferRejectedEmailTemplate.cshtml"));
+                    "Templates/OfferRejectedEmailTemplate.cshtml"));
             return template;
         }
 
@@ -94,7 +95,7 @@ namespace Services.Home.EmailService
         {
             string template =
                 File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    "Services/Home/EmailService/Templates/OfferAcceptedEmailTemplate.cshtml"));
+                    "Templates/OfferAcceptedEmailTemplate.cshtml"));
 
             return template;
         }
@@ -103,19 +104,19 @@ namespace Services.Home.EmailService
         {
             string template = File.ReadAllText(
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    "Services/Home/EmailService/Templates/QuestionEmailTemplate.cshtml"));
+                    "Templates/QuestionEmailTemplate.cshtml"));
 
             return template;
         }
 
         public string GetContactTemplate()
         {
-
+            var x = Directory.GetCurrentDirectory();
 
             string template = File.ReadAllText(
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    "Services/Home/EmailService/Templates/ContactEmailTemplate.cshtml"));
-
+                    "Templates/ContactEmailTemplate.cshtml"));
+            
             return template;
         }
     }

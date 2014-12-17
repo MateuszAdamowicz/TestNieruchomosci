@@ -148,10 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Home\EmailService\Templates\ContactEmailTemplate.cshtml" />
-    <None Include="Home\EmailService\Templates\OfferAcceptedEmailTemplate.cshtml" />
-    <None Include="Home\EmailService\Templates\OfferRejectedEmailTemplate.cshtml" />
-    <None Include="Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
