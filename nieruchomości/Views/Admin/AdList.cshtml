@@ -1,0 +1,182 @@
+﻿@using System.Data.SqlTypes
+@model System.Collections.Generic.IEnumerable<Models.ViewModels.AdminAdvertToShow>
+<style type="text/css">
+    .hiddenAd {
+        background-color: rgb(65, 65, 65);
+        color: white;
+        display: none;
+    }
+    .hiddenAd:hover {
+        background-color: black;
+    }
+
+    .Ad {
+        background-color:rgb(137, 213, 164)
+    }
+
+    .Ad:hover {
+        background-color:rgb(73, 147, 99)
+    }
+
+    .deletedAd {
+        background-color: red;
+        display: none;
+    }
+</style>
+
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        @if (HttpContext.Current.Request.Params.Get("changed") == "True")
+        {
+            var hide = HttpContext.Current.Request.Params.Get("hide");
+            if (hide == "True")
+            {
+                <div class="alert alert-dismissable alert-default" style="margin: 10px; background-color: #798d8f; border-color: #74898a; color: white">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <div>
+                        <strong>Ogłoszenie zostało ukryte!</strong><br/>
+                        Od tej pory nie będzie widoczne na liście nieruchomości.
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-dismissable alert-info" style="margin: 10px">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <div>
+                        <strong>Ogłoszenie zostało odkryte!</strong><br/>
+                        Od tej pory będzie widoczne na liście nieruchomości.
+                    </div>
+                </div>
+            }
+
+        }
+        <h4>Lista nieruchomości</h4>
+        <select id="filter" text="Pokaż" class="form-control">
+            <option text="aktywne" value="active">aktywne</option>
+            <option text="ukryte" value="hidden">ukryte</option>
+            <option text="usunięte" value="deleted">usunięte</option>
+        </select>
+        <div class="row">
+            <div class="col-md-12" style="font-size: small">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            Data dodania
+                        </th>
+                        <th>
+                            Typ
+                        </th>
+                        <th>
+                            Tytuł
+                        </th>
+                        <th>
+                            Miasto
+                        </th>
+                        <th>
+                            Osoba prowadząca
+                        </th>
+                        <th></th>
+                        <th>Pokaż/Ukryj</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var ad in Model.Where(x => x.Visible && !x.Deleted))
+                    {
+                        <tr class="Ad">
+                            <td>@ad.CreatedAt.ToShortDateString()</td>
+                            <td>@ad.AdType</td>
+                            <td>@ad.Title</td>
+                            <td>@ad.City</td>
+                            <td>@ad.Worker.FullName</td>
+                            <td style="text-align: center">
+                                @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
+                                @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
+                                @Html.ActionLink("Usuń", "DeleteAd", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
+                            </td>
+                            <td style="text-align: center">
+                                @if (ad.Visible)
+                                {
+                                    @Html.ActionLink("Ukryj", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-default btn-xs"})
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Pokaż", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-info btn-xs"})
+                                }
+                            </td>
+                        </tr>
+                    }
+                    @foreach (var ad in Model.Where(x => !x.Visible && !x.Deleted))
+                    {
+                        <tr class="hiddenAd">
+                            <td>@ad.CreatedAt.ToShortDateString()</td>
+                            <td>@ad.AdType</td>
+                            <td>@ad.Title</td>
+                            <td>@ad.City</td>
+                            <td>@ad.Worker.FullName</td>
+                            <td style="text-align: center">
+                                @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
+                                @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
+                                @Html.ActionLink("Usuń", "DeleteAd", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
+                            </td>
+                            <td style="text-align: center">
+                                @if (ad.Visible)
+                                {
+                                    @Html.ActionLink("Ukryj", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-default btn-xs"})
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Pokaż", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-info btn-xs"})
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                    @foreach (var ad in Model.Where(x => x.Deleted))
+                    {
+                        <tr class="deletedAd">
+                            <td>@ad.CreatedAt.ToShortDateString()</td>
+                            <td>@ad.AdType</td>
+                            <td>@ad.Title</td>
+                            <td>@ad.City</td>
+                            <td>@ad.Worker.FullName</td>
+                            <td style="text-align: center">
+                                @Html.ActionLink("Info", "Show", "Home", new { key = ad.Number }, new { @class = "btn btn-success btn-xs" })
+                            <td style="text-align: center">
+                                --
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" src="/Scripts/jquery-1.10.2.js"></script>
+
+<script language="javascript">
+    $("#filter").on("change", function() {
+        var val = $(this).val();
+
+        if (val === "hidden") {
+            $(".Ad").hide();
+            $(".deletedAd").hide();
+            $(".hiddenAd").show();
+        } else if (val === "active") {
+            $(".hiddenAd").hide();
+            $(".deletedAd").hide();
+            $(".Ad").show();
+        } else if (val == "deleted") {
+            $(".hiddenAd").hide();
+            $(".Ad").hide();
+            $(".deletedAd").show();
+        }
+
+    })
+</script>
+

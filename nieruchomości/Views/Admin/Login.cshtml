@@ -1,0 +1,35 @@
+﻿@model Models.ViewModels.LoginViewModel
+<div class="col-md-12 custom-center-panel">
+    @{
+        if (ViewBag.LoginError != null && (bool) (ViewBag.LoginError))
+        {
+            <div class="alert alert-danger">
+                <div>
+                    <strong>Błąd!</strong><br/> Nie udało się zalogować. Wpisz poprawne dane!
+                </div>
+            </div>
+        }
+    }
+    <h4>Zaloguj się jako administrator</h4>
+    <div class="col-md-12">
+        <div class="form-group-sm">
+            @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                ;
+                <div class="row">
+                    <small>Login:</small><br/>
+                    @Html.EditorFor(model => model.Login, new {htmlAttributes = new {@class = "form-control"}})
+                </div>
+                <div class="row">
+                    <small>Hasło:</small><br/>
+                    @Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "form-control", @type = "password"}})
+                </div><br/>
+                <div class="row">
+                    <button type="submit">Zaloguj</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

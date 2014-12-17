@@ -1,0 +1,27 @@
+﻿@model List<Models.EntityModels.Statistics>
+
+<!DOCTYPE html>
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        <h4>Ostatnie dni:</h4>
+        <div class="row" style="font-size: 12px">
+            @foreach (var stat in Model.Take(4).OrderByDescending(x => x.CreatedAt))
+            {
+                <div class="col-md-3">
+                    <b>@stat.CreatedAt.ToShortDateString()</b><br/>
+                    Liczba odwiedzin: @stat.Visits.Count <br/>
+                    Liczba użytkowników: @stat.Sessions.Count
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        <h4>Statystyki</h4>
+        <b>Liczba odwiedzin:</b> @Model.Sum(x => x.Visits.Sum(y => y.Count)) <br />
+        <b>Liczba użytkowników:</b> @Model.Sum(x => x.Sessions.Sum(y => 1))
+    </div>
+</div>

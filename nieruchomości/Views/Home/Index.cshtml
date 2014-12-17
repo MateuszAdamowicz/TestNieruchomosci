@@ -1,0 +1,290 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "View";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/angular-resource.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/app/app.js"></script>
+<script src="~/Scripts/app/dirPagination.js"></script>
+
+
+@*@Scripts.Render("~/bundles/angular")*@
+@*
+@Scripts.Render("~/bundles/app")
+*@
+
+
+<div ng-app="searcher">
+    <div class="row" style="margin-right: 15px" ng-controller="SearcherController">
+        <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+            <h4>Wyszukaj ofertę</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <small>Rodzaj nieruchomości: </small>
+                    <select class="form-control input-sm" ng-model="myProperty" ng-options="property.value as property.name for property in properties" ng-change="loadResources(myProperty)">
+                        <option style="display: none" value="">Wybierz rodzaj</option>
+                    </select>
+                </div>
+                <div class="col-md-6" ng-show="myProperty =='house'">
+                    <small>Typ oferty :</small>
+                    <select class="form-control input-sm" ng-model="myoffertTypeHouse" ng-options="offert.ToLet as boolToStr(offert.ToLet)+' '+ offert.counter.split(' ')[1]  for offert in houseList|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{City:myhouseCity||undefined}|filter:{Price:myhousePrice||undefined}|unique:'ToLet'">
+                        <option style="display: none" value="">Wybierz rodzaj</option>
+                    </select>
+                </div>
+                <div class="col-md-6" ng-show="myProperty =='flat'">
+                    <small>Typ oferty :</small>
+                    <select class="form-control input-sm" ng-model="myoffertTypeFlat" ng-options="offert.ToLet as boolToStr(offert.ToLet)+' '+ offert.counter.split(' ')[1] for offert in flatList|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|filter:{City:myflatCity||undefined}|unique:'ToLet'">
+                        <option style="display: none" value="">Wybierz rodzaj</option>
+                    </select>
+                </div>
+            </div>
+            @* HOUSES *@
+            <div class="row" style="margin-top: 25px" ng-show="myProperty =='house'">
+                <div class="col-md-4">
+                    <small>Miejscowość:</small>
+                    <select class="form-control input-sm" ng-model="myhouseCity" ng-options="city.City as city.counter for city in houseList|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|filter:{City:'!!'}|unique:'City'">
+                        <option value="">Wszystkie</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <small>Powierzchnia użytkowa:</small>
+                    <select class="form-control input-sm" ng-model="myhouseUsableArea" ng-options="usablearea.UsableArea as usablearea.counter for usablearea in houseList|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{Price:myhousePrice||undefined}|filter:{City:myhouseCity||undefined}|filter:{UsableArea:'!!'}|unique:'UsableArea'">
+                        <option value="">Wszystkie powierzchnie</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <small>Cena:</small>
+                    <select class="form-control input-sm" ng-model="myhousePrice" ng-options="price.Price as price.counter for price in houseList|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{City:myhouseCity||undefined}|filter:{Price:'!!'}|unique:'Price'">
+                        <option value="">Każda cena</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select class="form-control input-sm" style="margin-top: 15px; margin-left: 15px;" ng-model="mySort" ng-options="sort.name for sort in sorting">
+                            <option style="display: none" value="">Rodzaj sortowania</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 22px; padding-right: 22px;">
+                        <button class="btn btn-sm btn-default" style="margin-top: 15px; width: 100%" ng-click="clearFilters(myProperty)">Wyczyść filtry</button>
+                    </div>
+                </div>
+            </div>
+            @* FLATS *@
+            <div class="row" style="margin-top: 25px" ng-show="myProperty =='flat'">
+                <div class="col-md-4">
+                    <small>Miejscowość:</small>
+                    <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.City as city.counter for city in flatList|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|filter:{City:'!!'}|unique:'City'">
+                        <option ng-model="myflatCity" value="">Wszystkie</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <small>Ilość pokoi:</small>
+                    <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms as room.counter for room in flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||endefined}|filter:{Price:myflatPrice||undefined}|filter:{Rooms:'!!'}|unique:'Rooms'">
+                        <option value="">Każda ilość</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <small>Cena:</small>
+                    <select class="form-control input-sm" ng-model="myflatPrice" ng-options="price.Price as price.counter for price in flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:'!!'}|unique:'Price'">
+                        <option value="">Każda cena</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select class="form-control input-sm" style="margin-top: 15px; margin-left: 15px;" ng-model="mySort" ng-options="sort.name for sort in sorting">
+                            <option style="display: none" value="">Rodzaj sortowania</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 22px; padding-right: 22px;">
+                        <button class="btn btn-sm btn-default" style="margin-top: 15px; width: 100%" ng-click="clearFilters(myProperty)">Wyczyść filtry</button>
+                    </div>
+                </div>
+            </div>
+            @* LANDS *@
+            <div class="row" style="margin-top: 25px" ng-show="myProperty =='land'">
+                <div class="col-md-4">
+                    <small>Miejscowość:</small>
+                    <select class="form-control input-sm" ng-model="mylandCity" ng-options="city.City as city.counter for city in landList|filter:{Area:mylandArea||undefined}|filter:{Price:mylandPrice||undefined}|filter:{City:'!!'}|unique:'City'">
+                        <option value="">Wszystkie</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <small>Powierzchnia:</small>
+                    <select class="form-control input-sm" ng-model="mylandArea" ng-options="area.Area as area.counter for area in landList|filter:{City:mylandCity||undefined}|filter:{Price:mylandPrice||undefined}|filter:{Area:'!!'}|unique:'Area'">
+                        <option value="">Wszystkie powierzchnie</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <small>Cena:</small>
+                    <select class="form-control input-sm" ng-model="mylandPrice" ng-options="price.Price as price.counter for price in landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|filter:{Price:'!!'}|unique:'Price'">
+                        <option value="">Każda cena</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select class="form-control input-sm" style="margin-top: 15px; margin-left: 15px;" ng-model="mySort" ng-options="sort.name for sort in sorting">
+                            <option value="">Rodzaj sortowania</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 22px; padding-right: 22px;">
+                        <button class="btn btn-sm btn-default" style="margin-top: 15px; width: 100%" ng-click="clearFilters(myProperty)">Wyczyść filtry</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="spinner" class="col-md-12" style="margin-left: 15px; padding-left: 0;">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+
+        @* LIST FLATS*@
+        <div ng-show="myProperty =='flat'">
+            <ul style="padding-left: 0;">
+                <li dir-paginate="flat in filteredflatList = (flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'flat'" current-page="currentPage" pagination-id="flat">
+                    <div class="col-md-12 custom-advert-panel">
+                        <div class="col-md-3">
+                            <a href="/Home/Show?key={{flat.Number}}">
+                                <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 180px; height: 180px; border: 1px solid black" />
+                                <img ng-show="flat.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 180px; height: 180px; border: 1px solid black">
+                                <div style="width: 180px; color: white; background-color: black; text-align: center">{{flat.Number}}</div>
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0; padding-right: 0">
+                                    <div class="pull-left" style="font-weight: bold">
+                                        <a href="/Home/Show?key={{flat.Number}}">{{flat.Title}}</a> <small style="margin-left: 10px">nr. {{flat.Number}}</small>
+                                    </div>
+                                    <div class="pull-right" style="font-weight: bolder; font-size: larger">{{flat.Price}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 custom-advert-details">
+                                    {{flat.City}}, <small>{{flat.Rooms}}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="custom-advert-description" style="height: 100px; overflow-y:scroll">{{flat.Description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="text-center">
+                <dir-pagination-controls pagination-id="flat" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
+            </div>
+        </div>
+        @* LIST HOUSES*@
+        <div ng-show="myProperty =='house'">
+            <ul style="padding-left: 0;">
+                <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
+                    <div class="col-md-12 custom-advert-panel">
+                        <div class="col-md-3">
+                            <a href="/Home/Show?key={{house.Number}}">
+                                <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 180px; height: 180px; border: 1px solid black" />
+                                <img ng-show="house.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 180px; height: 180px; border: 1px solid black">
+                                <div style="width: 180px; color: white; background-color: black; text-align: center">{{house.Number}}</div>
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0; padding-right: 0">
+                                    <div class="pull-left" style="font-weight: bold">
+                                        <a href="/Home/Show?key={{house.Number}}">{{house.Title}}</a> <small style="margin-left: 10px">nr. {{house.Number}}</small>
+                                    </div>
+                                    <div class="pull-right" style="font-weight: bolder; font-size: larger">{{house.Price}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 custom-advert-details">
+                                    {{house.City}}, <small>{{house.UsableArea}}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="custom-advert-description" style="height: 100px; overflow-y:scroll">{{house.Description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="text-center">
+                <dir-pagination-controls pagination-id="house" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
+            </div>
+        </div>
+        @* LIST LAND*@
+        <div ng-show="myProperty =='land'">
+            <ul style="padding-left: 0;">
+                <li dir-paginate="land in filteredlandList = (landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|filter:{Price:mylandPrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'land'" current-page="currentPage" pagination-id="land">
+                    <div class="col-md-12 custom-advert-panel">
+                        <div class="col-md-3">
+                            <a href="/Home/Show?key={{land.Number}}">
+                                <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 180px; height: 180px; border: 1px solid black"/>
+                                <img ng-show="land.Picture.Link == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 180px; height: 180px; border: 1px solid black">
+                                <div style="width: 180px; color: white; background-color: black; text-align: center">{{land.Number}}</div>
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0; padding-right: 0">
+                                    <div class="pull-left" style="font-weight: bold">
+                                        <a href="/Home/Show?key={{land.Number}}">{{land.Title}}</a> <small style="margin-left: 10px">nr. {{land.Number}}</small>
+                                    </div>
+                                    <div class="pull-right" style="font-weight: bolder; font-size: larger">{{land.Price}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 custom-advert-details">
+                                    {{land.City}}, <small>{{land.Area}}</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="custom-advert-description" style="height: 100px; overflow-y:scroll">{{land.Description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="text-center">
+                <dir-pagination-controls pagination-id="land" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-right: 15px" ng-controller="NewestController">
+        <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+            <h4>Najnowsze oferty</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="/Home/Show?key={{advert.Number}}" ng-repeat="advert in NewestAdverts">
+                        <div class="col-md-3">
+                            <img ng-show="advert.Picture != null" src="/Content/Photos/{{advert.Picture.Link}}" width="100%" height="150px" />
+                            <img src="/Content/Photos/NoImageAvailable.jpg" width="100%" height="150px" ng-show="advert.Picture == null" />
+
+                            <div class="col-md-12" style="background-color: black; text-align: center">
+                                <div class="custom-city" style="color: white">
+                                    {{advert.City}}
+                                </div>
+                                <div class="custom-price" style="color: white">
+                                    {{advert.Price}}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

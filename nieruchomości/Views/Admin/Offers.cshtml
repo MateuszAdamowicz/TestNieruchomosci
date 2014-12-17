@@ -1,0 +1,71 @@
+﻿@using System.Data.SqlTypes
+@using Models.ViewModels
+@model List<Models.EntityModels.Offer>
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        <h4>Lista ofert</h4>
+        <div class="row">
+            <div class="col-md-12" style="font-size: small">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Data dodania
+                            </th>
+                            <th>
+                                Imię i nazwisko
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Rodzaj nieruchomości
+                            </th>
+                            <th>
+                                Miasto
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ad in Model)
+                        {
+                            string clas;
+                            if (ad.Status == OfferStatus.New)
+                            {
+                                clas = "active";
+                            }
+                            else if (ad.Status == OfferStatus.Accepted)
+                            {
+                                clas = "success";
+                            }
+                            else
+                            {
+                                clas = "danger";
+                            }
+
+                            <tr class="@clas">
+                                <td style="vertical-align:middle">@ad.CreatedAt</td>
+                                <td style="vertical-align:middle">@ad.FullName</td>
+                                <td style="vertical-align:middle">@ad.Email</td>
+                                <td style="vertical-align:middle">@ad.AdType</td>
+                                <td style="vertical-align:middle">@ad.City</td>
+                                <td style="vertical-align: middle">
+                                    <a href="/Admin/Offer/@ad.Id">
+                                        <button class="btn btn-xs">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

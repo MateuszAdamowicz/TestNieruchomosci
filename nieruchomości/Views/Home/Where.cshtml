@@ -1,0 +1,39 @@
+﻿
+<style text="css">
+    html, body, #map {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+        <h4>Gdzie nas znaleźć?</h4>
+        <div style="height:500px; width:100%; border: 2px solid black">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript" src="/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJktXHK4ntWky3gGMSpM-7AvJeTYxHFk">
+</script>
+<script type="text/javascript">
+    function initialize() {
+        var mapOptions = {
+            center: { lat: 50.905507, lng: 15.733918 },
+            zoom: 14
+        };
+        var map = new google.maps.Map($("#map")[0], mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: { lat: 50.905507, lng: 15.733918 },
+            map: map,
+            title: 'Do zmiany'
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

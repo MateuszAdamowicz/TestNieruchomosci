@@ -1,0 +1,132 @@
+﻿@using Models.EntityModels
+@model Models.ViewModels.AdminFlat
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="row" style="padding: 10px">
+        <div class="alert alert-dismissable alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Błąd</strong> @Html.ValidationSummary()
+            @{
+                var errors = ViewData.ModelState.Values.Count(x => x.Errors.Count > 0);
+                var all = ViewData.ModelState.Keys.Count;
+
+                var errors_p = (int)(((float) errors/(float) all)*100);
+                
+            }
+            <div class="progress progress-striped active" style="background-color:#e74c3c">
+                <div class="progress-bar progress-bar-success" style="width: @(100-errors_p)%"></div>
+                <div class="progress-bar progress-bar-danger" style="width: @(errors_p)%"></div>
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm("AddFlat", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    Html.AntiForgeryToken();
+    <div class="form-group-sm">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <small><b>Tytuł:</b></small>
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("Title") && ViewData.ModelState["Title"].Errors.Count > 0)?";border: 2px solid red":"" )} })
+                    </div>
+                    <div class="col-md-6">
+                        <small><b>Cena:</b></small>
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Miasto:</small>
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("City") && ViewData.ModelState["City"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Lokalizacja:</small>
+                        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Location") && ViewData.ModelState["Location"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Powierzchnia:</small>
+                        @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Area") && ViewData.ModelState["Area"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Kondygnacja:</small>
+                        @Html.EditorFor(model => model.Storey, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Storey") && ViewData.ModelState["Storey"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Stan techniczny:</small>
+                        @Html.EditorFor(model => model.TechnicalCondition, new { htmlAttributes = new { @class = "form-control" }, @style = ((ViewData.ModelState.ContainsKey("TechnicalCondition") && ViewData.ModelState["TechnicalCondition"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Liczba pokoi:</small>
+                        @Html.EditorFor(model => model.Rooms, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Rooms") && ViewData.ModelState["Rooms"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Ogrzewanie:</small>
+                        @Html.EditorFor(model => model.Heating, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Heating") && ViewData.ModelState["Heating"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Czynsz:</small>
+                        @Html.EditorFor(model => model.Rent, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Rent") && ViewData.ModelState["Rent"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Forma własności:</small>
+                        @Html.EditorFor(model => model.Ownership, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Ownership") && ViewData.ModelState["Ownership"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Cena za m<sup>2</sup>:</small>
+                        @Html.EditorFor(model => model.PricePerMeter, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("PricePerMeter") && ViewData.ModelState["PricePerMeter"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Opis:</small>
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" + ((ViewData.ModelState.ContainsKey("Description") && ViewData.ModelState["Description"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Szczegóły:</small>
+                        @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" + ((ViewData.ModelState.ContainsKey("Details") && ViewData.ModelState["Details"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Typ ogłoszenia:</small>
+                        @Html.DropDownListFor(model => model.ToLet, new SelectList(new Dictionary<string, bool>() { { "Sprzedaż", false }, { "Wynajem", true } }, "value", "key"), new { @class = "form-control", @style = "max-width:none" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Osoba prowadząca:</small>
+                        @Html.DropDownListFor(model => model.Worker, new SelectList((List<Worker>)ViewData["Workers"], "Id", "FullName"), new { @class = "form-control", @id = "workers", @style = "max-width:none" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Zdjęcia:</small>
+                        <input type="file" multiple class="form-control" id="Files" name="Files" accept="image/*" />
+                    </div>
+                </div>
+                <input type="hidden" id="AdType" name="AdType" value="Flat" />
+                <div class="row">
+                    <div class="col-md-12" style="text-align: center; margin-top: 10px">
+                        <button type="submit" class="btn btn-xs btn-success" style="width: 150px">Zapisz</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

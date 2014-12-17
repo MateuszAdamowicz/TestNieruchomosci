@@ -1,0 +1,68 @@
+﻿@model Models.ViewModels.WorkersViewModel
+
+@{
+    ViewBag.Title = "Workers";
+}
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        @if (Model.Response != null && Model.Response.Success)
+        {
+            <div class="row" style="padding: 10px">
+                <div class="col-md-12">
+                    <div class="alert alert-dismissable alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <span class="glyphicon glyphicon-ok" style="margin-right:20px"></span><strong>@Model.Response.Message</strong>
+                    </div>
+                </div>
+            </div>
+        }
+        <h4>Pracownicy</h4>
+
+        <p>
+            @Html.ActionLink("Dodaj pracownika", "AddWorker")
+        </p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Nazwisko
+                    </th>
+                    <th>
+                        Imię
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Data dodania
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Workers)
+                {
+                    <tr>
+                        <td>
+                            @item.LastName
+                        </td>
+                        <td>
+                            @item.FirstName
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.CreatedAt.ToShortDateString()
+                        </td>
+                        <td style="text-align: center">
+                            @Html.ActionLink("Pokaż", "Worker", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
+                            @Html.ActionLink("Edytuj", "EditWorker", new {id = item.Id}, new {@class = "btn btn-success btn-xs"})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

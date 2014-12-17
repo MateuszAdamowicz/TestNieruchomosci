@@ -1,0 +1,21 @@
+﻿@using Models.ViewModels
+@model Models.ViewModels.ShowAdvert
+
+
+@{
+    ViewBag.Title = "Show";
+}
+
+@if (Model.AdType == AdType.Flat)
+{
+    @Html.Partial("_ShowFlat", Model.Flat)
+}
+else if (Model.AdType == AdType.House)
+{
+    @Html.Partial("_ShowHouse", Model.House)
+}
+else if (Model.AdType == AdType.Land)
+{
+    @Html.Partial("_ShowLand", Model.Land)
+}
+

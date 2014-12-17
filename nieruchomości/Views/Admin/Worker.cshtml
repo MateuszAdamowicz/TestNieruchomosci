@@ -1,0 +1,75 @@
+﻿@using Services.Admin
+@model Models.ViewModels.WorkerAdverts
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        <div class="custom-advert-panel-title">Informacje o pracowniku</div>
+        <div class="custom-advert-panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <b>Imię:</b>
+                        </div>
+                        <div class="col-md-6">@Model.FirstName</div> <br />
+                        <div class="col-md-6">
+                            <b>Nazwisko:</b>
+                        </div>
+                        <div class="col-md-6">@Model.LastName</div> <br />
+                        <div class="col-md-6">
+                            <b>Telefon (1):</b>
+                        </div>
+                        <div class="col-md-6">@Model.PhoneFirst</div> <br />
+                        <div class="col-md-6">
+                            <b>Telefon (2):</b>
+                        </div>
+                        <div class="col-md-6">@Model.PhoneSecond</div> <br />
+                        <div class="col-md-6">
+                            <b>Email:</b>
+                        </div>
+                        <div class="col-md-6">@Model.Email</div> <br />
+                    </div>
+                </div>
+                <div class="col-md-6" style="text-align:right">
+                    @if (Model.HasPhoto)
+                    {
+                        <img src="/Content/Photos/Workers/@Model.Photo"/>
+                    }
+                    else
+                    {
+                        <img src="/Content/Photos/NoImageAvailable.jpg" height="100px"/>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="custom-advert-panel-title">Lista ogłoszeń</div>
+        <div class="custom-advert-panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <table width="100%" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th width="25%">Data dodania</th>
+                                <th width="25%">Typ</th>
+                                <th width="25%">Miasto</th>
+                                <th width="25%">Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var advert in Model.Adverts)
+                            {
+                                <tr>
+                                    <td>@advert.CreatedAt.ToShortDateString()</td>
+                                    <td>@EnumNameService.GetName(advert.AdType)</td>
+                                    <td>@advert.City</td>
+                                    <td><a href="/Home/Show?key=@advert.Number">Link</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

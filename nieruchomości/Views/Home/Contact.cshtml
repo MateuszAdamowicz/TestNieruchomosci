@@ -1,0 +1,90 @@
+﻿@model Models.ContactEmail
+
+@{
+    ViewBag.Title = "View";
+}
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        <h4>Dodaj bezpłatnie ofertę</h4>
+
+
+        <div class="col-md-12">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="row" style="padding: 10px">
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Błąd</strong> @Html.ValidationSummary()
+                        @{
+                var errors = ViewData.ModelState.Values.Count(x => x.Errors.Count > 0);
+                var all = ViewData.ModelState.Keys.Count;
+
+                var errors_p = (int)(((float)errors / (float)all) * 100);
+
+                        }
+                        <div class="progress progress-striped active" style="background-color:#e74c3c">
+                            <div class="progress-bar progress-bar-success" style="width: @(100-errors_p)%"></div>
+                            <div class="progress-bar progress-bar-danger" style="width: @(errors_p)%"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-6" style="padding-left:0px">
+                    <div class="custom-advert-panel-title">Jak to działa?</div>
+                    <p class="custom-advert-panel-body">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare eros nec quam fringilla, ut hendrerit lacus volutpat. Curabitur lobortis tellus est, at sodales risus luctus ac. Ut mattis ac mi sed rutrum. Suspendisse non gravida libero, sit amet varius dolor. Nunc tincidunt elementum consequat. Proin ultricies turpis lectus, ut rutrum nunc vehicula in. Donec aliquet, elit in tincidunt faucibus, leo nisl viverra augue, ut euismod lacus ligula eu arcu. Vestibulum aliquet urna nisi, et placerat neque ullamcorper at. Suspendisse viverra et ex eget faucibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut varius, nisi a feugiat scelerisque, sem diam bibendum enim, eu pharetra nulla sapien eu libero. Nunc nec maximus eros. Ut et sagittis metus, a bibendum augue. Mauris eleifend ultricies ullamcorper. Sed id ex a orci laoreet vehicula.
+
+                        Integer ornare leo quis egestas eleifend. Aliquam dictum pulvinar mauris et auctor. Praesent aliquam a nisl at pellentesque. Fusce suscipit lorem sit amet quam tincidunt, eget feugiat enim euismod. Sed pretium sit amet urna a condimentum. In tempus, risus vitae hendrerit pellentesque, urna libero fermentum dolor, quis rhoncus lectus lectus nec ligula. Proin sed tellus fringilla, finibus lectus sit amet, molestie arcu. Aliquam condimentum, libero in tristique commodo, tortor dui elementum nisi, sit amet hendrerit lectus turpis lacinia elit. Praesent at blandit turpis. Quisque non faucibus diam.
+
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group-sm">
+                            <div class="row">
+                                <div class="custom-advert-panel-title">
+                                    Dane klienta
+                                </div>
+                                <div class="custom-advert-panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <small>Imię i nazwisko</small>
+                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("FullName") && ViewData.ModelState["FullName"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <small>Email</small>
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("Email") && ViewData.ModelState["Email"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <small>Nr. Telefonu</small>
+                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("PhoneNumber") && ViewData.ModelState["PhoneNumber"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="custom-advert-panel-title">
+                                    Napisz czego szukasz
+                                </div>
+                                <div class="custom-advert-panel-body">
+                                    @Html.TextAreaFor(model => model.Body, new { @class = "form-control", @style = "max-width:none; height: 200px" + ((ViewData.ModelState.ContainsKey("Body") && ViewData.ModelState["Body"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                                </div>
+                            </div>
+                            <div class="row" style="text-align:center">
+                                <button type="submit" class="btn btn-sm btn-success" style="width:100px">Wyślij</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

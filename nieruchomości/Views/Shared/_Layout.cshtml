@@ -1,0 +1,151 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/ng-grid.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+<div class="container body-content">
+    @if (!String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name))
+    {
+        <div class="row">
+            <div class="col-md-12" style="background-color: rgb(255, 172, 172); margin-bottom: 10px">
+                <div class="col-md-6" style="text-align: left;">
+                    <small>zalogowano jako <strong>@HttpContext.Current.User.Identity.Name</strong></small>
+                </div>
+                <div class="col-md-6" style="text-align: right;">
+                    <small><strong><a style="color:black" href="/Admin/Login">Wyloguj</a></strong></small>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-2 custom-left-menu">
+            <img src="~/Content/img/the-palace-of-culture.jpg" width="100%"/>
+        </div>
+        <div class="col-md-10">
+            <div class="col-md-6">
+                <div class="partner" style="font-style: italic; color: black; font-size: large; margin-bottom: 10px; border-bottom: 1px solid black; border-radius: 10px; padding-left: 25px; border-left: 1px solid black">
+                    Najlepszy partner w nieruchomościach
+                </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <div class="partner" style="font-style: italic; color: black; font-size: large; margin-bottom: 10px; border-bottom: 1px solid black; border-radius: 10px; padding-right: 25px; border-right: 1px solid black; text-align: right">
+                    tel. 784 665 112
+                </div>
+            </div>
+            <div class="row" style="margin-right: 15px">
+                <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 190px">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" style="background-color: black" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1" style="background-color: black"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2" style="background-color: black"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active" style="padding: 10px">
+                                <h1>Lorem Ipsum</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non justo quis mi imperdiet ultrices. Morbi sed consectetur risus. Nulla faucibus et ipsum ac aliquet. Integer id facilisis risus, dictum pharetra arcu. In hac habitasse platea dictumst. Cras libero ex, sollicitudin eu semper eget, aliquet in justo. Aliquam vel nibh at est tempus efficitur. Sed urna tellus, scelerisque in felis non, semper tempus nulla. Vivamus porttitor risus non diam molestie mattis. Aliquam quis vestibulum mauris, quis feugiat eros. Nullam gravida, leo vel efficitur consequat, massa purus facilisis enim, vitae semper urna massa at mauris. Nullam ac ex nisl.</p>
+                            </div>
+                            <div class="item" style="padding: 10px">
+                                <h1>Lorem Ipsum
+                                </h1>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non justo quis mi imperdiet ultrices. Morbi sed consectetur risus. Nulla faucibus et ipsum ac aliquet. Integer id facilisis risus, dictum pharetra arcu. In hac habitasse platea dictumst. Cras libero ex, sollicitudin eu semper eget, aliquet in justo. Aliquam vel nibh at est tempus efficitur. Sed urna tellus, scelerisque in felis non, semper tempus nulla. Vivamus porttitor risus non diam molestie mattis. Aliquam quis vestibulum mauris, quis feugiat eros. Nullam gravida, leo vel efficitur consequat, massa purus facilisis enim, vitae semper urna massa at mauris. Nullam ac ex nisl.
+                                </p>
+
+                            </div>
+                            <div class="item" style="padding: 10px">
+                                <h1>
+                                    Lorem Ipsum
+                                </h1>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non justo quis mi imperdiet ultrices. Morbi sed consectetur risus. Nulla faucibus et ipsum ac aliquet. Integer id facilisis risus, dictum pharetra arcu. In hac habitasse platea dictumst. Cras libero ex, sollicitudin eu semper eget, aliquet in justo. Aliquam vel nibh at est tempus efficitur. Sed urna tellus, scelerisque in felis non, semper tempus nulla. Vivamus porttitor risus non diam molestie mattis. Aliquam quis vestibulum mauris, quis feugiat eros. Nullam gravida, leo vel efficitur consequat, massa purus facilisis enim, vitae semper urna massa at mauris. Nullam ac ex nisl.
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12 custom-left-menu" style="padding: 0px">
+                    <ul class="nav nav-pills nav-stacked small">
+                        <li class="custom-list"><a href="/Home/Index">Strona główna</a></li>
+                        <li class="custom-list"><a href="/Home/About">O firmie</a></li>
+                        <li class="custom-list"><a href="/Home/Credits">Kredyty</a></li>
+                        <li class="custom-list"><a href="/Home/Contact">Szybki kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 custom-left-menu">
+                    <small>Wprowadź numer oferty:</small><br/>
+                    @using (Html.BeginForm("Search", "Home"))
+                    {
+                        <div class="row">
+                            <div class="col-md-6" style="padding-right: 0px">
+                                <input class=" form-control input-sm" name="key"/>
+                            </div>
+                            <div class="col-md-6" style="padding-left: 10px">
+                                <button type="submit" class="btn btn-sm btn-default">Wyszukaj</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 custom-left-menu" style="padding: 0px">
+                    <a role="button" class="btn btn-sm btn-danger" style="width: 100%" href="/Home/CreateOffer">Dodaj bezpłatnie ofertę</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 custom-left-menu" style="padding: 0px">
+                    <a role="button" class="btn btn-sm btn-danger" style="width: 100%" href="/Home/Where">Gdzie jesteśmy</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="row">
+        <div class="navbar navbar-default">
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script language="javascript">
+    $('.dropdown-toggle').dropdown();
+    $(".carousel").carousel();
+</script>
+</body>
+</html>

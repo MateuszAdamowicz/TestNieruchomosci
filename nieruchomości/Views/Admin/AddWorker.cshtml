@@ -1,0 +1,117 @@
+﻿@model Models.ViewModels.AdminWorker
+
+@{
+    ViewBag.Title = "AddWorker";
+}
+
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        <h4>Dodaj pracownika</h4>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="row" style="padding: 10px">
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Błąd</strong> @Html.ValidationSummary()
+                    @{
+                        var errors = ViewData.ModelState.Values.Count(x => x.Errors.Count > 0);
+                        var all = ViewData.ModelState.Keys.Count;
+
+                        var errors_p = (int) (((float) errors/(float) all)*100);
+
+                    }
+                    <div class="progress progress-striped active" style="background-color: #e74c3c">
+                        <div class="progress-bar progress-bar-success" style="width: @(100 - errors_p)%">
+                            <span>Ukończono w @(100-errors_p)%</span>
+                        </div>
+                        <div class="progress-bar progress-bar-danger" style="width: @(errors_p)%"></div>
+                    </div>
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("AddWorker", "Admin", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr/>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="col-md-6">
+                    <div class="form-group-sm row">
+                        <div class="control-label col-md-2" style="font-size: small">
+                            Imię
+                        </div>
+                        <div class="col-md-10" style="margin-bottom: 3px">
+                            @Html.EditorFor(model => model.FirstName, new {htmlAttributes = new {@class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("FirstName") && ViewData.ModelState["FirstName"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                        </div>
+                    </div>
+
+                    <div class="form-group-sm row">
+                        <div class="control-label col-md-2" style="font-size: small">
+                            Nazwisko
+                        </div>
+                        <div class="col-md-10" style="margin-bottom: 3px">
+                            @Html.EditorFor(model => model.LastName, new {htmlAttributes = new {@class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("LastName") && ViewData.ModelState["LastName"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                        </div>
+                    </div>
+
+                    <div class="form-group-sm row">
+                        <div class="control-label col-md-2" style="font-size: small">
+                            Tel. 1)
+                        </div>
+                        <div class="col-md-10" style="margin-bottom: 3px">
+                            @Html.EditorFor(model => model.PhoneFirst, new {htmlAttributes = new {@class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("PhoneFirst") && ViewData.ModelState["PhoneFirst"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                        </div>
+                    </div>
+
+                    <div class="form-group-sm row">
+                        <div class="control-label col-md-2" style="font-size: small">
+                            Tel. 2)
+                        </div>
+                        <div class="col-md-10" style="margin-bottom: 3px">
+                            @Html.EditorFor(model => model.PhoneSecond, new {htmlAttributes = new {@class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("PhoneSecond") && ViewData.ModelState["PhoneSecond"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                        </div>
+                    </div>
+
+                    <div class="form-group-sm row">
+                        <div class="control-label col-md-2" style="font-size: small">
+                            Email
+                        </div>
+                        <div class="col-md-10" style="margin-bottom: 3px">
+                            @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("Email") && ViewData.ModelState["Email"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                        </div>
+                    </div>
+                    <div class="form-group-sm row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Dodaj" class="btn btn-sm btn-primary"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group-sm">
+                        <div class="control-label col-md-2">
+                            Zdjęcie:
+                        </div>
+                        <div class="col-md-10" style="margin-bottom: 3px">
+                            <input type="file" class="form-control" id="Photo" name="Photo" style="max-width: none" accept="image/*"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="col-md-6 col-md-push-6">
+            <div class="col-md-12" style="text-align:right">
+                @Html.ActionLink("Wróć do listy", "Workers")
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,50 @@
+﻿@using System.Collections.Concurrent
+@model Models.ViewModels.AdminAdvertToAdd
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        <h4>Dodaj nieruchomość</h4>
+        @Html.EnumDropDownListFor(model => model.AdType, new {@class = "form-control", @style = "max-width:none; border:1px solid green", @id = "AdType"})
+        <div id="flat-form">
+            @Html.Partial("_AddFlat", Model.Flat)
+        </div>
+        <div id="home-form" hidden>
+            @Html.Partial("_AddHouse", Model.House)
+        </div>
+        <div id="land-form" hidden>
+            @Html.Partial("_AddLand", Model.Land)
+        </div>
+    </div>
+</div>
+<script language="javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+<script language="javascript" src="~/Scripts/angular.js"></script>
+
+<script language="javascript">
+    function ShowHide(selectedValue) {
+        if (selectedValue === "Mieszkanie") {
+            $("#home-form").hide();
+            $("#land-form").hide();
+            $("#flat-form").show();
+        } else if (selectedValue === "Dom") {
+            $("#home-form").show();
+            $("#land-form").hide();
+            $("#flat-form").hide();
+        } else if (selectedValue === "Działka") {
+            $("#home-form").hide();
+            $("#land-form").show();
+            $("#flat-form").hide();
+        }
+    }
+
+    $("#AdType").on("change", function() {
+        var selectedId = $(this).prop("selectedIndex");
+        var selectedValue = $(this).prop("options")[selectedId].text;
+        ShowHide(selectedValue);
+    });
+
+    $("#AdType").prop("selectedIndex", @TempData["AdType"]);
+    var selectedValue = $("#AdType").prop("options")[@TempData["AdType"]].text;
+    ShowHide(selectedValue);
+</script>

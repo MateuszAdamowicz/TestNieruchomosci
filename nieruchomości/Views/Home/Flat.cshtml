@@ -1,0 +1,60 @@
+﻿@using System.Web.Optimization
+@{
+    Layout = null;
+}
+<div class="col-md-4">
+    <small>Miejscowość:</small>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle2" type="button" data-toggle="dropdown" aria-expanded="true">
+            Wybierz miejscowość
+        <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+            <li><a href="#">Wynajem</a></li>
+            <li><a href="#">Sprzedaż</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-md-4">
+    <small>Wybierz powierzchnię:</small>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle2" type="button" data-toggle="dropdown" aria-expanded="true">
+            Wybierz ilość
+        <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
+            <li><a href="#">Wynajem</a></li>
+            <li><a href="#">Sprzedaż</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-md-4">
+    <small>Cena:</small>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle2" type="button" data-toggle="dropdown" aria-expanded="true">
+            Wybierz cenę
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5">
+            <li><a href="#">Wynajem</a></li>
+            <li><a href="#">Sprzedaż</a></li>
+        </ul>
+    </div>
+</div>
+
+<div>
+    
+    <div class="grid-style" data-ng-grid="offertsGrid">
+    </div>
+    <div class="user-details" data-ng-show="selectedOffert">
+        <div class="well well-large">
+            <h3>Szczegółowy opis</h3>
+            <form>
+                <label for="City">Miasto</label>
+                <input type="text" id="City" name="firstName" data-ng-model="selectedOffert.City"/>
+                <label for="Heating">Ogrzewanie</label>
+                <input type="text" id="Heating" name="Heating" data-ng-model="selectedOffert.Heating"/>
+            </form>
+        </div>
+    </div>
+</div>

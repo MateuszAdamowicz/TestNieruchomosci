@@ -1,0 +1,18 @@
+﻿@model Models.ContactEmail
+
+@{
+    Layout = null;
+}
+<body>
+    <div class="col-md-12">
+        <h2>Użytkownik zadał pytanie</h2>
+        <hr />
+        <b>Imię i nazwisko:</b> @Model.FullName<br />
+        <b>Telefon:</b> @Model.PhoneNumber<br />
+        <b>Email:</b> @Model.Email<br />
+        <b>Treść wiadomości:</b><br />
+        <p>
+            @Model.Body
+        </p>
+    </div>
+</body>

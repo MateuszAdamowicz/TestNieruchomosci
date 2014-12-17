@@ -1,0 +1,84 @@
+﻿@using Microsoft.Ajax.Utilities
+@using Models.ViewModels
+@model Models.EntityModels.Offer
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        <h4>Oferta nr @Model.Id</h4>
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                            <div class="custom-advert-panel-title">
+                                    Dane klienta
+                            </div>
+                        <div class="custom-advert-panel-body">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-6">
+                                    <small>Imię i nazwisko:</small><br />
+                                    @String.Format("{0}", (Model.FullName.IsNullOrWhiteSpace()) ? "---" : Model.FullName)
+                                </div>
+                                <div class="col-md-6">
+                                    <small>Email:</small><br />
+                                    @String.Format("{0}", (Model.Email.IsNullOrWhiteSpace()) ? "---" : Model.Email)
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-6">
+                                    <small>Numer telefonu:</small><br />
+                                    @String.Format("{0}", (Model.PhoneNumber.IsNullOrWhiteSpace()) ? "---" : Model.PhoneNumber)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="custom-advert-panel-title">
+                                Informacje podstawowe
+                        </div>
+                        <div class="custom-advert-panel-body">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-6">
+                                    <small>Cena:</small><br />
+                                    @String.Format("{0}", (Model.Price.IsNullOrWhiteSpace()) ? "---" : Model.Price)
+                                </div>
+                                <div class="col-md-6">
+                                    <small>Nieruchomość:</small><br />
+                                    @Model.AdType
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-6">
+                                    <small>Miasto:</small><br />
+                                    @String.Format("{0}", (Model.City.IsNullOrWhiteSpace()) ? "---" : Model.City)
+                                </div>
+                                <div class="col-md-6">
+                                    <small>Lokalizacja:</small><br />
+                                    @String.Format("{0}", (Model.Location.IsNullOrWhiteSpace()) ? "---" : Model.Location)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="custom-advert-panel-title">
+                                Opis
+                        </div>
+                        <div class="custom-advert-panel-body">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-12">
+                                    @String.Format("{0}", (Model.Description.IsNullOrWhiteSpace()) ? "---" : Model.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.ActionLink("Akceptuj", "Offer", new {status = OfferStatus.Accepted}, new {@class = "btn btn-success"})
+                        @Html.ActionLink("Odrzuć", "Offer", new {status = OfferStatus.Rejected}, new {@class = "btn btn-danger"})
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
