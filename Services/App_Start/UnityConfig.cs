@@ -29,6 +29,7 @@ namespace Services.App_Start
             container.RegisterType<ICounterService, CounterService>();
             container.RegisterType<INewestAdvertService, NewestAdvertService>();
             container.RegisterType<IStatisticesService, StatisticesService>();
+            container.RegisterType<IAdminFilterService, AdminFilterService>();
         }
     }
 }

@@ -110,9 +110,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\AddAdvertService.cs" />
+    <Compile Include="Admin\AdminFilterService.cs" />
     <Compile Include="Admin\AdminLoginService.cs" />
     <Compile Include="Admin\EnumNameService.cs" />
     <Compile Include="Admin\IAddAdvertService.cs" />
+    <Compile Include="Admin\IAdminFilterService.cs" />
     <Compile Include="Admin\IAdminLoginService.cs" />
     <Compile Include="Admin\IEnumNameService.cs" />
     <Compile Include="Admin\IPhotoService.cs" />

@@ -1,29 +1,12 @@
 ﻿@using System.Data.SqlTypes
 @model System.Collections.Generic.IEnumerable<Models.ViewModels.AdminAdvertToShow>
 <style type="text/css">
-    .hiddenAd {
-        background-color: rgb(65, 65, 65);
-        color: white;
-        display: none;
-    }
-    .hiddenAd:hover {
-        background-color: black;
+    label {
+        font-size: small;
+        font-weight: normal;
     }
 
-    .Ad {
-        background-color:rgb(137, 213, 164)
-    }
-
-    .Ad:hover {
-        background-color:rgb(73, 147, 99)
-    }
-
-    .deletedAd {
-        background-color: red;
-        display: none;
-    }
 </style>
-
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
@@ -51,14 +34,111 @@
                     </div>
                 </div>
             }
-
         }
+        <h4>Znajdź ogłoszenie</h4>
+        <div class="row" style="margin-top:5px">
+            <div class="col-md-12">
+                @using (Html.BeginForm("AdList", "Admin", FormMethod.Get))
+                {
+                    <input type="hidden" name="search" value="true"/>
+                    <div class="form-group-sm">
+                        <div class="row">
+                            <div class="col-md-2" style="font-size:small; font-weight:bold">
+                                Wyszukiwana fraza:
+                            </div>
+                            <div class="col-md-2" style="font-size:small; font-weight:bold">
+                                Pracownik:
+                            </div>
+                            <div class="col-md-2" style="font-size:small; font-weight:bold">
+                                Widoczność:
+                            </div>
+                            <div class="col-md-3" style="font-size:small; font-weight:bold">
+                                Data (od-do):
+                            </div>
+                            <div class="col-md-3" style="font-size:small; font-weight:bold">
+                                Typ oferty:
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label><input type="radio" name="showHidden" value="false" checked/>Aktywne</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label><input type="radio" name="showHidden" value="true" />Ukryte</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="date" name="dateFrom" class="form-control" id="dateFrom" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="date" name="dateTo" class="form-control" id="dateTo"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pull-right">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label><input type="checkbox" name="type" value="Flat" />Mieszkanie</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label><input type="checkbox" name="type" value="House" />Dom</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label><input type="checkbox" name="type" value="Land" />Działka</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="padding-right:15px; text-align:left; margin-top:5px">
+                                        <button type="submit" class="btn btn-default btn-xs">Wyszukaj</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
         <h4>Lista nieruchomości</h4>
-        <select id="filter" text="Pokaż" class="form-control">
-            <option text="aktywne" value="active">aktywne</option>
-            <option text="ukryte" value="hidden">ukryte</option>
-            <option text="usunięte" value="deleted">usunięte</option>
-        </select>
+        <div class="row">
+            <div class="col-md-12">
+                @if (HttpContext.Current.Request.Params.Get("hidden") == "True")
+                {
+                    @Html.ActionLink("Pokaż aktywne", "AdList", "Admin", null, new { @class = "btn btn-default btn-xs" })
+                }
+                else
+                {
+                    @Html.ActionLink("Pokaż ukryte", "AdList", "Admin", new { hidden = true }, new { @class = "btn btn-default btn-xs" })
+                }
+                
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12" style="font-size: small">
                 <table class="table">
@@ -84,9 +164,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var ad in Model.Where(x => x.Visible && !x.Deleted))
+                    @foreach (var ad in Model)
                     {
-                        <tr class="Ad">
+                        <tr>
                             <td>@ad.CreatedAt.ToShortDateString()</td>
                             <td>@ad.AdType</td>
                             <td>@ad.Title</td>
@@ -106,47 +186,6 @@
                                 {
                                     @Html.ActionLink("Pokaż", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-info btn-xs"})
                                 }
-                            </td>
-                        </tr>
-                    }
-                    @foreach (var ad in Model.Where(x => !x.Visible && !x.Deleted))
-                    {
-                        <tr class="hiddenAd">
-                            <td>@ad.CreatedAt.ToShortDateString()</td>
-                            <td>@ad.AdType</td>
-                            <td>@ad.Title</td>
-                            <td>@ad.City</td>
-                            <td>@ad.Worker.FullName</td>
-                            <td style="text-align: center">
-                                @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
-                                @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
-                                @Html.ActionLink("Usuń", "DeleteAd", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
-                            </td>
-                            <td style="text-align: center">
-                                @if (ad.Visible)
-                                {
-                                    @Html.ActionLink("Ukryj", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-default btn-xs"})
-                                }
-                                else
-                                {
-                                    @Html.ActionLink("Pokaż", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-info btn-xs"})
-                                }
-                            </td>
-                        </tr>
-                    }
-
-                    @foreach (var ad in Model.Where(x => x.Deleted))
-                    {
-                        <tr class="deletedAd">
-                            <td>@ad.CreatedAt.ToShortDateString()</td>
-                            <td>@ad.AdType</td>
-                            <td>@ad.Title</td>
-                            <td>@ad.City</td>
-                            <td>@ad.Worker.FullName</td>
-                            <td style="text-align: center">
-                                @Html.ActionLink("Info", "Show", "Home", new { key = ad.Number }, new { @class = "btn btn-success btn-xs" })
-                            <td style="text-align: center">
-                                --
                             </td>
                         </tr>
                     }
@@ -160,23 +199,22 @@
 <script language="javascript" src="/Scripts/jquery-1.10.2.js"></script>
 
 <script language="javascript">
-    $("#filter").on("change", function() {
-        var val = $(this).val();
-
-        if (val === "hidden") {
-            $(".Ad").hide();
-            $(".deletedAd").hide();
-            $(".hiddenAd").show();
-        } else if (val === "active") {
-            $(".hiddenAd").hide();
-            $(".deletedAd").hide();
-            $(".Ad").show();
-        } else if (val == "deleted") {
-            $(".hiddenAd").hide();
-            $(".Ad").hide();
-            $(".deletedAd").show();
+    $("#dateFrom").on("change", function () {
+        var from = new Date($("#dateFrom").val());
+        var to = new Date($("#dateTo").val());
+        if (from > to) {
+            alert("Data początkowa nie może być większa od końcowej!");
+            $("#dateFrom").val("");
         }
+    });
 
-    })
+    $("#dateTo").on("change", function () {
+        var from = new Date($("#dateFrom").val());
+        var to = new Date($("#dateTo").val());
+        if (from > to) {
+            alert("Data początkowa nie może być większa od końcowej!");
+            $("#dateTo").val("");
+        }
+    });
 </script>
 

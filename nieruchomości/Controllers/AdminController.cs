@@ -21,9 +21,10 @@ namespace nieruchomości.Controllers
         private readonly IUpdateAdvertService _updateAdvertService;
         private readonly IAdminLoginService _adminLoginService;
         private readonly IEmailService _emailService;
+        private readonly IAdminFilterService _adminFilterService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterService adminFilterService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
@@ -31,6 +32,7 @@ namespace nieruchomości.Controllers
             _updateAdvertService = updateAdvertService;
             _adminLoginService = adminLoginService;
             _emailService = emailService;
+            _adminFilterService = adminFilterService;
         }
 
         [AllowAnonymous]
@@ -253,14 +255,20 @@ namespace nieruchomości.Controllers
         }
 
         [HttpGet]
-        public ActionResult AdList(bool? changed, bool? hide)
+        public ActionResult AdList(bool? changed, bool? hide, bool? hidden, bool? search, string key, string worker, bool? showHidden, DateTime? dateFrom, DateTime? dateTo, IEnumerable<AdType> type)
         {
-            var flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Flats);
-            var houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Houses);
-            var lands = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Lands);
 
-            var ads = flats.Concat(houses).Concat(lands).OrderByDescending(x => x.CreatedAt);
-            return View(ads);
+            IEnumerable<AdminAdvertToShow> advertList;
+            if (search != null && search == true)
+            {
+                advertList = _adminFilterService.FilterAdverts(key, worker, showHidden, dateFrom, dateTo, type); 
+            }
+            else
+            {
+                advertList = _adminFilterService.ActiveAdverts(hidden);
+            }
+            return View(advertList);
+
         }
 
         public ActionResult EditAd(int id, AdType adtype)
