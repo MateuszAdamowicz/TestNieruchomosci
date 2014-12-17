@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <small>Rodzaj nieruchomości: </small>
-                    <select class="form-control input-sm" ng-model="myProperty" ng-options="property.value as property.name for property in properties" ng-change="loadResources(myProperty)">
+                    <select class="form-control input-sm" ng-model="myProperty" ng-options="property.value as property.name for property in properties" ng-change=clearFiltersAll(myProperty)>
                         <option style="display: none" value="">Wybierz rodzaj</option>
                     </select>
                 </div>

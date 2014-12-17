@@ -15,11 +15,11 @@
 //        });
 //    }]);
 
-var searcher = angular.module('searcher', ['ngResource','ngRoute', 'angularUtils.directives.dirPagination']);
+var searcher = angular.module('searcher', ['ngResource', 'ngRoute', 'angularUtils.directives.dirPagination']);
 
 
 
-searcher.config(function($httpProvider) {
+searcher.config(function ($httpProvider, $routeProvider) {
     $httpProvider.interceptors.push('myHttpInterceptor');
 
     var spinnerFunction = function spinnerFunction(data) {
@@ -29,21 +29,22 @@ searcher.config(function($httpProvider) {
 
     $httpProvider.defaults.transformRequest.push(spinnerFunction);
     $httpProvider.defaults.timeout = 5000;
-
+    $routeProvider.when('/', { reloadOnSearch: false });
 });
 
-searcher.factory('myHttpInterceptor', function ($q, $window) {
-    return{
+
+searcher.factory('myHttpInterceptor', function ($q) {
+    return {
         'response':
-            function(response) {
+            function (response) {
                 $("#spinner").hide();
                 return response || $q.when(response);
             },
         'responseError':
             function (response) {
                 $("#spinner").hide();
-        return $q.reject(response);
-        }
+                return $q.reject(response);
+            }
     };
 });
 
@@ -59,12 +60,12 @@ searcher.filter('unique', function () {
                 } else {
                     unique[input[i][key]] += 1;
                 };
-                }
+            }
             for (var i = 0; i < uniqueList.length; i++) {
-                uniqueList[i].counter = uniqueList[i][key] + " ("+unique[uniqueList[i][key]]+")";
-            }        
+                uniqueList[i].counter = uniqueList[i][key] + " (" + unique[uniqueList[i][key]] + ")";
+            }
             return uniqueList;
-       }
+        }
     };
 });
 
@@ -78,22 +79,15 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     ];
 
     //$scope.myProperty = null;
-    $scope.$watch('myProperty', function (property) {
-        if (property) {
-            $location.search('property', property);
-        } else {
-            $location.search('property', null);
-        }
-    });
     $scope.$watch('$location.search().property', function (property) {
-            $scope.myProperty = property;
+        $scope.myProperty = property;
     });
 
     //$scope.myoffertTypeHouse = null;
     $scope.$watch('myoffertTypeHouse', function (offert) {
         if (offert) {
             $location.search('offert', offert);
-        } else {
+        } else if (offert === null) {
             $location.search('offert', null);
         }
     });
@@ -105,7 +99,7 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     $scope.$watch('myoffertTypeFlat', function (offert) {
         if (offert) {
             $location.search('offert', offert);
-        } else {
+        } else if (offert === null) {
             $location.search('offert', null);
         }
     });
@@ -113,43 +107,34 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
         $scope.myoffertTypeFlat = offert;
     });
 
-    
+
     $scope.boolToStr = function (arg) { return arg ? 'Wynajem' : 'Sprzedaż' };
 
-    $scope.$watch('myProperty',function (myProperty) {
-        
-        $scope.clearFilters('flat');
-        $scope.clearFilters('house');
-        $scope.clearFilters('land');
+    $scope.$watch('myProperty', function (myProperty) {
 
         if (myProperty === 'flat') {
-            
+            $location.search('property', myProperty);
             $scope.mySort = null;
-                var flatResource = $resource('/api/offertsapi/getflats', {}, {});
-                $scope.flatList = [];
-
-                flatResource.query(function(data) {
-                    $scope.flatList = data;
-                });
-            
+            $resource('/api/offertsapi/getflats', {}, {}).query().$promise.then(function (data) {
+                $scope.flatList = data;
+            });
         }
         else if (myProperty === 'land') {
+            $location.search('property', myProperty);
             $scope.mySort = null;
-                var landResource = $resource('/api/offertsapi/getlands', {}, {});
-                $scope.landList = [];
-
-                landResource.query(function(data) {
-                    $scope.landList = data;
-                });
-            }
+            $resource('/api/offertsapi/getlands', {}, {}).query().$promise.then(function (data) {
+                $scope.landList = data;
+            });
+        }
         else if (myProperty === 'house') {
+            $location.search('property', myProperty);
             $scope.mySort = null;
-                var houseResource = $resource('/api/offertsapi/gethouses', {}, {});
-                $scope.houseList = [];
-
-                houseResource.query(function(data) {
-                    $scope.houseList = data;
-                });
+            $resource('/api/offertsapi/gethouses', {}, {}).query().$promise.then(function (data) {
+                $scope.houseList = data;
+            });
+        }
+        else {
+            $location.search('offert', null);
         }
     });
 
@@ -157,31 +142,31 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     $scope.$watch('myhouseCity', function (city) {
         if (city) {
             $location.search('city', city);
-        } else {
+        } else if (city === null) {
             $location.search('city', null);
         }
     });
     $scope.$watch('$location.search().city', function (city) {
         $scope.myhouseCity = city;
     });
-   
+
     //$scope.myhouseUsableArea = null;
     $scope.$watch('myhouseUsableArea', function (usablearea) {
         if (usablearea) {
             $location.search('usablearea', usablearea);
-        } else {
+        } else if (usablearea === null) {
             $location.search('usablearea', null);
         }
     });
     $scope.$watch('$location.search().usablearea', function (usablearea) {
         $scope.myhouseUsableArea = usablearea;
     });
-    
+
     //$scope.myhousePrice = null;
     $scope.$watch('myhousePrice', function (price) {
         if (price) {
             $location.search('price', price);
-        } else {
+        } else if (price === null) {
             $location.search('price', null);
         }
     });
@@ -193,67 +178,67 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     $scope.$watch('mylandCity', function (city) {
         if (city) {
             $location.search('city', city);
-        } else {
+        } else if (city === null) {
             $location.search('city', null);
         }
     });
     $scope.$watch('$location.search().city', function (city) {
         $scope.mylandCity = city;
-    });   
+    });
 
     //$scope.mylandArea = null;
     $scope.$watch('mylandArea', function (area) {
         if (area) {
             $location.search('area', area);
-        } else {
+        } else if (area === null) {
             $location.search('area', null);
         }
     });
     $scope.$watch('$location.search().area', function (area) {
         $scope.mylandArea = area;
     });
-    
+
     //$scope.mylandPrice = null;
     $scope.$watch('mylandPrice', function (price) {
         if (price) {
             $location.search('price', price);
-        } else {
+        } else if (price === null) {
             $location.search('price', null);
         }
     });
     $scope.$watch('$location.search().price', function (price) {
         $scope.mylandPrice = price;
     });
-    
+
     //$scope.myflatCity = null;
     $scope.$watch('myflatCity', function (city) {
         if (city) {
             $location.search('city', city);
-        } else {
+        } else if (city === null) {
             $location.search('city', null);
         }
     });
     $scope.$watch('$location.search().city', function (city) {
         $scope.myflatCity = city;
     });
-    
+
     //$scope.myflatRoom = null;
     $scope.$watch('myflatRoom', function (room) {
         if (room) {
             $location.search('room', room);
-        } else {
+        } else if (room === null) {
             $location.search('room', null);
         }
     });
     $scope.$watch('$location.search().room', function (room) {
         $scope.myflatRoom = room;
     });
-    
+
     // $scope.myflatPrice = null;
     $scope.$watch('myflatPrice', function (price) {
         if (price) {
             $location.search('price', price);
-        } else {
+        } else if (price === null) {
             $location.search('price', null);
         }
     });
@@ -261,7 +246,7 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
         $scope.myflatPrice = price;
     });
 
-    $scope.mySortFunction = function(item) {
+    $scope.mySortFunction = function (item) {
         if ($scope.mySort !== null) {
             if ($scope.mySort.value === 'Price') {
                 return Number(item[$scope.mySort.value].split('z')[0].replace(/ /g, ''));
@@ -272,28 +257,27 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     };
 
     $scope.sorting = [
-        { name: 'Po cenie-rosnąco', value: 'Price', reverse:false},
-        { name: 'Po cenie-malejąco', value: 'Price',reverse:true},
-        { name: 'Po dacie-rosnąco', value: 'CreatedAt', reverse:false},
-        { name: 'Po dacie-malejąco', value: 'CreatedAt', reverse:true}
+        { name: 'Po cenie-rosnąco', value: 'Price', reverse: false },
+        { name: 'Po cenie-malejąco', value: 'Price', reverse: true },
+        { name: 'Po dacie-rosnąco', value: 'CreatedAt', reverse: false },
+        { name: 'Po dacie-malejąco', value: 'CreatedAt', reverse: true }
     ];
 
     $scope.mySort = null;
 
     $scope.clearFilters = function (myProperty) {
+
         if (myProperty === 'flat') {
             $scope.myoffertTypeFlat = null;
             $scope.myflatCity = null;
             $scope.myflatRoom = null;
             $scope.myflatPrice = null;
-            $scope.myoffertType = null;
             $scope.mySort = null;
         }
         else if (myProperty === 'land') {
             $scope.mylandCity = null;
             $scope.mylandArea = null;
             $scope.mylandPrice = null;
-            $scope.myoffertType = null;
             $scope.mySort = null;
         }
         else if (myProperty === 'house') {
@@ -301,9 +285,18 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
             $scope.myhouseCity = null;
             $scope.myhouseUsableArea = null;
             $scope.myhousePrice = null;
-            $scope.myoffertType = null;
             $scope.mySort = null;
         }
+    };
+    $scope.clearFiltersAll = function () {
+        $scope.clearFilters('flat');
+        $scope.clearFilters('house');
+        $scope.clearFilters('land');
+        //$location.search('room', null);
+        //$location.search('price', null);
+        //$location.search('area', null);
+        //$location.search('city', null);
+        //$location.search('usablearea', null);
     };
     $scope.currentPage = 1;
     $scope.pageSize = 5;
@@ -313,8 +306,8 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
 
 searcher.controller("NewestController", function ($scope, $resource) {
     $scope.NewestAdverts = [];
-    var newestResource = $resource('/api/offertsapi/getnewest', {}, {timeout: {params: 5000}});
-    newestResource.query(function(data) {
+    var newestResource = $resource('/api/offertsapi/getnewest', {}, { timeout: { params: 5000 } });
+    newestResource.query(function (data) {
         $scope.NewestAdverts = data;
     });
 });
