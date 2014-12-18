@@ -167,7 +167,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 custom-advert-details">
-                                    {{flat.City}}, <small>{{flat.Rooms}}</small>
+                                    {{flat.City}} <small ng-show="flat.Rooms != null">, {{flat.Rooms}}</small>
                                 </div>
                             </div>
                             <div class="row">
@@ -206,7 +206,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 custom-advert-details">
-                                    {{house.City}}, <small>{{house.UsableArea}}</small>
+                                    {{house.City}} <small ng-show="house.UsableArea != null">,{{house.UsableArea}}</small>
                                 </div>
                             </div>
                             <div class="row">
@@ -245,7 +245,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 custom-advert-details">
-                                    {{land.City}}, <small>{{land.Area}}</small>
+                                    {{land.City}} <small ng-show="land.Area != null">,{{land.Area}}</small>
                                 </div>
                             </div>
                             <div class="row">

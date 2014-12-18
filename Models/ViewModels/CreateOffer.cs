@@ -9,6 +9,7 @@ namespace Models.ViewModels
         public string FullName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailRequired")]
+        [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailNotValid")]
         public string Email { get; set; }
         public string Price { get; set; }
         public string City { get; set; }

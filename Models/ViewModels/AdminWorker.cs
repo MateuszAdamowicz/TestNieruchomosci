@@ -12,9 +12,12 @@ namespace Models.ViewModels
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "LastNameRequired")]
         public string LastName { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PhoneFirstRequired")]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneFirst { get; set; }
+        [DataType(DataType.PhoneNumber)]
         public string PhoneSecond { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailRequired")]
+        [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailNotValid")]
         public string Email { get; set; }
         public string OldPhoto { get; set; }
         public HttpPostedFileBase Photo { get; set; }

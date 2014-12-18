@@ -1,4 +1,5 @@
 ﻿@using System.Data.SqlTypes
+@using nieruchomości.Helpers
 @model System.Collections.Generic.IEnumerable<Models.ViewModels.AdminAdvertToShow>
 <style type="text/css">
     label {
@@ -168,7 +169,7 @@
                     {
                         <tr>
                             <td>@ad.CreatedAt.ToShortDateString()</td>
-                            <td>@ad.AdType</td>
+                            <td>@EnumNameHelper.GetAdType(ad.AdType)</td>
                             <td>@ad.Title</td>
                             <td>@ad.City</td>
                             <td>@ad.Worker.FullName</td>

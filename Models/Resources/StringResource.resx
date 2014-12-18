@@ -126,6 +126,9 @@
   <data name="DescriptionRequired" xml:space="preserve">
     <value>Opis jest wymagany.</value>
   </data>
+  <data name="EmailNotValid" xml:space="preserve">
+    <value>Adres email nie jest prawidłowy.</value>
+  </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>Adres email jest wymagany.</value>
   </data>
