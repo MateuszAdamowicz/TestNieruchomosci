@@ -144,6 +144,9 @@
   <data name="PhoneFirstRequired" xml:space="preserve">
     <value>Numer telefonu jest wymagany.</value>
   </data>
+  <data name="PhoneNotValid" xml:space="preserve">
+    <value>Numer telefonu nie jest poprawny. Poprawny numer składa się z 6-18 cyfr</value>
+  </data>
   <data name="PhoneNumberRequired" xml:space="preserve">
     <value>Numer telefonu jest wymagany.</value>
   </data>

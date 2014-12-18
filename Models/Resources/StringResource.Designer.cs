@@ -142,6 +142,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numer telefonu nie jest poprawny. Poprawny numer składa się z 6-18 cyfr.
+        /// </summary>
+        internal static string PhoneNotValid {
+            get {
+                return ResourceManager.GetString("PhoneNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Numer telefonu jest wymagany..
         /// </summary>
         internal static string PhoneNumberRequired {

@@ -53,17 +53,28 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <small>Imię i nazwisko</small>
-                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("FullName") && ViewData.ModelState["FullName"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                            <div class="has-feedback">
+                                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("FullName") && ViewData.ModelState["FullName"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0"></span>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <small>Email</small>
-                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("Email") && ViewData.ModelState["Email"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                            <div class="has-feedback">
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("Email") && ViewData.ModelState["Email"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0"></span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <small>Nr. Telefonu</small>
-                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("PhoneNumber") && ViewData.ModelState["PhoneNumber"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                            <small>Telefon</small>
+                                            <div class="has-feedback">
+
+                                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("PhoneNumber") && ViewData.ModelState["PhoneNumber"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0"></span>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

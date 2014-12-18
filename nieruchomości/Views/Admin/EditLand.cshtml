@@ -33,17 +33,28 @@
                     <div class="row">
                         <div class="col-md-6">
                             <small><b>Tytuł:</b></small>
-                            @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("Title") && ViewData.ModelState["Title"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                            <div class="has-feedback">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("Title") && ViewData.ModelState["Title"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0; color:red"></span>
+
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <small><b>Cena:</b></small>
-                            @Html.EditorFor(model => model.Price, new {htmlAttributes = new {@class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                            <div class="has-feedback">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0; color:red"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <small>Miasto:</small>
-                            @Html.EditorFor(model => model.City, new {htmlAttributes = new {@class = "form-control", @style = ((ViewData.ModelState.ContainsKey("City") && ViewData.ModelState["City"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                            <div class="has-feedback">
+                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("City") && ViewData.ModelState["City"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0; color:red"></span>
+
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <small>Lokalizacja:</small>
@@ -63,7 +74,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <small>Opis:</small>
-                            @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control", @style = "resize: none; max-width: none; height:200px" + ((ViewData.ModelState.ContainsKey("Description") && ViewData.ModelState["Description"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
+                            <div class="has-feedback">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" + ((ViewData.ModelState.ContainsKey("Description") && ViewData.ModelState["Description"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0; color:red"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
