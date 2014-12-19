@@ -160,6 +160,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cena powinna składać się z maksymalnie 7 cyfr..
+        /// </summary>
+        internal static string PriceNotValid {
+            get {
+                return ResourceManager.GetString("PriceNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cena jest wymagana..
         /// </summary>
         internal static string PriceRequired {

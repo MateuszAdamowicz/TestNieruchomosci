@@ -10,7 +10,10 @@ namespace Models.ViewModels
 
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailRequired")]
         [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailNotValid")]
+        [EmailAddress(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailNotValid")]
         public string Email { get; set; }
+
+        [RegularExpression("[0-9]{0,7}", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceNotValid")]
         public string Price { get; set; }
         public string City { get; set; }
         public string Location { get; set; }
