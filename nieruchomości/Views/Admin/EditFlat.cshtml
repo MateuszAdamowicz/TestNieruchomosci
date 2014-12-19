@@ -137,6 +137,16 @@
                             @Html.ListBoxFor(model => model.ToDeleted, new SelectList(new List<int>()), new {@class = "form-control", @style = "max-width:none; height: 100px"})
                         </div>
                     </div>
+                    <div class="row" style="color: rgb(74, 0, 0)">
+                        <div class="col-md-12">
+                            <div class="col-md-8" style="font-size:10px">
+                                Akceptowane pliki: jpg, png, gif, bnp
+                            </div>
+                            <div class="col-md-4" style="text-align:right; font-size:10px">
+                                Max 5MB
+                            </div>
+                        </div>
+                    </div>
                     <input type="hidden" id="AdType" name="AdType" value="Flat"/>
                     <div class="row">
                         <div class="col-md-12" style="text-align: center; margin-top: 10px">
@@ -159,14 +169,15 @@
 <script language="javascript">
     $("#ToDeleted").hide();
     var toDeleted = [];
-    $(".existsPhotos").on("click", function () {
+    $(".existsPhotos").on("click", function() {
         if ($(this).hasClass("grayscale")) {
             $(this).removeClass("grayscale");
             var photos = $(".photoItem");
             for (var i = 0; i < photos.length; i++) {
                 if (photos[i].value == $(this).data("id")) {
                     photos[i].remove();
-                };
+                }
+                ;
             }
         } else {
             $(this).addClass("grayscale");
@@ -176,7 +187,34 @@
             option.text = $(this).data("id");
             $(option).addClass("photoItem");
             $("#ToDeleted").append(option);
-        };
+        }
+        ;
         $(".photoItem").prop("selected", true);
-    })
+    });
+
+    $("#Files").on("change", function() {
+        var errors = [];
+        var valid = true;
+        var totalSize = 0;
+        for (var i = 0; i < $(this)[0].files.length; i++) {
+            if ($(this)[0].files[i].size / 1024 / 1024 > 5) {
+                valid = false;
+                errors.push('Plik: ' + $(this)[0].files[i].name + ' jest zbyt duży! (max 5MB)');
+            }
+            totalSize += $(this)[0].files[i].size / 1024 / 1024;
+        }
+
+        if (valid == true) {
+            if (totalSize > 20) {
+                valid = false;
+                errors.push("Łączna wielkość plików jest za duża! (max 20MB)");
+            }
+        }
+
+        if (valid == false) {
+            $(this)[0].value = "";
+            alert(errors.join("\n"));
+        }
+    });
 </script>
+
