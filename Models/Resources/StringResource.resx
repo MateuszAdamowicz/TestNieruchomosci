@@ -153,6 +153,9 @@
   <data name="PriceRequired" xml:space="preserve">
     <value>Cena jest wymagana.</value>
   </data>
+  <data name="TitleMaxLength" xml:space="preserve">
+    <value>Maksymalna długość tytułu to 40 znaków.</value>
+  </data>
   <data name="TitleRequired" xml:space="preserve">
     <value>Tytuł jest wymagany.</value>
   </data>

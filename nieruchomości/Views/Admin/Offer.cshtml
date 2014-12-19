@@ -41,7 +41,7 @@
                             <div class="row" style="margin-bottom: 10px">
                                 <div class="col-md-6">
                                     <small>Cena:</small><br />
-                                    @String.Format("{0}", (Model.Price.IsNullOrWhiteSpace()) ? "---" : Model.Price)
+                                    @String.Format("{0}", (Model.Price.IsNullOrWhiteSpace()) ? "---" : Model.Price+" zł")
                                 </div>
                                 <div class="col-md-6">
                                     <small>Nieruchomość:</small><br />
@@ -66,7 +66,7 @@
                         </div>
                         <div class="custom-advert-panel-body">
                             <div class="row" style="margin-bottom: 10px">
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="word-wrap: break-word">
                                     @String.Format("{0}", (Model.Description.IsNullOrWhiteSpace()) ? "---" : Model.Description)
                                 </div>
                             </div>

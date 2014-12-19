@@ -169,6 +169,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość tytułu to 40 znaków..
+        /// </summary>
+        internal static string TitleMaxLength {
+            get {
+                return ResourceManager.GetString("TitleMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tytuł jest wymagany..
         /// </summary>
         internal static string TitleRequired {

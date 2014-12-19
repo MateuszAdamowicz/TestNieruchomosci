@@ -18,6 +18,7 @@ namespace Models.ViewModels
         public string PricePerMeter { get; set; }
         public bool ToLet { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleRequired")]
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleMaxLength")]
         public string Title { get; set; }
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "DescriptionRequired")]

@@ -9,28 +9,20 @@
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
         <h4>Edytuj pracownika</h4>
-        @if (!ViewData.ModelState.IsValid)
-        {
-            <div class="row" style="padding: 10px">
-                <div class="alert alert-dismissable alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>Błąd</strong> @Html.ValidationSummary()
-                    @{
-            var errors = ViewData.ModelState.Values.Count(x => x.Errors.Count > 0);
-            var all = ViewData.ModelState.Keys.Count;
-
-            var errors_p = (int)(((float)errors / (float)all) * 100);
-
-                    }
-                    <div class="progress progress-striped active" style="background-color: #e74c3c">
-                        <div class="progress-bar progress-bar-success" style="width: @(100 - errors_p)%">
-                            <span>Ukończono w @(100 - errors_p)%</span>
-                        </div>
-                        <div class="progress-bar progress-bar-danger" style="width: @(errors_p)%"></div>
-                    </div>
-                </div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="row" style="padding: 10px">
+        <div class="panel panel-danger">
+            <button type="button" class="close" data-dismiss="alert" style="margin-right:5px; margin-top: 5px">×</button>
+            <div class="panel-heading">
+                Błąd
             </div>
-        }
+            <div class="panel-body">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+    </div>
+}
         @using (Html.BeginForm("EditWorker", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
@@ -101,7 +93,21 @@
                                     Zdjęcie:
                                 </div>
                                 <div class="col-md-10" style="margin-bottom: 3px">
-                                    <input type="file" class="form-control" id="Photo" name="Photo" style="max-width: none" accept="image/*" />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="Photo" name="Photo" style="max-width: none" accept="image/*" />
+                                        </div>
+                                    </div>
+                                    <div class="row" style="color: rgb(74, 0, 0)">
+                                        <div class="col-md-12">
+                                            <div class="col-md-8" style="font-size:10px">
+                                                Akceptowane pliki: jpg, png, gif, bnp
+                                            </div>
+                                            <div class="col-md-4" style="text-align:right; font-size:10px">
+                                                Max 5MB
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,3 +143,14 @@
     </div>
 </div>
 
+
+
+<script type="text/javascript">
+    $("#Photo").on("change", function() {
+        var size = $(this)[0].files[0].size;
+        if ((size / 1024 / 1024) > 5) {
+            alert("Plik jest za duży. Wybierz inne zdjęcie!");
+            $(this)[0].value = "";
+        }
+    })
+</script>
