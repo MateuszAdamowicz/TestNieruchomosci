@@ -7,6 +7,7 @@ using Models;
 using Models.ApplicationModels;
 using Models.ViewModels;
 using RazorEngine.Templating;
+using Services.Admin;
 
 namespace Services.Home.EmailService
 {
@@ -14,13 +15,15 @@ namespace Services.Home.EmailService
     {
         private readonly ITemplateService _templateSercvie;
         private readonly ISmtpManager _smtpManager;
+        private readonly IAppSettingsService _appSettingsService;
         private readonly string _domainName;
 
-        public EmailSenderService(ITemplateService templateSercvie, ISmtpManager smtpManager)
+        public EmailSenderService(ITemplateService templateSercvie, ISmtpManager smtpManager, IAppSettingsService appSettingsService)
         {
             _templateSercvie = templateSercvie;
             _smtpManager = smtpManager;
-            _domainName = ConfigurationManager.AppSettings["emailDomain"];
+            _appSettingsService = appSettingsService;
+            _domainName = _appSettingsService.GetKey("emailDomain");
         }
 
         public Result SendOfferQuestion(ContactEmail contactEmail)

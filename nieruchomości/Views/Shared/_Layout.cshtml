@@ -101,7 +101,10 @@
                         <li class="custom-list"><a href="/Home/Index">Strona główna</a></li>
                         <li class="custom-list"><a href="/Home/About">O firmie</a></li>
                         <li class="custom-list"><a href="/Home/Credits">Kredyty</a></li>
-                        <li class="custom-list"><a href="/Home/Contact">Napisz czego szukasz</a></li>
+                        @if (String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name))
+                        {
+                            <li class="custom-list"><a href="/Home/Contact">Napisz czego szukasz</a></li>
+                        }
                     </ul>
                 </div>
             </div>
