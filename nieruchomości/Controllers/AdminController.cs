@@ -26,9 +26,10 @@ namespace nieruchomości.Controllers
         private readonly IAdminFilterService _adminFilterService;
         private readonly IRepository _repository;
         private readonly IOfferService _offerService;
+        private readonly IDeleteMessageService _deleteMessageService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterService adminFilterService, IRepository repository, IOfferService offerService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterService adminFilterService, IRepository repository, IOfferService offerService, IDeleteMessageService deleteMessageService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
@@ -39,6 +40,7 @@ namespace nieruchomości.Controllers
             _adminFilterService = adminFilterService;
             _repository = repository;
             _offerService = offerService;
+            _deleteMessageService = deleteMessageService;
         }
 
         [AllowAnonymous]
@@ -54,6 +56,12 @@ namespace nieruchomości.Controllers
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Index","Home");
+        }
+
+        public ActionResult DeleteMessage(int id)
+        {
+            _deleteMessageService.DeleteMesssage(id);
+            return RedirectToAction("Messages");
         }
 
         public ActionResult DeleteAd(int id, AdType adType)

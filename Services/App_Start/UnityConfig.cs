@@ -33,6 +33,7 @@ namespace Services.App_Start
             container.RegisterType<IAppSettingsService, AppSettingsService>();
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<IOfferService, OfferService>();
+            container.RegisterType<IDeleteMessageService, DeleteMessageService>();
         }
     }
 }

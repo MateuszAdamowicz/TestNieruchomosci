@@ -7,5 +7,6 @@
         public string PhoneNumber { get; set; }
         public string Body { get; set; }
         public string OrderLink { get; set; }
+        public bool Deleted { get; set; }
     }
 }

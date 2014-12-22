@@ -26,6 +26,9 @@
                             <th>
 
                             </th>
+                            <th>
+                                
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +55,9 @@
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </a>
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Usuń", "DeleteMessage", "Admin", new { id = ad.Id }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
                                 </td>
                             </tr>
                         }
