@@ -183,8 +183,8 @@ namespace nieruchomości.Controllers
         {
             var xModel = new ShowCalc()
             {
-               XPrice = xPrice,
-               XOwnershipForm = xOwnershipForm
+               CalcPrice = xPrice,
+               CalcOwnershipForm = xOwnershipForm
             }; 
             return PartialView(xModel);
         }

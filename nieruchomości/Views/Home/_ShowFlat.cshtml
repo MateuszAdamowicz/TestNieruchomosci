@@ -18,7 +18,8 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/modalform.js"></script>
 
-<div id='myModal' class='modal fade in'>
+@*modal fade in function*@
+<div id='myModal' class='modal fade in'> 
     <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
@@ -43,7 +44,7 @@
                             }
                             else
                             {
-                                <img class="custom-head-photo" src="\Content\Photos\@Model.Pictures[0].Link"/>
+                                <img class="custom-head-photo" src="\Content\Photos\@Model.Pictures[0].Link" />
                             }
                         }
                     </div>
@@ -52,10 +53,10 @@
             </div>
             <div class="col-md-5" style="border-left: 1px solid #8B0808; border-radius: 10px">
                 <div class="list-group" style="margin-top: 20px">
-                        <div class="row custom-advert-type">
-                            <div class="col-md-5">Typ oferty:</div>
-                            <div class="col-md-7">@(Model.ToLet ? "Wynajem" : "Sprzedaż")</div>
-                        </div>
+                    <div class="row custom-advert-type">
+                        <div class="col-md-5">Typ oferty:</div>
+                        <div class="col-md-7">@(Model.ToLet ? "Wynajem" : "Sprzedaż")</div>
+                    </div>
                     @OwnHelpers.PropertyNotNull("Miasto", @Model.City)
                     @OwnHelpers.PropertyNotNull("Lokalizacja", @Model.Location)
                     @OwnHelpers.PropertyNotNull("Pow. całkowita", @Model.Area)
@@ -73,7 +74,10 @@
                     </div>
 
                     <div class="panel-body ">
-                        @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home", new { XPrice = Model.Price, XOwnershipForm = Model.Ownership }, new { data_modal = "", id = "btnCreate", @class = "btn btn-sm btn-info center-block " })
+                        @Html.ActionLink("Kalkulator opłat dodatkowych","CalcView", "Home",
+                                        new { XPrice = Model.Price, XOwnershipForm = Model.Ownership },
+                                        new { data_modal = "", id = "btnCreate", @class = "btn btn-sm btn-info center-block " })
+                                    @* Kalkulator opłat dodatkowych button to modal CalcView in Home Controller. Send "XPrice = Model.Price" and "XOwnershipForm = Model.Ownership" to Controller*@
                     </div>
                 </div>
             </div>
@@ -95,7 +99,7 @@
                                 foreach (var picture in Model.Pictures)
                                 {
                                     <div class="col-md-2" style="padding-bottom: 10px">
-                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer" class="small-pict"/>
+                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer" class="small-pict" />
                                     </div>
                                 }
                             }
@@ -143,13 +147,13 @@
                                     <div class="col-md-4">
                                         @if (Model.Worker.HasPhoto)
                                         {
-                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%"/>
+                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%" />
                                         }
                                     </div>
                                     <div class="col-md-8">
-                                        @Model.Worker.FullName<br/>
-                                        tel. 1: @Model.Worker.PhoneFirst<br/>
-                                        tel. 2: @Model.Worker.PhoneSecond<br/>
+                                        @Model.Worker.FullName<br />
+                                        tel. 1: @Model.Worker.PhoneFirst<br />
+                                        tel. 2: @Model.Worker.PhoneSecond<br />
                                         email: @Model.Worker.Email
                                     </div>
                                 </div>
@@ -180,5 +184,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/modalform")
+    @Scripts.Render("~/bundles/modalform") @*Modal form render, does not work. After debug Bundleconfig.cs, just delete <script src="~/Scripts/jquery-1.10.2.js"></script>
+                                            <script src="~/Scripts/modalform.js"></script> in line 18/19 *@ 
 }

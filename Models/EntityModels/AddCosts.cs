@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models.EntityModels
 {
-    class AddCosts
+    internal class AddCosts
     {
-        enum MyEnum
-        {
-            
-        }
+        
     }
 }
