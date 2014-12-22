@@ -57,21 +57,21 @@
                                 Data (od-do):
                             </div>
                             <div class="col-md-3" style="font-size:small; font-weight:bold">
-                                Typ oferty:
+                                Rodzaj nieruchomości:
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza" })
+                                        @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza", @style="font-size:12px"})
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko" })
+                                        @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko", @style="font-size:12px" })
                                     </div>
                                 </div>
                             </div>
@@ -90,12 +90,12 @@
                             <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="date" name="dateFrom" class="form-control" id="dateFrom" />
+                                        <input type="date" name="dateFrom" class="form-control" id="dateFrom" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="date" name="dateTo" class="form-control" id="dateTo"/>
+                                        <input type="date" name="dateTo" class="form-control" id="dateTo" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
                                     </div>
                                 </div>
                             </div>
@@ -142,14 +142,14 @@
         </div>
         <div class="row">
             <div class="col-md-12" style="font-size: small">
-                <table class="table">
+                <table class="table" style="font-size:11px">
                     <thead>
                     <tr>
                         <th>
                             Data dodania
                         </th>
                         <th>
-                            Typ
+                            Rodzaj
                         </th>
                         <th>
                             Tytuł
@@ -217,5 +217,12 @@
             $("#dateTo").val("");
         }
     });
+
+    $("#dateFrom").val("2014-01-01");
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getUTCMonth() + 1;
+    var day = today.getUTCDate();
+    $("#dateTo").val(year + "-" + month + "-" + day);
 </script>
 

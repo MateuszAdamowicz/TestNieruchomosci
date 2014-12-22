@@ -1,5 +1,6 @@
 ﻿@using System.Data.SqlTypes
 @using Models.ViewModels
+@using nieruchomości.Helpers
 @model List<Models.EntityModels.Offer>
 
 <div class="row" style="margin-right: 15px">
@@ -52,7 +53,7 @@
                                 <td style="vertical-align:middle">@ad.CreatedAt.ToShortDateString()</td>
                                 <td style="vertical-align:middle">@ad.FullName</td>
                                 <td style="vertical-align:middle">@ad.Email</td>
-                                <td style="vertical-align:middle">@ad.AdType</td>
+                                <td style="vertical-align:middle">@EnumNameHelper.GetAdType(ad.AdType)</td>
                                 <td style="vertical-align:middle">@ad.City</td>
                                 <td style="vertical-align: middle">
                                     <a href="/Admin/Offer/@ad.Id">

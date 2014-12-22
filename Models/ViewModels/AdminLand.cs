@@ -11,6 +11,7 @@ namespace Models.ViewModels
         public string Area { get; set; } // 
         public string Ownership { get; set; } // 
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleRequired")]
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleMaxLength")]
         public string Title { get; set; } // 
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "DescriptionRequired")]
         [DataType(DataType.MultilineText)]

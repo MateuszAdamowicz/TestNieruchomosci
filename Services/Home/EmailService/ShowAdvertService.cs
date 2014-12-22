@@ -20,7 +20,7 @@ namespace Services.Home.EmailService
 
             if (adType == AdType.Flat)
             {
-                var flat = Enumerable.FirstOrDefault(_applicationContext.Flats.Where(x => x.Id == id));
+                var flat = Enumerable.FirstOrDefault(_applicationContext.Flats.Where(x => x.Id == id && x.Visible && !x.Deleted));
                 if (flat == null)
                 {
                     return new Result<ShowAdvert>(false, null, "", null);
@@ -30,7 +30,7 @@ namespace Services.Home.EmailService
             }
             else if (adType == AdType.House)
             {
-                var house = Enumerable.FirstOrDefault(_applicationContext.Houses.Where(x => x.Id == id));
+                var house = Enumerable.FirstOrDefault(_applicationContext.Houses.Where(x => x.Id == id && x.Visible && !x.Deleted));
                 if (house == null)
                 {
                     return new Result<ShowAdvert>(false, null, "", null);
@@ -40,7 +40,7 @@ namespace Services.Home.EmailService
             }
             else if (adType == AdType.Land)
             {
-                var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(x => x.Id == id));
+                var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(x => x.Id == id && x.Visible && !x.Deleted));
                 if (land == null)
                 {
                     return new Result<ShowAdvert>(false, null, "", null);

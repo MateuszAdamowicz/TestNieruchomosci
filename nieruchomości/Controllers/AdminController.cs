@@ -7,6 +7,7 @@ using System.Web.Security;
 using Context;
 using Models.EntityModels;
 using Models.ViewModels;
+using PagedList;
 using Services.Admin;
 using Services.Home.EmailService;
 
@@ -22,9 +23,10 @@ namespace nieruchomości.Controllers
         private readonly IAdminLoginService _adminLoginService;
         private readonly IEmailService _emailService;
         private readonly IAdminFilterService _adminFilterService;
+        private readonly IRepository _repository;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterService adminFilterService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterService adminFilterService, IRepository repository)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
@@ -33,6 +35,7 @@ namespace nieruchomości.Controllers
             _adminLoginService = adminLoginService;
             _emailService = emailService;
             _adminFilterService = adminFilterService;
+            _repository = repository;
         }
 
         [AllowAnonymous]
@@ -54,23 +57,33 @@ namespace nieruchomości.Controllers
         {
             if (adType == AdType.Flat)
             {
-                var flat = _applicationContext.Flats.Find(id);
-                flat.Deleted = true;
+                var flat = _repository.Flats().FirstOrDefault(x => x.Id == id);
+                if (flat != null) flat.Deleted = true;
             }
             else if (adType == AdType.House)
             {
-                var house = _applicationContext.Houses.Find(id);
-                house.Deleted = true;
+                var house = _repository.Flats().FirstOrDefault(x => x.Id == id);
+                if (house != null) house.Deleted = true;
             }
             else
             {
-                var land = _applicationContext.Lands.Find(id);
-                land.Deleted = true;
+                var land = _repository.Lands().FirstOrDefault(x => x.Id == id);
+                if (land != null) land.Deleted = true;
             }
 
-            _applicationContext.SaveChanges();
+            _repository.SaveChanges();
 
             return RedirectToAction("AdList");
+        }
+
+        public ActionResult DeleteWorker(int id)
+        {
+            var worker = _repository.Workers().FirstOrDefault(x => x.Id == id);
+            if (worker != null) worker.Deleted = true;
+
+            _repository.SaveChanges();
+
+            return RedirectToAction("Workers");
         }
 
         [HttpPost]
@@ -105,7 +118,7 @@ namespace nieruchomości.Controllers
             {
                 TempData["AdType"] = 0;
             }
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
             return View(new AdminAdvertToAdd());
         }
 
@@ -125,7 +138,7 @@ namespace nieruchomości.Controllers
                 var result = _addAdvertService.AddFlat(adminFlat);
                 return RedirectToAction("Show", "Home", new { key = result.Data});
             }
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
             TempData["AdType"] = 0;
             return View("AddAdvert", new AdminAdvertToAdd() { Flat = adminFlat });
         }
@@ -146,7 +159,7 @@ namespace nieruchomości.Controllers
                 var result = _addAdvertService.AddHouse(adminHouse);
                 return RedirectToAction("Show", "Home", new { key = result.Data });
             }
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
             TempData["AdType"] = 1;
             return View("AddAdvert", new AdminAdvertToAdd() { House = adminHouse });
         }
@@ -166,26 +179,29 @@ namespace nieruchomości.Controllers
                 var result = _addAdvertService.AddLand(adminLand);
                 return RedirectToAction("Show", "Home", new { key = result.Data });
             }
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
             TempData["AdType"] = 2;
             return View("AddAdvert", new AdminAdvertToAdd() { Land = adminLand });
         }
 
-        public ActionResult Workers()
+        public ActionResult Workers(int? page)
         {
-            var workers = _applicationContext.Workers.ToList();
-            var workersVm = new WorkersViewModel() { Workers = workers };
-            return View(workersVm);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            var workers = _repository.Workers().ToList();
+            //var workersVm = new WorkersViewModel() { Workers = workers.ToPagedList(pageNumber, pageSize) };
+            return View(workers.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Worker(int id)
         {
-            var worker = _applicationContext.Workers.Find(id);
+            var worker = _repository.Workers().FirstOrDefault(x => x.Id == id);
             var model = AutoMapper.Mapper.Map<WorkerAdverts>(worker);
 
-            var flats = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_applicationContext.Flats.Where(x => x.Worker.Id == id).ToList());
-            var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_applicationContext.Houses.Where(x => x.Worker.Id == id).ToList());
-            var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_applicationContext.Lands.Where(x => x.Worker.Id == id).ToList());
+            var flats = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_repository.Flats().Where(x => x.Worker.Id == id).ToList());
+            var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_repository.Houses().Where(x => x.Worker.Id == id).ToList());
+            var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_repository.Lands().Where(x => x.Worker.Id == id).ToList());
 
             model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt);
 
@@ -208,7 +224,7 @@ namespace nieruchomości.Controllers
 
                 if (result.Success == true)
                 {
-                    var workers = _applicationContext.Workers.ToList();
+                    var workers = _repository.Workers().ToList();
                     var response = new Response()
                     {
                         Message = "Dodano nowego pracownika!",
@@ -224,7 +240,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult EditWorker(int id)
         {
-            var worker = Enumerable.FirstOrDefault(_applicationContext.Workers.Where(obj => obj.Id == id));
+            var worker = _repository.Workers().FirstOrDefault(x => x.Id == id);
 
             var adminWorker = AutoMapper.Mapper.Map<AdminWorker>(worker);
 
@@ -240,7 +256,7 @@ namespace nieruchomości.Controllers
                 var result = _workerService.EditWorker(adminWorker, id);
                 if (result.Success == true)
                 {
-                    var workers = _applicationContext.Workers.ToList();
+                    var workers = _repository.Workers().ToList();
                     var response = new Response()
                     {
                         Message = "Pomyślnie edytowano pracownika!",
@@ -295,20 +311,20 @@ namespace nieruchomości.Controllers
                 return RedirectToAction("Show", "Home", new {key = String.Format("{0}{1}", id*9999, "12")});
             }
 
-            var flat = _applicationContext.Flats.Find(id);
+            var flat = _repository.Flats().FirstOrDefault(x => x.Id ==id);
             if (flat != null)
             {
                 editFlat.Pictures = flat.Pictures;
             }
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
             return View(editFlat);
         }
 
         public ActionResult EditFlat(int id)
         {
-            var flat = Enumerable.FirstOrDefault(_applicationContext.Flats.Where(obj => obj.Id == id));
+            var flat = _repository.Flats().FirstOrDefault(x => x.Id == id);
             var flatToEdit = AutoMapper.Mapper.Map<EditFlat>(flat);
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
 
             return View(flatToEdit);
         }
@@ -325,28 +341,28 @@ namespace nieruchomości.Controllers
                 return RedirectToAction("Show", "Home", new { key = String.Format("{0}{1}", id * 9999, "14") });
             }
 
-            var house = _applicationContext.Houses.Find(id);
+            var house = _repository.Houses().FirstOrDefault(x => x.Id == id);
             if (house != null)
             {
                 editHouse.Pictures = house.Pictures;
             }
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
             return View(editHouse);
         }
         public ActionResult EditHouse(int id)
         {
-            var house = Enumerable.FirstOrDefault(_applicationContext.Houses.Where(obj => obj.Id == id));
+            var house = _repository.Houses().FirstOrDefault(x => x.Id == id);
             var houseToEdit = AutoMapper.Mapper.Map<EditHouse>(house);
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
 
             return View(houseToEdit);
         }
 
         public ActionResult EditLand(int id)
         {
-            var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(obj => obj.Id == id));
+            var land = _repository.Lands().FirstOrDefault(x => x.Id == id);
             var landToEdit = AutoMapper.Mapper.Map<EditLand>(land);
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
 
             return View(landToEdit);
         }
@@ -362,12 +378,12 @@ namespace nieruchomości.Controllers
                 return RedirectToAction("Show", "Home", new { key = String.Format("{0}{1}", id * 9999, "18") });
             }
 
-            var land = _applicationContext.Lands.Find(id);
+            var land = _repository.Lands().FirstOrDefault(x => x.Id == id);
             if (land != null)
             {
                 editLand.Pictures = land.Pictures;
             }
-            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            ViewData["Workers"] = _repository.Workers().ToList();
             return View(editLand);
         }
 
@@ -377,42 +393,42 @@ namespace nieruchomości.Controllers
             bool visible;
             if (adtype == AdType.Flat)
             {
-                var advert = _applicationContext.Flats.Find(id);
+                var advert = _repository.Flats().FirstOrDefault(x => x.Id == id);
                 advert.Visible = !advert.Visible;
                 visible = advert.Visible;
             }
             else if (adtype == AdType.House)
             {
-                var advert = _applicationContext.Houses.Find(id);
+                var advert = _repository.Houses().FirstOrDefault(x => x.Id == id);
                 advert.Visible = !advert.Visible;
                 visible = advert.Visible;
             }
             else
             {
-                var advert = _applicationContext.Lands.Find(id);
+                var advert = _repository.Houses().FirstOrDefault(x => x.Id == id);
                 advert.Visible = !advert.Visible;
                 visible = advert.Visible;
             }
-            _applicationContext.SaveChanges();
+            _repository.SaveChanges();
 
             return RedirectToAction("AdList", new{changed = true, hide = !visible});
         }
 
         public ActionResult Offers()
         {
-            var offers = _applicationContext.Offers.ToList();
+            var offers = _repository.Offers().ToList();
             return View(offers);
         }
 
         public ActionResult Offer(int id, OfferStatus? status)
         {
-            var offer = _applicationContext.Offers.Find(id);
+            var offer = _repository.Offers().FirstOrDefault(x => x.Id == id);
             if (offer != null)
             {
                 if (status != null)
                 {
                     offer.Status = (OfferStatus)status;
-                    _applicationContext.SaveChanges();
+                    _repository.SaveChanges();
                     _emailService.SendAndSaveOfferResponse(offer.Status, offer);
                     return RedirectToAction("Offers");
                 }
@@ -423,13 +439,13 @@ namespace nieruchomości.Controllers
 
         public ActionResult Messages()
         {
-            var msgList = _applicationContext.Mails.ToList();
+            var msgList = _repository.Mails().ToList();
             return View(msgList);
         }
 
         public ActionResult Message(int id)
         {
-            var msg = _applicationContext.Mails.Find(id);
+            var msg = _repository.Mails().FirstOrDefault(x => x.Id == id);
             if (msg != null)
             {
                 return View(msg);
@@ -439,7 +455,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult Statistics()
         {
-            return View(_applicationContext.Statisticses.ToList());
+            return View(_repository.Statisticses().ToList());
         }
     }
 }

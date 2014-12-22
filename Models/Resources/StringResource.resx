@@ -144,11 +144,20 @@
   <data name="PhoneFirstRequired" xml:space="preserve">
     <value>Numer telefonu jest wymagany.</value>
   </data>
+  <data name="PhoneNotValid" xml:space="preserve">
+    <value>Numer telefonu nie jest poprawny. Poprawny numer składa się z 6-18 cyfr</value>
+  </data>
   <data name="PhoneNumberRequired" xml:space="preserve">
     <value>Numer telefonu jest wymagany.</value>
   </data>
+  <data name="PriceNotValid" xml:space="preserve">
+    <value>Cena powinna składać się z maksymalnie 7 cyfr.</value>
+  </data>
   <data name="PriceRequired" xml:space="preserve">
     <value>Cena jest wymagana.</value>
+  </data>
+  <data name="TitleMaxLength" xml:space="preserve">
+    <value>Maksymalna długość tytułu to 40 znaków.</value>
   </data>
   <data name="TitleRequired" xml:space="preserve">
     <value>Tytuł jest wymagany.</value>

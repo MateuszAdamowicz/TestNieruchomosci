@@ -7,10 +7,17 @@ namespace Services.Admin
 {
     public class AdminLoginService : IAdminLoginService
     {
+        private readonly IAppSettingsService _appSettingsService;
+
+        public AdminLoginService(IAppSettingsService appSettingsService)
+        {
+            _appSettingsService = appSettingsService;
+        }
+
         public LoginViewModel Login(LoginViewModel loginViewModel)
         {
-            if (loginViewModel.Login == ConfigurationManager.AppSettings["adminLogin"] &&
-                loginViewModel.Password == ConfigurationManager.AppSettings["adminPassword"])
+            if (loginViewModel.Login == _appSettingsService.GetKey("adminLogin") &&
+                loginViewModel.Password == _appSettingsService.GetKey("adminPassword"))
             {
                 loginViewModel.Authorized = true;
             }

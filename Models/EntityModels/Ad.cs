@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Security;
+using System.Text.RegularExpressions;
 using Models.EntityModels.Interfaces;
 
 namespace Models.EntityModels

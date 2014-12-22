@@ -142,6 +142,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numer telefonu nie jest poprawny. Poprawny numer składa się z 6-18 cyfr.
+        /// </summary>
+        internal static string PhoneNotValid {
+            get {
+                return ResourceManager.GetString("PhoneNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Numer telefonu jest wymagany..
         /// </summary>
         internal static string PhoneNumberRequired {
@@ -151,11 +160,29 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cena powinna składać się z maksymalnie 7 cyfr..
+        /// </summary>
+        internal static string PriceNotValid {
+            get {
+                return ResourceManager.GetString("PriceNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cena jest wymagana..
         /// </summary>
         internal static string PriceRequired {
             get {
                 return ResourceManager.GetString("PriceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość tytułu to 40 znaków..
+        /// </summary>
+        internal static string TitleMaxLength {
+            get {
+                return ResourceManager.GetString("TitleMaxLength", resourceCulture);
             }
         }
         
