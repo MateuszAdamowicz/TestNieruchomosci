@@ -1,0 +1,38 @@
+﻿@using Models.EntityModels
+@using Models.ViewModels
+@using nieruchomości.Helpers
+@model Models.ViewModels.ShowCalc
+
+@{
+    ViewBag.Title = "ShowCalc";
+
+    int procent = 3;
+    //int flatPrice = Int32.Parse(Model.XPrice);
+
+}
+
+
+
+
+<script>
+    function calculateBMI() {
+        var wtStr = document.form.weight.value;
+        if (!wtStr)
+            wtStr = '0';
+        var htStr = document.form.height.value;
+        if (!htStr)
+            htStr = '0';
+        var weight = parseFloat(wtStr);
+        var height = parseFloat(htStr);
+        document.form.BodyMassIndex.value = (weight + height)*@procent;
+
+    }
+</script>
+
+
+<form name="form" id="form">
+    <input type="Text" name="weight" size="4" onkeyup="calculateBMI()"> Weight (in Kilos)
+    <input type="Text" name="height" size="4" onkeyup="calculateBMI()"> Height (in Centimeters)<br>
+    <input type="Text" name="BodyMassIndex" id="BodyMassIndex" size="4"> BMI
+    <input type="button" style="font-size: 8pt" value="Calculate" onclick="calculateBMI()" name="button">
+</form>

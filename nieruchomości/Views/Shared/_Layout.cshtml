@@ -147,9 +147,13 @@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-<script language="javascript">
-    $('.dropdown-toggle').dropdown();
-    $(".carousel").carousel();
-</script>
+    <script language="javascript">
+        $('.dropdown-toggle').dropdown();
+        $(".carousel").carousel();
+    </script>
+    
+    @Scripts.Render("~/bundles/jquery", "~/bundles/bootstrap", "~/bundles/site")
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>

@@ -1,9 +1,24 @@
-﻿@using nieruchomości.Helpers
+﻿@using System.Web.Optimization
+@using nieruchomości.Helpers
 @model Models.ViewModels.ShowFlat
 
 @{
     ViewBag.Title = "ShowFlat";
 }
+
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/modalform.js"></script>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number<br /><div class="pull-right" style="font-size: 12px; font-weight:100">Odwiedzin: <span class="badge">@(Model.Counter + 1)</span></div></div>
@@ -45,10 +60,14 @@
                     @OwnHelpers.PropertyNotNull("Forma własności", @Model.Ownership)
                     @OwnHelpers.PropertyNotNull("Cena za m<sup>2</sup>", @Model.PricePerMeter)
 
-                        <div class="row custom-advert-price">
-                            <div class="col-md-5">Cena:</div>
-                            <div class="col-md-7">@Model.Price zł</div>
-                        </div>
+                    <div class="row custom-advert-price">
+                        <div class="col-md-5">Cena:</div>
+                        <div class="col-md-7">@Model.Price zł</div>
+                    </div>
+                    
+                    <div class="panel-body ">
+                        @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home", new { XPrice = Model.Price, XOwnershipForm = Model.Ownership }, new { data_modal = "", id = "btnCreate", @class = "btn btn-info center-block" })
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,3 +168,8 @@
         $(".custom-head-photo").prop("src", link);
     });
 </script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modalform")
+}

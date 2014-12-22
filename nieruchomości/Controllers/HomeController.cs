@@ -176,5 +176,20 @@ namespace nieruchomości.Controllers
         {
             return View();
         }
+        
+        
+        
+        public ActionResult CalcView(string xPrice, string xOwnershipForm)
+        {
+            var xModel = new ShowCalc()
+            {
+               XPrice = xPrice,
+               XOwnershipForm = xOwnershipForm
+            }; 
+            return PartialView(xModel);
+        }
+    
     }
+
+
 }
