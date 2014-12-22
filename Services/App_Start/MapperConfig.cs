@@ -27,9 +27,14 @@ namespace Services.App_Start
                 .ForMember(dest => dest.Photo, opts => opts.UseValue(null));
             Mapper.CreateMap<Photo, ShowListPhoto>();
             Mapper.CreateMap<Flat, ShowListFlat>()
-                .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault()))).ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 12)));
+                .ForMember(dest => dest.Picture,
+                    opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())))
+                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id*9999, 12)))
+                .ForMember(dest => dest.ToLet, opts => opts.MapFrom(src => (src.ToLet == true) ? "Wynajem" : "Sprzedaż"));
             Mapper.CreateMap<House, ShowListHouse>()
-                .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault()))).ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 14)));
+                .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())))
+                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 14)))
+                .ForMember(dest => dest.ToLet, opts => opts.MapFrom(src => (src.ToLet == true) ? "Wynajem" : "Sprzedaż"));
             Mapper.CreateMap<Land, ShowListLand>()
                 .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault()))).ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 18)));
 

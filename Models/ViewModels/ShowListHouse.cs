@@ -14,7 +14,7 @@ namespace Models.ViewModels
         public string City { get; set; }
         public string Rooms { get; set; }
         public virtual ShowListPhoto Picture { get; set; }
-        public bool ToLet { get; set; }
+        public string ToLet { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Number { get; set; }
     }

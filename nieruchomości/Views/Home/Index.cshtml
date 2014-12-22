@@ -31,13 +31,13 @@
                 </div>
                 <div class="col-md-6" ng-show="myProperty =='house'">
                     <small>Typ oferty :</small>
-                    <select class="form-control input-sm" ng-model="myoffertTypeHouse" ng-options="offert.ToLet as boolToStr(offert.ToLet)+' '+ offert.counter.split(' ')[1]  for offert in houseList|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{City:myhouseCity||undefined}|filter:{Price:myhousePrice||undefined}|unique:'ToLet'">
+                    <select class="form-control input-sm" ng-model="myoffertTypeHouse" ng-options="offert.ToLet as offert.counter for offert in houseList|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{City:myhouseCity||undefined}|filter:{Price:myhousePrice||undefined}|unique:'ToLet'">
                         <option style="display: none" value="">Wybierz rodzaj</option>
                     </select>
                 </div>
                 <div class="col-md-6" ng-show="myProperty =='flat'">
                     <small>Typ oferty :</small>
-                    <select class="form-control input-sm" ng-model="myoffertTypeFlat" ng-options="offert.ToLet as boolToStr(offert.ToLet)+' '+ offert.counter.split(' ')[1] for offert in flatList|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|filter:{City:myflatCity||undefined}|unique:'ToLet'">
+                    <select class="form-control input-sm" ng-model="myoffertTypeFlat" ng-options="offert.ToLet as offert.counter for offert in flatList|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|filter:{City:myflatCity||undefined}|unique:'ToLet'">
                         <option style="display: none" value="">Wybierz rodzaj</option>
                     </select>
                 </div>
