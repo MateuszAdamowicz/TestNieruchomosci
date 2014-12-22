@@ -19,7 +19,7 @@ var searcher = angular.module('searcher', ['ngResource', 'ngRoute', 'angularUtil
 
 
 
-searcher.config(function ($httpProvider, $routeProvider) {
+searcher.config(function ($httpProvider) {
     $httpProvider.interceptors.push('myHttpInterceptor');
 
     var spinnerFunction = function spinnerFunction(data) {
@@ -29,7 +29,7 @@ searcher.config(function ($httpProvider, $routeProvider) {
 
     $httpProvider.defaults.transformRequest.push(spinnerFunction);
     $httpProvider.defaults.timeout = 5000;
-    $routeProvider.when('/', { reloadOnSearch: false });
+    //$routeProvider.when('/', { reloadOnSearch: false });
 });
 
 
@@ -97,7 +97,7 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
 
     //$scope.myoffertTypeFlat = null;
     $scope.$watch('myoffertTypeFlat', function (offert) {
-        if (offert) {
+        if (offert || offert === false) {
             $location.search('offert', offert);
         } else if (offert === null) {
             $location.search('offert', null);
@@ -114,21 +114,18 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
 
         if (myProperty === 'flat') {
             $location.search('property', myProperty);
-            $scope.mySort = null;
             $resource('/api/offertsapi/getflats', {}, {}).query().$promise.then(function (data) {
                 $scope.flatList = data;
             });
         }
         else if (myProperty === 'land') {
             $location.search('property', myProperty);
-            $scope.mySort = null;
             $resource('/api/offertsapi/getlands', {}, {}).query().$promise.then(function (data) {
                 $scope.landList = data;
             });
         }
         else if (myProperty === 'house') {
             $location.search('property', myProperty);
-            $scope.mySort = null;
             $resource('/api/offertsapi/gethouses', {}, {}).query().$promise.then(function (data) {
                 $scope.houseList = data;
             });
@@ -247,7 +244,7 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     });
 
     $scope.mySortFunction = function (item) {
-        if ($scope.mySort !== null) {
+        if ($scope.mySort) {
             if ($scope.mySort.value === 'Price') {
                 return Number(item[$scope.mySort.value].split('z')[0].replace(/ /g, ''));
             } else {
@@ -263,7 +260,22 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
         { name: 'Po dacie-malejąco', value: 'CreatedAt', reverse: true }
     ];
 
-    $scope.mySort = null;
+    //$scope.mySort = null;
+    $scope.$watch('mySort', function (sort) {
+        if (sort) {
+            $location.search('sort', sort.name);
+        } else if (sort === null) {
+            $location.search('sort', null);
+        }
+    });
+    $scope.$watch('$location.search().sort', function (sort) {
+        for (var i = 0; i < $scope.sorting.length; i++) {
+            if ($scope.sorting[i].name === sort) {
+                $scope.mySort = $scope.sorting[i];
+            } 
+        }
+    });
+
 
     $scope.clearFilters = function (myProperty) {
 
