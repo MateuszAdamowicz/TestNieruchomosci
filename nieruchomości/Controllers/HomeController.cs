@@ -17,16 +17,16 @@ namespace nieruchomości.Controllers
         private readonly ISearchService _searchService;
         private readonly IShowAdvertService _showAdvertService;
         private readonly ICounterService _counterService;
-        private readonly ICreateOfferService _createOfferService;
+        private readonly IOfferService _offerService;
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, ICreateOfferService createOfferService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService)
         {
             _context = context;
             _emailService = emailService;
             _searchService = searchService;
             _showAdvertService = showAdvertService;
             _counterService = counterService;
-            _createOfferService = createOfferService;
+            _offerService = offerService;
         }
 
         public ActionResult About()
@@ -149,7 +149,7 @@ namespace nieruchomości.Controllers
         {
             if (ModelState.IsValid)
             {
-                _createOfferService.AddOffer(createOffer);
+                _offerService.AddOffer(createOffer);
                 return View("ConfirmOffer", createOffer);
             }
             return View(createOffer);

@@ -9,6 +9,7 @@ using Models.EntityModels;
 using Models.ViewModels;
 using PagedList;
 using Services.Admin;
+using Services.Home;
 using Services.Home.EmailService;
 
 namespace nieruchomości.Controllers
@@ -24,9 +25,10 @@ namespace nieruchomości.Controllers
         private readonly IEmailService _emailService;
         private readonly IAdminFilterService _adminFilterService;
         private readonly IRepository _repository;
+        private readonly IOfferService _offerService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterService adminFilterService, IRepository repository)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterService adminFilterService, IRepository repository, IOfferService offerService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
@@ -36,6 +38,7 @@ namespace nieruchomości.Controllers
             _emailService = emailService;
             _adminFilterService = adminFilterService;
             _repository = repository;
+            _offerService = offerService;
         }
 
         [AllowAnonymous]
@@ -427,10 +430,12 @@ namespace nieruchomości.Controllers
             return RedirectToAction("AdList", new{changed = true, hide = !visible});
         }
 
-        public ActionResult Offers()
+        public ActionResult Offers(int? page)
         {
             var offers = _repository.Offers().ToList();
-            return View(offers);
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(offers.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Offer(int id, OfferStatus? status)
@@ -450,10 +455,13 @@ namespace nieruchomości.Controllers
             return RedirectToAction("Offers");
         }
 
-        public ActionResult Messages()
+        public ActionResult Messages(int? page)
         {
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+
             var msgList = _repository.Mails().ToList();
-            return View(msgList);
+            return View(msgList.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Message(int id)
@@ -464,6 +472,12 @@ namespace nieruchomości.Controllers
                 return View(msg);
             }
             return RedirectToAction("Messages");
+        }
+
+        public ActionResult DeleteOffer(int id)
+        {
+            _offerService.DeleteOffer(id);
+            return RedirectToAction("Offers");
         }
 
         public ActionResult Statistics()
