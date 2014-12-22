@@ -120,14 +120,17 @@
     <Compile Include="Admin\IAppSettingsService.cs" />
     <Compile Include="Admin\IEnumNameService.cs" />
     <Compile Include="Admin\IPhotoService.cs" />
+    <Compile Include="Admin\IRepository.cs" />
     <Compile Include="Admin\IUpdateAdvertService.cs" />
     <Compile Include="Admin\IWorkerService.cs" />
     <Compile Include="Admin\LogService\ExceptionLoggingFilter.cs" />
     <Compile Include="Admin\PhotoService.cs" />
+    <Compile Include="Admin\Repository.cs" />
     <Compile Include="Admin\UpdateAdvertService.cs" />
     <Compile Include="Admin\WorkerService.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Home\CounterService.cs" />
+    <Compile Include="Home\CreateOfferService.cs" />
     <Compile Include="Home\EmailService\EmailSenderService.cs" />
     <Compile Include="Home\EmailService\EmailService.cs" />
     <Compile Include="Home\EmailService\EmailStorageService.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="Home\EmailService\ShowAdvertService.cs" />
     <Compile Include="Home\EmailService\SmtpManager.cs" />
     <Compile Include="Home\ICounterService.cs" />
+    <Compile Include="Home\ICreateOfferService.cs" />
     <Compile Include="Home\INewestAdvertService.cs" />
     <Compile Include="Home\ISearchService.cs" />
     <Compile Include="Home\IStatisticesService.cs" />

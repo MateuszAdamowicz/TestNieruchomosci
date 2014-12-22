@@ -11,6 +11,7 @@ namespace Models.EntityModels
         public string Email { get; set; }
         public bool HasPhoto { get; set; }
         public string Photo { get; set; }
+        public bool Deleted { get; set; }
 
         public string FullName
         {

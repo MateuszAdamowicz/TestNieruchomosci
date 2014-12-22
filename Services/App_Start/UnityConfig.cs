@@ -31,6 +31,8 @@ namespace Services.App_Start
             container.RegisterType<IStatisticesService, StatisticesService>();
             container.RegisterType<IAdminFilterService, AdminFilterService>();
             container.RegisterType<IAppSettingsService, AppSettingsService>();
+            container.RegisterType<IRepository, Repository>();
+            container.RegisterType<ICreateOfferService, CreateOfferService>();
         }
     }
 }

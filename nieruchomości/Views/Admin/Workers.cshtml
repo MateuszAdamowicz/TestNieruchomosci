@@ -1,12 +1,14 @@
-﻿@model Models.ViewModels.WorkersViewModel
-
+﻿@model PagedList.IPagedList<Worker>
+@using Models.EntityModels
+@using PagedList
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Workers";
 }
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
-        @if (Model.Response != null && Model.Response.Success)
+        @*@if (Model.Response != null && Model.Response.Success)
         {
             <div class="row" style="padding: 10px">
                 <div class="col-md-12">
@@ -16,7 +18,7 @@
                     </div>
                 </div>
             </div>
-        }
+        }*@
         <h4>Pracownicy</h4>
 
         <p>
@@ -41,7 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Workers.OrderByDescending(x => x.CreatedAt))
+                @foreach (var item in Model.OrderByDescending(x => x.CreatedAt))
                 {
                     <tr>
                         <td>
@@ -59,10 +61,11 @@
                         <td style="text-align: center">
                             @Html.ActionLink("Pokaż", "Worker", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
                             @Html.ActionLink("Edytuj", "EditWorker", new {id = item.Id}, new {@class = "btn btn-success btn-xs"})
+                            @Html.ActionLink("Usuń", "DeleteWorker", new { id = item.Id}, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć tego pracownika?');" })
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-    </div>
+        </div>
 </div>

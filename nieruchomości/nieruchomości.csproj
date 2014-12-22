@@ -71,6 +71,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.3.5.1405-prerelease\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -230,6 +236,7 @@
     <Content Include="Content\bootstrap_old.min.css" />
     <Content Include="Content\img\the-palace-of-culture.jpg" />
     <Content Include="Content\ng-grid.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Photos\1373914_phpThumb_generated_thumbnailjpg %281%29.jpg" />
     <Content Include="Content\Photos\1463911_phpThumb_generated_thumbnailjpg %282%29.jpg" />
     <Content Include="Content\Photos\1523916_phpThumb_generated_thumbnailjpg %283%29.jpg" />
