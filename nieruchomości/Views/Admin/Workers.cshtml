@@ -67,5 +67,7 @@
                 }
             </tbody>
         </table>
+        <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
+        <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Workers", new { page }))</div>
         </div>
 </div>

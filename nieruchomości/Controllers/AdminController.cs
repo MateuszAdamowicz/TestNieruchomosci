@@ -186,7 +186,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult Workers(int? page)
         {
-            int pageSize = 3;
+            int pageSize = 20;
             int pageNumber = (page ?? 1);
 
             var workers = _repository.Workers().ToList();
@@ -271,8 +271,18 @@ namespace nieruchomości.Controllers
         }
 
         [HttpGet]
-        public ActionResult AdList(bool? changed, bool? hide, bool? hidden, bool? search, string key, string worker, bool? showHidden, DateTime? dateFrom, DateTime? dateTo, IEnumerable<AdType> type)
+        public ActionResult AdList(int? page, bool? changed, bool? hide, bool? hidden, bool? search, string key, string worker, bool? showHidden, DateTime? dateFrom, DateTime? dateTo, IEnumerable<AdType> type)
         {
+            ViewBag.changed = changed;
+            ViewBag.hide = hide;
+            ViewBag.hidden = hidden;
+            ViewBag.search = search;
+            ViewBag.key = key;
+            ViewBag.worker = worker;
+            ViewBag.showHidden = showHidden;
+            ViewBag.dateFrom = dateFrom;
+            ViewBag.dateTo = dateTo;
+            ViewBag.type = type;
 
             IEnumerable<AdminAdvertToShow> advertList;
             if (search != null && search == true)
@@ -283,7 +293,10 @@ namespace nieruchomości.Controllers
             {
                 advertList = _adminFilterService.ActiveAdverts(hidden);
             }
-            return View(advertList);
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(advertList.ToPagedList(pageNumber, pageSize));
 
         }
 
