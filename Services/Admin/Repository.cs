@@ -41,7 +41,7 @@ namespace Services.Admin
 
         public IQueryable<Mail> Mails()
         {
-            return _applicationContext.Mails;
+            return _applicationContext.Mails.Where(x => !x.Deleted);
         }
 
         public IQueryable<Statistics> Statisticses()

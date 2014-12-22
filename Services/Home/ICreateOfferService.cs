@@ -2,8 +2,9 @@
 
 namespace Services.Home
 {
-    public interface ICreateOfferService
+    public interface IOfferService
     {
         void AddOffer(CreateOffer createOffer);
+        void DeleteOffer(int id);
     }
 }

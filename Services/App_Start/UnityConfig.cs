@@ -32,7 +32,8 @@ namespace Services.App_Start
             container.RegisterType<IAdminFilterService, AdminFilterService>();
             container.RegisterType<IAppSettingsService, AppSettingsService>();
             container.RegisterType<IRepository, Repository>();
-            container.RegisterType<ICreateOfferService, CreateOfferService>();
+            container.RegisterType<IOfferService, OfferService>();
+            container.RegisterType<IDeleteMessageService, DeleteMessageService>();
         }
     }
 }

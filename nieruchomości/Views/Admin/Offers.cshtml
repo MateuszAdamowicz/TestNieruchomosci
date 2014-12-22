@@ -1,7 +1,8 @@
 ﻿@using System.Data.SqlTypes
 @using Models.ViewModels
 @using nieruchomości.Helpers
-@model List<Models.EntityModels.Offer>
+@using PagedList.Mvc
+@model PagedList.PagedList<Models.EntityModels.Offer>
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
@@ -29,6 +30,10 @@
                             </th>
                             <th>
 
+                            </th>
+                            
+                            <th>
+                                
                             </th>
                         </tr>
                     </thead>
@@ -62,10 +67,15 @@
                                         </button>
                                     </a>
                                 </td>
+                                <td>
+                                    @Html.ActionLink("Usuń", "DeleteOffer", "Admin", new { id = ad.Id}, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć tą ofertę?');" })
+                                </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+                <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
+                <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Offers", new { page}))</div>
             </div>
         </div>
     </div>

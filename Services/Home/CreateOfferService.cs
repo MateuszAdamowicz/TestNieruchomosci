@@ -4,11 +4,11 @@ using Models.ViewModels;
 
 namespace Services.Home
 {
-    public class CreateOfferService : ICreateOfferService
+    public class OfferService : IOfferService
     {
         private readonly IApplicationContext _applicationContext;
 
-        public CreateOfferService(IApplicationContext applicationContext)
+        public OfferService(IApplicationContext applicationContext)
         {
             _applicationContext = applicationContext;
         }
@@ -17,6 +17,17 @@ namespace Services.Home
         {
             var offer = AutoMapper.Mapper.Map<Offer>(createOffer);
             _applicationContext.Offers.Add(offer);
+            _applicationContext.SaveChanges();
+        }
+
+        public void DeleteOffer(int id)
+        {
+            var offer = _applicationContext.Offers.Find(id);
+
+            if (offer != null)
+            {
+                offer.Deleted = true;
+            }
             _applicationContext.SaveChanges();
         }
     }

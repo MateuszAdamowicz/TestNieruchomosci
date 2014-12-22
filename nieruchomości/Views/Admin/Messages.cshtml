@@ -1,5 +1,6 @@
 ﻿@using System.Data.SqlTypes
-@model List<Models.EntityModels.Mail>
+@using PagedList.Mvc
+@model PagedList.PagedList<Models.EntityModels.Mail>
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
@@ -24,6 +25,9 @@
                             </th>
                             <th>
 
+                            </th>
+                            <th>
+                                
                             </th>
                         </tr>
                     </thead>
@@ -52,10 +56,15 @@
                                         </button>
                                     </a>
                                 </td>
+                                <td>
+                                    @Html.ActionLink("Usuń", "DeleteMessage", "Admin", new { id = ad.Id }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
+                                </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+                <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
+                <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Messages", new { page }))</div>
             </div>
         </div>
     </div>
