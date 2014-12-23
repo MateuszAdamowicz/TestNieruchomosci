@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Models.EntityModels;
 
-namespace Services
+namespace Context
 {
     public class SeedService
     {
