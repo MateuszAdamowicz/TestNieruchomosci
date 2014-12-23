@@ -183,7 +183,7 @@ namespace nieruchomości.Controllers
         public ActionResult CalcView(string xPrice, string xOwnershipForm)
         {
             var x = _context.CostProperties.ToList();
-                            
+                         
             var xModel = new ShowCalc()
             {
                CalcPrice = xPrice,
