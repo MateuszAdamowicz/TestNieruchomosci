@@ -234,6 +234,7 @@
       <DependentUpon>201412230701375_InitialMigrations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\IfModelChanges.cs" />
+    <Compile Include="Migrations\MigrateConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

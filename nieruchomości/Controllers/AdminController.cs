@@ -241,8 +241,7 @@ namespace nieruchomości.Controllers
                         Message = "Dodano nowego pracownika!",
                         Success = true
                     };
-                    var workersVm = new WorkersViewModel() {Workers = workers, Response = response};
-                    return View("Workers", workersVm);
+                    return RedirectToAction("Workers");
                 }
                 return View(adminWorker);
             }
