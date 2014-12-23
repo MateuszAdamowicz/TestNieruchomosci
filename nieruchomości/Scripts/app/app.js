@@ -68,7 +68,6 @@ searcher.filter('unique', function () {
         }
     };
 });
-
 searcher.controller('SearcherController', function ($scope, $resource, $location) {
 
     $scope.$location = $location;

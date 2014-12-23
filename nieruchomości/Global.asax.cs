@@ -28,9 +28,7 @@ namespace nieruchomości
             XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
             ILog logger = LogManager.GetLogger("Log4NetTest.OtherClass");
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, logger);
-            
-            //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationContext, Configuration>());
+            Database.SetInitializer(new IfModelChanges());
             MapperConfig.Register();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
