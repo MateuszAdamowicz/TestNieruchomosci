@@ -23,6 +23,5 @@ namespace Models.EntityModels
         public bool Deleted { get; set; }
         public virtual List<Photo> Pictures { get; set; }
         public int Counter { get; set; }
-        public bool ChangedTest { get; set; }
     }
 }

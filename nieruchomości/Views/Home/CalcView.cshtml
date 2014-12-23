@@ -42,7 +42,7 @@
             procent = '0';
         var StartCost = parseFloat(cost);
         var StartPercent = parseFloat(procent);
-        document.form.AddCosts.value = (StartCost * @Model.CalcVATNotary.Firstordefault(x => x.Type = VAT) / 100);
+        @*document.form.AddCosts.value = (StartCost * @Model.CalcVATNotary.Firstordefault(x => x.Type = VAT) / 100);*@
         document.form.FullCosts.value = (StartCost + StartCost * StartPercent / 100);
     }
 

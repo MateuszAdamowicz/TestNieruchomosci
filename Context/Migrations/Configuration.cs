@@ -1,4 +1,4 @@
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
 using Models.EntityModels;
 
 namespace Context.Migrations
@@ -13,136 +13,56 @@ namespace Context.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "Context.ApplicationContext";
         }
 
-        protected override void Seed(Context.ApplicationContext context)
-        {
-            var CostProp1 = new CostProperty()
-            {
-                Name = "Podatek od czynnoœci cywilnoprawnych",
-                Value = 0.02,
-                Type = PropertyType.VatClat
-            };
+        //protected override void Seed(ApplicationContext context)
+        //{
 
-            var CostProp2 = new CostProperty()
-            {
-                Name = "VAT od taksy notarialnej",
-                Value = 22,
-                Type = PropertyType.VatNotary
-            };
+        //    var rnd = new Random();
 
-            var CostProp3 = new CostProperty()
-            {
-                Name = "Za³o¿enie KW",
-                Value = 40,
-                Type = PropertyType.Mr
-            };
+        //    var seedService = new SeedService();
 
-            var CostProp4 = new CostProperty()
-            {
-                Name = "Prowizja agencji",
-                Value = 0,
-                Type = PropertyType.AgencyCommissionPercent
-            };
+        //    var workers = new List<Worker>();
 
-            var CostProp5 = new CostProperty()
-            {
-                Name = "VAT od prowizji agencji",
-                Value = 0.23,
-                Type = PropertyType.VatAgencyCommission
-            };
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        var worker = seedService.GetWorker();
+        //        workers.Add(worker);
+        //        context.Workers.Add(worker);
+        //    }
+        //    context.SaveChanges();
 
-            var CostProp6 = new CostProperty()
-            {
-                Name = "Wypisy aktu (strona)",
-                Value = 7.3,
-                Type = PropertyType.ActPagePrice
-            };
+        //    var flats = new List<Flat>();
 
-            var CostProp7 = new CostProperty()
-            {
-                Name = "Op³ata s¹dowa",
-                Value = 200,
-                Type = PropertyType.CourtFee
-            };
+        //    for (int i = 0; i < 20; i++)
+        //    {
+        //        var flat = seedService.GetFlat();
+        //        flat.Worker = workers[rnd.Next(workers.Count)];
+        //        context.Flats.Add(flat);
+        //    }
 
-            context.CostProperties.AddOrUpdate(x => x.Type, CostProp1);
-            context.CostProperties.AddOrUpdate(x => x.Type, CostProp2);
-            context.CostProperties.AddOrUpdate(x => x.Type, CostProp3);
-            context.CostProperties.AddOrUpdate(x => x.Type, CostProp4);
-            context.CostProperties.AddOrUpdate(x => x.Type, CostProp5);
-            context.CostProperties.AddOrUpdate(x => x.Type, CostProp6);
-            context.CostProperties.AddOrUpdate(x => x.Type, CostProp7);
+        //    var houses = new List<House>();
 
+        //    for (int i = 0; i < 25; i++)
+        //    {
+        //        var house = seedService.GetHouse();
+        //        house.Worker = workers[rnd.Next(workers.Count)];
+        //        context.Houses.Add(house);
+        //    }
 
+        //    var lands = new List<Land>();
 
-            var ClatProp1 = new Clat
-            {
-                From = 0,
-                To = 3000,
-                Percent = 0,
-                Max = 0
-            };
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        var land = seedService.GetLand();
+        //        land.Worker = workers[rnd.Next(workers.Count)];
+        //        context.Lands.Add(land);
+        //    }
 
+        //    context.SaveChanges();
 
-            var ClatProp2 = new Clat
-            {
-                From = 3000,
-                To = 10000,
-                Percent = 3,
-                Max = 0
-            };
-
-            var ClatProp3 = new Clat
-            {
-                From = 10000,
-                To = 30000,
-                Percent = 2,
-                Max = 0
-            };
-
-            var ClatProp4 = new Clat
-            {
-                From = 30000,
-                To = 60000,
-                Percent = 1,
-                Max = 0
-            };
-
-            var ClatProp5 = new Clat
-            {
-                From = 60000,
-                To = 1000000,
-                Percent = 0.4,
-                Max = 0
-            };
-
-            var ClatProp6 = new Clat
-            {
-                From = 1000000,
-                To = 2000000,
-                Percent = 0.2,
-                Max = 0
-            };
-
-            var ClatProp7 = new Clat
-            {
-                From = 2000000,
-                To = Double.MaxValue,
-                Percent = 0.25,
-                Max = 10000
-            };
-
-            context.Clats.AddOrUpdate(x => x.To, ClatProp1);
-            context.Clats.AddOrUpdate(x => x.To, ClatProp2);
-            context.Clats.AddOrUpdate(x => x.To, ClatProp3);
-            context.Clats.AddOrUpdate(x => x.To, ClatProp4);
-            context.Clats.AddOrUpdate(x => x.To, ClatProp5);
-            context.Clats.AddOrUpdate(x => x.To, ClatProp6);
-            context.Clats.AddOrUpdate(x => x.To, ClatProp7);
-
-            context.SaveChanges();
-        }
+        //}
     }
 }

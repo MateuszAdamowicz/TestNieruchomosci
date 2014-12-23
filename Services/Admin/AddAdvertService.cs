@@ -22,9 +22,11 @@ namespace Services.Admin
         public Result<string> AddFlat(AdminFlat adminFlat)
         {
             var flat = Mapper.Map<Flat>(adminFlat);
-            var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminFlat.Worker));
-
-            flat.Worker = worker;
+            if (adminFlat.Worker != 0)
+            {
+                var worker = _context.Workers.FirstOrDefault(x => x.Id == adminFlat.Worker);
+                flat.Worker = worker;
+            }
             flat.Pictures = _photoService.AddAdvertPhotos(adminFlat.Files);
             foreach (var photo in flat.Pictures)
             {

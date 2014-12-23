@@ -153,7 +153,6 @@
     <Compile Include="Home\StatisticesService.cs" />
     <Compile Include="App_Start\MapperConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeedService.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
   </ItemGroup>
   <ItemGroup>

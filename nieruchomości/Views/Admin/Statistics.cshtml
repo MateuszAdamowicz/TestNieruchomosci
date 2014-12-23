@@ -10,7 +10,7 @@
             {
                 <div class="col-md-3">
                     <b>@stat.CreatedAt.ToShortDateString()</b><br/>
-                    Liczba odwiedzin: @stat.Visits.Count <br/>
+                    Liczba odwiedzin: @stat.Visits.Select(x => x.Count).Sum() <br/>
                     Liczba użytkowników: @stat.Sessions.Count
                 </div>
             }
