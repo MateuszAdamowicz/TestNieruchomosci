@@ -7,6 +7,7 @@ using System.Web.Security;
 using Context;
 using Models.EntityModels;
 using Models.ViewModels;
+using Newtonsoft.Json.Linq;
 using PagedList;
 using Services.Admin;
 using Services.Home;
@@ -491,5 +492,19 @@ namespace nieruchomości.Controllers
         {
             return View(_repository.Statisticses().ToList());
         }
+
+        public ActionResult Settings()
+        {
+            var x = _applicationContext.Clats.ToList();
+            var y = _applicationContext.CostProperties.ToList();
+            var model = new SettingsViewModel()
+            {
+                ClatList = x,
+                CostPropertiesList = y
+            };
+
+            return View(model);
+        }
+
     }
 }

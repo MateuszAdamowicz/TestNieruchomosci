@@ -173,7 +173,7 @@
                                 <td>@EnumNameHelper.GetAdType(ad.AdType)</td>
                                 <td>@ad.Title</td>
                                 <td>@ad.City</td>
-                                <td>@ad.Worker.FullName</td>
+                                <td>@String.Format("{0}", (ad.Worker != null)?ad.Worker.FullName:"---")</td>
                                 <td style="text-align: center">
                                     @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
                                     @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})

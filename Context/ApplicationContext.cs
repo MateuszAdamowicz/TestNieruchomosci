@@ -14,8 +14,10 @@ namespace Context
         public IDbSet<Photo> Photos { get; set; }
         public IDbSet<Offer> Offers { get; set; }
         public IDbSet<Mail> Mails { get; set; }
-        public IDbSet<Statistics> Statisticses { get; set; } 
-        
+        public IDbSet<Statistics> Statisticses { get; set; }
+        public IDbSet<Clat> Clats { get; set; }
+        public IDbSet<CostProperty> CostProperties { get; set; }
+
 
         public ApplicationContext() : base()
         {
@@ -33,5 +35,7 @@ namespace Context
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<Models.ViewModels.SettingsViewModel> SettingsViewModels { get; set; }
     }
 }

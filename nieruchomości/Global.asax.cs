@@ -25,6 +25,8 @@ namespace nieruchomości
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Bootstrapper.Initialise();
 
+
+            //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
             XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
             ILog logger = LogManager.GetLogger("Log4NetTest.OtherClass");
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, logger);            

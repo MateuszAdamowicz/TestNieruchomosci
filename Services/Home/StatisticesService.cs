@@ -21,7 +21,7 @@ namespace Services.Home
         {
             var statistices = _applicationContext.Statisticses.ToList();
 
-            var stat = statistices.Where(x => x.CreatedAt.Date == DateTime.Now.Date).FirstOrDefault();
+            var stat = statistices.FirstOrDefault(x => x.CreatedAt.Date == DateTime.Now.Date);
 
 
             if (stat == null)
@@ -52,7 +52,7 @@ namespace Services.Home
         {
             var statistices = _applicationContext.Statisticses.ToList();
 
-            var stat = statistices.Where(x => x.CreatedAt.Date == DateTime.Now.Date).FirstOrDefault();
+            var stat = statistices.FirstOrDefault(x => x.CreatedAt.Date == DateTime.Now.Date);
 
             if (stat == null)
             {
