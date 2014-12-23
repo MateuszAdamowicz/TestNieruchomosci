@@ -68,6 +68,124 @@ searcher.filter('unique', function () {
         }
     };
 });
+
+searcher.filter('pricefilter', function () {
+    return function (input, key) {
+        var filtered = [];
+        if (key) {
+            if (typeof input !== "undefined") {
+                for (var i = 0; i < input.length; i++) {
+                    if (input[i].Price) {
+                        var number = Number(input[i].Price.split('z')[0].replace(/ /g, ''));
+                        if (key.max === null && key.min <= number) {
+                            filtered.push(input[i]);
+                        } else if (key.max > number && key.min <= number) {
+                            filtered.push(input[i]);
+                        }
+                    }
+                }
+
+            }
+        } else {
+            filtered = input;
+        }
+        return filtered;
+    };
+});
+
+searcher.filter('usableareafilter', function () {
+    return function (input, key) {
+        var filtered = [];
+        if (key) {
+            if (typeof input !== "undefined") {
+                for (var i = 0; i < input.length; i++) {
+                    if (input[i].UsableArea) {
+                        var number = Number(input[i].UsableArea.split('m')[0]);
+                        if (key.max === null && key.min <= number) {
+                            filtered.push(input[i]);
+                        } else if (key.max > number && key.min <= number) {
+                            filtered.push(input[i]);
+                        }
+                    }
+                }
+
+            }
+        } else {
+            filtered = input;
+        }
+        return filtered;
+    };
+});
+
+searcher.filter('areafilter', function () {
+    return function (input, key) {
+        var filtered = [];
+        if (key) {
+            if (typeof input !== "undefined") {
+
+                for (var i = 0; i < input.length; i++) {
+                    if(input[i].Area){
+                        var number = Number(input[i].Area.split('m')[0]);
+                        if (key.max === null && key.min <= number) {
+                            filtered.push(input[i]);
+                        } else if (key.max > number && key.min <= number) {
+                            filtered.push(input[i]);
+                        }
+                    }
+                }
+
+            }
+        } else {
+            filtered = input;
+        }
+        return filtered;
+    };
+});
+
+//searcher.filter('unique2', function () {
+//    return function (input, key) {
+//        if (typeof input !== "undefined") {
+//            var unique = {};
+
+//            var uniqueList = [
+//{ name: 'Poniżej 100 000 zł', min: 0, max: 100000 },
+//{ name: 'Od 100 000zł do 150 000zł', min: 100000, max: 200000 },
+//{ name: 'Od 150 000zł do 200 000zł', min: 150000, max: 200000 },
+//{ name: 'Od 200 000zł do 300 000zł', min: 200000, max: 300000 },
+//{ name: 'Od 300 000zł do 400 000zł', min: 300000, max: 400000 },
+//{ name: 'Od 400 000zł do 500 000zł', min: 400000, max: 500000 },
+//{ name: 'Powyżej 500 000zł', min: 500000, max: null }
+//            ];
+//            for (var i = 0; i < input.length; i++) {
+//                var number = Number(input[i][key].split('z')[0].replace(/ /g, ''));
+//                if (number < 100000) {
+//                    unique1 += 1;
+//                }
+//                else if (number >= 100000 && number < 150000) {
+//                    unique2 += 1;
+//                }
+//                else if (number >= 150000 && number < 200000) {
+//                    unique3 += 1;
+//                }
+//                else if (number >= 200000 && number < 300000) {
+//                    unique4 += 1;
+//                }
+//                else if (number >= 300000 && number < 400000) {
+//                    unique5 += 1;
+//                }
+//                else if (number >= 400000 && number < 500000) {
+//                    unique6 += 1;
+//                }
+//                else if (number >= 500000) {
+//                    unique7 += 1;
+//                };
+//            }
+
+//            return uniqueList;
+//        }
+//    };
+//});
+
 searcher.controller('SearcherController', function ($scope, $resource, $location) {
 
     $scope.$location = $location;
@@ -77,6 +195,33 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     { name: 'Działki', value: 'land' }
     ];
 
+    $scope.prices = [
+{ name: 'Poniżej 100 000 zł', min: 0, max: 100000 },
+{ name: 'Od 100 000zł do 150 000zł', min: 100000, max: 150000 },
+{ name: 'Od 150 000zł do 200 000zł', min: 150000, max: 200000 },
+{ name: 'Od 200 000zł do 300 000zł', min: 200000, max: 300000 },
+{ name: 'Od 300 000zł do 400 000zł', min: 300000, max: 400000 },
+{ name: 'Od 400 000zł do 500 000zł', min: 400000, max: 500000 },
+{ name: 'Powyżej 500 000zł', min: 500000, max: null }
+    ];
+
+    $scope.usableareas = [
+{ name: 'Poniżej 100m2', min: 0, max: 100 },
+{ name: 'Od 100m2 do 2000m2', min: 100, max: 150 },
+{ name: 'Od 2000m2 do 5000m2', min: 150, max: 200 },
+{ name: 'Od 5000m2 do 10000m2', min: 200, max: 250 },
+{ name: 'Od 10000m2 do 20000m2', min: 250, max: 300 },
+{ name: 'Powyżej 300m2', min: 300, max: null }
+    ];
+
+    $scope.areas = [
+{ name: 'Poniżej 1000m2', min: 0, max: 1000 },
+{ name: 'Od 1000m2 do 2000m2', min: 1000, max: 2000 },
+{ name: 'Od 2000m2 do 5000m2', min: 2000, max: 5000 },
+{ name: 'Od 5000m2 do 10000m2', min: 5000, max: 10000 },
+{ name: 'Od 10000m2 do 20000m2', min: 10000, max: 20000 },
+{ name: 'Powyżej 20000m2', min: 20000, max: null }
+    ];
     //$scope.myProperty = null;
     $scope.$watch('$location.search().property', function (property) {
         $scope.myProperty = property;
@@ -96,7 +241,7 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
 
     //$scope.myoffertTypeFlat = null;
     $scope.$watch('myoffertTypeFlat', function (offert) {
-        if (offert || offert === false) {
+        if (offert) {
             $location.search('offert', offert);
         } else if (offert === null) {
             $location.search('offert', null);
@@ -149,25 +294,33 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     //$scope.myhouseUsableArea = null;
     $scope.$watch('myhouseUsableArea', function (usablearea) {
         if (usablearea) {
-            $location.search('usablearea', usablearea);
+            $location.search('usablearea', usablearea.name);
         } else if (usablearea === null) {
             $location.search('usablearea', null);
         }
     });
     $scope.$watch('$location.search().usablearea', function (usablearea) {
-        $scope.myhouseUsableArea = usablearea;
+        for (var i = 0; i < $scope.usableareas.length; i++) {
+            if ($scope.usableareas[i].name === usablearea) {
+                $scope.myhouseUsableArea = $scope.usableareas[i];
+            }
+        }
     });
 
     //$scope.myhousePrice = null;
     $scope.$watch('myhousePrice', function (price) {
         if (price) {
-            $location.search('price', price);
+            $location.search('price', price.name);
         } else if (price === null) {
             $location.search('price', null);
         }
     });
     $scope.$watch('$location.search().price', function (price) {
-        $scope.myhousePrice = price;
+                for (var i = 0; i < $scope.prices.length; i++) {
+            if ($scope.prices[i].name === price) {
+                $scope.myhousePrice = $scope.prices[i];
+            }
+        }
     });
 
     //$scope.mylandCity = null;
@@ -185,25 +338,41 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     //$scope.mylandArea = null;
     $scope.$watch('mylandArea', function (area) {
         if (area) {
-            $location.search('area', area);
+            $location.search('area', area.name);
         } else if (area === null) {
             $location.search('area', null);
         }
     });
+
     $scope.$watch('$location.search().area', function (area) {
-        $scope.mylandArea = area;
+        for (var i = 0; i < $scope.areas.length; i++) {
+            if ($scope.areas[i].name === area) {
+                $scope.mylandArea = $scope.areas[i];
+            }
+        }
     });
 
+    $scope.$watch('$location.search().price', function (price) {
+        for (var i = 0; i < $scope.prices.length; i++) {
+            if ($scope.prices[i].name === price) {
+                $scope.mylandPrice = $scope.prices[i];
+            }
+        }
+    });
     //$scope.mylandPrice = null;
     $scope.$watch('mylandPrice', function (price) {
         if (price) {
-            $location.search('price', price);
+            $location.search('price', price.name);
         } else if (price === null) {
             $location.search('price', null);
         }
     });
     $scope.$watch('$location.search().price', function (price) {
-        $scope.mylandPrice = price;
+        for (var i = 0; i < $scope.prices.length; i++) {
+            if ($scope.prices[i].name === price) {
+                $scope.mylandPrice = $scope.prices[i];
+            }
+        }
     });
 
     //$scope.myflatCity = null;
@@ -233,13 +402,17 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
     // $scope.myflatPrice = null;
     $scope.$watch('myflatPrice', function (price) {
         if (price) {
-            $location.search('price', price);
+            $location.search('price', price.name);
         } else if (price === null) {
             $location.search('price', null);
         }
     });
     $scope.$watch('$location.search().price', function (price) {
-        $scope.myflatPrice = price;
+        for (var i = 0; i < $scope.prices.length; i++) {
+            if ($scope.prices[i].name === price) {
+                $scope.myflatPrice = $scope.prices[i];
+            }
+        }
     });
 
     $scope.mySortFunction = function (item) {
@@ -271,7 +444,7 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
         for (var i = 0; i < $scope.sorting.length; i++) {
             if ($scope.sorting[i].name === sort) {
                 $scope.mySort = $scope.sorting[i];
-            } 
+            }
         }
     });
 
