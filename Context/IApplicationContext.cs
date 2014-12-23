@@ -12,7 +12,9 @@ namespace Context
         IDbSet<Photo> Photos { get; set; }
         IDbSet<Offer> Offers { get; set; }
         IDbSet<Mail> Mails { get; set; }
-        IDbSet<Statistics> Statisticses { get; set; } 
+        IDbSet<Statistics> Statisticses { get; set; }
+        IDbSet<Clat> Clats { get; set; }
+        IDbSet<CostProperty> CostProperties { get; set; }
         void SaveChanges();
     }
 }

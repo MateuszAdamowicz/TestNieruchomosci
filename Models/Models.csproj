@@ -51,7 +51,8 @@
     <Compile Include="ApplicationModels\Result.cs" />
     <Compile Include="ContactEmail.cs" />
     <Compile Include="EntityModels\Ad.cs" />
-    <Compile Include="EntityModels\AddCosts.cs" />
+    <Compile Include="EntityModels\CLAT.cs" />
+    <Compile Include="EntityModels\CostProperty.cs" />
     <Compile Include="EntityModels\Base.cs" />
     <Compile Include="EntityModels\Flat.cs" />
     <Compile Include="EntityModels\House.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="EntityModels\Mail.cs" />
     <Compile Include="EntityModels\Offer.cs" />
     <Compile Include="EntityModels\Photo.cs" />
+    <Compile Include="EntityModels\PropertyType.cs" />
     <Compile Include="EntityModels\Statistics.cs" />
     <Compile Include="EntityModels\Worker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

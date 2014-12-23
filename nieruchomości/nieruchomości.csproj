@@ -234,6 +234,7 @@
       <DependentUpon>201412230701375_InitialMigrations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\IfModelChanges.cs" />
+    <Compile Include="Migrations\MigrateConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -350,7 +351,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\nieruchomosci - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\nieruchomosci - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - FTP %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - FTP %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
@@ -1154,6 +1159,7 @@
     <Content Include="Views\Home\_ShowLand.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\CalcView.cshtml" />
+    <Content Include="Views\Admin\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

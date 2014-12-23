@@ -1,9 +1,12 @@
-﻿@using Models.EntityModels
+﻿@using System.Activities.Expressions
+@using Models.EntityModels
 @using Models.ViewModels
 @using nieruchomości.Helpers
 @model Models.ViewModels.ShowCalc
 
+
 @{
+    
     ViewBag.Title = "ShowCalc";
 
     double kwota = 0;
@@ -12,7 +15,12 @@
         kwota = Convert.ToDouble(Model.CalcPrice);
     }
     
-    /*string cena = kwota.Where(x => Convert.ToInt32(x) <= 9 || x == ',').Aggregate<char, string>(null, (current, x) => current + x);
+    
+    
+    //var vat = Model.Properties.FirstOrDefault(x => x.Type == PropertyType.)
+    
+  
+    /*string cena = kwota.Where(x => Convert.ToInt32(x) <= 9 || x == '').Aggregate<char, string>(null, (current, x) => current + x);
 
 
     double xcena = Convert.ToDouble(cena);
@@ -34,9 +42,10 @@
             procent = '0';
         var StartCost = parseFloat(cost);
         var StartPercent = parseFloat(procent);
-        document.form.AddCosts.value = (StartCost * StartPercent / 100);
+        document.form.AddCosts.value = (StartCost * @Model.CalcVATNotary.Firstordefault(x => x.Type = VAT) / 100);
         document.form.FullCosts.value = (StartCost + StartCost * StartPercent / 100);
     }
+
 </script>
 
 
