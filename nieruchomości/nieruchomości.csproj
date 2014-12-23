@@ -348,6 +348,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -1153,7 +1157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
