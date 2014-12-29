@@ -4,6 +4,7 @@
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
         <h4>Ostatnie dni:</h4>
         <div class="row" style="font-size: 12px">
             @foreach (var stat in Model.Take(4).OrderByDescending(x => x.CreatedAt))

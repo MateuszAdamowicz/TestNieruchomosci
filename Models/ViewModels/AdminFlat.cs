@@ -28,6 +28,7 @@ namespace Models.ViewModels
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "CityRequired")]
         public string City { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceRequired")]
+        [RegularExpression(@"([0-9]+\.[0-9]+)|([0-9]+)|(Do negocjacji)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceAdvertNotValid")]
         public string Price { get; set; }
         public int Worker { get; set; }
         public IEnumerable<HttpPostedFileBase> Files { get; set; }

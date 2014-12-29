@@ -160,6 +160,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prawidłowy format ceny to: 12, 12.32, Do negocjacji.
+        /// </summary>
+        internal static string PriceAdvertNotValid {
+            get {
+                return ResourceManager.GetString("PriceAdvertNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cena powinna składać się z maksymalnie 7 cyfr..
         /// </summary>
         internal static string PriceNotValid {

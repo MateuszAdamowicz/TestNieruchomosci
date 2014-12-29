@@ -26,7 +26,7 @@ namespace Services.Admin
 
             if (!String.IsNullOrEmpty(key))
             {
-                advertsToShow = advertsToShow.Where(x => x.Title == key || x.City == key || x.Number == key);
+                advertsToShow = advertsToShow.Where(x => x.Title.Contains(key) || x.City.Contains(key) || x.Number == key);
             }
 
             if (!String.IsNullOrEmpty(worker))

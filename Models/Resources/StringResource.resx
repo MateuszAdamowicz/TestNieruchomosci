@@ -150,6 +150,9 @@
   <data name="PhoneNumberRequired" xml:space="preserve">
     <value>Numer telefonu jest wymagany.</value>
   </data>
+  <data name="PriceAdvertNotValid" xml:space="preserve">
+    <value>Prawidłowy format ceny to: 12, 12.32, Do negocjacji</value>
+  </data>
   <data name="PriceNotValid" xml:space="preserve">
     <value>Cena powinna składać się z maksymalnie 7 cyfr.</value>
   </data>
