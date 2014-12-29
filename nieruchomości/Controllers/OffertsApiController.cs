@@ -30,21 +30,21 @@ namespace nieruchomości.Controllers
 
         public IEnumerable<ShowListHouse> GetHouses()
         {
-            List<House> houseData = _repository.Houses().Where(x => x.Visible).OrderByDescending(x => x.CreatedAt).ToList();
+            List<House> houseData = _repository.Houses().Where(x => x.Visible && x.Deleted == false).OrderByDescending(x => x.CreatedAt).ToList();
             List<ShowListHouse> listHouse = AutoMapper.Mapper.Map<List<ShowListHouse>>(houseData);
             return listHouse;
         }
 
         public IEnumerable<ShowListFlat> GetFlats()
         {
-            List<Flat> flatData = _repository.Flats().Where(x => x.Visible).OrderByDescending(x => x.CreatedAt).ToList();
+            List<Flat> flatData = _repository.Flats().Where(x => x.Visible && x.Deleted == false).OrderByDescending(x => x.CreatedAt).ToList();
             List<ShowListFlat> listFlat= AutoMapper.Mapper.Map<List<ShowListFlat>>(flatData);
             return listFlat;
         }
 
         public IEnumerable<ShowListLand> GetLands()
         {
-            List<Land> landData = _repository.Lands().Where(x => x.Visible).OrderByDescending(x => x.CreatedAt).ToList();
+            List<Land> landData = _repository.Lands().Where(x => x.Visible && x.Deleted == false).OrderByDescending(x => x.CreatedAt).ToList();
             List<ShowListLand> listLand = AutoMapper.Mapper.Map<List<ShowListLand>>(landData);
             return listLand;
         }
