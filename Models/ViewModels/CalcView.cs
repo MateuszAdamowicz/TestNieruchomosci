@@ -2,7 +2,7 @@
 
 namespace Models.ViewModels
 {
-    public class ShowCalc
+    public class CalcView
     {
         public string CalcPrice { get; set; }                   //price of property, charged from _show(flat,house,land).cshtml
         public double CalcCLAT { get; set; }                    // Civil law transaction tax. 

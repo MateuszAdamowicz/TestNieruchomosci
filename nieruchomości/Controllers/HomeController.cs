@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Context;
 using Models;
 using Models.EntityModels;
 using Models.ViewModels;
+using PagedList;
 using Services.Home;
 using Services.Home.EmailService;
 
@@ -182,19 +184,33 @@ namespace nieruchomości.Controllers
         
         public ActionResult CalcView(string xPrice, string xOwnershipForm)
         {
-            var x = _context.CostProperties.ToList();
-                         
-            var xModel = new ShowCalc()
+
+            var x = _context.Clats.ToList();
+            var xxxjson = new JavaScriptSerializer().Serialize(x);
+
+
+            var y = _context.CostProperties.ToList();
+             
+            var z = new CalcView()
             {
                CalcPrice = xPrice,
                CalcOwnershipForm = xOwnershipForm
              
             };
 
+            var model = new CalcViewModel()
+            {
+                ModelCalcView = z,
+                ClatList = x,
+                CostPropertiesList = y
+            };
 
-            return PartialView(xModel);
+
+ 
+
+            return PartialView(model);
         }
-    
+
     }
 
 

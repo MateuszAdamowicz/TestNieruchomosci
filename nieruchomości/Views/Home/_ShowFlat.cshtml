@@ -5,21 +5,12 @@
 @{
     ViewBag.Title = "ShowFlat";
 }
-@*
-        <style type="text/css">
-            option-button
-        .option-button {
-            height:200%;
-            font-weight: bold;
-        }
-    </style>
-*@
 
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/modalform.js"></script>
 
 @*modal fade in function*@
-<div id='myModal' class='modal fade in'> 
+<div id='myModal' class='modal fade in'>
     <div class="modal-dialog">
         <div class="modal-content">
             <div id='myModalContent'></div>
@@ -74,12 +65,11 @@
                     </div>
 
                     <div class="panel-body ">
-                        @Html.ActionLink("Kalkulator opłat dodatkowych","CalcView", "Home",
-                                        new { XPrice = Model.Price, XOwnershipForm = Model.Ownership },
-                                        new { data_modal = "", id = "btnCreate", @class = "btn btn-sm btn-info center-block " })
-                                    @* Kalkulator opłat dodatkowych - button to modal CalcView in Home Controller. Send "XPrice = Model.Price" and "XOwnershipForm = Model.Ownership" to Controller*@
+                        @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home",
+                            new { XPrice = Model.Price, XOwnershipForm = Model.Ownership },
+                            new { data_modal = "", id = "btnCreate", @class = "btn btn-sm btn-info center-block " })
                     </div>
-                </div>
+                    </div>
             </div>
         </div>
         <div class="row">
@@ -185,5 +175,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modalform") @*Modal form render, does not work. After debug Bundleconfig.cs, just delete <script src="~/Scripts/jquery-1.10.2.js"></script>
-                                            <script src="~/Scripts/modalform.js"></script> in line 18/19 *@ 
+        <script src="~/Scripts/modalform.js"></script> in line 18/19 *@
 }
+

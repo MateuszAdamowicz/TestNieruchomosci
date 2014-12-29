@@ -12,5 +12,6 @@ namespace Models.EntityModels
         public double To { get; set; }
         public double Percent { get; set; }
         public double Max { get; set; }
+        public double Price { get; set; }
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="ViewModels\AdminLand.cs" />
     <Compile Include="ViewModels\AdminWorker.cs" />
     <Compile Include="ViewModels\AdType.cs" />
+    <Compile Include="ViewModels\CalcViewModel.cs" />
     <Compile Include="ViewModels\CreateOffer.cs" />
     <Compile Include="ViewModels\EditFlat.cs" />
     <Compile Include="ViewModels\EditHouse.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="ViewModels\Session.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShowAdvert.cs" />
-    <Compile Include="ViewModels\ShowCalc.cs" />
+    <Compile Include="ViewModels\CalcView.cs" />
     <Compile Include="ViewModels\ShowFlat.cs" />
     <Compile Include="ViewModels\ShowHouse.cs" />
     <Compile Include="ViewModels\ShowLand.cs" />

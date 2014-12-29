@@ -1,14 +1,25 @@
-﻿@using Models.EntityModels
+﻿@using System.Diagnostics
+@using Models.EntityModels
 @model Models.ViewModels.SettingsViewModel
 
 
 @{
-    ViewBag.Title = "ShowCalc";
+    ViewBag.Title = "Settings";
 
-     //var VAT = Model.CostPropertiesList.First(x => x.Type = PropertyType.VatClat);
+    
+    var vatClat = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatClat);
+    var vatNotary = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatNotary);
+    var mr = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.Mr);
+    var actPagePrice = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.ActPagePrice);
+    var agencyCommissionPercent = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.AgencyCommissionPercent);
+    var courtFee = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.CourtFee);
+    var vatAgencyCommission = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatAgencyCommission);
 
 
-}
+    var clatList = Model.ClatList.ToList();
+    //var costPropertyList = Model.CostPropertiesList.ToList();
+    
+    }
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">

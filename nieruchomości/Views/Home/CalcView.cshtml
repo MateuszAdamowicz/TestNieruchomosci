@@ -1,61 +1,284 @@
 ﻿@using System.Activities.Expressions
+@using System.Diagnostics
+@using System.Web.Script.Serialization
+@using Microsoft.Ajax.Utilities
 @using Models.EntityModels
 @using Models.ViewModels
 @using nieruchomości.Helpers
-@model Models.ViewModels.ShowCalc
-
+@using Models.EntityModels
+@model Models.ViewModels.CalcViewModel
 
 @{
-    
+
     ViewBag.Title = "ShowCalc";
 
-    double kwota = 0;
-    if (Model.CalcPrice!=null)
-    {
-        kwota = Convert.ToDouble(Model.CalcPrice);
-    }
+    var price = Convert.ToDouble(Model.ModelCalcView.CalcPrice);
+    var ownershipForm = Model.ModelCalcView.CalcOwnershipForm;
     
-    
-    
-    //var vat = Model.Properties.FirstOrDefault(x => x.Type == PropertyType.)
-    
-  
-    /*string cena = kwota.Where(x => Convert.ToInt32(x) <= 9 || x == '').Aggregate<char, string>(null, (current, x) => current + x);
+    var vatClat = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatClat).Value;
+    var vatNotary = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatNotary).Value;
+    var mr = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.Mr).Value;
+    var actPagePrice = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.ActPagePrice).Value;
+    var agencyCommissionPercent = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.AgencyCommissionPercent).Value;
+    var courtFee = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.CourtFee).Value;
+    var vatAgencyCommission = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatAgencyCommission).Value;
 
-
-    double xcena = Convert.ToDouble(cena);
-    int procent = 3;*/
-    //int flatPrice = Int32.Parse(Model.XPrice);
+    var clatList = Model.ClatList;
 
 }
 
 
-<script>
+<script type="text/javascript">
+
+    var ClatJsonList = @Html.Raw(Json.Encode(Model.ClatList));
+    var vatClat = @Html.Raw(Json.Encode(vatClat));
+    var VatNotary = @Html.Raw(Json.Encode(vatNotary));
+    var courtFee = @Html.Raw(Json.Encode(courtFee));
+    var agencyCommissionPercent = @Html.Raw(Json.Encode(agencyCommissionPercent));
+    var KW = @Html.Raw(Json.Encode(mr));
+    var vatAgencyCommission = @Html.Raw(Json.Encode(vatAgencyCommission));
+    var actPagePrice = @Html.Raw(Json.Encode(actPagePrice));
+
+
     function CalculateAddPrice() {
+        var appCost = 0.0;
+        var cost = +document.getElementById("StartCost").value;
+        document.getElementById("CLAT").value = cost * vatClat;
+        appCost += +document.getElementById("CLAT").value;
+
+        //Notary
+        for (var i = 0; i < ClatJsonList.length; i++) {
+            var clatItem= ClatJsonList[i];
+            if ((cost < clatItem.To) && (cost >= clatItem.From)) {
+                var temp = (cost - clatItem.From) * clatItem.Percent/100;
+                if (((temp - clatItem.Max)>0) && (clatItem.Max!=0)){
+                    document.getElementById("Notary").value = clatItem.Max;
+                    appCost += +document.getElementById("Notary").value;
+                    break;
+                } else {
+                    document.getElementById("Notary").value = temp + clatItem.Price;
+                    appCost += +document.getElementById("Notary").value;
+                    break;
+                }
+            }
+        }
 
 
-        var cost = document.form.Koszt.value;
-        if (!cost)
-            cost = '0';
-        var procent = document.form.Percent.value;
-        if (!procent)
-            procent = '0';
-        var StartCost = parseFloat(cost);
-        var StartPercent = parseFloat(procent);
-        @*document.form.AddCosts.value = (StartCost * @Model.CalcVATNotary.Firstordefault(x => x.Type = VAT) / 100);*@
-        document.form.FullCosts.value = (StartCost + StartCost * StartPercent / 100);
+        document.getElementById("VATNotary").value = document.getElementById("Notary").value * VatNotary;
+        appCost += +document.getElementById("VATNotary").value;
+
+        document.getElementById("CourtFee").value = courtFee;
+        document.getElementById("KW").value = KW + cost;
+        document.getElementById("AgencyCommissionPercent").value = agencyCommissionPercent;
+        document.getElementById("AgencyCommission").value = agencyCommissionPercent*cost;
+        document.getElementById("VATAgencyCommission").value = agencyCommissionPercent*cost*vatAgencyCommission;
+        document.getElementById("ActPagePrice").value = actPagePrice;
+        document.getElementById("ApproxCost").value = KW;
+
+        appCost = +document.getElementById("ApproxCost").value;
+        document.getElementById("TotalCost").value = cost + appCost;
+
+        // document.getElementById("Notary").value + document.getElementById("CLAT").value + document.getElementById("VATNotary").value + courtFee + KW + document.getElementById("AgencyCommission").value + document.getElementById("VATAgencyCommission").value
     }
-
 </script>
 
 
-<form name="form" id="form">
-    <input type="Text" name="Koszt" size="4" value="@kwota" onkeyup="CalculateAddPrice()"> Cena Nieruchomości (PLN)<br>
-    <input type="Text" name="Percent" size="4" value="2" onkeyup="CalculateAddPrice()"> Prowizja agencji (%)<br>
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel" >Kalkulator opłat dodatkowych</h4>
+    </div>
+    <form class="form-horizontal">
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="control-label col-xs-6">Cena nieruchomości</label>
+                <div class="controls col-xs-6">
+                    @*<span class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Help info"></span>*@
+                    <div class="input-group input-group-sm">
+                        <input type="number" value="@price" id="StartCost" class="form-control" onkeyup="CalculateAddPrice()" placeholder="cena nieruchomości">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Podatek od czynności cywilnoprawnych</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" readonly="readonly" id="CLAT">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Taksa notarialna</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="Notary" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
 
-    <input type="Text" name="AddCosts" id="AddCosts" readonly="readonly" size="6"> Dodatkowe koszty<br>
-    <input type="Text" name="FullCosts" id="FullCosts" readonly="readonly" size="4" > Całkowite koszty<br>
-</form>
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">VAT od taksy notarialnej</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="VATNotary" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Opłata sądowa</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="CourtFee" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Założenie KW</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="KW" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Prowizja Agencji</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="AgencyCommissionPercent">
+                        <span class="input-group-addon">%</span>
+                        <input type="number" class="form-control" id="AgencyCommission" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">VAT od prowizji agencji</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="VATAgencyCommission" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Wypisy aktu</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="ActPagePrice" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Przybliżone koszty dodatkowe</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="ApproxCost" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label danger col-xs-6">Całkowity koszt nieruchomości</label>
+                <div class="controls col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="number" class="form-control" id="TotalCost" readonly="readonly">
+                        <span class="input-group-addon">PLN</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+        @*<div class="input-group input-group-sm">
+                        <span class="input-group-addon">Cena nieruchomości</span>
+                        <input type="text" value="@price" class="form-control" id="Koszt" onkeyup="CalculateAddPrice()">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Podatek od czynności cywilnoprawnych</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Taksa notarialna</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">VAT od taksy notarialnej</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Opłata sądowa</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Założenie księgi wieczystej</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Prowizja agencji</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[%]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Prowizja agencji</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon " >[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">VAT od prowizji agencji</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Wypisy aktu</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Przybliżone koszty dodatkowe</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">Koszt całkowity</span>
+                        <input type="text" value="" class="form-control" id="Tax">
+                        <span class="input-group-addon">[PLN]</span>
+                    </div>
+                </div>
+            </form>*@
 
 
 <script language="javascript">
