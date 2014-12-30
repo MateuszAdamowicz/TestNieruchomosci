@@ -215,5 +215,12 @@
             alert(errors.join("\n"));
         }
     });
+    
+    $("#Rooms").on("change", function () {
+        if (+$(this).val() < 0) {
+            $(this).val("0");
+            alert("Liczba pokoi nie może być ujemna!");
+        }
+    });
 </script>
 
