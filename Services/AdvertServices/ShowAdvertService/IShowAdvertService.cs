@@ -5,6 +5,6 @@ namespace Services.AdvertServices.ShowAdvertService
 {
     public interface IShowAdvertService
     {
-        Result<ShowAdvert> GetAdvert(AdType adType, int id);
+        Result<ShowAdvert> GetAdvert(AdType adType, int id, bool admin);
     }
 }

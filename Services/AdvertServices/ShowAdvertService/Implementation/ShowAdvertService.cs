@@ -1,26 +1,37 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.Mvc;
 using Context;
 using Models.ApplicationModels;
+using Models.EntityModels;
 using Models.ViewModels;
+using Services.GenericRepository;
 
 namespace Services.AdvertServices.ShowAdvertService.Implementation
 {
     public class ShowAdvertService : IShowAdvertService
     {
         private readonly ApplicationContext _applicationContext;
+        private readonly IGenericRepository _genericRepository;
 
-        public ShowAdvertService(ApplicationContext applicationContext)
+        public ShowAdvertService(ApplicationContext applicationContext, IGenericRepository genericRepository)
         {
             _applicationContext = applicationContext;
+            _genericRepository = genericRepository;
         }
 
-        public Result<ShowAdvert> GetAdvert(AdType adType, int id)
+        public Result<ShowAdvert> GetAdvert(AdType adType, int id, bool admin)
         {
             var showAdvert = new ShowAdvert { AdType = adType };
 
             if (adType == AdType.Flat)
             {
-                var flat = Enumerable.FirstOrDefault(_applicationContext.Flats.Where(x => x.Id == id && x.Visible && !x.Deleted));
+                var flats = _genericRepository.GetSet<Flat>().Where(x => x.Id == id);
+                if (!admin)
+                {
+                    flats = flats.Where(x => x.Visible);
+                }
+                var flat = flats.FirstOrDefault();
                 if (flat == null)
                 {
                     return new Result<ShowAdvert>(false, null, "", null);
@@ -30,7 +41,12 @@ namespace Services.AdvertServices.ShowAdvertService.Implementation
             }
             else if (adType == AdType.House)
             {
-                var house = Enumerable.FirstOrDefault(_applicationContext.Houses.Where(x => x.Id == id && x.Visible && !x.Deleted));
+                var houses = _genericRepository.GetSet<House>().Where(x => x.Id == id);
+                if (!admin)
+                {
+                    houses = houses.Where(x => x.Visible);
+                }
+                var house = houses.FirstOrDefault();
                 if (house == null)
                 {
                     return new Result<ShowAdvert>(false, null, "", null);
@@ -40,7 +56,12 @@ namespace Services.AdvertServices.ShowAdvertService.Implementation
             }
             else if (adType == AdType.Land)
             {
-                var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(x => x.Id == id && x.Visible && !x.Deleted));
+                var lands = _genericRepository.GetSet<Land>().Where(x => x.Id == id);
+                if (!admin)
+                {
+                    lands = lands.Where(x => x.Visible);
+                }
+                var land = lands.FirstOrDefault();
                 if (land == null)
                 {
                     return new Result<ShowAdvert>(false, null, "", null);

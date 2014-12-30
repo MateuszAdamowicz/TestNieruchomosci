@@ -6,6 +6,10 @@
 }
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @if (!Model.Visible)
+        {
+            <div class="alert-danger"><strong>To ogłoszenie jest ukryte.</strong> Nie jest widoczne dla użytkowników</div>
+        }
         <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number<br /><div class="pull-right" style="font-size: 12px; font-weight:100">Odwiedzin: <span class="badge">@(Model.Counter)</span></div></div>
         <h4>@Model.Title</h4>
         <h5>Dom</h5>

@@ -89,6 +89,7 @@ namespace nieruchomości.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Show(ContactEmail contactEmail, string key)
         {
+            var admin = User.Identity.IsAuthenticated;
             if (ModelState.IsValid)
             {
                 _emailService.SendAndSaveOfferQuestion(contactEmail);
@@ -98,7 +99,7 @@ namespace nieruchomości.Controllers
             var parsedSearch = _searchService.ParseKey(key);
             if (parsedSearch.Id > 0)
             {
-                var advert = _showAdvertService.GetAdvert(parsedSearch.AdType, parsedSearch.Id);
+                var advert = _showAdvertService.GetAdvert(parsedSearch.AdType, parsedSearch.Id, admin);
                 if (advert.Success)
                 {
                     if (parsedSearch.AdType == AdType.Flat)
@@ -122,11 +123,12 @@ namespace nieruchomości.Controllers
 
         public ActionResult Show(string key)
         {
+            var admin = User.Identity.IsAuthenticated;
             var parsedSearch = _searchService.ParseKey(key);
 
             if (parsedSearch.Id > 0)
             {
-                var result = _showAdvertService.GetAdvert(parsedSearch.AdType, parsedSearch.Id);
+                var result = _showAdvertService.GetAdvert(parsedSearch.AdType, parsedSearch.Id, admin);
 
                 if (result.Success)
                 {
