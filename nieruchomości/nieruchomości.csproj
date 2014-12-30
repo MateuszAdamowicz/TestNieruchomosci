@@ -1188,9 +1188,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Context\Context.csproj">
       <Project>{8459f37f-efb8-4806-beb3-3c1601301f2c}</Project>
       <Name>Context</Name>
