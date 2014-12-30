@@ -17,11 +17,11 @@
                             if (Model.Pictures == null || Model.Pictures.Count == 0)
                             {
                                 @*<div style="text-align: center">Brak zdjęć</div>*@
-                                <img class="custom-head-photo" src="\Content\Photos\NoImageAvailable.jpg" />
+                                <img class="custom-head-photo" src="/Content/Photos/NoImageAvailable.jpg" />
                             }
                             else
                             {
-                                <img class="custom-head-photo" src="\Content\Photos\@Model.Pictures[0].Link" />
+                                <img class="custom-head-photo" src="/Content/Photos/@Model.Pictures[0].Link" />
                             }
                         }
                     </div>
