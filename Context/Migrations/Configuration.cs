@@ -21,35 +21,35 @@ namespace Context.Migrations
             var CostProp1 = new CostProperty()
             {
                 Name = "Podatek od czynnoœci cywilnoprawnych",
-                Value = 0.02,
+                Value = 2,
                 Type = PropertyType.VatClat
             };
 
             var CostProp2 = new CostProperty()
             {
                 Name = "VAT od taksy notarialnej",
-                Value = 0.22,
+                Value = 23,
                 Type = PropertyType.VatNotary
             };
 
             var CostProp3 = new CostProperty()
             {
                 Name = "Za³o¿enie KW",
-                Value = 40,
+                Value = 200,
                 Type = PropertyType.Mr
             };
 
             var CostProp4 = new CostProperty()
             {
                 Name = "Prowizja agencji",
-                Value = 0.10,
+                Value = 2,
                 Type = PropertyType.AgencyCommissionPercent
             };
 
             var CostProp5 = new CostProperty()
             {
                 Name = "VAT od prowizji agencji",
-                Value = 0.23,
+                Value = 23,
                 Type = PropertyType.VatAgencyCommission
             };
 
@@ -60,7 +60,7 @@ namespace Context.Migrations
                 Value = 7.3,
                 Type = PropertyType.ActPagePrice
             };
-  
+
 
             var CostProp7 = new CostProperty()
             {
@@ -76,7 +76,7 @@ namespace Context.Migrations
             context.CostProperties.AddOrUpdate(x => x.Type, CostProp5);
             context.CostProperties.AddOrUpdate(x => x.Type, CostProp6);
             context.CostProperties.AddOrUpdate(x => x.Type, CostProp7);
-          
+
 
             var ClatProp1 = new Clat
             {
@@ -86,7 +86,7 @@ namespace Context.Migrations
                 Max = 0,
                 Price = 0
             };
-         
+
             var ClatProp2 = new Clat
             {
                 From = 3000,
@@ -95,7 +95,7 @@ namespace Context.Migrations
                 Max = 0,
                 Price = 100
             };
-        
+
             var ClatProp3 = new Clat
             {
                 From = 10000,
@@ -113,7 +113,7 @@ namespace Context.Migrations
                 Max = 0,
                 Price = 710
             };
-           
+
 
             var ClatProp5 = new Clat
             {
@@ -123,7 +123,7 @@ namespace Context.Migrations
                 Max = 0,
                 Price = 1010
             };
-           
+
             var ClatProp6 = new Clat
             {
                 From = 1000000,

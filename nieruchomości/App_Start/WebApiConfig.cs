@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace nieruchomości.App_Start
+namespace nieruchomości
 {
 
 

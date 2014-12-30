@@ -67,10 +67,9 @@
                         <div class="col-md-5">Cena:</div>
                         <div class="col-md-7">@Model.Price zł</div>
                     </div>
-
                     <div class="panel-body ">
                         @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home",
-                            new { XPrice = Model.Price, XOwnershipForm = Model.Ownership },
+                            new { viewPrice = Model.Price, viewOwnershipForm = Model.Ownership },
                             new { data_modal = "", id = "btnCreate", @class = "btn btn-sm btn-info center-block " })
                     </div>
                 </div>
@@ -178,7 +177,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/modalform") @*Modal form render, does not work. After debug Bundleconfig.cs, just delete <script src="~/Scripts/jquery-1.10.2.js"></script>
-        <script src="~/Scripts/modalform.js"></script> in line 18/19 *@
+    @Scripts.Render("~/bundles/modalform") 
 }
 

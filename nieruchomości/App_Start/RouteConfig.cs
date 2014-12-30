@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace nieruchomości.App_Start
+namespace nieruchomości
 {
     public class RouteConfig
     {

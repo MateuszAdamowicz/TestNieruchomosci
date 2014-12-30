@@ -9,7 +9,6 @@ using System.Web.Routing;
 using Context;
 using log4net;
 using log4net.Config;
-using nieruchomości.App_Start;
 using nieruchomości.Migrations;
 using Services.StatisticesServices.StatisticesService;
 

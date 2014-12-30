@@ -9,6 +9,7 @@ using Models.EntityModels;
 using Models.ViewModels;
 using PagedList;
 using Services.AdvertServices.ShowAdvertService;
+using Services.CalcService;
 using Services.CreateOfferService;
 using Services.EmailServices.EmailService;
 using Services.SearchService;
@@ -24,8 +25,10 @@ namespace nieruchomości.Controllers
         private readonly IShowAdvertService _showAdvertService;
         private readonly ICounterService _counterService;
         private readonly IOfferService _offerService;
+        private readonly ICalcService _calcService;
+
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService, ICalcService calcService)
         {
             _context = context;
             _emailService = emailService;
@@ -33,6 +36,8 @@ namespace nieruchomości.Controllers
             _showAdvertService = showAdvertService;
             _counterService = counterService;
             _offerService = offerService;
+            _calcService = calcService;
+
         }
 
         public ActionResult About()
@@ -184,34 +189,12 @@ namespace nieruchomości.Controllers
         {
             return View();
         }
-        
-        
-        
-        public ActionResult CalcView(string xPrice, string xOwnershipForm)
+
+
+
+        public ActionResult CalcView(string viewPrice, string viewOwnershipForm)
         {
-
-            var x = _context.Clats.ToList();
-            var xxxjson = new JavaScriptSerializer().Serialize(x);
-
-
-            var y = _context.CostProperties.ToList();
-             
-            var z = new CalcView()
-            {
-               CalcPrice = xPrice,
-               CalcOwnershipForm = xOwnershipForm
-             
-            };
-
-            var model = new CalcViewModel()
-            {
-                ModelCalcView = z,
-                ClatList = x,
-                CostPropertiesList = y
-            };
-
-
- 
+            var model = _calcService.BuildViewModel(viewPrice, viewOwnershipForm);
 
             return PartialView(model);
         }

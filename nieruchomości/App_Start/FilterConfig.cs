@@ -2,7 +2,7 @@
 using log4net;
 using Services.LogService.Implementation;
 
-namespace nieruchomości.App_Start
+namespace nieruchomości
 {
     public class FilterConfig
     {

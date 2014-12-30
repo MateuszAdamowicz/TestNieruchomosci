@@ -115,6 +115,8 @@
     <Compile Include="AdvertServices\ChangeAdvertVisability\Implementation\ChangeAdvertVisibility.cs" />
     <Compile Include="AdvertServices\ChangeAdvertVisability\IChangeAdvertVisibility.cs" />
     <Compile Include="AppSettingsService\Implementation\AppSettingsService.cs" />
+    <Compile Include="CalcService\ICalcService.cs" />
+    <Compile Include="CalcService\Implementation\CalcService.cs" />
     <Compile Include="DeleteMessageService\Implementation\DeleteMessageService.cs" />
     <Compile Include="EnumNameService\Implementation\EnumNameService.cs" />
     <Compile Include="GenericRepository\Implementation\GenericRepository.cs" />

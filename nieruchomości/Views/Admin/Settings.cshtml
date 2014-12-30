@@ -5,44 +5,30 @@
 
 @{
     ViewBag.Title = "Settings";
-
-    
-    var vatClat = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatClat);
-    var vatNotary = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatNotary);
-    var mr = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.Mr);
-    var actPagePrice = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.ActPagePrice);
-    var agencyCommissionPercent = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.AgencyCommissionPercent);
-    var courtFee = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.CourtFee);
-    var vatAgencyCommission = Model.CostPropertiesList.FirstOrDefault(x => x.Type == PropertyType.VatAgencyCommission);
-
-
-    var clatList = Model.ClatList.ToList();
-    //var costPropertyList = Model.CostPropertiesList.ToList();
-    
-    }
+}
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
         <h4>Ustawienia</h4>
-        
+
         <table>
             <thead>
                 <tr>
                     <th>
-                        From
-                    </th>                    
-                    <th>
-                        To
-                    </th>                    
-                    <th>
-                        Percent
-                    </th>                    
-                    <th>
-                        Max
+                        Od
                     </th>
                     <th>
-                        Price
+                        do
+                    </th>
+                    <th>
+                        procent
+                    </th>
+                    <th>
+                        max
+                    </th>
+                    <th>
+                        cena
                     </th>
                 </tr>
             </thead>
@@ -65,7 +51,7 @@
                                 {
                                     @Html.TextBox("To", x.To)
                                 }
-                                
+
                             </td>
                             <td>
                                 @Html.TextBox("Percent", x.Percent)
@@ -84,5 +70,39 @@
                 }
             </tbody>
         </table>
+
+
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    Nazwa
+                </th>
+                <th>
+                    Wartość
+                </th>
+            </tr>
+
+            @foreach (var item in Model.CostPropertiesList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+
+                    @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>*@
+                </tr>
+            }
+
+        </table>
+
     </div>
 </div>

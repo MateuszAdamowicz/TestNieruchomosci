@@ -16,6 +16,7 @@ using Services.AdvertServices.AddAdvertService;
 using Services.AdvertServices.AdminFilterAdvertService;
 using Services.AdvertServices.ChangeAdvertVisability;
 using Services.AdvertServices.UpdateAdvertService;
+using Services.CalcService;
 using Services.CreateOfferService;
 using Services.DeleteMessageService;
 using Services.EmailServices.EmailService;
@@ -40,9 +41,11 @@ namespace nieruchomości.Controllers
         private readonly IGenericRepository _genericRepository;
         private readonly ISearchService _searchService;
         private readonly IChangeAdvertVisibility _changeAdvertVisibility;
+        private readonly ICalcService _calcService;
+
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository, ISearchService searchService, IChangeAdvertVisibility changeAdvertVisibility )
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository, ISearchService searchService, IChangeAdvertVisibility changeAdvertVisibility, ICalcService calcService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
@@ -56,6 +59,8 @@ namespace nieruchomości.Controllers
             _genericRepository = genericRepository;
             _searchService = searchService;
             _changeAdvertVisibility = changeAdvertVisibility;
+            _calcService = calcService;
+
         }
 
         [AllowAnonymous]
@@ -477,8 +482,18 @@ namespace nieruchomości.Controllers
             return View(model);
         }
 
-        public ActionResult EditClat(Clat clat)
+        [HttpPost]
+        public ActionResult EditClat(Clat clatModel)
         {
+            var clat = _applicationContext.Clats.Find(clatModel.Id);
+
+            clat.From = clatModel.From;
+            clat.To = clatModel.To;
+            clat.Percent = clatModel.Percent;
+            clat.Price = clatModel.Price;
+
+            _applicationContext.SaveChanges();
+
             return RedirectToAction("Settings");
         }
     }

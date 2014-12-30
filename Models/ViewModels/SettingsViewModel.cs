@@ -7,7 +7,7 @@ using Models.EntityModels;
 
 namespace Models.ViewModels
 {
-    public class SettingsViewModel:Base
+    public class SettingsViewModel
     {
         public List<Clat> ClatList { get; set; }
         public List<CostProperty> CostPropertiesList { get; set; }

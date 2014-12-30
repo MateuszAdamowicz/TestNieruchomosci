@@ -5,7 +5,7 @@ using Models;
 using Models.EntityModels;
 using Models.ViewModels;
 
-namespace nieruchomości.App_Start
+namespace nieruchomości
 {
     public class MapperConfig
     {

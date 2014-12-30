@@ -35,7 +35,5 @@ namespace Context
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
-        public System.Data.Entity.DbSet<Models.ViewModels.SettingsViewModel> SettingsViewModels { get; set; }
     }
 }

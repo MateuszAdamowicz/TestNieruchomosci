@@ -16,6 +16,8 @@ using Services.AdvertServices.ShowAdvertService.Implementation;
 using Services.AdvertServices.UpdateAdvertService;
 using Services.AdvertServices.UpdateAdvertService.Implementation;
 using Services.AppSettingsService;
+using Services.CalcService;
+using Services.CalcService.Implementation;
 using Services.CreateOfferService;
 using Services.CreateOfferService.Implementation;
 using Services.DeleteMessageService;
@@ -36,7 +38,7 @@ using Services.StatisticesServices.StatisticesService;
 using Services.StatisticesServices.StatisticesService.Implementation;
 using Services.WorkerService;
 
-namespace nieruchomości.App_Start
+namespace nieruchomości
 {
     public class UnityConfig
     {
@@ -65,6 +67,7 @@ namespace nieruchomości.App_Start
             container.RegisterType<IDeleteMessageService, Services.DeleteMessageService.Implementation.DeleteMessageService>();
             container.RegisterType<IGenericRepository, Services.GenericRepository.Implementation.GenericRepository>();
             container.RegisterType<IChangeAdvertVisibility, ChangeAdvertVisibility>();
+            container.RegisterType<ICalcService, CalcService>();
         }
     }
 }

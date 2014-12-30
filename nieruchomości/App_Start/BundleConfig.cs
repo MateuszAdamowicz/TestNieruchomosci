@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace nieruchomości.App_Start
+namespace nieruchomości
 {
     public class BundleConfig
     {
