@@ -8,8 +8,11 @@ using Models;
 using Models.EntityModels;
 using Models.ViewModels;
 using PagedList;
-using Services.Home;
-using Services.Home.EmailService;
+using Services.AdvertServices.ShowAdvertService;
+using Services.CreateOfferService;
+using Services.EmailServices.EmailService;
+using Services.SearchService;
+using Services.StatisticesServices.CounterService;
 
 namespace nieruchomości.Controllers
 {

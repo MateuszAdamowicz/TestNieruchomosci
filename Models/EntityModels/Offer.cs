@@ -13,7 +13,6 @@ namespace Models.EntityModels
         public string Location { get; set; }
         public string Description { get; set; }
         public OfferStatus Status { get; set; }
-        public bool Deleted { get; set; }
 
     }
 }

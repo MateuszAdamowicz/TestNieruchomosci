@@ -11,8 +11,7 @@ using log4net;
 using log4net.Config;
 using nieruchomości.App_Start;
 using nieruchomości.Migrations;
-using Services.App_Start;
-using Services.Home;
+using Services.StatisticesServices.StatisticesService;
 
 namespace nieruchomości
 {

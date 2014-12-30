@@ -109,51 +109,48 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\AddAdvertService.cs" />
-    <Compile Include="Admin\AdminFilterService.cs" />
-    <Compile Include="Admin\AdminLoginService.cs" />
-    <Compile Include="Admin\AppSettingsService.cs" />
-    <Compile Include="Admin\DeleteMessageService.cs" />
-    <Compile Include="Admin\EnumNameService.cs" />
-    <Compile Include="Admin\IAddAdvertService.cs" />
-    <Compile Include="Admin\IAdminFilterService.cs" />
-    <Compile Include="Admin\IAdminLoginService.cs" />
-    <Compile Include="Admin\IAppSettingsService.cs" />
-    <Compile Include="Admin\IDeleteMessageService.cs" />
-    <Compile Include="Admin\IEnumNameService.cs" />
-    <Compile Include="Admin\IPhotoService.cs" />
-    <Compile Include="Admin\IRepository.cs" />
-    <Compile Include="Admin\IUpdateAdvertService.cs" />
-    <Compile Include="Admin\IWorkerService.cs" />
-    <Compile Include="Admin\LogService\ExceptionLoggingFilter.cs" />
-    <Compile Include="Admin\PhotoService.cs" />
-    <Compile Include="Admin\Repository.cs" />
-    <Compile Include="Admin\UpdateAdvertService.cs" />
-    <Compile Include="Admin\WorkerService.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="Home\CounterService.cs" />
-    <Compile Include="Home\CreateOfferService.cs" />
-    <Compile Include="Home\EmailService\EmailSenderService.cs" />
-    <Compile Include="Home\EmailService\EmailService.cs" />
-    <Compile Include="Home\EmailService\EmailStorageService.cs" />
-    <Compile Include="Home\EmailService\IEmailSenderService.cs" />
-    <Compile Include="Home\EmailService\IEmailService.cs" />
-    <Compile Include="Home\EmailService\IEmailStorageService.cs" />
-    <Compile Include="Home\EmailService\IShowAdvertService.cs" />
-    <Compile Include="Home\EmailService\ISmtpManager.cs" />
-    <Compile Include="Home\EmailService\ShowAdvertService.cs" />
-    <Compile Include="Home\EmailService\SmtpManager.cs" />
-    <Compile Include="Home\ICounterService.cs" />
-    <Compile Include="Home\ICreateOfferService.cs" />
-    <Compile Include="Home\INewestAdvertService.cs" />
-    <Compile Include="Home\ISearchService.cs" />
-    <Compile Include="Home\IStatisticesService.cs" />
-    <Compile Include="Home\NewestAdvertService.cs" />
-    <Compile Include="Home\SearchService.cs" />
-    <Compile Include="Home\StatisticesService.cs" />
-    <Compile Include="App_Start\MapperConfig.cs" />
+    <Compile Include="AdvertServices\AddAdvertService\Implementation\AddAdvertService.cs" />
+    <Compile Include="AdvertServices\AdminFilterAdvertService\Implementation\AdminFilterAdvertService.cs" />
+    <Compile Include="AdminLoginService\Implementation\AdminLoginService.cs" />
+    <Compile Include="AppSettingsService\Implementation\AppSettingsService.cs" />
+    <Compile Include="DeleteMessageService\Implementation\DeleteMessageService.cs" />
+    <Compile Include="EnumNameService\Implementation\EnumNameService.cs" />
+    <Compile Include="GenericRepository\Implementation\GenericRepository.cs" />
+    <Compile Include="AdvertServices\AddAdvertService\IAddAdvertService.cs" />
+    <Compile Include="AdvertServices\AdminFilterAdvertService\IAdminFilterAdvertService.cs" />
+    <Compile Include="AdminLoginService\IAdminLoginService.cs" />
+    <Compile Include="AppSettingsService\IAppSettingsService.cs" />
+    <Compile Include="DeleteMessageService\IDeleteMessageService.cs" />
+    <Compile Include="EnumNameService\IEnumNameService.cs" />
+    <Compile Include="GenericRepository\IGenericRepository.cs" />
+    <Compile Include="PhotoService\IPhotoService.cs" />
+    <Compile Include="AdvertServices\UpdateAdvertService\IUpdateAdvertService.cs" />
+    <Compile Include="WorkerService\IWorkerService.cs" />
+    <Compile Include="LogService\Implementation\ExceptionLoggingFilter.cs" />
+    <Compile Include="PhotoService\Implementation\PhotoService.cs" />
+    <Compile Include="AdvertServices\UpdateAdvertService\Implementation\UpdateAdvertService.cs" />
+    <Compile Include="WorkerService\Implementation\WorkerService.cs" />
+    <Compile Include="StatisticesServices\CounterService\Implementation\CounterService.cs" />
+    <Compile Include="CreateOfferService\Implementation\CreateOfferService.cs" />
+    <Compile Include="EmailServices\EmailSenderService\Implementation\EmailSenderService.cs" />
+    <Compile Include="EmailServices\EmailService\Implementation\EmailService.cs" />
+    <Compile Include="EmailServices\EmailStorageService\Implementation\EmailStorageService.cs" />
+    <Compile Include="EmailServices\EmailStorageService\IEmailSenderService.cs" />
+    <Compile Include="EmailServices\EmailService\IEmailService.cs" />
+    <Compile Include="EmailServices\EmailSenderService\IEmailStorageService.cs" />
+    <Compile Include="AdvertServices\ShowAdvertService\IShowAdvertService.cs" />
+    <Compile Include="EmailServices\SmtpManager\ISmtpManager.cs" />
+    <Compile Include="AdvertServices\ShowAdvertService\Implementation\ShowAdvertService.cs" />
+    <Compile Include="EmailServices\SmtpManager\Implementation\SmtpManager.cs" />
+    <Compile Include="StatisticesServices\CounterService\ICounterService.cs" />
+    <Compile Include="CreateOfferService\ICreateOfferService.cs" />
+    <Compile Include="AdvertServices\NewestAdvertService\INewestAdvertService.cs" />
+    <Compile Include="SearchService\ISearchService.cs" />
+    <Compile Include="StatisticesServices\StatisticesService\IStatisticesService.cs" />
+    <Compile Include="AdvertServices\NewestAdvertService\Implementation\NewestAdvertService.cs" />
+    <Compile Include="SearchService\Implementation\SearchService.cs" />
+    <Compile Include="StatisticesServices\StatisticesService\Implementation\StatisticesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="App_Start\UnityConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -169,6 +166,7 @@
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -20,7 +20,6 @@ namespace Models.EntityModels
         public string Price { get; set; }
         public virtual Worker Worker { get; set; }
         public bool Visible { get; set; }
-        public bool Deleted { get; set; }
         public virtual List<Photo> Pictures { get; set; }
         public int Counter { get; set; }
     }

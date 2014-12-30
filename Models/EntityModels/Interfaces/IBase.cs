@@ -6,5 +6,6 @@ namespace Models.EntityModels.Interfaces
     {
         int Id { get; set; }
         DateTime CreatedAt { get; set; }
+        bool Deleted { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
-using Services.App_Start;
 using Unity.Mvc4;
+using UnityConfig = nieruchomoœci.App_Start.UnityConfig;
 
 namespace nieruchomoœci
 {
