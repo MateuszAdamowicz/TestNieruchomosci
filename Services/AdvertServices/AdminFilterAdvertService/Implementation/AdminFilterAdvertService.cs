@@ -30,7 +30,7 @@ namespace Services.AdvertServices.AdminFilterAdvertService.Implementation
 
             if (!String.IsNullOrEmpty(worker))
             {
-                advertsToShow = advertsToShow.Where(x => x.Worker.FirstName == worker || x.Worker.LastName == worker);
+                advertsToShow = advertsToShow.Where(x =>x.Worker != null &&(x.Worker.FirstName == worker || x.Worker.LastName == worker || x.Worker.FullName.Contains(worker)));
             }
 
             if (showHidden == false)
