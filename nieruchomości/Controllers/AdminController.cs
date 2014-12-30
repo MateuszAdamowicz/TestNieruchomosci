@@ -471,15 +471,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult Settings()
         {
-            var x = _applicationContext.Clats.ToList();
-            var y = _applicationContext.CostProperties.ToList();
-            var model = new SettingsViewModel()
-            {
-                ClatList = x,
-                CostPropertiesList = y
-            };
-
-            return View(model);
+            return View(_calcService.BuildViewModel());
         }
 
         [HttpPost]
@@ -496,5 +488,30 @@ namespace nieruchomości.Controllers
 
             return RedirectToAction("Settings");
         }
+
+
+        public ActionResult DeleteSetting(int id)
+        {
+
+            //Clat deleteOrderDetails =
+            //    _applicationContext.Clats.Where(x => x.Id == id);
+
+
+
+            //_applicationContext.Clats.Remove(deleteOrderDetails);
+            _applicationContext.SaveChanges();
+            return RedirectToAction("Settings");
+        }
+
+
+        //public ActionResult DeleteWorker(int id)
+        //{
+        //    var worker = _genericRepository.GetSet<Worker>().FirstOrDefault(x => x.Id == id);
+        //    if (worker != null) worker.Deleted = true;
+
+        //    _genericRepository.SaveChanges();
+
+        //    return RedirectToAction("Workers");
+        //}
     }
 }

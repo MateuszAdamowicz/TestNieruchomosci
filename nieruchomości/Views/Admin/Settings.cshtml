@@ -63,7 +63,8 @@
                                 @Html.TextBox("Price", x.Price)
                             </td>
                             <td>
-                                <button type="submit">Ok</button>
+                                <button type="submit">Edytuj</button>
+                                @Html.ActionLink("Usuń", "DeleteSetting", new { id = x.Id }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć?');" })
                             </td>
                         </tr>
                     }

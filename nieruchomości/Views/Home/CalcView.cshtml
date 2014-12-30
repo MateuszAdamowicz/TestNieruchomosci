@@ -11,7 +11,6 @@
 @{
     ViewBag.Title = "ShowCalc";
 }
-@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
 
 
 <script type="text/javascript">
@@ -21,7 +20,7 @@
     function CalculateAddPrice() {
 
         var realEstatePrice = +$("#StartCost").val();
-        $("#CLAT").val(realEstatePrice * $("#propVatClat").val()/100);
+        $("#CLAT").val((realEstatePrice * $("#propVatClat").val()/100).toFixed(2));
 
         var addCost = +$("#CLAT").val();
 
@@ -33,35 +32,35 @@
             {
                 var temp = (realEstatePrice - clatItem.From) * clatItem.Percent/100;
                 if (((temp - clatItem.Max)>0) && (clatItem.Max !== 0)) {
-                    $("#Notary").val(clatItem.Max);
+                    $("#Notary").val((clatItem.Max).toFixed(2));
                     addCost += +$("#Notary").val();
                     break;
                 }
                 else
                 {
-                    $("#Notary").val(temp + clatItem.Price);
+                    $("#Notary").val((temp + clatItem.Price).toFixed(2));
                     addCost += +$("#Notary").val();
                     break;
                 }
             }
         }
 
-        $("#VATNotary").val($("#Notary").val() * ($("#propVatNotary").val())/100);
+        $("#VATNotary").val((Math.round($("#Notary").val() * ($("#propVatNotary").val())/100)).toFixed(2));
         addCost += +$("#VATNotary").val();
 
         addCost += +$("#CourtFee").val();
         addCost += +$("#KW").val();
         //addCost += +$("#ActPagePrice").val();
 
-        $("#AgencyCommission").val($("#AgencyCommissionPercent").val()/100 * realEstatePrice);
+        $("#AgencyCommission").val(($("#AgencyCommissionPercent").val()/100 * realEstatePrice).toFixed(2));
         addCost += +$("#AgencyCommission").val();
 
-        $("#VATAgencyCommission").val($("#AgencyCommission").val() * $("#propVatAgencyCommission").val()/100);
+        $("#VATAgencyCommission").val(($("#AgencyCommission").val() * $("#propVatAgencyCommission").val()/100).toFixed(2));
         addCost += +$("#VATAgencyCommission").val();
 
-        $("#ApproxCost").val(addCost);
+        $("#ApproxCost").val((addCost).toFixed(2));
 
-        $("#TotalCost").val(addCost + realEstatePrice);
+        $("#TotalCost").val((addCost + realEstatePrice).toFixed(2));
     }
 </script>
 
@@ -84,7 +83,7 @@
                 <div class="col-xs-6">
                     @*<span class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Help info"></span>*@
                     <div class="input-group input-group-sm">
-                        <input type="text" value="@Model.ModelCalcView.Price" id="StartCost" name="StartCost" class="form-control" onkeyup="CalculateAddPrice()" placeholder="cena nieruchomości">
+                        <input type="number" value="@Model.ModelCalcView.Price"  min="0" step="1000" id="StartCost" name="StartCost" class="form-control" onchange="CalculateAddPrice()" onkeyup="    CalculateAddPrice()" placeholder="cena nieruchomości">
                         <span class="input-group-addon">PLN</span>
                     </div>
                 </div>
@@ -93,7 +92,7 @@
                 <label class="control-label danger col-xs-6">Podatek od czynności cywilnoprawnych</label>
                 <div class="col-xs-6">
                     <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" readonly="readonly" id="CLAT">
+                        <input type="number" class="form-control"  readonly="readonly" id="CLAT">
                         <span class="input-group-addon">PLN</span>
                     </div>
                 </div>
@@ -112,7 +111,7 @@
                 <label class="control-label danger col-xs-6">VAT od taksy notarialnej</label>
                 <div class="col-xs-6">
                     <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" id="VATNotary" readonly="readonly">
+                        <input type="number" class="form-control"  id="VATNotary" readonly="readonly">
                         <span class="input-group-addon">PLN</span>
                     </div>
                 </div>
@@ -139,14 +138,13 @@
             </div>
 
 
-
             <div class="form-group">
                 <label class="control-label danger col-xs-6">Prowizja Agencji</label>
                 <div class="col-xs-6">
                     <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" value="@Model.CostPropertiesList.Single(x => x.Type == PropertyType.AgencyCommissionPercent).Value" onkeyup="CalculateAddPrice()" id="AgencyCommissionPercent">
+                        <input type="number" class="form-control" min="0" step="0.1" value="@Model.CostPropertiesList.Single(x => x.Type == PropertyType.AgencyCommissionPercent).Value" onchange="CalculateAddPrice()" onkeyup="CalculateAddPrice()" id="AgencyCommissionPercent">
                         <span class="input-group-addon">%</span>
-                        <input type="number" class="form-control" id="AgencyCommission" readonly="readonly">
+                        <input type="number" class="form-control"  id="AgencyCommission" readonly="readonly">
                         <span class="input-group-addon">PLN</span>
                     </div>
                 </div>
@@ -156,13 +154,11 @@
                 <label class="control-label danger col-xs-6">VAT od prowizji agencji</label>
                 <div class="col-xs-6">
                     <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" id="VATAgencyCommission" readonly="readonly">
+                        <input type="number" class="form-control"  id="VATAgencyCommission" readonly="readonly">
                         <span class="input-group-addon">PLN</span>
                     </div>
                 </div>
             </div>
-
-
 
             @*<div class="form-group">
                     <label class="control-label danger col-xs-6">Wypisy aktu</label>
@@ -178,7 +174,7 @@
                 <label class="control-label danger col-xs-6">Przybliżone koszty dodatkowe</label>
                 <div class="col-xs-6">
                     <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" id="ApproxCost" readonly="readonly">
+                        <input type="number" class="form-control"  id="ApproxCost" readonly="readonly">
                         <span class="input-group-addon">PLN</span>
                     </div>
                 </div>
@@ -188,7 +184,7 @@
                 <label class="control-label danger col-xs-6">Całkowity koszt nieruchomości</label>
                 <div class="col-xs-6">
                     <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" id="TotalCost" readonly="readonly">
+                        <input type="number" class="form-control" pattern="[0-9]+([\.|,][0-9]+)?" id="TotalCost" readonly="readonly">
                         <span class="input-group-addon">PLN</span>
                     </div>
                 </div>
