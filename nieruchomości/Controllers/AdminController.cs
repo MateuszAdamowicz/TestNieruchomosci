@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
 using Context;
 using Models.EntityModels;
@@ -218,9 +219,9 @@ namespace nieruchomości.Controllers
             var worker = _genericRepository.GetSet<Worker>().FirstOrDefault(x => x.Id == id);
             var model = AutoMapper.Mapper.Map<WorkerAdverts>(worker);
 
-            var flats = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Flat>().Where(x => x.Worker.Id == id).ToList());
-            var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<House>().Where(x => x.Worker.Id == id).ToList());
-            var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Land>().Where(x => x.Worker.Id == id).ToList());
+            var flats = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Flat>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
+            var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<House>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
+            var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Land>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
 
             model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt);
 
@@ -274,14 +275,7 @@ namespace nieruchomości.Controllers
                 var result = _workerService.EditWorker(adminWorker, id);
                 if (result.Success == true)
                 {
-                    var workers = _genericRepository.GetSet<Worker>().ToList();
-                    var response = new Response()
-                    {
-                        Message = "Pomyślnie edytowano pracownika!",
-                        Success = true
-                    };
-                    var workersVm = new WorkersViewModel() {Workers = workers, Response = response};
-                    return View("Workers", workersVm);
+                    return RedirectToAction("Worker", new {id});
                 }
                 return View(adminWorker);
             }

@@ -14,7 +14,7 @@ namespace Services.GenericRepository.Implementation
             _context = context;
         }
 
-        public IEnumerable<T> GetSet<T>() where T: Base
+        public IEnumerable<T> GetSet<T>() where T : Base
         {
             return _context.Set<T>().Where(x => !x.Deleted);
         }
