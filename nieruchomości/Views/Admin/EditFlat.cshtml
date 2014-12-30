@@ -43,10 +43,9 @@
                         <div class="col-md-6">
                             <small>Miasto:</small>
                             <div class="has-feedback">
-                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("City") && ViewData.ModelState["City"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
                                 <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0; color:red"></span>
                             </div>
-                            @Html.EditorFor(model => model.City, new {htmlAttributes = new {@class = "form-control", @style = ((ViewData.ModelState.ContainsKey("City") && ViewData.ModelState["City"].Errors.Count > 0) ? ";border: 2px solid red" : "")}})
                         </div>
                         <div class="col-md-6">
                             <small>Lokalizacja:</small>
