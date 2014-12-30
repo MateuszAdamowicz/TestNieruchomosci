@@ -112,6 +112,8 @@
     <Compile Include="AdvertServices\AddAdvertService\Implementation\AddAdvertService.cs" />
     <Compile Include="AdvertServices\AdminFilterAdvertService\Implementation\AdminFilterAdvertService.cs" />
     <Compile Include="AdminLoginService\Implementation\AdminLoginService.cs" />
+    <Compile Include="AdvertServices\ChangeAdvertVisability\Implementation\ChangeAdvertVisibility.cs" />
+    <Compile Include="AdvertServices\ChangeAdvertVisability\IChangeAdvertVisibility.cs" />
     <Compile Include="AppSettingsService\Implementation\AppSettingsService.cs" />
     <Compile Include="DeleteMessageService\Implementation\DeleteMessageService.cs" />
     <Compile Include="EnumNameService\Implementation\EnumNameService.cs" />

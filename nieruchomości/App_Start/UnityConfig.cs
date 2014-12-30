@@ -7,6 +7,8 @@ using Services.AdvertServices.AddAdvertService;
 using Services.AdvertServices.AddAdvertService.Implementation;
 using Services.AdvertServices.AdminFilterAdvertService;
 using Services.AdvertServices.AdminFilterAdvertService.Implementation;
+using Services.AdvertServices.ChangeAdvertVisability;
+using Services.AdvertServices.ChangeAdvertVisability.Implementation;
 using Services.AdvertServices.NewestAdvertService;
 using Services.AdvertServices.NewestAdvertService.Implementation;
 using Services.AdvertServices.ShowAdvertService;
@@ -62,6 +64,7 @@ namespace nieruchomości.App_Start
             container.RegisterType<IOfferService, OfferService>();
             container.RegisterType<IDeleteMessageService, Services.DeleteMessageService.Implementation.DeleteMessageService>();
             container.RegisterType<IGenericRepository, Services.GenericRepository.Implementation.GenericRepository>();
+            container.RegisterType<IChangeAdvertVisibility, ChangeAdvertVisibility>();
         }
     }
 }

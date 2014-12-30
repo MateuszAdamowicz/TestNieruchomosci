@@ -9,6 +9,9 @@
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     }
 
+    .pull-right {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
 </style>
 
 <div class="row" style="margin-right: 15px">
@@ -22,7 +25,7 @@
                 <div class="alert alert-dismissable alert-default" style="margin: 10px; background-color: #798d8f; border-color: #74898a; color: white">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <div>
-                        <strong>Ogłoszenie zostało ukryte!</strong><br/>
+                        <strong>Ogłoszenie zostało ukryte!</strong><br />
                         Od tej pory nie będzie widoczne na liście nieruchomości.
                     </div>
                 </div>
@@ -32,7 +35,7 @@
                 <div class="alert alert-dismissable alert-info" style="margin: 10px">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <div>
-                        <strong>Ogłoszenie zostało odkryte!</strong><br/>
+                        <strong>Ogłoszenie zostało odkryte!</strong><br />
                         Od tej pory będzie widoczne na liście nieruchomości.
                     </div>
                 </div>
@@ -43,7 +46,7 @@
             <div class="col-md-12">
                 @using (Html.BeginForm("AdList", "Admin", FormMethod.Get))
                 {
-                    <input type="hidden" name="search" value="true"/>
+                    <input type="hidden" name="search" value="true" />
                     <div class="form-group-sm">
                         <div class="row">
                             <div class="col-md-2" style="font-size:small; font-weight:bold">
@@ -66,21 +69,21 @@
                             <div class="col-md-2">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza", @style="font-size:12px"})
+                                        @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza", @style = "font-size:12px" })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko", @style="font-size:12px" })
+                                        @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko", @style = "font-size:12px" })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label><input type="radio" name="showHidden" value="false" checked/>Aktywne</label>
+                                        <label><input type="radio" name="showHidden" value="false" checked />Aktywne</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -139,61 +142,62 @@
                 {
                     @Html.ActionLink("Pokaż ukryte", "AdList", "Admin", new { hidden = true }, new { @class = "btn btn-default btn-xs" })
                 }
-                
+
             </div>
         </div>
         <div class="row">
             <div class="col-md-12" style="font-size: small">
-                <table class="table" style="font-size:11px">
-                    <thead>
-                        <tr>
-                            <th>
-                                Data dodania
-                            </th>
-                            <th>
-                                Rodzaj
-                            </th>
-                            <th>
-                                Tytuł
-                            </th>
-                            <th>
-                                Miasto
-                            </th>
-                            <th>
-                                Osoba prowadząca
-                            </th>
-                            <th></th>
-                            <th>Pokaż/Ukryj</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var ad in Model)
-                        {
+                @using (Html.BeginForm("ChangeAd", "Admin"))
+                {
+                    <table class="table" style="font-size: 11px">
+                        <thead>
                             <tr>
-                                <td>@ad.CreatedAt.ToShortDateString()</td>
-                                <td>@EnumNameHelper.GetAdType(ad.AdType)</td>
-                                <td>@ad.Title</td>
-                                <td>@ad.City</td>
-                                <td>@String.Format("{0}", (ad.Worker != null)?ad.Worker.FullName:"---")</td>
-                                <td style="text-align: center">
-                                    @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
-                                    @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
-                                    @Html.ActionLink("Usuń", "DeleteAd", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
-                                </td>
-                                <td style="text-align: center">
-                                    @if (ad.Visible)
+                                <th style="width: 12%">
+                                    <button type="submit" class="btn btn-primary btn-xs" style="width: 100%" id="submit">Wykonaj</button>
+                                    @if (HttpContext.Current.Request.Params.Get("hidden") == "True")
                                     {
-                                        @Html.ActionLink("Ukryj", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-default btn-xs"})
+                                        <label style="font-size: 11px; font-weight: bold; margin-bottom: 0"><input type="radio" checked name="action" value="true" /> Pokaż</label>
                                     }
                                     else
                                     {
-                                        @Html.ActionLink("Pokaż", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-info btn-xs"})
+                                        <label style="font-size: 11px; font-weight: bold; margin-bottom: 0"><input type="radio" checked name="action" value="true" /> Ukryj</label>
                                     }
-                                </td>
+                                    <label style="font-size: 11px; font-weight: bold; margin-bottom: 0"><input type="radio" name="action" value="false" id="delete"/> Usuń</label>
+                                </th>
+                                <th>
+                                    Data dodania
+                                </th>
+                                <th>
+                                    Rodzaj
+                                </th>
+                                <th>
+                                    Tytuł
+                                </th>
+                                <th>
+                                    Miasto
+                                </th>
+                                <th>
+                                    Osoba prowadząca
+                                </th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var ad in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="numbers" value="@ad.Number" />
+                                    </td>
+                                    <td>@ad.CreatedAt.ToShortDateString()</td>
+                                    <td>@EnumNameHelper.GetAdType(ad.AdType)</td>
+                                    <td>@ad.Title</td>
+                                    <td>@ad.City</td>
+                                    <td>@String.Format("{0}", (ad.Worker != null) ? ad.Worker.FullName : "---")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
                 <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
                 <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("AdList", new { page, changed = ViewBag.changed, hide = ViewBag.hide, hidden = ViewBag.hidden, search = ViewBag.Search, key = ViewBag.key, worker = ViewBag.worker, showHidden = ViewBag.showHidden, dateFrom = ViewBag.dateFrom, dateTo = ViewBag.dateTo, type = ViewBag.type }))</div>
             </div>
@@ -228,5 +232,11 @@
     var month = today.getUTCMonth() + 1;
     var day = today.getUTCDate();
     $("#dateTo").val(year + "-" + month + "-" + day);
+
+    $("#submit").on("click",function() {
+        if ($("#delete")[0].checked) {
+            return confirm("Na pewno chcesz usunąć te ogłoszenia?");
+        };
+    });
 </script>
 

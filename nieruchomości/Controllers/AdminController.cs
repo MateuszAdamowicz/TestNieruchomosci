@@ -14,11 +14,13 @@ using PagedList;
 using Services.AdminLoginService;
 using Services.AdvertServices.AddAdvertService;
 using Services.AdvertServices.AdminFilterAdvertService;
+using Services.AdvertServices.ChangeAdvertVisability;
 using Services.AdvertServices.UpdateAdvertService;
 using Services.CreateOfferService;
 using Services.DeleteMessageService;
 using Services.EmailServices.EmailService;
 using Services.GenericRepository;
+using Services.SearchService;
 using Services.WorkerService;
 
 namespace nieruchomości.Controllers
@@ -36,9 +38,11 @@ namespace nieruchomości.Controllers
         private readonly IOfferService _offerService;
         private readonly IDeleteMessageService _deleteMessageService;
         private readonly IGenericRepository _genericRepository;
+        private readonly ISearchService _searchService;
+        private readonly IChangeAdvertVisibility _changeAdvertVisibility;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository )
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository, ISearchService searchService, IChangeAdvertVisibility changeAdvertVisibility )
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
@@ -50,6 +54,8 @@ namespace nieruchomości.Controllers
             _offerService = offerService;
             _deleteMessageService = deleteMessageService;
             _genericRepository = genericRepository;
+            _searchService = searchService;
+            _changeAdvertVisibility = changeAdvertVisibility;
         }
 
         [AllowAnonymous]
@@ -73,28 +79,6 @@ namespace nieruchomości.Controllers
             return RedirectToAction("Messages");
         }
 
-        public ActionResult DeleteAd(int id, AdType adType)
-        {
-            if (adType == AdType.Flat)
-            {
-                var flat = _genericRepository.GetSet<Flat>().FirstOrDefault(x => x.Id == id);
-                if (flat != null) flat.Deleted = true;
-            }
-            else if (adType == AdType.House)
-            {
-                var house = _genericRepository.GetSet<House>().FirstOrDefault(x => x.Id == id);
-                if (house != null) house.Deleted = true;
-            }
-            else
-            {
-                var land = _genericRepository.GetSet<Land>().FirstOrDefault(x => x.Id == id);
-                if (land != null) land.Deleted = true;
-            }
-
-            _genericRepository.SaveChanges();
-
-            return RedirectToAction("AdList");
-        }
 
         public ActionResult DeleteWorker(int id)
         {
@@ -412,31 +396,17 @@ namespace nieruchomości.Controllers
             return View(editLand);
         }
 
-        public ActionResult Hide(int id, AdType adtype)
+        public ActionResult ChangeAd(IEnumerable<string> numbers, bool action)
         {
+            if (action)
+            {
+                var visible = _changeAdvertVisibility.HideAdverts(numbers);
+                return RedirectToAction("AdList", new { changed = true, hide = !visible });
+            }
+            _changeAdvertVisibility.DeleteAdverts(numbers);
+            return RedirectToAction("AdList");
 
-            bool visible;
-            if (adtype == AdType.Flat)
-            {
-                var advert = _genericRepository.GetSet<Flat>().FirstOrDefault(x => x.Id == id);
-                advert.Visible = !advert.Visible;
-                visible = advert.Visible;
-            }
-            else if (adtype == AdType.House)
-            {
-                var advert = _genericRepository.GetSet<House>().FirstOrDefault(x => x.Id == id);
-                advert.Visible = !advert.Visible;
-                visible = advert.Visible;
-            }
-            else
-            {
-                var advert = _genericRepository.GetSet<Land>().FirstOrDefault(x => x.Id == id);
-                advert.Visible = !advert.Visible;
-                visible = advert.Visible;
-            }
-            _genericRepository.SaveChanges();
-
-            return RedirectToAction("AdList", new{changed = true, hide = !visible});
+            //return RedirectToAction("AdList", new{changed = true, hide = !visible});
         }
 
         public ActionResult Offers(int? page)
