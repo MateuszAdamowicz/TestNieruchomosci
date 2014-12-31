@@ -7,74 +7,75 @@
     ViewBag.Title = "Settings";
 }
 
+
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
         <h4>Ustawienia</h4>
 
-        <table>
+        <table class="table-hover">
             <thead>
-            <tr>
-                <th>
-                    Od
-                </th>
-                <th>
-                    do
-                </th>
-                <th>
-                    procent
-                </th>
-                <th>
-                    max
-                </th>
-                <th>
-                    cena
-                </th>
-            </tr>
+                <tr>
+                    <th>
+                        Od
+                    </th>
+                    <th>
+                        do
+                    </th>
+                    <th>
+                        procent
+                    </th>
+                    <th>
+                        max
+                    </th>
+                    <th>
+                        cena
+                    </th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var x in Model.ClatList)
-            {
-                using (Html.BeginForm("EditClat", "Admin"))
+                @foreach (var x in Model.ClatList)
                 {
-                    <tr>
-                        @Html.Hidden("Id", x.Id)
-                        <td>
-                            @Html.TextBox("From", x.From)
-                        </td>
-                        <td>
-                            @if (x.To == Double.MaxValue)
-                            {
-                                @Html.TextBox("To", "Max")
-                            }
-                            else
-                            {
-                                @Html.TextBox("To", x.To)
-                            }
+                    using (Html.BeginForm("EditClat", "Admin"))
+                    {
+                        <tr>
+                            @Html.Hidden("Id", x.Id)
+                            <td>
+                                @Html.TextBox("From", x.From)
+                            </td>
+                            <td>
+                                @if (x.To == Double.MaxValue)
+                                {
+                                    @Html.TextBox("To", "Max")
+                                }
+                                else
+                                {
+                                    @Html.TextBox("To", x.To)
+                                }
 
-                        </td>
-                        <td>
-                            @Html.TextBox("Percent", x.Percent)
-                        </td>
-                        <td>
-                            @Html.TextBox("Max", x.Max)
-                        </td>
-                        <td>
-                            @Html.TextBox("Price", x.Price)
-                        </td>
-                        <td>
-                            <button type="submit">Edytuj</button>
-                            @Html.ActionLink("Usuń", "DeleteSetting", new {id = x.Id}, new {@class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć?');"})
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                @Html.TextBox("Percent", x.Percent)
+                            </td>
+                            <td>
+                                @Html.TextBox("Max", x.Max)
+                            </td>
+                            <td>
+                                @Html.TextBox("Price", x.Price)
+                            </td>
+                            <td style="text-align: center">
+                                <button type="submit">Edytuj</button>
+                                @Html.ActionLink("Usuń", "DeleteSetting", new { id = x.Id }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Na pewno usunąć?');" })
+                            </td>
+                        </tr>
+                    }
                 }
-            }
 
             </tbody>
         </table>
 
-     
-        <table class="table">
+
+        <table class="table-hover">
             <tr>
                 <th>
                     Nazwa
@@ -86,23 +87,24 @@
 
             @foreach (var item in Model.CostPropertiesList)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Value)
-                    </td>
+                using (Html.BeginForm("EditCostPropList", "Admin"))
+                {
+                    <tr>
+                        @Html.Hidden("Id", item.Id)
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.TextBox("Value", item.Value)
+                        </td>
 
-                    @*<td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </td>*@
-                </tr>
+                        <td>
+                            <button type="submit">Edytuj</button>
+
+                        </td>
+                    </tr>
+                }
             }
-
         </table>
-
     </div>
 </div>

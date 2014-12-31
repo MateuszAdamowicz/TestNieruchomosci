@@ -489,7 +489,6 @@ namespace nieruchomości.Controllers
             return RedirectToAction("Settings");
         }
 
-
         public ActionResult DeleteSetting(int id)
         {
 
@@ -500,11 +499,25 @@ namespace nieruchomości.Controllers
             return RedirectToAction("Settings");
         }
 
-        public ActionResult AddSetting(int id)
+        [HttpPost]
+        public ActionResult EditCostPropList(CostProperty costPropModel)
+        {
+            var costProp = _applicationContext.CostProperties.Find(costPropModel.Id);
+
+            costProp.Value = costPropModel.Value;
+
+            _applicationContext.SaveChanges();
+
+            return RedirectToAction("Settings");
+        }
+
+
+
+        public ActionResult AddSetting(Clat clat)
         {
 
-            Clat deleteOrderDetails = _applicationContext.Clats.First(x => x.Id == id);
-            _applicationContext.Clats.Add(deleteOrderDetails);
+            
+            _applicationContext.Clats.Add(clat);
             _applicationContext.SaveChanges();
 
             return RedirectToAction("Settings");
