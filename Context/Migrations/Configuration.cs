@@ -77,6 +77,15 @@ namespace Context.Migrations
             context.CostProperties.AddOrUpdate(x => x.Type, CostProp6);
             context.CostProperties.AddOrUpdate(x => x.Type, CostProp7);
 
+            var ClatProp0 = new Clat
+            {
+                From = 30,
+                To = 100,
+                Percent = 10,
+                Max = 0,
+                Price = 10000
+            };
+
 
             var ClatProp1 = new Clat
             {
@@ -149,6 +158,7 @@ namespace Context.Migrations
             context.Clats.AddOrUpdate(x => x.To, ClatProp5);
             context.Clats.AddOrUpdate(x => x.To, ClatProp6);
             context.Clats.AddOrUpdate(x => x.To, ClatProp7);
+            context.Clats.AddOrUpdate(x => x.To, ClatProp0);
 
             context.SaveChanges();
         }

@@ -21,7 +21,7 @@ namespace Services.CalcService.Implementation
         public CalcViewModel BuildViewModel()
         {
 
-            var clats = _context.Clats.ToList();
+            var clats = _context.Clats.OrderBy(x => x.From).ThenBy(x=>x.To).ToList();
             var properties = _context.CostProperties.ToList();
 
             var model = new CalcViewModel()
@@ -36,7 +36,7 @@ namespace Services.CalcService.Implementation
         public CalcViewModel BuildViewModel(string viewPrice, string viewOwnership)
         {
 
-            var clats = _context.Clats.ToList();
+            var clats = _context.Clats.OrderBy(x => x.To).ThenBy(x=>x.To).ToList();
             var properties = _context.CostProperties.ToList();
             decimal price;
             decimal.TryParse(viewPrice, out price);

@@ -28,7 +28,7 @@
         {
             var clatItem = ClatJsonList[i];
 
-            if ((realEstatePrice < clatItem.To) && (realEstatePrice >= clatItem.From))
+            if ( (realEstatePrice > clatItem.From) && (realEstatePrice <= clatItem.To))
             {
                 var temp = (realEstatePrice - clatItem.From) * clatItem.Percent/100;
                 if (((temp - clatItem.Max)>0) && (clatItem.Max !== 0)) {

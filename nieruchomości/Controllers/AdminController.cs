@@ -480,7 +480,7 @@ namespace nieruchomości.Controllers
             var clat = _applicationContext.Clats.Find(clatModel.Id);
 
             clat.From = clatModel.From;
-            clat.To = clatModel.To;
+            clat.To = clatModel.To; 
             clat.Percent = clatModel.Percent;
             clat.Price = clatModel.Price;
 
@@ -493,25 +493,21 @@ namespace nieruchomości.Controllers
         public ActionResult DeleteSetting(int id)
         {
 
-            //Clat deleteOrderDetails =
-            //    _applicationContext.Clats.Where(x => x.Id == id);
-
-
-
-            //_applicationContext.Clats.Remove(deleteOrderDetails);
+            Clat deleteOrderDetails =_applicationContext.Clats.First(x => x.Id == id);
+            _applicationContext.Clats.Remove(deleteOrderDetails);
             _applicationContext.SaveChanges();
+
             return RedirectToAction("Settings");
         }
 
+        public ActionResult AddSetting(int id)
+        {
 
-        //public ActionResult DeleteWorker(int id)
-        //{
-        //    var worker = _genericRepository.GetSet<Worker>().FirstOrDefault(x => x.Id == id);
-        //    if (worker != null) worker.Deleted = true;
+            Clat deleteOrderDetails = _applicationContext.Clats.First(x => x.Id == id);
+            _applicationContext.Clats.Add(deleteOrderDetails);
+            _applicationContext.SaveChanges();
 
-        //    _genericRepository.SaveChanges();
-
-        //    return RedirectToAction("Workers");
-        //}
+            return RedirectToAction("Settings");
+        }
     }
 }
