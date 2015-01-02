@@ -483,11 +483,14 @@ namespace nieruchomości.Controllers
             clat.To = clatModel.To; 
             clat.Percent = clatModel.Percent;
             clat.Price = clatModel.Price;
+            clat.Max = clatModel.Max;
 
             _applicationContext.SaveChanges();
 
             return RedirectToAction("Settings");
         }
+
+       
 
         public ActionResult DeleteSetting(int id)
         {
@@ -513,11 +516,17 @@ namespace nieruchomości.Controllers
 
 
 
+        public ActionResult AddSetting()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult AddSetting(Clat clat)
         {
-
-            
-            _applicationContext.Clats.Add(clat);
+            Clat model = new Clat {To = clat.To, Max = clat.Max, Price = clat.Price, Percent = clat.Percent, From = clat.From};
+            _applicationContext.Clats.Add(model);
             _applicationContext.SaveChanges();
 
             return RedirectToAction("Settings");

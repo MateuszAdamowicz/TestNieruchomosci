@@ -1162,6 +1162,7 @@
     <Content Include="Views\Home\CalcView.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
     <Content Include="Views\Admin\View.cshtml" />
+    <Content Include="Views\Admin\AddSetting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
