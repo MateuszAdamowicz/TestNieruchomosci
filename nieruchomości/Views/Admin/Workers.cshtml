@@ -61,7 +61,7 @@
                         <td style="text-align: center">
                             @Html.ActionLink("Pokaż", "Worker", new { id = item.Id }, new { @class = "btn btn-info btn-xs" })
                             @Html.ActionLink("Edytuj", "EditWorker", new {id = item.Id}, new {@class = "btn btn-success btn-xs"})
-                            @Html.ActionLink("Usuń", "DeleteWorker", new { id = item.Id}, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć tego pracownika?');" })
+                            @Html.ActionLink("Usuń", "DeleteWorker", new { id = item.Id}, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Na pewno usunąć tego pracownika?');" })
                         </td>
                     </tr>
                 }
