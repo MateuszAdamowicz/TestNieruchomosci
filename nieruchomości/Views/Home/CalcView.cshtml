@@ -20,9 +20,25 @@
     function CalculateAddPrice() {
 
         var realEstatePrice = +$("#StartCost").val();
-        $("#CLAT").val((realEstatePrice * $("#propVatClat").val()/100).toFixed(2));
+        var addCost = 0;
 
-        var addCost = +$("#CLAT").val();
+        if($("#isVAT").prop("checked") === false)
+        {
+            $("#CLAT").val((realEstatePrice * $("#propVatClat").val()/100).toFixed(2));
+        }
+        else
+        {
+            $("#CLAT").val(0);
+        }
+
+
+        addCost = +$("#CLAT").val();
+
+        $("#AgencyCommission").val(($("#AgencyCommissionPercent").val()/100 * realEstatePrice).toFixed(2));
+        addCost += +$("#AgencyCommission").val();
+
+        $("#VATAgencyCommission").val(($("#AgencyCommission").val() * $("#propVatAgencyCommission").val()/100).toFixed(2));
+        addCost += +$("#VATAgencyCommission").val();
 
         for (var i = 0; i < ClatJsonList.length; i++)
         {
@@ -45,18 +61,22 @@
             }
         }
 
-        $("#VATNotary").val((Math.round($("#Notary").val() * ($("#propVatNotary").val())/100)).toFixed(2));
+        $("#VATNotary").val(($("#Notary").val() * (($("#propVatNotary").val())/100)).toFixed(2));
         addCost += +$("#VATNotary").val();
 
+        if($("#withKW").prop("checked") === true) {
+            $("#CourtFee").val(@Model.CostPropertiesList.Single(x => x.Type == PropertyType.CourtFee).Value);
+        }
+        else {
+            $("#CourtFee").val(0);
+        }
+
         addCost += +$("#CourtFee").val();
+
         addCost += +$("#KW").val();
         //addCost += +$("#ActPagePrice").val();
 
-        $("#AgencyCommission").val(($("#AgencyCommissionPercent").val()/100 * realEstatePrice).toFixed(2));
-        addCost += +$("#AgencyCommission").val();
 
-        $("#VATAgencyCommission").val(($("#AgencyCommission").val() * $("#propVatAgencyCommission").val()/100).toFixed(2));
-        addCost += +$("#VATAgencyCommission").val();
 
         $("#ApproxCost").val((addCost).toFixed(2));
 
@@ -74,125 +94,150 @@
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Kalkulator opłat dodatkowych</h4>
+        <h2 class="modal-title text-center" id="myModalLabel">Kalkulator opłat dodatkowych</h2>
+        </div>
+
+    <div class="modal-header">
+
+        <div class="container">
+            <h4>Przedmiot sprzedaży:</h4>
+            <div class="radio">
+                <label><input type="radio" id="withoutKW" name="optradio" checked="checked" onchange="CalculateAddPrice()">Spółdzielcze własnościowe prawo do lokalu mieszkalnego (brak Księgi Wieczystej)</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" id="withKW" name="optradio" onchange="CalculateAddPrice()">Nieruchomość gruntowa / nieruchomość lokalowa (z założoną Księgą Wieczystą)</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" id="isVAT" name="optcheckbox" onchange="CalculateAddPrice()">Nieruchomość od dewelopera - jestem płatnikiem VAT</label>
+            </div>
+        </div>
     </div>
-    <form class="form-horizontal">
-        <div class="modal-body">
-            <div class="form-group">
-                <label class="control-label col-xs-6">Cena nieruchomości</label>
-                <div class="col-xs-6">
-                    @*<span class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Help info"></span>*@
-                    <div class="input-group input-group-sm">
-                        <input type="number" value="@Model.ModelCalcView.Price"  min="0" step="1000" id="StartCost" name="StartCost" class="form-control" onchange="CalculateAddPrice()" onkeyup="    CalculateAddPrice()" placeholder="cena nieruchomości">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">Podatek od czynności cywilnoprawnych</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control"  readonly="readonly" id="CLAT">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">Taksa notarialna</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" id="Notary" name="Notary" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">VAT od taksy notarialnej</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control"  id="VATNotary" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
+        <br />
 
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">Opłata sądowa</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" value="@Model.CostPropertiesList.Single(x=>x.Type == PropertyType.CourtFee).Value" id="CourtFee" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">Założenie księgi wieczystej</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" id="KW" value="@((Model.ModelCalcView.OwnershipForm == "")?0:@Model.CostPropertiesList.Single(x => x.Type == PropertyType.Mr).Value)" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
+        <form class="form-horizontal">
+            <div class="modal-body">
 
 
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">Prowizja Agencji</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" min="0" step="0.1" value="@Model.CostPropertiesList.Single(x => x.Type == PropertyType.AgencyCommissionPercent).Value" onchange="CalculateAddPrice()" onkeyup="CalculateAddPrice()" id="AgencyCommissionPercent">
-                        <span class="input-group-addon">%</span>
-                        <input type="number" class="form-control"  id="AgencyCommission" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">VAT od prowizji agencji</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control"  id="VATAgencyCommission" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
-                    </div>
-                </div>
-            </div>
-
-            @*<div class="form-group">
-                    <label class="control-label danger col-xs-6">Wypisy aktu</label>
+                <div class="form-group">
+                    <label class="control-label col-xs-6">Cena nieruchomości</label>
                     <div class="col-xs-6">
+                        @*<span class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Help info"></span>*@
                         <div class="input-group input-group-sm">
-                            <input type="number" class="form-control" value="@Model.CostPropertiesList.Single(x => x.Type == PropertyType.ActPagePrice).Value" id="ActPagePrice" readonly="readonly">
+                            <input type="number" value="@Model.ModelCalcView.Price" min="0" step="1000" id="StartCost" name="StartCost" class="form-control" onchange=" CalculateAddPrice() " onkeyup=" CalculateAddPrice() " placeholder="cena nieruchomości">
                             <span class="input-group-addon">PLN</span>
                         </div>
                     </div>
-                </div>*@
+                </div>
 
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">Przybliżone koszty dodatkowe</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control"  id="ApproxCost" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">Prowizja Agencji</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" min="0" step="0.1" value="@Model.CostPropertiesList.Single(x => x.Type == PropertyType.AgencyCommissionPercent).Value" onchange=" CalculateAddPrice() " onkeyup=" CalculateAddPrice() " id="AgencyCommissionPercent">
+                            <span class="input-group-addon">%</span>
+                            <input type="number" class="form-control" id="AgencyCommission" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label danger col-xs-6">Całkowity koszt nieruchomości</label>
-                <div class="col-xs-6">
-                    <div class="input-group input-group-sm">
-                        <input type="number" class="form-control" pattern="[0-9]+([\.|,][0-9]+)?" id="TotalCost" readonly="readonly">
-                        <span class="input-group-addon">PLN</span>
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">VAT od prowizji agencji</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="VATAgencyCommission" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </form>
-</div>
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">Podatek od czynności cywilnoprawnych</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" readonly="readonly" id="CLAT">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">Opłata notarialna</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="Notary" name="Notary" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">VAT od opłaty notarialnej</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="VATNotary" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">Opłata sądowa</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="CourtFee" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">Księga wieczysta</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="KW" value="@((Model.ModelCalcView.OwnershipForm == "") ? 0 : @Model.CostPropertiesList.Single(x => x.Type == PropertyType.Mr).Value)" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                @*<div class="form-group">
+                        <label class="control-label danger col-xs-6">Wypisy aktu</label>
+                        <div class="col-xs-6">
+                            <div class="input-group input-group-sm">
+                                <input type="number" class="form-control" value="@Model.CostPropertiesList.Single(x => x.Type == PropertyType.ActPagePrice).Value" id="ActPagePrice" readonly="readonly">
+                                <span class="input-group-addon">PLN</span>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">Przybliżone koszty dodatkowe</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" id="ApproxCost" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label danger col-xs-6">Całkowity koszt nieruchomości</label>
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            <input type="number" class="form-control" pattern="[0-9]+([\.|,][0-9]+)?" id="TotalCost" readonly="readonly">
+                            <span class="input-group-addon">PLN</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
 
 
 <script language="javascript">
