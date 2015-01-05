@@ -518,7 +518,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult AddSetting()
         {
-            //TO DO - wrzucic do osobnego controllera
+            //TO DO - wrzucic do osobnego serwisu
             var clats = _applicationContext.Clats.OrderBy(x => x.From).ThenBy(x => x.To).ToList();
             var sum = 0.0;
             var clat = new Clat();
