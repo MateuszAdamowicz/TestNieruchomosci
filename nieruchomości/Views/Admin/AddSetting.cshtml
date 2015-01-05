@@ -1,14 +1,55 @@
 ﻿@using Models.EntityModels
-@model Models.EntityModels.Clat
+
+@model Models.ViewModels.AddSettingViewModel
 
 @{
     ViewBag.Title = "AddSettings";
-
-    }
+}
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
+
+        @if (@Model.CompartmentsList.Count == 0)
+        {
+            @Html.Label("Nie ma mozliwosci wprowadzenia danych, postepuj wg instrukcji.")
+
+        }
+        else
+        {
+
+            <h4>Przedzialy puste do wprowadzenia</h4>
+            
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Od
+                        </th>
+                        <th>
+                            Do
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.CompartmentsList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.Label("przedzial:          ")
+                                </td>
+                            <td>
+                                @Html.TextBox("From", x.From, new { style = "max-width: 100px;" })
+                            </td>
+
+                            <td>
+                                @Html.TextBox("Percent", x.To, new { style = "max-width: 100px;" })
+                            </td>
+                        </tr>
+                    }
+               </tbody>
+            </table>
+        }
 
         @using (Html.BeginForm())
         {
@@ -21,40 +62,40 @@
                 <div class="form-group">
                     @Html.Label("Od", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Clat.From, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Clat.From, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.Label("Do", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Clat.To, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Clat.To, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.Label("Procent", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Percent, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Percent, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Clat.Percent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Clat.Percent, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.Label("Maksymalnie", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Max, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Max, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Clat.Max, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Clat.Max, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.Label("Kwota", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Clat.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Clat.Price, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

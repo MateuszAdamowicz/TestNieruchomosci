@@ -75,6 +75,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ViewModels\AddSettingViewModel.cs" />
     <Compile Include="ViewModels\AdminAdvertToAdd.cs" />
     <Compile Include="ViewModels\AdminAdvertToShow.cs" />
     <Compile Include="ViewModels\AdminFlat.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="ViewModels\AdminWorker.cs" />
     <Compile Include="ViewModels\AdType.cs" />
     <Compile Include="ViewModels\CalcViewModel.cs" />
+    <Compile Include="ViewModels\Compartments.cs" />
     <Compile Include="ViewModels\CreateOffer.cs" />
     <Compile Include="ViewModels\EditFlat.cs" />
     <Compile Include="ViewModels\EditHouse.cs" />

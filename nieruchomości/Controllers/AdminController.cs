@@ -518,8 +518,24 @@ namespace nieruchomości.Controllers
 
         public ActionResult AddSetting()
         {
-            
-            return View();
+            //TO DO - wrzucic do osobnego controllera
+            var clats = _applicationContext.Clats.OrderBy(x => x.From).ThenBy(x => x.To).ToList();
+            var sum = 0.0;
+            var clat = new Clat();
+            List<Compartments> compartmentses = new List<Compartments>();
+            foreach (var x in clats)
+            {
+                sum += x.To - x.From;
+                if (sum != x.To)
+                {
+                    Compartments oneCompartment = new Compartments {To = x.From, From = x.From - x.To + sum};
+                    compartmentses.Add(oneCompartment);
+                    sum = x.To;
+                }
+            }
+            var model = new AddSettingViewModel {Clat = clat, CompartmentsList = compartmentses};
+
+            return View(model);
         }
 
         [HttpPost]
