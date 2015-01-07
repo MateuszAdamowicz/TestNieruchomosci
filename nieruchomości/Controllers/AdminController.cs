@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
 using Context;
 using Models.EntityModels;
-using Models.EntityModels.Interfaces;
 using Models.ViewModels;
-using Newtonsoft.Json.Linq;
 using PagedList;
 using Services.AdminLoginService;
 using Services.AdvertServices.AddAdvertService;
@@ -198,7 +195,7 @@ namespace nieruchomości.Controllers
             int pageSize = 20;
             int pageNumber = (page ?? 1);
 
-            var workers = _genericRepository.GetSet<Worker>().ToList();
+            var workers = _genericRepository.GetSet<Worker>().OrderByDescending(x => x.CreatedAt).ToList();
             //var workersVm = new WorkersViewModel() { Workers = workers.ToPagedList(pageNumber, pageSize) };
             return View(workers.ToPagedList(pageNumber, pageSize));
         }

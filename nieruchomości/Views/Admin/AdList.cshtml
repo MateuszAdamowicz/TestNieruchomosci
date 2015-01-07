@@ -12,6 +12,11 @@
     .pull-right {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     }
+
+    tbody tr:hover {
+        cursor: pointer;
+        background-color: rgb(232, 232, 232);
+    }
 </style>
 
 <div class="row" style="margin-right: 15px">
@@ -166,12 +171,15 @@
                                 <th>
                                     Osoba prowadząca
                                 </th>
+                                <th>
+                                    
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var ad in Model)
                             {
-                                <tr>
+                                <tr href="/Home/Show?key=@ad.Number">
                                     <td>
                                         <input type="checkbox" name="numbers" value="@ad.Number" />
                                     </td>
@@ -180,6 +188,9 @@
                                     <td>@ad.Title</td>
                                     <td>@ad.City</td>
                                     <td>@String.Format("{0}", (ad.Worker != null) ? ad.Worker.FullName : "---")</td>
+                                    <td>
+                                        @Html.ActionLink("Edytuj", "EditAd", new { id = ad.Id, adtype = ad.AdType }, new { @class = "btn btn-default btn-xs"})
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -225,5 +236,9 @@
             return confirm("Na pewno chcesz usunąć te ogłoszenia?");
         };
     });
+    
+   $("tr").on("click", function() {
+       document.location = $(this).attr("href");
+   });
 </script>
 
