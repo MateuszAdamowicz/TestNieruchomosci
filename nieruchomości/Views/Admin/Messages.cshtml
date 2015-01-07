@@ -26,9 +26,6 @@
                             <th>
 
                             </th>
-                            <th>
-                                
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,15 +46,13 @@
                                         <span class="glyphicon glyphicon-ok"></span>
                                     }
                                 </td>
-                                <td style="vertical-align: middle">
-                                    <a href="/Admin/Message/@ad.Id">
-                                        <button class="btn btn-sm">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </a>
-                                </td>
                                 <td>
-                                    @Html.ActionLink("Usuń", "DeleteMessage", "Admin", new { id = ad.Id }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Na pewno usunąć to ogłoszenie?');" })
+                                    <a class="btn btn-success btn-xs" href="/Admin/Message?id=@ad.Id">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="btn btn-danger btn-xs" href="/Admin/DeleteMessage?id=@ad.Id" onclick="return confirm('Na pewno usunąć tą wiadomość?');">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
                                 </td>
                             </tr>
                         }

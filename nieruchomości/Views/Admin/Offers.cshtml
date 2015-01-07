@@ -31,10 +31,6 @@
                             <th>
 
                             </th>
-                            
-                            <th>
-                                
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,15 +56,13 @@
                                 <td style="vertical-align:middle">@ad.Email</td>
                                 <td style="vertical-align:middle">@EnumNameHelper.GetAdType(ad.AdType)</td>
                                 <td style="vertical-align:middle">@ad.City</td>
-                                <td style="vertical-align: middle">
-                                    <a href="/Admin/Offer/@ad.Id">
-                                        <button class="btn btn-xs">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </a>
-                                </td>
                                 <td>
-                                    @Html.ActionLink("Usuń", "DeleteOffer", "Admin", new { id = ad.Id}, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Na pewno usunąć tą ofertę?');" })
+                                    <a class="btn btn-success btn-xs" href="/Admin/Offer?id=@ad.Id">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="btn btn-danger btn-xs" href="/Admin/DeleteOffer?id=@ad.Id" onclick="return confirm('Na pewno usunąć tą ofertę?');">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a
                                 </td>
                             </tr>
                         }

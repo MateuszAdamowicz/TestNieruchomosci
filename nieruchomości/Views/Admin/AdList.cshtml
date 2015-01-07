@@ -14,7 +14,6 @@
     }
 
     tbody tr:hover {
-        cursor: pointer;
         background-color: rgb(232, 232, 232);
     }
 </style>
@@ -179,7 +178,7 @@
                         <tbody>
                             @foreach (var ad in Model)
                             {
-                                <tr href="/Home/Show?key=@ad.Number">
+                                <tr>
                                     <td>
                                         <input type="checkbox" name="numbers" value="@ad.Number" />
                                     </td>
@@ -189,7 +188,13 @@
                                     <td>@ad.City</td>
                                     <td>@String.Format("{0}", (ad.Worker != null) ? ad.Worker.FullName : "---")</td>
                                     <td>
-                                        @Html.ActionLink("Edytuj", "EditAd", new { id = ad.Id, adtype = ad.AdType }, new { @class = "btn btn-default btn-xs"})
+                                        @*@Html.ActionLink("Edytuj", "EditAd", new { id = ad.Id, adtype = ad.AdType }, new { @class = "btn btn-default btn-xs"})*@
+                                        <a class="btn btn-success btn-xs" href="/Home/Show?key=@ad.Number">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </a>
+                                        <a class="btn btn-default btn-xs" href="/Admin/EditAd?id=@ad.Id&adtype=@ad.AdType">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
                                     </td>
                                 </tr>
                             }
@@ -236,9 +241,5 @@
             return confirm("Na pewno chcesz usunąć te ogłoszenia?");
         };
     });
-    
-   $("tr").on("click", function() {
-       document.location = $(this).attr("href");
-   });
 </script>
 
