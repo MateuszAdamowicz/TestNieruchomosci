@@ -398,9 +398,9 @@ namespace nieruchomości.Controllers
             return View(editLand);
         }
 
-        public ActionResult ChangeAd(IEnumerable<string> numbers, bool action)
+        public ActionResult ChangeAd(IEnumerable<string> numbers, bool delete)
         {
-            if (action)
+            if (!delete)
             {
                 var visible = _changeAdvertVisibility.HideAdverts(numbers);
                 return RedirectToAction("AdList", new { changed = true, hide = !visible });
