@@ -15,77 +15,76 @@
         @Html.Partial("AdminMenu")
         <h4>Ustawienia</h4>
 
-
+        <a href="@Url.Action("AddClat", "Admin")" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-plus"></span> Dodaj przedział opłaty notarialnej</a>
 
         <table class="table table-hover">
             <thead>
-            <tr>
-                <th>
-                    Od
-                </th>
-                <th>
-                    Do
-                </th>
-                <th>
-                    Procent
-                </th>
-                <th>
-                    Max
-                </th>
-                <th>
-                    Cena
-                </th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>
+                        Od
+                    </th>
+                    <th>
+                        Do
+                    </th>
+                    <th>
+                        Procent
+                    </th>
+                    <th>
+                        Max
+                    </th>
+                    <th>
+                        Cena
+                    </th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var x in Model.ClatList)
-            {
-                using (Html.BeginForm("EditClat", "Admin"))
+                @foreach (var x in Model.ClatList)
                 {
-                    <tr>
-                        @Html.Hidden("Id", x.Id)
-                        <td>
-                            @Html.TextBox("From", x.From, new {style = "max-width: 100px;"})
-                        </td>
-                        <td>
-                            @if (x.To == Double.MaxValue)
-                            {
-                                @Html.TextBox("To", "Max", new {style = "max-width: 100px;"})
-                            }
-                            else
-                            {
-                                @Html.TextBox("To", x.To, new {style = "max-width: 100px;"})
-                            }
+                    using (Html.BeginForm("EditClat", "Admin"))
+                    {
+                        <tr>
+                            @Html.Hidden("Id", x.Id)
+                            <td>
+                                @Html.TextBox("From", x.From, new { style = "max-width: 100px;" })
+                            </td>
+                            <td>
+                                @if (x.To == Double.MaxValue)
+                                {
+                                    @Html.TextBox("To", "Max", new { style = "max-width: 100px;" })
+                                }
+                                else
+                                {
+                                    @Html.TextBox("To", x.To, new { style = "max-width: 100px;" })
+                                }
 
-                        </td>
-                        <td>
-                            @Html.TextBox("Percent", x.Percent, new {style = "max-width: 100px;"})
-                        </td>
-                        <td>
-                            @if (x.Max == 0)
-                            {
-                                @Html.TextBox("Max", "Brak", new {style = "max-width: 100px;"})
-                            }
-                            else
-                            {
-                                @Html.TextBox("Max", x.Max, new {style = "max-width: 100px;"})
-                            }
-                        </td>
-                        <td>
-                            @Html.TextBox("Price", x.Price, new {style = "max-width: 100px;"})
-                        </td>
-                        <td style="text-align: center">
-                            <button type="submit" class="btn btn-primary btn-xs" onclick=" return confirm('Na pewno edytować?') ">Edytuj</button>
-                            @Html.ActionLink("Usuń", "DeleteSetting", new {id = x.Id}, new {@class = "btn btn-info btn-xs", @onclick = "return confirm('Na pewno usunąć?');"})
-                        </td>
-                    </tr>
+                            </td>
+                            <td>
+                                @Html.TextBox("Percent", x.Percent, new { style = "max-width: 100px;" })
+                            </td>
+                            <td>
+                                @if (x.Max == 0)
+                                {
+                                    @Html.TextBox("Max", "Brak", new { style = "max-width: 100px;" })
+                                }
+                                else
+                                {
+                                    @Html.TextBox("Max", x.Max, new { style = "max-width: 100px;" })
+                                }
+                            </td>
+                            <td>
+                                @Html.TextBox("Price", x.Price, new { style = "max-width: 100px;" })
+                            </td>
+                            <td style="text-align: center">
+                                <button type="submit" class="btn btn-default btn-xs glyphicon glyphicon-pencil" aria-hidden="true" onclick=" return confirm('Na pewno edytować?') "></button>
+                                @Html.ActionLink(" ", "DeleteClat", new { id = x.Id }, new { @class = "btn btn-danger btn-xs glyphicon glyphicon-trash", @onclick = "return confirm('Na pewno usunąć?');" })
+                            </td>
+                        </tr>
 
+                    }
                 }
-            }
             </tbody>
 
-            @Html.ActionLink("Dodaj nowe przedział taksy notarialnej", "AddSetting", "Admin", new { @class = "btn btn-info btn-xs" })
         </table>
 
         <br>
@@ -115,13 +114,26 @@
                             @Html.TextBox("Value", item.Value, new {style = "max-width: 100px;"})
                         </td>
                         <td style="text-align: center">
-                            <button type="submit" class="btn btn-primary btn-xs" onclick=" return confirm('Na pewno edytować?') ">Edytuj</button>
+                            <button type="submit" class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick=" return confirm('Na pewno edytować?') "></button>
                         </td>
                     </tr>
                 }
             }
             </tbody>
         </table>
+        <h4>Legenda</h4>
+
+        <div class="row">
+            <div class="col-md-12" style="font-size: small">
+                <span class="btn btn-default btn-xs disabled" style="opacity: 1; width:80px">
+                    <span class="glyphicon glyphicon-search"></span>
+                    Edytuj
+                </span>
+                <span class="btn btn-danger btn-xs disabled" style="opacity: 1; width:80px">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Usuń
+                </span>
+            </div>
+        </div>
     </div>
 </div>
-

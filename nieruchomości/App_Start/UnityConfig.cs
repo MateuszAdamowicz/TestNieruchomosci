@@ -38,6 +38,9 @@ using Services.StatisticesServices.CounterService.Implementation;
 using Services.StatisticesServices.StatisticesService;
 using Services.StatisticesServices.StatisticesService.Implementation;
 using Services.WorkerService;
+using Services.AdminSettingsService;
+using Services.AdminSettingsService.Implementation;
+
 
 namespace nieruchomości
 {
@@ -70,6 +73,7 @@ namespace nieruchomości
             container.RegisterType<IChangeAdvertVisibility, ChangeAdvertVisibility>();
             container.RegisterType<ICalcService, CalcService>();
             container.RegisterType<IGetAdvertService, GetAdvertService>();
+            container.RegisterType<IAdminSettingsService, AdminSettingsService>();
         }
     }
 }
