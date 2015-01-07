@@ -75,8 +75,8 @@
         </table>
         <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
         <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Workers", new { page }))</div>
-    
-        <div clas="row">
+        <h4>Legenda</h4>
+        <div class="row">
             <div class="col-md-12" style="font-size: small">
                 <span class="btn btn-success btn-xs disabled" style="opacity: 1; width:80px">
                     <span class="glyphicon glyphicon-search"></span>
@@ -85,6 +85,10 @@
                 <span class="btn btn-default btn-xs disabled" style="opacity: 1; width:80px">
                     <span class="glyphicon glyphicon-search"></span>
                     Edytuj
+                </span>
+                <span class="btn btn-danger btn-xs disabled" style="opacity: 1; width:80px">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Usuń
                 </span>
             </div>
         </div>
