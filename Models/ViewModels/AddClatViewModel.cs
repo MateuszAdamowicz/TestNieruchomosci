@@ -7,7 +7,7 @@ using Models.EntityModels;
 
 namespace Models.ViewModels
 {
-    public class AddSettingViewModel
+    public class AddClatViewModel
     {
 
         public Clat Clat { get; set; }
