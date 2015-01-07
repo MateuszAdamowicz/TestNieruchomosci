@@ -155,6 +155,16 @@ textarea {
     margin-bottom: 10px;
 }
 
+.custom-advert-panel-empty {
+    margin-left: 15px;
+    padding: 5px;
+    border: 2px solid rgb(255, 227, 176); 
+    border-radius: 10px;
+    margin-left: 15px;    
+    background-color: rgb(255, 245, 227);
+    margin-bottom: 10px;
+}
+
 .custom-advert-description {
     font-size: small;
     text-align: justify;

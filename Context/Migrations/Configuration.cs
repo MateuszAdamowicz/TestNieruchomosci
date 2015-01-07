@@ -77,7 +77,6 @@ namespace Context.Migrations
             context.CostProperties.AddOrUpdate(x => x.Type, CostProp6);
             context.CostProperties.AddOrUpdate(x => x.Type, CostProp7);
 
-
             var ClatProp1 = new Clat
             {
                 From = 0,

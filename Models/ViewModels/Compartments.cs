@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Models.EntityModels;
 
 namespace Models.ViewModels
 {
-    public class CalcViewModel:SettingsViewModel
+    public class Compartments
     {
-        public CalcView ModelCalcView { get; set; }
+        public double From { get; set; }
+        public double To { get; set; }
     }
 }

@@ -468,15 +468,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult Settings()
         {
-            var x = _applicationContext.Clats.ToList();
-            var y = _applicationContext.CostProperties.ToList();
-            var model = new SettingsViewModel()
-            {
-                ClatList = x,
-                CostPropertiesList = y
-            };
-
-            return View(model);
+            return View(_calcService.BuildViewModel());
         }
 
         [HttpPost]
@@ -485,10 +477,69 @@ namespace nieruchomości.Controllers
             var clat = _applicationContext.Clats.Find(clatModel.Id);
 
             clat.From = clatModel.From;
-            clat.To = clatModel.To;
+            clat.To = clatModel.To; 
             clat.Percent = clatModel.Percent;
             clat.Price = clatModel.Price;
+            clat.Max = clatModel.Max;
 
+            _applicationContext.SaveChanges();
+
+            return RedirectToAction("Settings");
+        }
+
+       
+
+        public ActionResult DeleteSetting(int id)
+        {
+
+            Clat deleteOrderDetails =_applicationContext.Clats.First(x => x.Id == id);
+            _applicationContext.Clats.Remove(deleteOrderDetails);
+            _applicationContext.SaveChanges();
+
+            return RedirectToAction("Settings");
+        }
+
+        [HttpPost]
+        public ActionResult EditCostPropList(CostProperty costPropModel)
+        {
+            var costProp = _applicationContext.CostProperties.Find(costPropModel.Id);
+
+            costProp.Value = costPropModel.Value;
+
+            _applicationContext.SaveChanges();
+
+            return RedirectToAction("Settings");
+        }
+
+
+
+        public ActionResult AddSetting()
+        {
+            //TO DO - wrzucic do osobnego serwisu
+            var clats = _applicationContext.Clats.OrderBy(x => x.From).ThenBy(x => x.To).ToList();
+            var sum = 0.0;
+            var clat = new Clat();
+            List<Compartments> compartmentses = new List<Compartments>();
+            foreach (var x in clats)
+            {
+                sum += x.To - x.From;
+                if (sum != x.To)
+                {
+                    Compartments oneCompartment = new Compartments {To = x.From, From = x.From - x.To + sum};
+                    compartmentses.Add(oneCompartment);
+                    sum = x.To;
+                }
+            }
+            var model = new AddSettingViewModel {Clat = clat, CompartmentsList = compartmentses};
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddSetting(Clat clat)
+        {
+            Clat model = new Clat {To = clat.To, Max = clat.Max, Price = clat.Price, Percent = clat.Percent, From = clat.From};
+            _applicationContext.Clats.Add(model);
             _applicationContext.SaveChanges();
 
             return RedirectToAction("Settings");

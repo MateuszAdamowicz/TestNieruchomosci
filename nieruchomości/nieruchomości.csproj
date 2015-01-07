@@ -357,12 +357,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\nieruchomosci - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\nieruchomosci - FTP %283%29.pubxml" />
-    <None Include="Properties\PublishProfiles\nieruchomosci - FTP %284%29.pubxml" />
-    <None Include="Properties\PublishProfiles\nieruchomosci - FTP %285%29.pubxml" />
-    <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy %283%29.pubxml" />
-    <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\nieruchomosci - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
@@ -1168,6 +1162,7 @@
     <Content Include="Views\Home\CalcView.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
     <Content Include="Views\Admin\View.cshtml" />
+    <Content Include="Views\Admin\AddSetting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

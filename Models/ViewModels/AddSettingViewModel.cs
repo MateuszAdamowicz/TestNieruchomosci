@@ -7,8 +7,10 @@ using Models.EntityModels;
 
 namespace Models.ViewModels
 {
-    public class CalcViewModel:SettingsViewModel
+    public class AddSettingViewModel
     {
-        public CalcView ModelCalcView { get; set; }
+
+        public Clat Clat { get; set; }
+        public List<Compartments> CompartmentsList { get; set; }
     }
 }

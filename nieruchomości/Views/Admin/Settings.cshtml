@@ -1,4 +1,6 @@
-﻿@using System.Diagnostics
+﻿@using System.Collections.Concurrent
+@using System.Diagnostics
+@using System.Web.Optimization
 @using Models.EntityModels
 @model Models.ViewModels.SettingsViewModel
 
@@ -7,74 +9,89 @@
     ViewBag.Title = "Settings";
 }
 
+
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
         <h4>Ustawienia</h4>
 
-        <table>
+
+
+        <table class="table table-hover">
             <thead>
-                <tr>
-                    <th>
-                        Od
-                    </th>
-                    <th>
-                        do
-                    </th>
-                    <th>
-                        procent
-                    </th>
-                    <th>
-                        max
-                    </th>
-                    <th>
-                        cena
-                    </th>
-                </tr>
+            <tr>
+                <th>
+                    Od
+                </th>
+                <th>
+                    Do
+                </th>
+                <th>
+                    Procent
+                </th>
+                <th>
+                    Max
+                </th>
+                <th>
+                    Cena
+                </th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var x in Model.ClatList)
+            @foreach (var x in Model.ClatList)
+            {
+                using (Html.BeginForm("EditClat", "Admin"))
                 {
-                    using (Html.BeginForm("EditClat", "Admin"))
-                    {
-                        <tr>
-                            @Html.Hidden("Id", x.Id)
-                            <td>
-                                @Html.TextBox("From", x.From)
-                            </td>
-                            <td>
-                                @if (x.To == Double.MaxValue)
-                                {
-                                    @Html.TextBox("To", "Max")
-                                }
-                                else
-                                {
-                                    @Html.TextBox("To", x.To)
-                                }
+                    <tr>
+                        @Html.Hidden("Id", x.Id)
+                        <td>
+                            @Html.TextBox("From", x.From, new {style = "max-width: 100px;"})
+                        </td>
+                        <td>
+                            @if (x.To == Double.MaxValue)
+                            {
+                                @Html.TextBox("To", "Max", new {style = "max-width: 100px;"})
+                            }
+                            else
+                            {
+                                @Html.TextBox("To", x.To, new {style = "max-width: 100px;"})
+                            }
 
-                            </td>
-                            <td>
-                                @Html.TextBox("Percent", x.Percent)
-                            </td>
-                            <td>
-                                @Html.TextBox("Max", x.Max)
-                            </td>
-                            <td>
-                                @Html.TextBox("Price", x.Price)
-                            </td>
-                            <td>
-                                <button type="submit">Ok</button>
-                            </td>
-                        </tr>
-                    }
+                        </td>
+                        <td>
+                            @Html.TextBox("Percent", x.Percent, new {style = "max-width: 100px;"})
+                        </td>
+                        <td>
+                            @if (x.Max == 0)
+                            {
+                                @Html.TextBox("Max", "Brak", new {style = "max-width: 100px;"})
+                            }
+                            else
+                            {
+                                @Html.TextBox("Max", x.Max, new {style = "max-width: 100px;"})
+                            }
+                        </td>
+                        <td>
+                            @Html.TextBox("Price", x.Price, new {style = "max-width: 100px;"})
+                        </td>
+                        <td style="text-align: center">
+                            <button type="submit" class="btn btn-primary btn-xs" onclick=" return confirm('Na pewno edytować?') ">Edytuj</button>
+                            @Html.ActionLink("Usuń", "DeleteSetting", new {id = x.Id}, new {@class = "btn btn-info btn-xs", @onclick = "return confirm('Na pewno usunąć?');"})
+                        </td>
+                    </tr>
+
                 }
+            }
             </tbody>
+
+            @Html.ActionLink("Dodaj nowe przedział taksy notarialnej", "AddSetting", "Admin", new { @class = "btn btn-info btn-xs" })
         </table>
 
-
-
-
-        <table class="table">
+        <br>
+        <br>
+        <table class="table table-hover">
+            <thead>
             <tr>
                 <th>
                     Nazwa
@@ -83,26 +100,28 @@
                     Wartość
                 </th>
             </tr>
-
+            </thead>
+            <tbody>
             @foreach (var item in Model.CostPropertiesList)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Value)
-                    </td>
-
-                    @*<td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </td>*@
-                </tr>
+                using (Html.BeginForm("EditCostPropList", "Admin"))
+                {
+                    <tr>
+                        @Html.Hidden("Id", item.Id)
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.TextBox("Value", item.Value, new {style = "max-width: 100px;"})
+                        </td>
+                        <td style="text-align: center">
+                            <button type="submit" class="btn btn-primary btn-xs" onclick=" return confirm('Na pewno edytować?') ">Edytuj</button>
+                        </td>
+                    </tr>
+                }
             }
-
+            </tbody>
         </table>
-
     </div>
 </div>
+
