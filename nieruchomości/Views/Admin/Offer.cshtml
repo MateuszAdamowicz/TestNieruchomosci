@@ -73,8 +73,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        @Html.ActionLink("Akceptuj", "Offer", new {status = OfferStatus.Accepted}, new {@class = "btn btn-success"})
-                        @Html.ActionLink("Odrzuć", "Offer", new {status = OfferStatus.Rejected}, new {@class = "btn btn-danger"})
+                        @Html.ActionLink("Akceptuj", "Offer", new {id = Model.Id, status = OfferStatus.Accepted}, new {@class = "btn btn-success"})
+                        @Html.ActionLink("Odrzuć", "Offer", new {id = Model.Id, status = OfferStatus.Rejected}, new {@class = "btn btn-danger"})
                     </div>
                 </div>
             </div>
