@@ -404,7 +404,7 @@ namespace nieruchomości.Controllers
             if (!delete)
             {
                 var visible = _changeAdvertVisibility.HideAdverts(numbers);
-                return RedirectToAction("AdList", new { changed = true, hide = !visible });
+                return RedirectToAction("AdList", new { changed = true, hide = !visible, search=!visible,showHidden = !visible });
             }
             _changeAdvertVisibility.DeleteAdverts(numbers);
             return RedirectToAction("AdList");
