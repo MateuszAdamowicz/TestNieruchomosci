@@ -209,7 +209,7 @@ namespace nieruchomości.Controllers
             var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<House>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
             var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Land>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
 
-            model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt);
+            model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt).ToList();
 
             return View(model);
         }
@@ -538,6 +538,7 @@ namespace nieruchomości.Controllers
         [HttpPost]
         public ActionResult AddSetting(Clat clat)
         {
+
             Clat model = new Clat {To = clat.To, Max = clat.Max, Price = clat.Price, Percent = clat.Percent, From = clat.From};
             _applicationContext.Clats.Add(model);
             _applicationContext.SaveChanges();

@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using Context;
+using Models.EntityModels;
 using Models.ViewModels;
+using Services.GenericRepository;
 
 namespace Services.AdvertServices.AdminFilterAdvertService.Implementation
 {
     public class AdminFilterAdvertService : IAdminFilterAdvertService
     {
-        private readonly IApplicationContext _applicationContext;
+        private readonly IGenericRepository _genericRepository;
 
-        public AdminFilterAdvertService(IApplicationContext applicationContext)
+        public AdminFilterAdvertService(IGenericRepository genericRepository)
         {
-            _applicationContext = applicationContext;
+            _genericRepository = genericRepository;
         }
 
         public IEnumerable<AdminAdvertToShow> FilterAdverts(string key, string worker, bool? showHidden, DateTime? dateFrom, DateTime? dateTo, IEnumerable<AdType> type)
         {
-            var searchFlats = AutoMapper.Mapper.Map<IEnumerable<AdminAdvertToShow>>(_applicationContext.Flats);
-            var searchHouses = AutoMapper.Mapper.Map<IEnumerable<AdminAdvertToShow>>(_applicationContext.Houses);
-            var searchLands = AutoMapper.Mapper.Map<IEnumerable<AdminAdvertToShow>>(_applicationContext.Lands);
+            var searchFlats = AutoMapper.Mapper.Map<IEnumerable<AdminAdvertToShow>>(_genericRepository.GetSet<Flat>());
+            var searchHouses = AutoMapper.Mapper.Map<IEnumerable<AdminAdvertToShow>>(_genericRepository.GetSet<House>());
+            var searchLands = AutoMapper.Mapper.Map<IEnumerable<AdminAdvertToShow>>(_genericRepository.GetSet<Land>());
 
             var advertsToShow = searchFlats.Concat(searchHouses).Concat(searchLands);
 
@@ -71,19 +73,19 @@ namespace Services.AdvertServices.AdminFilterAdvertService.Implementation
             {
                 flats =
                     AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(
-                        _applicationContext.Flats.Where(x => !x.Visible && !x.Deleted));
+                        _genericRepository.GetSet<Flat>().Where(x => !x.Visible));
                 houses =
                     AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(
-                        _applicationContext.Houses.Where(x => !x.Visible && !x.Deleted));
+                        _genericRepository.GetSet<House>().Where(x => !x.Visible));
                 lands =
                     AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(
-                        _applicationContext.Lands.Where(x => !x.Visible && !x.Deleted));
+                        _genericRepository.GetSet<Land>().Where(x => !x.Visible));
             }
             else
             {
-                flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Flats.Where(x => x.Visible && !x.Deleted));
-                houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Houses.Where(x => x.Visible && !x.Deleted));
-                lands = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Lands.Where(x => x.Visible && !x.Deleted));
+                flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_genericRepository.GetSet<Flat>().Where(x => x.Visible));
+                houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_genericRepository.GetSet<House>().Where(x => x.Visible));
+                lands = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_genericRepository.GetSet<Land>().Where(x => x.Visible));
             }
             var advertsToShow = flats.Concat(houses).Concat(lands).OrderByDescending(x => x.CreatedAt);
             return advertsToShow;

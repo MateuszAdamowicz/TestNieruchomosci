@@ -9,6 +9,7 @@ using Services.AdvertServices.AdminFilterAdvertService;
 using Services.AdvertServices.AdminFilterAdvertService.Implementation;
 using Services.AdvertServices.ChangeAdvertVisability;
 using Services.AdvertServices.ChangeAdvertVisability.Implementation;
+using Services.AdvertServices.GetAdvertService.Implementation;
 using Services.AdvertServices.NewestAdvertService;
 using Services.AdvertServices.NewestAdvertService.Implementation;
 using Services.AdvertServices.ShowAdvertService;
@@ -68,6 +69,7 @@ namespace nieruchomości
             container.RegisterType<IGenericRepository, Services.GenericRepository.Implementation.GenericRepository>();
             container.RegisterType<IChangeAdvertVisibility, ChangeAdvertVisibility>();
             container.RegisterType<ICalcService, CalcService>();
+            container.RegisterType<IGetAdvertService, GetAdvertService>();
         }
     }
 }
