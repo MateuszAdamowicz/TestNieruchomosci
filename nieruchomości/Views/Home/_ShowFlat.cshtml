@@ -88,11 +88,17 @@
                             }
                             else
                             {
+                                int counter = 0;
                                 foreach (var picture in Model.Pictures)
                                 {
+                                    counter++;
                                     <div class="col-md-2" style="padding: 5px">
-                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer" class="small-pict" />
+                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer; max-height: 100px" class="small-pict" />
                                     </div>
+                                    if (counter%6 == 0)
+                                    {
+                                        <div class="row"></div>
+                                    }
                                 }
                             }
                         }
