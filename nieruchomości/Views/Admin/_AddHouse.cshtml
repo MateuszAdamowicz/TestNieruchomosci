@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-6">
                         <small>Liczba pokoi:</small>
-                        @Html.EditorFor(model => model.Rooms, new { htmlAttributes = new {@type="number", @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Rooms") && ViewData.ModelState["Rooms"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                        @Html.EditorFor(model => model.Rooms, new { htmlAttributes = new {@type="number", @class = "form-control Rooms", @style = ((ViewData.ModelState.ContainsKey("Rooms") && ViewData.ModelState["Rooms"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
                     </div>
                 </div>
                 <div class="row">
@@ -173,7 +173,14 @@
             $(this)[0].value = "";
             alert(errors.join("\n"));
         }
-    })
+    });
+
+    $(".Rooms").on("change", function () {
+        if (+$(this).val() < 0) {
+            $(this).val("0");
+            alert("Liczba pokoi nie może być ujemna!");
+        }
+    });
 </script>
 
 <script type="text/javascript">

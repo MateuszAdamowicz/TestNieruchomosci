@@ -6,9 +6,9 @@ namespace Models.EntityModels
     {
         public string Location { get; set; }
         public string Area { get; set; }
-        public string Storey { get; set; }
+        public int Storey { get; set; }
         public string TechnicalCondition { get; set; }
-        public string Rooms { get; set; }
+        public int Rooms { get; set; }
         public string Heating { get; set; }
         public string Rent { get; set; }
         public string Ownership { get; set; }

@@ -8,7 +8,7 @@ namespace Models.EntityModels.Interfaces
         string LandArea { get; set; }
         string UsableArea { get; set; }
         string TechnicalCondition { get; set; }
-        string Rooms { get; set; }
+        int Rooms { get; set; }
         string Heating { get; set; }
         string Rent { get; set; }
         string Ownership { get; set; }

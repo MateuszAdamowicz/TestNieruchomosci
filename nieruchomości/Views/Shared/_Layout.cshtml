@@ -151,10 +151,7 @@
     <script language="javascript">
         $('.dropdown-toggle').dropdown();
         $(".carousel").carousel();
+        $('.carousel').bind('mousewheel', function (e) { $(this).carousel('next'); });
     </script>
-    
- @*   @Scripts.Render("~/bundles/jquery", "~/bundles/bootstrap", "~/bundles/site")
-    @RenderSection("scripts", required: false)*@
-
 </body>
 </html>
