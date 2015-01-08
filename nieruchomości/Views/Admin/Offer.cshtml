@@ -62,7 +62,7 @@
                     </div>
                     <div class="row">
                         <div class="custom-advert-panel-title">
-                                Opis
+                            Opis
                         </div>
                         <div class="custom-advert-panel-body">
                             <div class="row" style="margin-bottom: 10px">
@@ -73,8 +73,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        @Html.ActionLink("Akceptuj", "Offer", new {status = OfferStatus.Accepted}, new {@class = "btn btn-success"})
-                        @Html.ActionLink("Odrzuć", "Offer", new {status = OfferStatus.Rejected}, new {@class = "btn btn-danger"})
+                        <div class="pull-right" style="text-align:right">
+                            <a class="btn btn-primary btn" href="mailto:@(Model.Email)">
+                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                Odpowiedz
+                            </a>
+                        </div>
+                            @Html.ActionLink("Akceptuj", "Offer", new { id = Model.Id, status = OfferStatus.Accepted }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Odrzuć", "Offer", new { id = Model.Id, status = OfferStatus.Rejected }, new { @class = "btn btn-danger" })
                     </div>
                 </div>
             </div>
@@ -82,3 +88,4 @@
         </div>
     </div>
 </div>
+

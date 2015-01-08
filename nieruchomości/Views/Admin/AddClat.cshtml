@@ -1,0 +1,83 @@
+﻿@using Models.EntityModels
+
+@model Models.ViewModels.AddClatViewModel
+
+@{
+    ViewBag.Title = "AddClat";
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="row" style="padding: 10px">
+        <div class="panel panel-danger">
+            <button type="button" class="close" data-dismiss="alert" style="margin-right:5px; margin-top: 5px">×</button>
+            <div class="panel-heading">
+                Błąd
+            </div>
+            <div class="panel-body">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+
+        @if (@Model.CompartmentsList.Count == 0)
+        {
+            @Html.Label("Nie ma mozliwosci wprowadzenia danych, postepuj wg instrukcji.")
+
+        }
+        else
+        {
+
+            <h4>Przedzialy puste do wprowadzenia</h4>
+            
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Od
+                    </th>
+                    <th>
+                        Do
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.CompartmentsList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.Label("przedzial:")
+                                </td>
+                            <td>
+                                <div>
+                                    @x.From
+                                </div>
+                           </td>
+
+                            <td>
+                                <div>
+                                    @x.To
+                                </div>
+                            </td>
+                        </tr>
+                    }
+               </tbody>
+            </table>
+        }
+
+        @{ Html.RenderPartial("AddClatTable", Model.Clat); }
+
+        <div>
+            @Html.ActionLink("Powrót", "Settings")
+        </div>
+    </div>
+</div>
+
+

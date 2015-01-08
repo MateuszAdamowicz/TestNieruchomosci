@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Security;
 using Context;
 using Models.EntityModels;
-using Models.EntityModels.Interfaces;
 using Models.ViewModels;
-using Newtonsoft.Json.Linq;
 using PagedList;
 using Services.AdminLoginService;
+using Services.AdminSettingsService;
 using Services.AdvertServices.AddAdvertService;
 using Services.AdvertServices.AdminFilterAdvertService;
 using Services.AdvertServices.ChangeAdvertVisability;
@@ -42,10 +40,10 @@ namespace nieruchomości.Controllers
         private readonly ISearchService _searchService;
         private readonly IChangeAdvertVisibility _changeAdvertVisibility;
         private readonly ICalcService _calcService;
-
+        private readonly IAdminSettingsService _adminSettingsService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository, ISearchService searchService, IChangeAdvertVisibility changeAdvertVisibility, ICalcService calcService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository, ISearchService searchService, IChangeAdvertVisibility changeAdvertVisibility, ICalcService calcService, IAdminSettingsService adminSettingsService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
@@ -60,7 +58,7 @@ namespace nieruchomości.Controllers
             _searchService = searchService;
             _changeAdvertVisibility = changeAdvertVisibility;
             _calcService = calcService;
-
+            _adminSettingsService = adminSettingsService;
         }
 
         [AllowAnonymous]
@@ -198,7 +196,7 @@ namespace nieruchomości.Controllers
             int pageSize = 20;
             int pageNumber = (page ?? 1);
 
-            var workers = _genericRepository.GetSet<Worker>().ToList();
+            var workers = _genericRepository.GetSet<Worker>().OrderByDescending(x => x.CreatedAt).ToList();
             //var workersVm = new WorkersViewModel() { Workers = workers.ToPagedList(pageNumber, pageSize) };
             return View(workers.ToPagedList(pageNumber, pageSize));
         }
@@ -212,7 +210,7 @@ namespace nieruchomości.Controllers
             var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<House>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
             var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Land>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
 
-            model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt);
+            model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt).ToList();
 
             return View(model);
         }
@@ -401,12 +399,12 @@ namespace nieruchomości.Controllers
             return View(editLand);
         }
 
-        public ActionResult ChangeAd(IEnumerable<string> numbers, bool action)
+        public ActionResult ChangeAd(IEnumerable<string> numbers, bool delete)
         {
-            if (action)
+            if (!delete)
             {
                 var visible = _changeAdvertVisibility.HideAdverts(numbers);
-                return RedirectToAction("AdList", new { changed = true, hide = !visible });
+                return RedirectToAction("AdList", new { changed = true, hide = !visible, search=!visible,showHidden = !visible });
             }
             _changeAdvertVisibility.DeleteAdverts(numbers);
             return RedirectToAction("AdList");
@@ -416,7 +414,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult Offers(int? page)
         {
-            var offers = _genericRepository.GetSet<Offer>().ToList();
+            var offers = _genericRepository.GetSet<Offer>().OrderByDescending(x => x.CreatedAt).ToList();
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             return View(offers.ToPagedList(pageNumber, pageSize));
@@ -477,58 +475,49 @@ namespace nieruchomości.Controllers
         [HttpPost]
         public ActionResult EditClat(Clat clatModel)
         {
-            var clat = _applicationContext.Clats.Find(clatModel.Id);
-
-            clat.From = clatModel.From;
-            clat.To = clatModel.To; 
-            clat.Percent = clatModel.Percent;
-            clat.Price = clatModel.Price;
-            clat.Max = clatModel.Max;
-
-            _applicationContext.SaveChanges();
-
+            _adminSettingsService.EditClat(clatModel);
             return RedirectToAction("Settings");
         }
 
        
 
-        public ActionResult DeleteSetting(int id)
+        public ActionResult DeleteClat(int id)
+        {
+            _adminSettingsService.DeleteClat(id);
+            return RedirectToAction("Settings");
+        }
+
+
+        public ActionResult AddClat()
+        {
+            var model = _adminSettingsService.AddClat();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddClat(Clat clat)
         {
 
-            Clat deleteOrderDetails =_applicationContext.Clats.First(x => x.Id == id);
-            _applicationContext.Clats.Remove(deleteOrderDetails);
-            _applicationContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _adminSettingsService.AddClat(clat);
+                return RedirectToAction("Settings");
+            }
+            else
+            {
+                var model = _adminSettingsService.AddClat();
+                model.Clat = clat;
 
-            return RedirectToAction("Settings");
+                return View("AddClat", model);
+            }
+
+
         }
 
         [HttpPost]
         public ActionResult EditCostPropList(CostProperty costPropModel)
         {
-            var costProp = _applicationContext.CostProperties.Find(costPropModel.Id);
-
-            costProp.Value = costPropModel.Value;
-
-            _applicationContext.SaveChanges();
-
-            return RedirectToAction("Settings");
-        }
-
-
-
-        public ActionResult AddSetting()
-        {
-            
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AddSetting(Clat clat)
-        {
-            Clat model = new Clat {To = clat.To, Max = clat.Max, Price = clat.Price, Percent = clat.Percent, From = clat.From};
-            _applicationContext.Clats.Add(model);
-            _applicationContext.SaveChanges();
-
+            _adminSettingsService.EditCostPropList(costPropModel);
             return RedirectToAction("Settings");
         }
     }

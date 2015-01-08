@@ -12,6 +12,10 @@
     .pull-right {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     }
+
+    tbody tr:hover {
+        background-color: rgb(232, 232, 232);
+    }
 </style>
 
 <div class="row" style="margin-right: 15px">
@@ -46,145 +50,153 @@
             <div class="col-md-12">
                 @using (Html.BeginForm("AdList", "Admin", FormMethod.Get))
                 {
-                    <input type="hidden" name="search" value="true" />
-                    <div class="form-group-sm">
-                        <div class="row">
-                            <div class="col-md-2" style="font-size:small; font-weight:bold">
-                                Wyszukiwana fraza:
-                            </div>
-                            <div class="col-md-2" style="font-size:small; font-weight:bold">
-                                Pracownik:
-                            </div>
-                            <div class="col-md-2" style="font-size:small; font-weight:bold">
-                                Widoczność:
-                            </div>
-                            <div class="col-md-3" style="font-size:small; font-weight:bold">
-                                Data (od-do):
-                            </div>
-                            <div class="col-md-3" style="font-size:small; font-weight:bold">
-                                Rodzaj nieruchomości:
+                <input type="hidden" name="search" value="true" />
+                <div class="form-group-sm">
+                    <div class="row">
+                        <div class="col-md-2" style="font-size:small; font-weight:bold">
+                            Wyszukiwana fraza:
+                        </div>
+                        <div class="col-md-2" style="font-size:small; font-weight:bold">
+                            Pracownik:
+                        </div>
+                        <div class="col-md-2" style="font-size:small; font-weight:bold">
+                            Widoczność:
+                        </div>
+                        <div class="col-md-3" style="font-size:small; font-weight:bold">
+                            Data (od-do):
+                        </div>
+                        <div class="col-md-3" style="font-size:small; font-weight:bold">
+                            Rodzaj nieruchomości:
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza", @style = "font-size:12px" })
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza", @style = "font-size:12px" })
-                                    </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko", @style = "font-size:12px" })
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko", @style = "font-size:12px" })
-                                    </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label><input type="radio" name="showHidden" value="false" checked />Aktywne</label>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label><input type="radio" name="showHidden" value="false" checked />Aktywne</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label><input type="radio" name="showHidden" value="true" />Ukryte</label>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label><input type="radio" name="showHidden" value="true" />Ukryte</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input type="date" name="dateFrom" class="form-control" id="dateFrom" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input type="date" name="dateTo" class="form-control" id="dateTo" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
-                                    </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="date" name="dateFrom" class="form-control" id="dateFrom" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
                                 </div>
                             </div>
-                            <div class="col-md-3 pull-right">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label><input type="checkbox" name="type" value="Flat" />Mieszkanie</label>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="date" name="dateTo" class="form-control" id="dateTo" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label><input type="checkbox" name="type" value="House" />Dom</label>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 pull-right">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label><input type="checkbox" name="type" value="Flat" />Mieszkanie</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label><input type="checkbox" name="type" value="Land" />Działka</label>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label><input type="checkbox" name="type" value="House" />Dom</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12" style="padding-right:15px; text-align:left; margin-top:5px">
-                                        <button type="submit" class="btn btn-default btn-xs">Wyszukaj</button>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label><input type="checkbox" name="type" value="Land" />Działka</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="padding-right:15px; text-align:left; margin-top:5px">
+                                    <button type="submit" class="btn btn-default btn-xs">Wyszukaj</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 }
             </div>
         </div>
         <h4>Lista nieruchomości</h4>
         <div class="row">
             <div class="col-md-12" style="font-size: small">
-                @using (Html.BeginForm("ChangeAd", "Admin"))
-                {
-                    <table class="table" style="font-size: 11px">
-                        <thead>
+                <table class="table" style="font-size: 11px">
+                    <thead>
+                        <tr>
+                            <th>
+                                Data dodania
+                            </th>
+                            <th>
+                                Rodzaj
+                            </th>
+                            <th>
+                                Tytuł
+                            </th>
+                            <th>
+                                Miasto
+                            </th>
+                            <th>
+                                Osoba prowadząca
+                            </th>
+                            <th style="width:130px">
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ad in Model)
+                        {
                             <tr>
-                                <th style="width: 12%">
-                                    <button type="submit" class="btn btn-primary btn-xs" style="width: 100%" id="submit">Wykonaj</button>
-                                    @if (HttpContext.Current.Request.Params.Get("hidden") == "True")
+                                <td>@ad.CreatedAt.ToShortDateString()</td>
+                                <td>@EnumNameHelper.GetAdType(ad.AdType)</td>
+                                <td>@ad.Title</td>
+                                <td>@ad.City</td>
+                                <td>@String.Format("{0}", (ad.Worker != null) ? ad.Worker.FullName : "---")</td>
+                                <td style="text-align:right">
+                                    <a class="btn btn-success btn-xs" href="/Home/Show?key=@ad.Number" data-toggle="tooltip" data-placement="top" title="Podgląd">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="btn btn-default btn-xs" href="/Admin/EditAd?id=@ad.Id&adtype=@ad.AdType" data-toggle="tooltip" data-placement="top" title="Edytuj">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    </a>
+                                    @if (!ad.Visible)
                                     {
-                                        <label style="font-size: 11px; font-weight: bold; margin-bottom: 0"><input type="radio" checked name="action" value="true" /> Pokaż</label>
+                                        <a class="btn btn-primary btn-xs" href="/Admin/ChangeAd?delete=False&numbers=@ad.Number" data-toggle="tooltip" data-placement="top" title="Pokaż">
+                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                        </a>
                                     }
                                     else
                                     {
-                                        <label style="font-size: 11px; font-weight: bold; margin-bottom: 0"><input type="radio" checked name="action" value="true" /> Ukryj</label>
+                                        <a class="btn btn-warning btn-xs" href="/Admin/ChangeAd?delete=False&numbers=@ad.Number" data-toggle="tooltip" data-placement="top" title="Ukryj">
+                                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                        </a>
                                     }
-                                    <label style="font-size: 11px; font-weight: bold; margin-bottom: 0"><input type="radio" name="action" value="false" id="delete"/> Usuń</label>
-                                </th>
-                                <th>
-                                    Data dodania
-                                </th>
-                                <th>
-                                    Rodzaj
-                                </th>
-                                <th>
-                                    Tytuł
-                                </th>
-                                <th>
-                                    Miasto
-                                </th>
-                                <th>
-                                    Osoba prowadząca
-                                </th>
+                                    <a class="btn btn-danger btn-xs" href="/Admin/ChangeAd?delete=True&numbers=@ad.Number" data-toggle="tooltip" data-placement="top" title="Usuń" onclick="return confirm('Na pewno usunąć ogłoszenie?');">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var ad in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="numbers" value="@ad.Number" />
-                                    </td>
-                                    <td>@ad.CreatedAt.ToShortDateString()</td>
-                                    <td>@EnumNameHelper.GetAdType(ad.AdType)</td>
-                                    <td>@ad.Title</td>
-                                    <td>@ad.City</td>
-                                    <td>@String.Format("{0}", (ad.Worker != null) ? ad.Worker.FullName : "---")</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                }
+                        }
+                    </tbody>
+                </table>
                 <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
                 <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("AdList", new { page, changed = ViewBag.changed, hide = ViewBag.hide, hidden = ViewBag.hidden, search = ViewBag.Search, key = ViewBag.key, worker = ViewBag.worker, showHidden = ViewBag.showHidden, dateFrom = ViewBag.dateFrom, dateTo = ViewBag.dateTo, type = ViewBag.type }))</div>
             </div>
@@ -195,6 +207,9 @@
 <script language="javascript" src="/Scripts/jquery-1.10.2.js"></script>
 
 <script language="javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
     $("#dateFrom").on("change", function () {
         var from = new Date($("#dateFrom").val());
         var to = new Date($("#dateTo").val());
@@ -217,13 +232,13 @@
     var today = new Date();
     var year = today.getFullYear();
     var month = today.getUTCMonth() + 1;
+    if ((month + "").length == 1) {
+        month = "0" + month;
+    }
     var day = today.getUTCDate();
+    if ((day + "").length == 1) {
+        day = "0" + day;
+    }
+
     $("#dateTo").val(year + "-" + month + "-" + day);
-
-    $("#submit").on("click",function() {
-        if ($("#delete")[0].checked) {
-            return confirm("Na pewno chcesz usunąć te ogłoszenia?");
-        };
-    });
 </script>
-

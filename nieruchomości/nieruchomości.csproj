@@ -1162,7 +1162,8 @@
     <Content Include="Views\Home\CalcView.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
     <Content Include="Views\Admin\View.cshtml" />
-    <Content Include="Views\Admin\AddSetting.cshtml" />
+    <Content Include="Views\Admin\AddClat.cshtml" />
+    <Content Include="Views\Admin\AddClatTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

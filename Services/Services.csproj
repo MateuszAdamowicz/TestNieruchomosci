@@ -109,11 +109,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminSettingsService\IAdminSettingsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AdminSettingsService\Implementation\AdminSettingsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AdvertServices\AddAdvertService\Implementation\AddAdvertService.cs" />
     <Compile Include="AdvertServices\AdminFilterAdvertService\Implementation\AdminFilterAdvertService.cs" />
     <Compile Include="AdminLoginService\Implementation\AdminLoginService.cs" />
     <Compile Include="AdvertServices\ChangeAdvertVisability\Implementation\ChangeAdvertVisibility.cs" />
     <Compile Include="AdvertServices\ChangeAdvertVisability\IChangeAdvertVisibility.cs" />
+    <Compile Include="AdvertServices\GetAdvertService\Implementation\GetAdvertService.cs" />
+    <Compile Include="AdvertServices\GetAdvertService\IGetAdvertService.cs" />
     <Compile Include="AppSettingsService\Implementation\AppSettingsService.cs" />
     <Compile Include="CalcService\ICalcService.cs" />
     <Compile Include="CalcService\Implementation\CalcService.cs" />
