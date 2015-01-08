@@ -20,15 +20,27 @@
                                             <div class="col-md-4">@msg.FullName</div>
                                             <div class="col-md-4">@msg.Email</div>
                                             <div class="col-md-2" style="text-align: right">
-                                                <a class="btn btn-success btn-xs" href="/Admin/Message?id=@msg.Id" data-toggle="tooltip" data-placement="top" title="Podgląd">
-                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                                </a>
-                                                <a class="btn btn-danger btn-xs" href="/Admin/DeleteMessage?id=@msg.Id" onclick="return confirm('Na pewno usunąć łwiadomość?');" data-toggle="tooltip" data-placement="top" title="Usuń">
-                                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                                </a>
-                                                <a class="btn btn-primary btn-xs" href="mailto:@(msg.Email)">
-                                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Odpowiedz"></span>
-                                                </a>
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <a class="btn btn-success btn-xs" href="/Admin/Message?id=@msg.Id" data-toggle="tooltip" data-placement="top" title="Podgląd">
+                                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                        </a>
+                                                        <a class="btn btn-danger btn-xs" href="/Admin/DeleteMessage?id=@msg.Id" onclick="return confirm('Na pewno usunąć wiadomość?');" data-toggle="tooltip" data-placement="top" title="Usuń">
+                                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                        </a>
+                                                        <a class="btn btn-primary btn-xs" href="mailto:@(msg.Email)">
+                                                            <span class="glyphicon glyphicon-envelope" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Odpowiedz"></span>
+                                                        </a>
+                                                    </div>
+                                                    @if (!String.IsNullOrEmpty(msg.OrderLink))
+                                                    {
+                                                        <div class="col-md-3" style="padding-left:0px">
+                                                            <a class="btn btn-warning btn-xs disabled" data-toggle="tooltip" data-placement="top" title="Wiadomość dotyczy nieruchomości" style="opacity:1; pointer-events:auto; cursor:default">
+                                                                <span class="glyphicon glyphicon-home"></span>
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
