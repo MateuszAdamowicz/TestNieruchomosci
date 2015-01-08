@@ -12,7 +12,7 @@ namespace Models.EntityModels
     {
         [Range(0, Double.MaxValue, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleRequired")]
         public double From { get; set; }
-        
+
         [Range(0, Double.MaxValue, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleRequired")]
         public double To { get; set; }
        
