@@ -48,6 +48,7 @@ searcher.factory('myHttpInterceptor', function ($q) {
     };
 });
 
+
 searcher.filter('unique', function () {
     return function (input, key) {
         if (typeof input !== "undefined") {
@@ -63,6 +64,36 @@ searcher.filter('unique', function () {
             }
             for (var i = 0; i < uniqueList.length; i++) {
                 uniqueList[i].counter = uniqueList[i][key] + " (" + unique[uniqueList[i][key]] + ")";
+            }
+            return uniqueList;
+        }
+    };
+});
+
+searcher.filter('uniqueRooms', function () {
+    return function (input, key) {
+        if (typeof input !== "undefined") {
+            var unique = {};
+            var uniqueList = [];
+            for (var i = 0; i < input.length; i++) {
+                if (typeof unique[input[i][key]] == "undefined") {
+                    unique[input[i][key]] = 1;
+                    uniqueList.push(input[i]);
+                } else {
+                    unique[input[i][key]] += 1;
+                };
+            }
+            for (var i = 0; i < uniqueList.length; i++) {
+                if (uniqueList[i][key] === "1") {
+                    uniqueList[i].counter = uniqueList[i][key] + " pokój (" + unique[uniqueList[i][key]] + ")";
+                }
+                else if (uniqueList[i][key] === "2" || uniqueList[i][key] === "3" || uniqueList[i][key] === "4") {
+                    uniqueList[i].counter = uniqueList[i][key] + " pokoje (" + unique[uniqueList[i][key]] + ")";
+                }
+                else{
+                    uniqueList[i].counter = uniqueList[i][key] + " pokoi (" + unique[uniqueList[i][key]] + ")";
+                }
+
             }
             return uniqueList;
         }

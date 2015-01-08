@@ -7,11 +7,11 @@
         @Html.Partial("AdminMenu")
         <h4>Dodaj nieruchomość</h4>
         @Html.EnumDropDownListFor(model => model.AdType, new {@class = "form-control", @style = "max-width:none; border:1px solid green", @id = "AdType"})
-        <div id="flat-form">
-            @Html.Partial("_AddFlat", Model.Flat)
-        </div>
         <div id="home-form" hidden>
             @Html.Partial("_AddHouse", Model.House)
+        </div>
+        <div id="flat-form">
+            @Html.Partial("_AddFlat", Model.Flat)
         </div>
         <div id="land-form" hidden>
             @Html.Partial("_AddLand", Model.Land)

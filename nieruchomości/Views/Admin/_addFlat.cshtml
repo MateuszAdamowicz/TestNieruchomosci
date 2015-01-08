@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-md-6">
                         <small>Liczba pokoi:</small>
-                        @Html.EditorFor(model => model.Rooms, new { htmlAttributes = new { @type="number", @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Rooms") && ViewData.ModelState["Rooms"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                        @Html.EditorFor(model => model.Rooms, new { htmlAttributes = new { @type="number", @class = "form-control Rooms", @style = ((ViewData.ModelState.ContainsKey("Rooms") && ViewData.ModelState["Rooms"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
                     </div>
                 </div>
                 <div class="row">
@@ -151,7 +151,7 @@
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-    $("#Files").on("change", function () {
+    $("#Files").on("change", function() {
         var errors = [];
         var valid = true;
         var totalSize = 0;
@@ -162,25 +162,32 @@
             }
             totalSize += $(this)[0].files[i].size / 1024 / 1024;
         }
-        
+
         if (valid == true) {
             if (totalSize > 20) {
                 valid = false;
                 errors.push("Łączna wielkość plików jest za duża! (max 20MB)");
             }
         }
-        
+
         if (valid == false) {
             $(this)[0].value = "";
             alert(errors.join("\n"));
         }
-    })
+    });
 
 
-    $("#Rooms").on("change", function() {
+    $(".Rooms").on("change", function() {
         if (+$(this).val() < 0) {
             $(this).val("0");
             alert("Liczba pokoi nie może być ujemna!");
+        }
+    });
+
+    $("#Storey").on("change", function () {
+        if (+$(this).val() < 0) {
+            $(this).val("0");
+            alert("Liczba kondygnacji nie może być ujemna!");
         }
     });
 </script>

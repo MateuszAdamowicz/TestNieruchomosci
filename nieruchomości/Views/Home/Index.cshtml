@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-4">
                     <small>Ilość pokoi:</small>
-                    <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms as room.counter for room in flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|pricefilter:myflatPrice|filter:{Rooms:'!!'}|unique:'Rooms'">
+                    <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms as room.counter for room in flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|pricefilter:myflatPrice|filter:{Rooms:'!!'}|uniqueRooms:'Rooms'">
                         <option value="">Każda ilość</option>
                     </select>
                 </div>

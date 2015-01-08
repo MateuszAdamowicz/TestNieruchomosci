@@ -9,9 +9,11 @@ namespace Models.ViewModels
     {
         public string Location { get; set; }
         public string Area { get; set; }
-        public string Storey { get; set; }
+        [Range(0, 100, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "StoreyRange")]
+        public int Storey { get; set; }
         public string TechnicalCondition { get; set; }
-        public string Rooms { get; set; }
+        [Range(0, 100, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "RoomsRange")]
+        public int Rooms { get; set; }
         public string Heating { get; set; }
         public string Rent { get; set; }
         public string Ownership { get; set; }

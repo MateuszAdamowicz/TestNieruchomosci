@@ -14,11 +14,11 @@ namespace Context
 
         private readonly List<string> _adAreaList;
 
-        private readonly List<string> _adStoreyList;
+        private readonly List<int> _adStoreyList;
 
         private readonly List<string> _adTechnicalList;
 
-        private readonly List<string> _adRoomsList;
+        private readonly List<int> _adRoomsList;
 
         private readonly List<string> _adHeatingList;
 
@@ -63,9 +63,9 @@ namespace Context
                 "11m2"
             };
 
-            _adStoreyList = new List<string>()
+            _adStoreyList = new List<int>()
             {
-                "I piętro", "II piętro", "III piętro", "IV piętro", "V piętro", "VI piętro", "VII piętro"
+                1, 2, 3, 4, 5, 6, 7
             };
 
             _adTechnicalList = new List<string>()
@@ -77,16 +77,16 @@ namespace Context
                 "Do naprawy hydraulika"
             };
 
-            _adRoomsList = new List<string>()
+            _adRoomsList = new List<int>()
             {
-                "1 pokój",
-                "2 pokoje",
-                "3 pokoje",
-                "4 pokoje",
-                "5 pokoi",
-                "6 pokoi",
-                "7 pokoi",
-                "8 pokoi"
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
             };
 
             _adHeatingList = new List<string>()
@@ -151,6 +151,11 @@ namespace Context
             return list[rnd.Next(list.Count)];
         }
 
+        public int GetRandomInt(List<int> list)
+        {
+            return list[rnd.Next(list.Count)];
+        }
+
         public Worker GetWorker()
         {
             var worker = new Worker()
@@ -180,8 +185,8 @@ namespace Context
                 Location = GetRandom(_adLocationList),
                 Ownership = GetRandom(_adOwnershipList),
                 PricePerMeter = GetRandom(_adPricePerList),
-                Rooms = GetRandom(_adRoomsList),
-                Storey = GetRandom(_adStoreyList),
+                Rooms = GetRandomInt(_adRoomsList),
+                Storey = GetRandomInt(_adStoreyList),
                 Rent =  GetRandom(_adRentList),
                 ToLet = (rnd.Next(10)%2==0),
                 Visible = true,
@@ -206,7 +211,7 @@ namespace Context
                 Location = GetRandom(_adLocationList),
                 Ownership = GetRandom(_adOwnershipList),
                 PricePerMeter = GetRandom(_adPricePerList),
-                Rooms = GetRandom(_adRoomsList),
+                Rooms = GetRandomInt(_adRoomsList),
                 LandArea = GetRandom(_adAreaList),
                 Rent = GetRandom(_adRentList),
                 ToLet = (rnd.Next(10)%2 == 0),

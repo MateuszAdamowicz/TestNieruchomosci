@@ -11,7 +11,8 @@ namespace Models.ViewModels
         public string LandArea { get; set; }
         public string UsableArea { get; set; }
         public string TechnicalCondition { get; set; }
-        public string Rooms { get; set; }
+        [Range(0, 100, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "RoomsRange")]
+        public int Rooms { get; set; }
         public string Heating { get; set; }
         public string Rent { get; set; }
         public string Ownership { get; set; }

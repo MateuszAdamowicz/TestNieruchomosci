@@ -6,9 +6,9 @@ namespace Models.EntityModels.Interfaces
     {
         string Location { get; set; }
         string Area { get; set; }
-        string Storey { get; set; }
+        int Storey { get; set; }
         string TechnicalCondition { get; set; }
-        string Rooms { get; set; }
+        int Rooms { get; set; }
         string Heating { get; set; }
         string Rent { get; set; }
         string Ownership { get; set; }

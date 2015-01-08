@@ -159,6 +159,12 @@
   <data name="PriceRequired" xml:space="preserve">
     <value>Cena jest wymagana.</value>
   </data>
+  <data name="RoomsRange" xml:space="preserve">
+    <value>Ilość pokoi musi być pomiędzy {1}, a {2}.</value>
+  </data>
+  <data name="StoreyRange" xml:space="preserve">
+    <value>Ilość kondygnacji musi być pomiędzy {1}, a {2}.</value>
+  </data>
   <data name="TitleMaxLength" xml:space="preserve">
     <value>Maksymalna długość tytułu to 40 znaków.</value>
   </data>

@@ -187,6 +187,24 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ilość pokoi musi być pomiędzy {1}, a {2}..
+        /// </summary>
+        internal static string RoomsRange {
+            get {
+                return ResourceManager.GetString("RoomsRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ilość kondygnacji musi być pomiędzy {1}, a {2}..
+        /// </summary>
+        internal static string StoreyRange {
+            get {
+                return ResourceManager.GetString("StoreyRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maksymalna długość tytułu to 40 znaków..
         /// </summary>
         internal static string TitleMaxLength {
