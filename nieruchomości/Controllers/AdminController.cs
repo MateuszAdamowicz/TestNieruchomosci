@@ -442,7 +442,7 @@ namespace nieruchomości.Controllers
             int pageSize = 20;
             int pageNumber = (page ?? 1);
 
-            var msgList = _genericRepository.GetSet<Mail>().ToList();
+            var msgList = _genericRepository.GetSet<Mail>().OrderByDescending(x => x.CreatedAt).ToList();
             return View(msgList.ToPagedList(pageNumber, pageSize));
         }
 

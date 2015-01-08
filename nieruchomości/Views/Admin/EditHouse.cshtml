@@ -125,11 +125,19 @@
                         <div class="col-md-12">
                             <small>Zdjęcia:</small>
                             <div class="row">
+                                @{
+                                    int counter = 0;
+                                }
                                 @foreach (var photo in Model.Pictures)
                                 {
+                                    counter++;
                                     <div class="col-md-4">
                                         <img src="/Content/Photos/@photo.Link" style="width: 100%; margin-bottom: 10px" class="existsPhotos" data-id="@photo.Id"/>
                                     </div>
+                                    if (counter%3 == 0)
+                                    {
+                                        <div class="row"></div>
+                                    }
                                 }
                             </div>
                             <input type="file" multiple class="form-control" id="Files" name="Files" style="max-width: none"/>
