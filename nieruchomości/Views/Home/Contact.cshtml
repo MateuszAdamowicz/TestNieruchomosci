@@ -9,20 +9,20 @@
 
 
         <div class="col-md-12">
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="row" style="padding: 10px">
-        <div class="panel panel-danger">
-            <button type="button" class="close" data-dismiss="alert" style="margin-right:5px; margin-top: 5px">×</button>
-            <div class="panel-heading">
-                Błąd
-            </div>
-            <div class="panel-body">
-                @Html.ValidationSummary()
-            </div>
-        </div>
-    </div>
-}
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="row" style="padding: 10px" id="danger-panel">
+                    <div class="panel panel-danger">
+                        <button type="button" class="close" data-dismiss="alert" style="margin-right:5px; margin-top: 5px">×</button>
+                        <div class="panel-heading">
+                            Błąd
+                        </div>
+                        <div class="panel-body">
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
+                </div>
+            }
 
             <div class="row">
                 <div class="col-md-6" style="padding-left:0px">
@@ -91,3 +91,9 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $(".close").on("click", function() {
+        $("#danger-panel")[0].remove();
+    });
+</script>

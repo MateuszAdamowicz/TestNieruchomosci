@@ -2,9 +2,6 @@
 @using Microsoft.Ajax.Utilities
 @using PagedList.Mvc
 @model PagedList.PagedList<Models.EntityModels.Mail>
-@{
-    int counter = 0;
-}
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
@@ -12,10 +9,9 @@
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             @foreach (var msg in Model)
             {
-                counter += 1;
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading@(msg.Id)">
-                        <div class="panel-title" style="font-size:small">
+                        <div class="panel-title" style="font-size:14px">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse@(msg.Id)" aria-expanded="true" aria-controls="collapse@(msg.Id)">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -23,15 +19,15 @@
                                             <div class="col-md-2">@msg.CreatedAt.ToShortDateString()</div>
                                             <div class="col-md-4">@msg.FullName</div>
                                             <div class="col-md-4">@msg.Email</div>
-                                            <div class="col-md-2">
-                                                <a class="btn btn-success btn-xs" href="/Admin/Message?id=@msg.Id">
+                                            <div class="col-md-2" style="text-align: right">
+                                                <a class="btn btn-success btn-xs" href="/Admin/Message?id=@msg.Id" data-toggle="tooltip" data-placement="top" title="Podgląd">
                                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                                 </a>
-                                                <a class="btn btn-danger btn-xs" href="/Admin/DeleteMessage?id=@msg.Id" onclick="return confirm('Na pewno usunąć wiadomość?');">
+                                                <a class="btn btn-danger btn-xs" href="/Admin/DeleteMessage?id=@msg.Id" onclick="return confirm('Na pewno usunąć łwiadomość?');" data-toggle="tooltip" data-placement="top" title="Usuń">
                                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                 </a>
                                                 <a class="btn btn-primary btn-xs" href="mailto:@(msg.Email)">
-                                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Odpowiedz"></span>
                                                 </a>
                                             </div>
                                         </div>
@@ -101,20 +97,22 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row" style="text-align:right">
-                                            <a class="btn btn-primary btn" href="mailto:@(msg.Email)">
-                                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                                Odpowiedz
-                                            </a>
-                                        </div>
+
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             }
+            <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
+            <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("Offers", new { page }))</div>
         </div>
     </div>
 </div>
+<script language="javascript" src="/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>

@@ -414,7 +414,7 @@ namespace nieruchomości.Controllers
 
         public ActionResult Offers(int? page)
         {
-            var offers = _genericRepository.GetSet<Offer>().ToList();
+            var offers = _genericRepository.GetSet<Offer>().OrderByDescending(x => x.CreatedAt).ToList();
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             return View(offers.ToPagedList(pageNumber, pageSize));

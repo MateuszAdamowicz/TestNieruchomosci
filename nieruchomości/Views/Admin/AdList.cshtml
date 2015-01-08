@@ -156,7 +156,7 @@
                             <th>
                                 Osoba prowadząca
                             </th>
-                            <th>
+                            <th style="width:130px">
 
                             </th>
                         </tr>
@@ -170,27 +170,26 @@
                                 <td>@ad.Title</td>
                                 <td>@ad.City</td>
                                 <td>@String.Format("{0}", (ad.Worker != null) ? ad.Worker.FullName : "---")</td>
-                                <td>
-                                    @*@Html.ActionLink("Edytuj", "EditAd", new { id = ad.Id, adtype = ad.AdType }, new { @class = "btn btn-default btn-xs"})*@
-                                    <a class="btn btn-success btn-xs" href="/Home/Show?key=@ad.Number">
+                                <td style="text-align:right">
+                                    <a class="btn btn-success btn-xs" href="/Home/Show?key=@ad.Number" data-toggle="tooltip" data-placement="top" title="Podgląd">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </a>
-                                    <a class="btn btn-default btn-xs" href="/Admin/EditAd?id=@ad.Id&adtype=@ad.AdType">
+                                    <a class="btn btn-default btn-xs" href="/Admin/EditAd?id=@ad.Id&adtype=@ad.AdType" data-toggle="tooltip" data-placement="top" title="Edytuj">
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
                                     @if (!ad.Visible)
                                     {
-                                        <a class="btn btn-primary btn-xs" href="/Admin/ChangeAd?delete=False&numbers=@ad.Number">
+                                        <a class="btn btn-primary btn-xs" href="/Admin/ChangeAd?delete=False&numbers=@ad.Number" data-toggle="tooltip" data-placement="top" title="Pokaż">
                                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                         </a>
                                     }
                                     else
                                     {
-                                        <a class="btn btn-warning btn-xs" href="/Admin/ChangeAd?delete=False&numbers=@ad.Number">
+                                        <a class="btn btn-warning btn-xs" href="/Admin/ChangeAd?delete=False&numbers=@ad.Number" data-toggle="tooltip" data-placement="top" title="Ukryj">
                                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                                         </a>
                                     }
-                                    <a class="btn btn-danger btn-xs" href="/Admin/ChangeAd??delete=True&numbers=@ad.Number">
+                                    <a class="btn btn-danger btn-xs" href="/Admin/ChangeAd?delete=True&numbers=@ad.Number" data-toggle="tooltip" data-placement="top" title="Usuń" onclick="return confirm('Na pewno usunąć ogłoszenie?');">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </a>
                                 </td>
@@ -208,6 +207,9 @@
 <script language="javascript" src="/Scripts/jquery-1.10.2.js"></script>
 
 <script language="javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
     $("#dateFrom").on("change", function () {
         var from = new Date($("#dateFrom").val());
         var to = new Date($("#dateTo").val());
