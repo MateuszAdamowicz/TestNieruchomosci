@@ -13,6 +13,7 @@ namespace Models
         [EmailAddress(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailNotValid", ErrorMessage = null)]
         public string Email { get; set; }
 
+        [RegularExpression("[0-9]{6,18}", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PhoneNotValid")]
         public string PhoneNumber { get; set; }
         
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "BodyRequired")]
