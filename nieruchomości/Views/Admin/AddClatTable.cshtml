@@ -5,46 +5,45 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Dodaj przedział taksy notarialnej</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.Label("Od", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("From") && ViewData.ModelState["From"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                @*@Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Do", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("To") && ViewData.ModelState["To"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                @*@Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Procent", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Percent, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Percent, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Percent, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("Percent") && ViewData.ModelState["Percent"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                @*@Html.ValidationMessageFor(model => model.Percent, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Maksymalnie", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Max, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Max, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Max, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("Max") && ViewData.ModelState["Max"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                @*@Html.ValidationMessageFor(model => model.Max, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Kwota", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" + ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                @*@Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })*@
             </div>
         </div>
 

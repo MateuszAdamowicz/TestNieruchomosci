@@ -1,4 +1,5 @@
-﻿@using Models.EntityModels
+﻿@using System.Web.UI.WebControls
+@using Models.EntityModels
 
 @model Models.ViewModels.AddClatViewModel
 
@@ -6,30 +7,20 @@
     ViewBag.Title = "AddClat";
 }
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="row" style="padding: 10px">
-        <div class="panel panel-danger">
-            <button type="button" class="close" data-dismiss="alert" style="margin-right:5px; margin-top: 5px">×</button>
-            <div class="panel-heading">
-                Błąd
-            </div>
-            <div class="panel-body">
-                @Html.ValidationSummary()
-            </div>
-        </div>
-    </div>
-}
 
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
 
-        @if (@Model.CompartmentsList.Count == 0)
+        @if (@Model.CompartmentsList.Count < 1)
         {
-            @Html.Label("Nie ma mozliwosci wprowadzenia danych, postepuj wg instrukcji.")
-
+            <br/>
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Błąd:</span>
+               Brak pustych przedziałów do wprowadzenia, postępuj wg instrukcji!
+            </div>
         }
         else
         {
@@ -70,14 +61,37 @@
                     }
                </tbody>
             </table>
+        
+        if (!ViewData.ModelState.IsValid)
+        {
+            <div class="row" style="padding: 10px">
+                <div class="panel panel-danger">
+                    <button type="button" class="close" data-dismiss="alert" style="margin-right:5px; margin-top: 5px">×</button>
+                    <div class="panel-heading">
+                        Błąd
+                    </div>
+                    <div class="panel-body">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <h4>Dodaj przedział taksy notarialnej</h4>
+        { Html.RenderPartial("AddClatTable", Model.Clat); }
         }
 
-        @{ Html.RenderPartial("AddClatTable", Model.Clat); }
-
-        <div>
-            @Html.ActionLink("Powrót", "Settings")
-        </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
 
+        <div class="col-md-6 col-md-push-6">
+            <div class="col-md-12" style="text-align: right">
+                @Html.ActionLink("Wróć do listy", "Settings")
+            </div>
+        </div>
 
+    </div>
+</div>
+            

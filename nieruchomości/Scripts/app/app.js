@@ -197,30 +197,30 @@ searcher.controller('SearcherController', function ($scope, $resource, $location
 
     $scope.prices = [
 { name: 'Poniżej 100 000 zł', min: 0, max: 100000 },
-{ name: 'Od 100 000zł do 150 000zł', min: 100000, max: 150000 },
-{ name: 'Od 150 000zł do 200 000zł', min: 150000, max: 200000 },
-{ name: 'Od 200 000zł do 300 000zł', min: 200000, max: 300000 },
-{ name: 'Od 300 000zł do 400 000zł', min: 300000, max: 400000 },
-{ name: 'Od 400 000zł do 500 000zł', min: 400000, max: 500000 },
-{ name: 'Powyżej 500 000zł', min: 500000, max: null }
+{ name: 'Od 100 000 zł do 150 000 zł', min: 100000, max: 150000 },
+{ name: 'Od 150 000 zł do 200 000 zł', min: 150000, max: 200000 },
+{ name: 'Od 200 000 zł do 300 000 zł', min: 200000, max: 300000 },
+{ name: 'Od 300 000 zł do 400 000 zł', min: 300000, max: 400000 },
+{ name: 'Od 400 000 zł do 500 000 zł', min: 400000, max: 500000 },
+{ name: 'Powyżej 500 000 zł', min: 500000, max: null }
     ];
 
     $scope.usableareas = [
-{ name: 'Poniżej 100m2', min: 0, max: 100 },
-{ name: 'Od 100m2 do 2000m2', min: 100, max: 150 },
-{ name: 'Od 2000m2 do 5000m2', min: 150, max: 200 },
-{ name: 'Od 5000m2 do 10000m2', min: 200, max: 250 },
-{ name: 'Od 10000m2 do 20000m2', min: 250, max: 300 },
-{ name: 'Powyżej 300m2', min: 300, max: null }
+{ name: 'Poniżej 100 m2', min: 0, max: 100 },
+{ name: 'Od 100 m2 do 2000 m2', min: 100, max: 150 },
+{ name: 'Od 2000 m2 do 5000 m2', min: 150, max: 200 },
+{ name: 'Od 5000 m2 do 10000 m2', min: 200, max: 250 },
+{ name: 'Od 10000 m2 do 20000 m2', min: 250, max: 300 },
+{ name: 'Powyżej 300 m2', min: 300, max: null }
     ];
 
     $scope.areas = [
-{ name: 'Poniżej 1000m2', min: 0, max: 1000 },
-{ name: 'Od 1000m2 do 2000m2', min: 1000, max: 2000 },
-{ name: 'Od 2000m2 do 5000m2', min: 2000, max: 5000 },
-{ name: 'Od 5000m2 do 10000m2', min: 5000, max: 10000 },
-{ name: 'Od 10000m2 do 20000m2', min: 10000, max: 20000 },
-{ name: 'Powyżej 20000m2', min: 20000, max: null }
+{ name: 'Poniżej 1000 m2', min: 0, max: 1000 },
+{ name: 'Od 1000 m2 do 2000 m2', min: 1000, max: 2000 },
+{ name: 'Od 2000 m2 do 5000 m2', min: 2000, max: 5000 },
+{ name: 'Od 5000 m2 do 10000 m2', min: 5000, max: 10000 },
+{ name: 'Od 10000 m2 do 20000 m2', min: 10000, max: 20000 },
+{ name: 'Powyżej 20000 m2', min: 20000, max: null }
     ];
     //$scope.myProperty = null;
     $scope.$watch('$location.search().property', function (property) {
