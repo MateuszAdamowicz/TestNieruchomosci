@@ -120,11 +120,17 @@
   <data name="BodyRequired" xml:space="preserve">
     <value>Treść wiadomości jest wymagana.</value>
   </data>
+  <data name="CityMaxLength" xml:space="preserve">
+    <value>Maksymalna długość dla pola Miasto to 40 znaków.</value>
+  </data>
   <data name="CityRequired" xml:space="preserve">
     <value>Miasto jest wymagane.</value>
   </data>
   <data name="DescriptionRequired" xml:space="preserve">
     <value>Opis jest wymagany.</value>
+  </data>
+  <data name="EmailMaxLength" xml:space="preserve">
+    <value>Maksymalna długość dla pola Email to 40 znaków.</value>
   </data>
   <data name="EmailNotValid" xml:space="preserve">
     <value>Adres email nie jest prawidłowy.</value>
@@ -132,11 +138,20 @@
   <data name="EmailRequired" xml:space="preserve">
     <value>Adres email jest wymagany.</value>
   </data>
+  <data name="FirstNameMaxLength" xml:space="preserve">
+    <value>Maksymalna długość dla pola Imię to 20 znaków.</value>
+  </data>
   <data name="FirstNameRequired" xml:space="preserve">
     <value>Imię jest wymagane.</value>
   </data>
+  <data name="FullNameMaxLength" xml:space="preserve">
+    <value>Maksymalna długość dla pola Imię i Nazwisko to 40 znaków.</value>
+  </data>
   <data name="FullNameRequired" xml:space="preserve">
     <value>Imię i nazwisko są wymagane.</value>
+  </data>
+  <data name="LastNameMaxLength" xml:space="preserve">
+    <value>Maksymalna długość dla pola Nazwisko to 20 znaków.</value>
   </data>
   <data name="LastNameRequired" xml:space="preserve">
     <value>Nazwisko jest wymagane.</value>
