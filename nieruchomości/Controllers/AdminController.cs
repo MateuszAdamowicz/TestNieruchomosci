@@ -497,8 +497,21 @@ namespace nieruchomości.Controllers
         [HttpPost]
         public ActionResult AddClat(Clat clat)
         {
-            _adminSettingsService.AddClat(clat);
-            return RedirectToAction("Settings");
+
+            if (ModelState.IsValid)
+            {
+                _adminSettingsService.AddClat(clat);
+                return RedirectToAction("Settings");
+            }
+            else
+            {
+                var model = _adminSettingsService.AddClat();
+                model.Clat = clat;
+
+                return View("AddClat", model);
+            }
+
+
         }
 
         [HttpPost]

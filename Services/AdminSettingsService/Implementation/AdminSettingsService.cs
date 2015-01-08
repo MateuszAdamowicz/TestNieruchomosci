@@ -70,8 +70,10 @@ namespace Services.AdminSettingsService.Implementation
             Clat model = new Clat { To = clat.To, Max = clat.Max, Price = clat.Price, Percent = clat.Percent, From = clat.From };
             _applicationContext.Clats.Add(model);
             _applicationContext.SaveChanges();
+       
         }
-     }
+
+ }
 
 
 }
