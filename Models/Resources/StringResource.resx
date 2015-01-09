@@ -171,4 +171,7 @@
   <data name="TitleRequired" xml:space="preserve">
     <value>Tytuł jest wymagany.</value>
   </data>
+  <data name="Clat_To_Wartosc_powinna_byc_wieksza_anizeli_OD" xml:space="preserve">
+    <value>Wartosc powinna byc wieksza anizeli OD</value>
+  </data>
 </root>

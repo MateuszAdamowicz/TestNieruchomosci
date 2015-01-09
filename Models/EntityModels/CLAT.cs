@@ -18,7 +18,7 @@ namespace Models.EntityModels
        
         [Range(0, Double.MaxValue, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleRequired")]
         public double Percent { get; set; }
-        
+
         [Range(0, Double.MaxValue, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleRequired")]
         public double Max { get; set; }
         
