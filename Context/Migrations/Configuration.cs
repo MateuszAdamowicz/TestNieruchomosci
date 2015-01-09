@@ -150,6 +150,48 @@ namespace Context.Migrations
             context.Clats.AddOrUpdate(x => x.To, ClatProp7);
 
             context.SaveChanges();
+
+
+            //var seedService = new SeedService();
+
+            //var workers = new List<Worker>();
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    workers.Add(seedService.GetWorker());
+            //}
+
+            //var flats = new List<Flat>();
+            //for (int i = 0; i < 40; i++)
+            //{
+            //    var flat = seedService.GetFlat();
+            //    flat.Worker = workers[i%20];
+            //    flats.Add(flat);
+            //}
+
+            //var houses = new List<House>();
+            //for (int i = 0; i < 40; i++)
+            //{
+            //    var house = seedService.GetHouse();
+            //    house.Worker = workers[i%20];
+            //    houses.Add(house);
+            //}
+
+            //var lands = new List<Land>();
+            //for (int i = 0; i < 40; i++)
+            //{
+            //    var land = seedService.GetLand();
+            //    land.Worker = workers[i%20];
+            //    lands.Add(land);
+            //}
+
+            //for (int i = 0; i < 40; i++)
+            //{
+            //    context.Lands.Add(lands[i]);
+            //    context.Flats.Add(flats[i]);
+            //    context.Houses.Add(houses[i]);
+            //}
+
+            //context.SaveChanges();
         }
     }
 }
