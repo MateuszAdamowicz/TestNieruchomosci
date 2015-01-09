@@ -519,7 +519,6 @@ namespace nieruchomości.Controllers
         [HttpPost]
         public ActionResult AddClat(Clat clat)
         {
-
             if (ModelState.IsValid)
             {
                 _adminSettingsService.AddClat(clat);
@@ -532,8 +531,6 @@ namespace nieruchomości.Controllers
 
                 return View("AddClat", model);
             }
-
-
         }
 
         [HttpPost]

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Models.EntityModels;
 
 namespace Models.ViewModels
 {
-    public class ShowFlat
+    public class ShowFlat : ShowAd
     {
         public ShowFlat()
         {
@@ -30,7 +29,6 @@ namespace Models.ViewModels
         public bool Visible { get; set; }
         public bool Deleted { get; set; }
         public virtual List<Photo> Pictures { get; set; }
-        public DateTime CreatedAt { get; set; }
         public ContactEmail ContactEmail { get; set; }
         public string Number { get; set; }
         public int Counter { get; set; }
