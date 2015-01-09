@@ -70,6 +70,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość dla pola Miasto to 40 znaków..
+        /// </summary>
+        internal static string CityMaxLength {
+            get {
+                return ResourceManager.GetString("CityMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Miasto jest wymagane..
         /// </summary>
         internal static string CityRequired {
@@ -97,6 +106,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość dla pola Email to 40 znaków..
+        /// </summary>
+        internal static string EmailMaxLength {
+            get {
+                return ResourceManager.GetString("EmailMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adres email nie jest prawidłowy..
         /// </summary>
         internal static string EmailNotValid {
@@ -115,6 +133,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość dla pola Imię to 20 znaków..
+        /// </summary>
+        internal static string FirstNameMaxLength {
+            get {
+                return ResourceManager.GetString("FirstNameMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Imię jest wymagane..
         /// </summary>
         internal static string FirstNameRequired {
@@ -124,11 +151,29 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość dla pola Imię i Nazwisko to 40 znaków..
+        /// </summary>
+        internal static string FullNameMaxLength {
+            get {
+                return ResourceManager.GetString("FullNameMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Imię i nazwisko są wymagane..
         /// </summary>
         internal static string FullNameRequired {
             get {
                 return ResourceManager.GetString("FullNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość dla pola Nazwisko to 20 znaków..
+        /// </summary>
+        internal static string LastNameMaxLength {
+            get {
+                return ResourceManager.GetString("LastNameMaxLength", resourceCulture);
             }
         }
         

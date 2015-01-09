@@ -27,6 +27,7 @@ namespace Models.ViewModels
         [DataType(DataType.MultilineText)]
         public string Details { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "CityRequired")]
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "CityMaxLength")]
         public string City { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceRequired")]
         [RegularExpression(@"([0-9]+\.[0-9]+)|([0-9]+)|(Do negocjacji)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceAdvertNotValid")]

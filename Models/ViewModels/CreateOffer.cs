@@ -6,15 +6,18 @@ namespace Models.ViewModels
     public class CreateOffer
     {
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "FullNameRequired")]
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "FullNameMaxLength")]
         public string FullName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailRequired")]
         [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailNotValid")]
         [EmailAddress(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailNotValid", ErrorMessage = null)]
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "EmailMaxLength")]
         public string Email { get; set; }
 
         [RegularExpression("[0-9]{0,7}", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceNotValid")]
         public string Price { get; set; }
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "CityMaxLength")]
         public string City { get; set; }
         public string Location { get; set; }
         public string Description { get; set; }

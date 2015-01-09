@@ -8,8 +8,10 @@ namespace Models.ViewModels
     public class AdminWorker
     {
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "FirstNameRequired")]
+        [MaxLength(20, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "FirstNameMaxLength")]
         public string FirstName { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "LastNameRequired")]
+        [MaxLength(20, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "LastNameMaxLength")]
         public string LastName { get; set; }
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PhoneFirstRequired")]
         [RegularExpression("[0-9]{6,18}", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PhoneNotValid")]
