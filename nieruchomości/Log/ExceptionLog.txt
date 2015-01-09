@@ -5608,6 +5608,7 @@ Parameter name: parameters
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
 
+<<<<<<< HEAD
 2015-01-09 08:32:25,533 [12] ERROR - System.Web.HttpCompileException (0x80004005): c:\Users\madamowicz\Documents\Visual Studio 2013\Projects\temp\nieruchomoœci\nieruchomoœci\Views\Admin\AdList.cshtml(103): error CS1061: 'System.Nullable<System.DateTime>' does not contain a definition for 'Date' and no extension method 'Date' accepting a first argument of type 'System.Nullable<System.DateTime>' could be found (are you missing a using directive or an assembly reference?)
    at System.Web.Compilation.AssemblyBuilder.Compile()
    at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
@@ -5766,11 +5767,27 @@ Parameter name: parameters
    --- End of inner exception stack trace ---
    at System.Web.Mvc.DefaultModelBinder.CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
    at System.Web.Mvc.DefaultModelBinder.BindSimpleModel(ControllerContext controllerContext, ModelBindingContext bindingContext, ValueProviderResult valueProviderResult)
+=======
+2015-01-08 16:07:42,015 [6] ERROR - System.OverflowException: Value was either too large or too small for an Int32.
+   at System.Convert.ToInt32(Double value)
+   at System.Double.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value, IFormatProvider provider)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.<SetupConversion>b__2(Object v)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at System.Web.Mvc.DataAnnotationsModelValidator.Validate(Object container)
+   at System.Web.Mvc.ModelValidator.CompositeModelValidator.<Validate>d__1.MoveNext()
+   at System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexElementalModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Object model)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+>>>>>>> 2f290e6ed8ca4dc036f92ba7eebf2521c16659ec
    at System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
 
+<<<<<<< HEAD
 2015-01-09 09:17:31,179 [7] ERROR - System.MissingMethodException: Cannot create an instance of an interface. Object type 'PagedList.IPagedList`1[[Models.ViewModels.AdminAdvertToShow, Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. ---> System.MissingMethodException: Cannot create an instance of an interface.
    at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
    at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
@@ -5781,11 +5798,27 @@ Parameter name: parameters
    --- End of inner exception stack trace ---
    at System.Web.Mvc.DefaultModelBinder.CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
    at System.Web.Mvc.DefaultModelBinder.BindSimpleModel(ControllerContext controllerContext, ModelBindingContext bindingContext, ValueProviderResult valueProviderResult)
+=======
+2015-01-08 16:07:42,015 [6] ERROR - System.OverflowException: Value was either too large or too small for an Int32.
+   at System.Convert.ToInt32(Double value)
+   at System.Double.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value, IFormatProvider provider)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.<SetupConversion>b__2(Object v)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at System.Web.Mvc.DataAnnotationsModelValidator.Validate(Object container)
+   at System.Web.Mvc.ModelValidator.CompositeModelValidator.<Validate>d__1.MoveNext()
+   at System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexElementalModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Object model)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+>>>>>>> 2f290e6ed8ca4dc036f92ba7eebf2521c16659ec
    at System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
 
+<<<<<<< HEAD
 2015-01-09 09:18:59,347 [8] ERROR - System.MissingMethodException: Cannot create an instance of an interface. Object type 'PagedList.IPagedList`1[[Models.ViewModels.AdminAdvertToShow, Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. ---> System.MissingMethodException: Cannot create an instance of an interface.
    at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
    at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
@@ -5796,11 +5829,27 @@ Parameter name: parameters
    --- End of inner exception stack trace ---
    at System.Web.Mvc.DefaultModelBinder.CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
    at System.Web.Mvc.DefaultModelBinder.BindSimpleModel(ControllerContext controllerContext, ModelBindingContext bindingContext, ValueProviderResult valueProviderResult)
+=======
+2015-01-08 16:08:05,195 [9] ERROR - System.OverflowException: Value was either too large or too small for an Int32.
+   at System.Convert.ToInt32(Double value)
+   at System.Double.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value, IFormatProvider provider)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.<SetupConversion>b__2(Object v)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at System.Web.Mvc.DataAnnotationsModelValidator.Validate(Object container)
+   at System.Web.Mvc.ModelValidator.CompositeModelValidator.<Validate>d__1.MoveNext()
+   at System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexElementalModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Object model)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+>>>>>>> 2f290e6ed8ca4dc036f92ba7eebf2521c16659ec
    at System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
 
+<<<<<<< HEAD
 2015-01-09 09:18:59,347 [8] ERROR - System.MissingMethodException: Cannot create an instance of an interface. Object type 'PagedList.IPagedList`1[[Models.ViewModels.AdminAdvertToShow, Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'. ---> System.MissingMethodException: Cannot create an instance of an interface.
    at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
    at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
@@ -5811,11 +5860,27 @@ Parameter name: parameters
    --- End of inner exception stack trace ---
    at System.Web.Mvc.DefaultModelBinder.CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
    at System.Web.Mvc.DefaultModelBinder.BindSimpleModel(ControllerContext controllerContext, ModelBindingContext bindingContext, ValueProviderResult valueProviderResult)
+=======
+2015-01-08 16:08:05,195 [9] ERROR - System.OverflowException: Value was either too large or too small for an Int32.
+   at System.Convert.ToInt32(Double value)
+   at System.Double.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value, IFormatProvider provider)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.<SetupConversion>b__2(Object v)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at System.Web.Mvc.DataAnnotationsModelValidator.Validate(Object container)
+   at System.Web.Mvc.ModelValidator.CompositeModelValidator.<Validate>d__1.MoveNext()
+   at System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexElementalModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Object model)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+>>>>>>> 2f290e6ed8ca4dc036f92ba7eebf2521c16659ec
    at System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
    at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
 
+<<<<<<< HEAD
 2015-01-09 09:27:02,516 [9] ERROR - System.ArgumentException: The parameters dictionary contains a null entry for parameter 'Flat' of non-nullable type 'System.Boolean' for method 'System.Web.Mvc.ActionResult AdList(Models.ViewModels.AdList, System.Nullable`1[System.Int32], System.Nullable`1[System.Boolean], System.Nullable`1[System.Boolean], System.Nullable`1[System.Boolean], System.String, System.String, System.Nullable`1[System.Boolean], System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime], Boolean, Boolean, Boolean)' in 'nieruchomoœci.Controllers.AdminController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
 Parameter name: parameters
    at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
@@ -5979,4 +6044,41 @@ Parameter name: parameters
    at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+=======
+2015-01-08 16:08:40,993 [8] ERROR - System.OverflowException: Value was either too large or too small for an Int32.
+   at System.Convert.ToInt32(Double value)
+   at System.Double.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value, IFormatProvider provider)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.<SetupConversion>b__2(Object v)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at System.Web.Mvc.DataAnnotationsModelValidator.Validate(Object container)
+   at System.Web.Mvc.ModelValidator.CompositeModelValidator.<Validate>d__1.MoveNext()
+   at System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexElementalModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Object model)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+
+2015-01-08 16:08:40,993 [8] ERROR - System.OverflowException: Value was either too large or too small for an Int32.
+   at System.Convert.ToInt32(Double value)
+   at System.Double.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value, IFormatProvider provider)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.<SetupConversion>b__2(Object v)
+   at System.ComponentModel.DataAnnotations.RangeAttribute.IsValid(Object value)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+   at System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(Object value, ValidationContext validationContext)
+   at System.Web.Mvc.DataAnnotationsModelValidator.Validate(Object container)
+   at System.Web.Mvc.ModelValidator.CompositeModelValidator.<Validate>d__1.MoveNext()
+   at System.Web.Mvc.DefaultModelBinder.OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexElementalModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Object model)
+   at System.Web.Mvc.DefaultModelBinder.BindComplexModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+>>>>>>> 2f290e6ed8ca4dc036f92ba7eebf2521c16659ec
 
