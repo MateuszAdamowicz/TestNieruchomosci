@@ -61,20 +61,20 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prawidłowy format {0} to: 100, 100.32, 100m2 .
+        /// </summary>
+        internal static string AreaAdvertNotValid {
+            get {
+                return ResourceManager.GetString("AreaAdvertNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Treść wiadomości jest wymagana..
         /// </summary>
         internal static string BodyRequired {
             get {
                 return ResourceManager.GetString("BodyRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Miasto to 40 znaków..
-        /// </summary>
-        internal static string CityMaxLength {
-            get {
-                return ResourceManager.GetString("CityMaxLength", resourceCulture);
             }
         }
         
@@ -97,15 +97,6 @@ namespace Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Email to 40 znaków..
-        /// </summary>
-        internal static string EmailMaxLength {
-            get {
-                return ResourceManager.GetString("EmailMaxLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Adres email nie jest prawidłowy..
         /// </summary>
         internal static string EmailNotValid {
@@ -124,29 +115,11 @@ namespace Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Imię to 20 znaków..
-        /// </summary>
-        internal static string FirstNameMaxLength {
-            get {
-                return ResourceManager.GetString("FirstNameMaxLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Imię jest wymagane..
         /// </summary>
         internal static string FirstNameRequired {
             get {
                 return ResourceManager.GetString("FirstNameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Imię i Nazwisko to 40 znaków..
-        /// </summary>
-        internal static string FullNameMaxLength {
-            get {
-                return ResourceManager.GetString("FullNameMaxLength", resourceCulture);
             }
         }
         
@@ -160,20 +133,20 @@ namespace Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Nazwisko to 20 znaków..
-        /// </summary>
-        internal static string LastNameMaxLength {
-            get {
-                return ResourceManager.GetString("LastNameMaxLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nazwisko jest wymagane..
         /// </summary>
         internal static string LastNameRequired {
             get {
                 return ResourceManager.GetString("LastNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość dla pola {0} to {1} znaków..
+        /// </summary>
+        internal static string MaxLength {
+            get {
+                return ResourceManager.GetString("MaxLength", resourceCulture);
             }
         }
         
@@ -232,6 +205,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} jest wymagane..
+        /// </summary>
+        internal static string Required {
+            get {
+                return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ilość pokoi musi być pomiędzy {1}, a {2}..
         /// </summary>
         internal static string RoomsRange {
@@ -246,15 +228,6 @@ namespace Models.Resources {
         internal static string StoreyRange {
             get {
                 return ResourceManager.GetString("StoreyRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość tytułu to 40 znaków..
-        /// </summary>
-        internal static string TitleMaxLength {
-            get {
-                return ResourceManager.GetString("TitleMaxLength", resourceCulture);
             }
         }
         

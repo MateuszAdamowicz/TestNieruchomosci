@@ -168,7 +168,10 @@
                                     <div class="pull-left" style="font-weight: bold">
                                         <a href="/Home/Show?key={{flat.Number}}">{{flat.Title}}</a> <small style="margin-left: 10px">nr. {{flat.Number}}</small>
                                     </div>
-                                    <div class="pull-right" style="font-weight: bolder; font-size: larger">{{flat.Price}}</div>
+                                    <div class="pull-right" style="font-weight: bolder; font-size: larger">
+                                        {{flat.Price}}
+                                        <span ng-if="flat.Price !== 'Do negocjacji'">zł</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -212,7 +215,10 @@
                                     <div class="pull-left" style="font-weight: bold">
                                         <a href="/Home/Show?key={{house.Number}}">{{house.Title}}</a> <small style="margin-left: 10px">nr. {{house.Number}}</small>
                                     </div>
-                                    <div class="pull-right" style="font-weight: bolder; font-size: larger">{{house.Price}}</div>
+                                    <div class="pull-right" style="font-weight: bolder; font-size: larger">
+                                        {{house.Price}}
+                                    <span ng-if="flat.Price !== 'Do negocjacji'">zł</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">

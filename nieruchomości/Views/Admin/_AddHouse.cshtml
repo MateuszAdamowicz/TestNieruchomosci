@@ -33,7 +33,7 @@
                     <div class="col-md-6">
                         <small><b>Cena (zł):</b></small>
                         <div class="has-feedback">
-                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @id = "PriceHouse", @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
                             <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0; color: red"></span>
                         </div>
                     </div>
@@ -88,10 +88,10 @@
                     </div>
                     <div class="col-md-6">
                         <small>Cena za m<sup>2</sup> (zł):</small>
-                        @Html.EditorFor(model => model.PricePerMeter, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("PricePerMeter") && ViewData.ModelState["PricePerMeter"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                        @Html.EditorFor(model => model.PricePerMeter, new { htmlAttributes = new { @class = "form-control", @id = "PricePerMeterHouse", @style = ((ViewData.ModelState.ContainsKey("PricePerMeter") && ViewData.ModelState["PricePerMeter"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
                     </div>
                 </div>
-                <div class="row">
+                <div class="row"> 
                     <div class="col-md-12">
                         <small>Opis:</small>
                         <div class="has-feedback">
@@ -175,10 +175,19 @@
         }
     });
 
-    $(".Rooms").on("change", function () {
-        if (+$(this).val() < 0) {
-            $(this).val("0");
-            alert("Liczba pokoi nie może być ujemna!");
+    $("#PriceHouse").on("change", function () {
+        var usablearea = Number($("#UsableArea").val().split('m')[0]);
+        var price = Number($(this).val());
+        if (!isNaN(usablearea) && !isNaN(price) && usablearea != 0) {
+            $("#PricePerMeterHouse").val((price / usablearea).toFixed(2));
+        }
+    });
+
+    $("#UsableArea").on("change", function () {
+        var usablearea = Number($(this).val().split('m')[0]);
+        var price = Number($("#PriceHouse").val());
+        if (!isNaN(usablearea) && !isNaN(price) && usablearea != 0) {
+            $("#PricePerMeterHouse").val((price / usablearea).toFixed(2));
         }
     });
 </script>

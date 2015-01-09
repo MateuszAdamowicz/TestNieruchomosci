@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AreaAdvertNotValid" xml:space="preserve">
+    <value>Prawidłowy format {0} to: 100, 100.32, 100m2 </value>
+  </data>
   <data name="BodyRequired" xml:space="preserve">
     <value>Treść wiadomości jest wymagana.</value>
-  </data>
-  <data name="CityMaxLength" xml:space="preserve">
-    <value>Maksymalna długość dla pola Miasto to 40 znaków.</value>
   </data>
   <data name="CityRequired" xml:space="preserve">
     <value>Miasto jest wymagane.</value>
@@ -129,32 +129,23 @@
   <data name="DescriptionRequired" xml:space="preserve">
     <value>Opis jest wymagany.</value>
   </data>
-  <data name="EmailMaxLength" xml:space="preserve">
-    <value>Maksymalna długość dla pola Email to 40 znaków.</value>
-  </data>
   <data name="EmailNotValid" xml:space="preserve">
     <value>Adres email nie jest prawidłowy.</value>
   </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>Adres email jest wymagany.</value>
   </data>
-  <data name="FirstNameMaxLength" xml:space="preserve">
-    <value>Maksymalna długość dla pola Imię to 20 znaków.</value>
-  </data>
   <data name="FirstNameRequired" xml:space="preserve">
     <value>Imię jest wymagane.</value>
-  </data>
-  <data name="FullNameMaxLength" xml:space="preserve">
-    <value>Maksymalna długość dla pola Imię i Nazwisko to 40 znaków.</value>
   </data>
   <data name="FullNameRequired" xml:space="preserve">
     <value>Imię i nazwisko są wymagane.</value>
   </data>
-  <data name="LastNameMaxLength" xml:space="preserve">
-    <value>Maksymalna długość dla pola Nazwisko to 20 znaków.</value>
-  </data>
   <data name="LastNameRequired" xml:space="preserve">
     <value>Nazwisko jest wymagane.</value>
+  </data>
+  <data name="MaxLength" xml:space="preserve">
+    <value>Maksymalna długość dla pola {0} to {1} znaków.</value>
   </data>
   <data name="PhoneFirstRequired" xml:space="preserve">
     <value>Numer telefonu jest wymagany.</value>
@@ -174,14 +165,14 @@
   <data name="PriceRequired" xml:space="preserve">
     <value>Cena jest wymagana.</value>
   </data>
+  <data name="Required" xml:space="preserve">
+    <value>{0} jest wymagane.</value>
+  </data>
   <data name="RoomsRange" xml:space="preserve">
     <value>Ilość pokoi musi być pomiędzy {1}, a {2}.</value>
   </data>
   <data name="StoreyRange" xml:space="preserve">
     <value>Ilość kondygnacji musi być pomiędzy {1}, a {2}.</value>
-  </data>
-  <data name="TitleMaxLength" xml:space="preserve">
-    <value>Maksymalna długość tytułu to 40 znaków.</value>
   </data>
   <data name="TitleRequired" xml:space="preserve">
     <value>Tytuł jest wymagany.</value>

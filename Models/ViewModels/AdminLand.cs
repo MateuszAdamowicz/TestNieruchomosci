@@ -7,22 +7,46 @@ namespace Models.ViewModels
 {
     public class AdminLand
     {
-        public string Location { get; set; } // 
-        public string Area { get; set; } // 
-        public string Ownership { get; set; } // 
+        [Display(Name = "Lokalizacja")]
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]       
+        public string Location { get; set; }
+
+        [Display(Name = "Powierzchnia")]
+        [RegularExpression(@"([0-9]+\.[0-9]+m2?)|([0-9]+m2?)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "AreaAdvertNotValid")]        
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]                
+        public string Area { get; set; }
+
+        [Display(Name = "Forma w³asnoœci")]
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]        
+        public string Ownership { get; set; }
+
+        [Display(Name = "Tytu³")]
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleRequired")]
-        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "TitleMaxLength")]
-        public string Title { get; set; } // 
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]
+        public string Title { get; set; } 
+
+        [Display(Name = "Opis")]
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "DescriptionRequired")]
         [DataType(DataType.MultilineText)]
-        public string Description { get; set; } //
+        [MaxLength(1000, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]       
+        public string Description { get; set; }
+
+        [Display(Name = "Szczegó³y")]
         [DataType(DataType.MultilineText)]
-        public string Details { get; set; } //
+        [MaxLength(1000, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]        
+        public string Details { get; set; }
+
+        [Display(Name = "Miasto")]
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "CityRequired")]
-        public string City { get; set; } // 
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]        
+        public string City { get; set; }
+
+        [Display(Name = "Cena")]
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceRequired")]
         [RegularExpression(@"([0-9]+\.[0-9]+)|([0-9]+)|(Do negocjacji)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceAdvertNotValid")]
-        public string Price { get; set; } // 
+        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]       
+        public string Price { get; set; } 
+
         public int Worker { get; set; }
         public IEnumerable<HttpPostedFileBase> Files { get; set; }
     }

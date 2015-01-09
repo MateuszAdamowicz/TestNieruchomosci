@@ -65,7 +65,9 @@
 
                     <div class="row custom-advert-price">
                         <div class="col-md-5">Cena:</div>
-                        <div class="col-md-7">@Model.Price zł</div>
+                        <div class="col-md-7">
+                             @(Model.Price == "Do negocjacji" ? Model.Price : Model.Price + " zł")
+                        </div>
                     </div>
                     <div class="panel-body ">
                         @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home",
