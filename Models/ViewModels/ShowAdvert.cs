@@ -1,4 +1,6 @@
-﻿namespace Models.ViewModels
+﻿using System;
+
+namespace Models.ViewModels
 {
     public class ShowAdvert
     {

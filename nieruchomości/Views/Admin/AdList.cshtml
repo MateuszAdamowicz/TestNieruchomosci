@@ -1,7 +1,8 @@
 ﻿@using System.Data.SqlTypes
+@using Models.ViewModels
 @using nieruchomości.Helpers
 @using PagedList.Mvc
-@model PagedList.PagedList<Models.ViewModels.AdminAdvertToShow>
+@model AdList
 <style type="text/css">
     label {
         font-size: small;
@@ -73,55 +74,55 @@
                         <div class="col-md-2">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.TextBox("key", null, null, new { @class = "form-control", @placeholder = "Fraza", @style = "font-size:12px" })
+                                    @Html.TextBoxFor(model => model.FilterOptions.Key, new {@class ="form-control", @placeholder = "Fraza", @style="font-size:12px"})
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.TextBox("worker", null, null, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko", @style = "font-size:12px" })
+                                    @Html.TextBoxFor(model => model.FilterOptions.Worker, new { @class = "form-control", @placeholder = "Imię i/lub nazwisko", @style = "font-size:12px" })
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label><input type="radio" name="showHidden" value="false" checked />Aktywne</label>
+                                    <label>@Html.RadioButtonFor(model => model.FilterOptions.ShowHidden, false, new {@checked = "checked"})Aktywne</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label><input type="radio" name="showHidden" value="true" />Ukryte</label>
+                                    <label>@Html.RadioButtonFor(model => model.FilterOptions.ShowHidden, true)Ukryte</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="date" name="dateFrom" class="form-control" id="dateFrom" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
+                                   <input type="date" name="FilterOptions.DateFrom" class="form-control" id="dateFrom" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="date" name="dateTo" class="form-control" id="dateTo" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
+                                    <input type="date" name="FilterOptions.DateTo" class="form-control" id="dateTo" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" oninvalid="setCustomValidity('Wprowadź datę w formacie YYYY-MM-DD')" oninput="setCustomValidity('')" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 pull-right">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label><input type="checkbox" name="type" value="Flat" />Mieszkanie</label>
+                                    <label>@Html.CheckBoxFor(model => Model.FilterOptions.Flat)Mieszkanie</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label><input type="checkbox" name="type" value="House" />Dom</label>
+                                    <label>@Html.CheckBoxFor(model => Model.FilterOptions.House)Dom</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label><input type="checkbox" name="type" value="Land" />Działka</label>
+                                    <label>@Html.CheckBoxFor(model => Model.FilterOptions.Land)Działka</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -162,7 +163,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var ad in Model)
+                        @foreach (var ad in Model.Adverts)
                         {
                             <tr>
                                 <td>@ad.CreatedAt.ToShortDateString()</td>
@@ -197,8 +198,8 @@
                         }
                     </tbody>
                 </table>
-                <small>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount</small>
-                <div style="text-align:center">@Html.PagedListPager(Model, page => Url.Action("AdList", new { page, changed = ViewBag.changed, hide = ViewBag.hide, hidden = ViewBag.hidden, search = ViewBag.Search, key = ViewBag.key, worker = ViewBag.worker, showHidden = ViewBag.showHidden, dateFrom = ViewBag.dateFrom, dateTo = ViewBag.dateTo, type = ViewBag.type }))</div>
+                <small>Strona @(Model.Adverts.PageCount < Model.Adverts.PageNumber ? 0 : Model.Adverts.PageNumber) z @Model.Adverts.PageCount</small>
+                <div style="text-align:center">@Html.PagedListPager(Model.Adverts, page => Url.Action("AdList", new { page, key = Model.FilterOptions.Key, worker = Model.FilterOptions.Worker, showHidden = Model.FilterOptions.ShowHidden, dateFrom = Model.FilterOptions.DateFrom, dateTo = Model.FilterOptions.DateTo, flat = Model.FilterOptions.Flat, land = Model.FilterOptions.Land, house = Model.FilterOptions.House, paged = true }))</div>
             </div>
         </div>
     </div>
@@ -228,7 +229,12 @@
         }
     });
 
-    $("#dateFrom").val("2014-01-01");
+    $("#dateFrom").val("@Model.FilterOptions.DateFrom.GetValueOrDefault().ToShortDateString()");
+    $("#dateTo").val("@Model.FilterOptions.DateTo.GetValueOrDefault().ToShortDateString()");
+
+    if ($("#dateFrom").val() === "0001-01-01") {
+        $("#dateFrom").val("2014-01-01");
+    }
     var today = new Date();
     var year = today.getFullYear();
     var month = today.getUTCMonth() + 1;
@@ -239,6 +245,8 @@
     if ((day + "").length == 1) {
         day = "0" + day;
     }
-
-    $("#dateTo").val(year + "-" + month + "-" + day);
+    
+    if ($("#dateTo").val() === "0001-01-01") {
+        $("#dateTo").val(year + "-" + month + "-" + day);
+    }
 </script>

@@ -270,33 +270,55 @@ namespace nieruchomości.Controllers
         }
 
         [HttpGet]
-        public ActionResult AdList(int? page, bool? changed, bool? hide, bool? hidden, bool? search, string key, string worker, bool? showHidden, DateTime? dateFrom, DateTime? dateTo, IEnumerable<AdType> type)
+        public ActionResult AdList(AdList adList,int? page, bool? changed, bool? hide, bool? hidden, string key, string worker, bool? showHidden, DateTime? dateFrom, DateTime? dateTo, bool? flat, bool? house, bool? land , bool? paged)
         {
-            ViewBag.changed = changed;
-            ViewBag.hide = hide;
-            ViewBag.hidden = hidden;
-            ViewBag.search = search;
-            ViewBag.key = key;
-            ViewBag.worker = worker;
-            ViewBag.showHidden = showHidden;
-            ViewBag.dateFrom = dateFrom;
-            ViewBag.dateTo = dateTo;
-            ViewBag.type = type;
-
+            var modelToShow = new AdList();
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
             IEnumerable<AdminAdvertToShow> advertList;
-            if (search != null && search == true)
+            if (adList != null && adList.FilterOptions != null)
             {
-                advertList = _adminFilterAdvertService.FilterAdverts(key, worker, showHidden, dateFrom, dateTo, type); 
+                advertList =
+                    _adminFilterAdvertService.FilterAdverts(adList.FilterOptions.Key, adList.FilterOptions.Worker,
+                        adList.FilterOptions.ShowHidden, adList.FilterOptions.DateFrom, adList.FilterOptions.DateTo,
+                        adList.FilterOptions.Type).ToList();
             }
             else
             {
-                advertList = _adminFilterAdvertService.ActiveAdverts(hidden);
+                if (paged == null || paged == false)
+                {
+                    advertList = _adminFilterAdvertService.ActiveAdverts(hidden).ToList();
+                    modelToShow.FilterOptions = new AdListFilter();
+                }
+                else
+                {
+                    var filterOptions = new AdListFilter()
+                    {
+                        DateFrom = dateFrom,
+                        DateTo = dateTo,
+                        Flat = flat.GetValueOrDefault(),
+                        Land = land.GetValueOrDefault(),
+                        House = house.GetValueOrDefault(),
+                        Key = key,
+                        ShowHidden = showHidden,
+                        Worker = worker
+                    };
+                    modelToShow.FilterOptions = filterOptions;
+                    advertList = _adminFilterAdvertService.FilterAdverts(key, worker, showHidden, dateFrom, dateTo, filterOptions.Type);
+                }
             }
+            modelToShow.Adverts = advertList.ToPagedList(pageNumber, pageSize);
+            if (modelToShow.FilterOptions == null)
+            {
+                modelToShow.FilterOptions = adList.FilterOptions;
+            }
+            return View(modelToShow);
 
-            int pageSize = 20;
-            int pageNumber = (page ?? 1);
-            return View(advertList.ToPagedList(pageNumber, pageSize));
+        }
 
+        public ActionResult AdListPaged(int? page, IPagedList<AdminAdvertToShow> pagedList)
+        {
+            return RedirectToAction("AdList");
         }
 
         public ActionResult EditAd(int id, AdType adtype)
@@ -481,15 +503,15 @@ namespace nieruchomości.Controllers
                 return RedirectToAction("Settings");
             }
             var model = _calcService.BuildViewModel();
-            
-            model.ClatList.Clear(); 
+
+            model.ClatList.Clear();
             model.ClatList.Add(clatModel);
 
-            return View("Settings",model);
+            return View("Settings", model);
 
         }
 
-       
+
 
         public ActionResult DeleteClat(int id)
         {
@@ -514,11 +536,11 @@ namespace nieruchomości.Controllers
                 _adminSettingsService.AddClat(clat);
                 return RedirectToAction("Settings");
             }
-         
-          var model = _adminSettingsService.AddClat();
-          model.Clat = clat;
 
-          return View("AddClat", model);
+            var model = _adminSettingsService.AddClat();
+            model.Clat = clat;
+
+            return View("AddClat", model);
         }
 
 

@@ -4,7 +4,7 @@ using Models.EntityModels;
 
 namespace Models.ViewModels
 {
-    public class ShowHouse
+    public class ShowHouse: ShowAd
     {
         public ShowHouse()
         {
@@ -30,7 +30,6 @@ namespace Models.ViewModels
         public bool Visible { get; set; }
         public bool Deleted { get; set; }
         public virtual List<Photo> Pictures { get; set; }
-        public DateTime CreatedAt { get; set; }
         public ContactEmail ContactEmail { get; set; }
         public string Number { get; set; }
         public int Counter { get; set; }

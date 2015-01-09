@@ -153,6 +153,7 @@
                         <p style="font-weight: bold">Brak wyników</p>
                     </div>
                 </li>
+                
                 <li dir-paginate="flat in filteredflatList = (flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|pricefilter:myflatPrice|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'flat'" current-page="currentPage" pagination-id="flat">
                     <div class="col-md-12 custom-advert-panel">
                         <div class="col-md-3">
