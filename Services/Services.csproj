@@ -122,6 +122,8 @@
     <Compile Include="AdvertServices\ChangeAdvertVisability\IChangeAdvertVisibility.cs" />
     <Compile Include="AdvertServices\GetAdvertService\Implementation\GetAdvertService.cs" />
     <Compile Include="AdvertServices\GetAdvertService\IGetAdvertService.cs" />
+    <Compile Include="AdvertServices\GetNextPreviousService\Implementation\GetNextPreviousService.cs" />
+    <Compile Include="AdvertServices\GetNextPreviousService\IGetNextPreviousService.cs" />
     <Compile Include="AppSettingsService\Implementation\AppSettingsService.cs" />
     <Compile Include="CalcService\ICalcService.cs" />
     <Compile Include="CalcService\Implementation\CalcService.cs" />
@@ -178,7 +180,6 @@
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

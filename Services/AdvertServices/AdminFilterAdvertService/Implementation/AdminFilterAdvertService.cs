@@ -46,15 +46,15 @@ namespace Services.AdvertServices.AdminFilterAdvertService.Implementation
 
             if (dateFrom != null)
             {
-                advertsToShow = advertsToShow.Where(x => x.CreatedAt >= dateFrom);
+                advertsToShow = advertsToShow.Where(x => x.CreatedAt.Date >= dateFrom);
             }
 
             if (dateTo != null)
             {
-                advertsToShow = advertsToShow.Where(x => x.CreatedAt <= dateTo);
+                advertsToShow = advertsToShow.Where(x => x.CreatedAt.Date <= dateTo);
             }
 
-            if (type != null && type.Count() > 0)
+            if (type != null && type.Any())
             {
                 advertsToShow = advertsToShow.Where(x => type.Contains(x.AdType));
             }

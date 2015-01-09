@@ -24,6 +24,25 @@
         {
             <div class="alert-danger"><strong>To ogłoszenie jest ukryte.</strong> Nie jest widoczne dla użytkowników</div>
         }
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-md-6" style="text-align:left">
+                @if (!String.IsNullOrEmpty(Model.Previous))
+                {
+                    <a class="btn btn-xs btn-success" href="/Home/Show?key=@Model.Previous">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                }
+            </div>
+            <div class="col-md-6" style="text-align:right">
+                @if (!String.IsNullOrEmpty(Model.Next))
+                {
+                    <a class="btn btn-xs btn-success" href="/Home/Show?key=@Model.Next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                }
+
+            </div>
+        </div>
         <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number<br /><div class="pull-right" style="font-size: 12px; font-weight:100">Odwiedzin: <span class="badge">@(Model.Counter)</span></div></div>
         <h4>@Model.Title</h4>
         <h5>Mieszkanie</h5>
@@ -98,7 +117,7 @@
                                     <div class="col-md-2" style="padding: 5px">
                                         <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer; max-height: 100px" class="small-pict" />
                                     </div>
-                                    if (counter%6 == 0)
+                                if (counter % 6 == 0)
                                     {
                                         <div class="row"></div>
                                     }
@@ -171,7 +190,6 @@
     </div>
 </div>
 
-
 <script src="/Scripts/jquery-1.10.2.js"></script>
 
 <script language="javascript">
@@ -183,8 +201,4 @@
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/modalform") 
-}
 

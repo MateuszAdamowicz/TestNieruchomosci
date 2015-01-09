@@ -177,4 +177,34 @@
   <data name="TitleRequired" xml:space="preserve">
     <value>Tytuł jest wymagany.</value>
   </data>
+  <data name="SettingsFromRange" xml:space="preserve">
+    <value>Wartość "Od" musi znajdować się między {1}, a {2}.</value>
+  </data>
+  <data name="SettingsFromRequired" xml:space="preserve">
+    <value>"Od" jest wymagane.</value>
+  </data>
+  <data name="SettingsMaxRange" xml:space="preserve">
+    <value>Wartość "Max" musi znajdować się między {1}, a {2}.</value>
+  </data>
+  <data name="SettingsMaxRequired" xml:space="preserve">
+    <value>"Max" jest wymagane.</value>
+  </data>
+  <data name="SettingsPercentRange" xml:space="preserve">
+    <value>Wartość "Procent" musi znajdować się między {1}, a {2}.</value>
+  </data>
+  <data name="SettingsPercentRequired" xml:space="preserve">
+    <value>"Procent" jest wymagane.</value>
+  </data>
+  <data name="SettingsPriceRange" xml:space="preserve">
+    <value>Wartość "Kwota" musi znajdować się między {1}, a {2}.</value>
+  </data>
+  <data name="SettingsPriceRequired" xml:space="preserve">
+    <value>"Kwota" jest wymagane.</value>
+  </data>
+  <data name="SettingsToRange" xml:space="preserve">
+    <value>Wartość "Do" musi znajdować się między {1}, a {2}.</value>
+  </data>
+  <data name="SettingsToRequired" xml:space="preserve">
+    <value>"Do" jest wymagane.</value>
+  </data>
 </root>

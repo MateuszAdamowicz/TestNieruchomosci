@@ -8,6 +8,7 @@ using Models;
 using Models.EntityModels;
 using Models.ViewModels;
 using PagedList;
+using Services.AdvertServices.GetNextPreviousService;
 using Services.AdvertServices.ShowAdvertService;
 using Services.CalcService;
 using Services.CreateOfferService;
@@ -26,9 +27,10 @@ namespace nieruchomości.Controllers
         private readonly ICounterService _counterService;
         private readonly IOfferService _offerService;
         private readonly ICalcService _calcService;
+        private readonly IGetNextPreviousService _getNextPreviousService;
 
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService, ICalcService calcService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService, ICalcService calcService, IGetNextPreviousService getNextPreviousService)
         {
             _context = context;
             _emailService = emailService;
@@ -37,7 +39,7 @@ namespace nieruchomości.Controllers
             _counterService = counterService;
             _offerService = offerService;
             _calcService = calcService;
-
+            _getNextPreviousService = getNextPreviousService;
         }
 
         public ActionResult About()
@@ -142,7 +144,6 @@ namespace nieruchomości.Controllers
                         ((List<int>)Session["Visited"]).Add(Convert.ToInt32(key));
                         _counterService.AddHit(key);
                     }
-
                     return View(result.Data);
                 }
                 return RedirectToAction("NotFound");
@@ -198,8 +199,5 @@ namespace nieruchomości.Controllers
 
             return PartialView(model);
         }
-
     }
-
-
 }
