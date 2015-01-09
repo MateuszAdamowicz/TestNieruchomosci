@@ -10,185 +10,281 @@
 }
 
 
+
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
-        <h4>Ustawienia - Przedziały opłaty notarialnej</h4>
 
-        <br/>
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Instrukcja nr 1
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        @if (!ViewData.ModelState.IsValid)
+        {
+
+
+            <h4>Edycja przedziału opłaty notarialnej</h4>
+
+            <div class="row" style="padding: 10px">
+                <div class="panel panel-danger">
+                    <button type="button" class="close" data-dismiss="alert" style="margin-right: 5px; margin-top: 5px">×</button>
+                    <div class="panel-heading">
+                        Błąd
                     </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Instrukcja nr 2
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                     <div class="panel-body">
-                        <h4>Legenda</h4>
-
-                        <div class="row">
-                            <div class="col-md-12" style="font-size: small">
-                                <span class="btn btn-default btn-xs disabled" style="opacity: 1; width: 80px">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    Edytuj
-                                </span>
-                                <span class="btn btn-danger btn-xs disabled" style="opacity: 1; width: 80px">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    Usuń
-                                </span>
-                            </div>
-                        </div>
-
+                        @Html.ValidationSummary()
                     </div>
                 </div>
             </div>
 
-        </div>
-        <br/>
-
-        <a href="@Url.Action("AddClat", "Admin")" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-plus"></span> Dodaj przedział opłaty notarialnej</a>
-
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        Od
-                    </th>
-                    <th>
-                        Do
-                    </th>
-                    <th>
-                        Procent
-                    </th>
-                    <th>
-                        Max
-                    </th>
-                    <th>
-                        Cena
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var x in Model.ClatList)
-                {
-                    using (Html.BeginForm("EditClat", "Admin"))
-                    {
-                        <tr>
-                            @Html.Hidden("Id", x.Id)
-                            <td>
-                                @Html.TextBox("From", x.From, new { style = "max-width: 100px;" })
-                            </td>
-                            <td>
-                                @if (x.To == Double.MaxValue)
-                                {
-                                    @Html.TextBox("To", "Max", new { style = "max-width: 100px;" })
-                                }
-                                else
-                                {
-                                    @Html.TextBox("To", x.To, new { style = "max-width: 100px;" })
-                                }
-
-                            </td>
-                            <td>
-                                @Html.TextBox("Percent", x.Percent, new { style = "max-width: 100px;" })
-                            </td>
-                            <td>
-                                @if (x.Max == 0)
-                                {
-                                    @Html.TextBox("Max", "Brak", new { style = "max-width: 100px;" })
-                                }
-                                else
-                                {
-                                    @Html.TextBox("Max", x.Max, new { style = "max-width: 100px;" })
-                                }
-                            </td>
-                            <td>
-                                @Html.TextBox("Price", x.Price, new { style = "max-width: 100px;" })
-                            </td>
-                            <td style="text-align: center">
-                                <button type="submit" class="btn btn-default btn-xs glyphicon glyphicon-pencil" aria-hidden="true" onclick=" return confirm('Na pewno edytować?') "></button>
-                                @Html.ActionLink(" ", "DeleteClat", new { id = x.Id }, new { @class = "btn btn-danger btn-xs glyphicon glyphicon-trash", @onclick = "return confirm('Na pewno usunąć?');" })
-                            </td>
-                        </tr>
-
-                    }
-                }
-            </tbody>
-
-        </table>
-
-        <br>
-        <h4>Ustawienia - inne ustawienia</h4>
-        <br>
-        
-        <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="false">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Instrukcja nr 3
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br/>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>
-                    Nazwa
-                </th>
-                <th>
-                    Wartość
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model.CostPropertiesList)
-            {
-                using (Html.BeginForm("EditCostPropList", "Admin"))
-                {
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        @Html.Hidden("Id", item.Id)
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.TextBox("Value", item.Value, new {style = "max-width: 100px;"})
-                        </td>
-                        <td style="text-align: center">
-                            <button type="submit" class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick=" return confirm('Na pewno edytować?') "></button>
-                        </td>
+                        <th>
+                            Od
+                        </th>
+                        <th>
+                            Do
+                        </th>
+                        <th>
+                            Procent
+                        </th>
+                        <th>
+                            Max
+                        </th>
+                        <th>
+                            Cena
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.ClatList)
+                    {
+                        using (Html.BeginForm("EditClat", "Admin"))
+                        {
+                            <tr>
+                                @Html.Hidden("Id", x.Id)
+                                <td>
+                                    @Html.TextBox("From", x.From, new { style = "max-width: 100px;" + ((ViewData.ModelState.ContainsKey("From") && ViewData.ModelState["From"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                                </td>
+                                <td>
+                                    @if (x.To == Double.MaxValue)
+                                    {
+                                        @Html.TextBox("To", "Max", new { style = "max-width: 100px;" + ((ViewData.ModelState.ContainsKey("To") && ViewData.ModelState["To"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBox("To", x.To, new { style = "max-width: 100px;" + ((ViewData.ModelState.ContainsKey("To") && ViewData.ModelState["To"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                                    }
 
+
+                                </td>
+                                <td>
+                                    @Html.TextBox("Percent", x.Percent, new { style = "max-width: 100px;" + ((ViewData.ModelState.ContainsKey("Percent") && ViewData.ModelState["Percent"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                                </td>
+                                <td>
+                                    @Html.TextBox("Max", x.Max, new { style = "max-width: 100px;" + ((ViewData.ModelState.ContainsKey("Max") && ViewData.ModelState["Max"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                                </td>
+                                <td>
+                                    @Html.TextBox("Price", x.Price, new { style = "max-width: 100px;" + ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
+                                </td>
+                                <td style="text-align: center">
+                                    <button type="submit" class="btn btn-default btn-xs glyphicon glyphicon-pencil" aria-hidden="true" onclick=" return confirm('Na pewno edytować?') "></button>
+                                </td>
+                            </tr>
+
+                        }
+                    }
+                </tbody>
+
+            </table>
+
+
+        }
+        else
+        {
+            <h4>Ustawienia - Przedziały opłaty notarialnej</h4>
+
+            <br />
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Instrukcja nr 1
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Instrukcja nr 2
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <h4>Legenda</h4>
+
+                            <div class="row">
+                                <div class="col-md-12" style="font-size: small">
+                                    <span class="btn btn-default btn-xs disabled" style="opacity: 1; width: 80px">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                        Edytuj
+                                    </span>
+                                    <span class="btn btn-danger btn-xs disabled" style="opacity: 1; width: 80px">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                        Usuń
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br />
+
+
+            <a href="@Url.Action("AddClat", "Admin")" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-plus"></span> Dodaj przedział opłaty notarialnej</a>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Od
+                        </th>
+                        <th>
+                            Do
+                        </th>
+                        <th>
+                            Procent
+                        </th>
+                        <th>
+                            Max
+                        </th>
+                        <th>
+                            Cena
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.ClatList)
+                    {
+                        using (Html.BeginForm("EditClat", "Admin"))
+                        {
+                            <tr>
+                                @Html.Hidden("Id", x.Id)
+                                <td>
+                                    @Html.TextBox("From", x.From, new { style = "max-width: 100px;" })
+                                </td>
+                                <td>
+                                    @if (x.To == Double.MaxValue)
+                                    {
+                                        @Html.TextBox("To", "Max", new { style = "max-width: 100px;" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBox("To", x.To, new { style = "max-width: 100px;" })
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.TextBox("Percent", x.Percent, new { style = "max-width: 100px;" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("Max", x.Max, new { style = "max-width: 100px;" })
+                                </td>
+                                <td>
+                                    @Html.TextBox("Price", x.Price, new { style = "max-width: 100px;" })
+                                </td>
+                                <td style="text-align: center">
+                                    <button type="submit" class="btn btn-default btn-xs glyphicon glyphicon-pencil" aria-hidden="true" onclick=" return confirm('Na pewno edytować?') "></button>
+                                    @Html.ActionLink(" ", "DeleteClat", new { id = x.Id }, new { @class = "btn btn-danger btn-xs glyphicon glyphicon-trash", @onclick = "return confirm('Na pewno usunąć?');" })
+                                </td>
+                            </tr>
+
+                        }
+                    }
+                </tbody>
+
+            </table>
+
+            <br>
+            <h4>Ustawienia - inne ustawienia</h4>
+            <br>
+
+            <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="false">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Instrukcja nr 3
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Nazwa
+                        </th>
+                        <th>
+                            Wartość
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CostPropertiesList)
+                    {
+                        using (Html.BeginForm("EditCostPropList", "Admin"))
+                        {
+                            <tr>
+                                @Html.Hidden("Id", item.Id)
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.TextBox("Value", item.Value, new { style = "max-width: 100px;" })
+                                </td>
+                                <td style="text-align: center">
+                                    <button type="submit" class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick=" return confirm('Na pewno edytować?') "></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        }
     </div>
 </div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-6 col-md-push-6">
+                <div class="col-md-12" style="text-align: right">
+                    @Html.ActionLink("Wróć do listy", "Settings")
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

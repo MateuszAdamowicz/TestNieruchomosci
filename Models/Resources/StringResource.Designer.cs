@@ -88,15 +88,6 @@ namespace Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wartosc powinna byc wieksza anizeli OD.
-        /// </summary>
-        internal static string Clat_To_Wartosc_powinna_byc_wieksza_anizeli_OD {
-            get {
-                return ResourceManager.GetString("Clat_To_Wartosc_powinna_byc_wieksza_anizeli_OD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Opis jest wymagany..
         /// </summary>
         internal static string DescriptionRequired {
@@ -246,6 +237,96 @@ namespace Models.Resources {
         internal static string RoomsRange {
             get {
                 return ResourceManager.GetString("RoomsRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Od&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsFromRange {
+            get {
+                return ResourceManager.GetString("SettingsFromRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Od&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsFromRequired {
+            get {
+                return ResourceManager.GetString("SettingsFromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Max&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsMaxRange {
+            get {
+                return ResourceManager.GetString("SettingsMaxRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Max&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsMaxRequired {
+            get {
+                return ResourceManager.GetString("SettingsMaxRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Procent&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsPercentRange {
+            get {
+                return ResourceManager.GetString("SettingsPercentRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Procent&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsPercentRequired {
+            get {
+                return ResourceManager.GetString("SettingsPercentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Kwota&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsPriceRange {
+            get {
+                return ResourceManager.GetString("SettingsPriceRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Kwota&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsPriceRequired {
+            get {
+                return ResourceManager.GetString("SettingsPriceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Do&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsToRange {
+            get {
+                return ResourceManager.GetString("SettingsToRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Do&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsToRequired {
+            get {
+                return ResourceManager.GetString("SettingsToRequired", resourceCulture);
             }
         }
         
