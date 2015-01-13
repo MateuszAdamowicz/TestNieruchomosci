@@ -497,11 +497,21 @@ namespace nieruchomości.Controllers
         [HttpPost]
         public ActionResult EditClat(Clat clatModel)
         {
-            _adminSettingsService.EditClat(clatModel);
-            return RedirectToAction("Settings");
+            if (ModelState.IsValid)
+            {
+                _adminSettingsService.EditClat(clatModel);
+                return RedirectToAction("Settings");
+            }
+            var model = _calcService.BuildViewModel();
+
+            model.ClatList.Clear();
+            model.ClatList.Add(clatModel);
+
+            return View("Settings", model);
+
         }
 
-       
+
 
         public ActionResult DeleteClat(int id)
         {
@@ -516,22 +526,23 @@ namespace nieruchomości.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         public ActionResult AddClat(Clat clat)
         {
+
             if (ModelState.IsValid)
             {
                 _adminSettingsService.AddClat(clat);
                 return RedirectToAction("Settings");
             }
-            else
-            {
-                var model = _adminSettingsService.AddClat();
-                model.Clat = clat;
 
-                return View("AddClat", model);
-            }
+            var model = _adminSettingsService.AddClat();
+            model.Clat = clat;
+
+            return View("AddClat", model);
         }
+
 
         [HttpPost]
         public ActionResult EditCostPropList(CostProperty costPropModel)

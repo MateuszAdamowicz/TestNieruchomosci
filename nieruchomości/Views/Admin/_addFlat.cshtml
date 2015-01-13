@@ -34,7 +34,7 @@
                         <small><b>Cena (zł):</b></small>
                         <div class="has-feedback">
                             
-                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @id="PriceFlat" , @style = ((ViewData.ModelState.ContainsKey("Price") && ViewData.ModelState["Price"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
                             <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0; color:red"></span>
                         </div>
                        </div>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col-md-6">
                         <small>Cena za m<sup>2</sup> (zł):</small>
-                        @Html.EditorFor(model => model.PricePerMeter, new { htmlAttributes = new { @class = "form-control", @style = ((ViewData.ModelState.ContainsKey("PricePerMeter") && ViewData.ModelState["PricePerMeter"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
+                        @Html.EditorFor(model => model.PricePerMeter, new { htmlAttributes = new { @class = "form-control", @id = "PricePerMeterFlat", @style = ((ViewData.ModelState.ContainsKey("PricePerMeter") && ViewData.ModelState["PricePerMeter"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
                     </div>
                 </div>
                 <div class="row">
@@ -176,20 +176,28 @@
         }
     });
 
-
-    $(".Rooms").on("change", function() {
-        if (+$(this).val() < 0) {
-            $(this).val("0");
-            alert("Liczba pokoi nie może być ujemna!");
-        }
-    });
-
     $("#Storey").on("change", function () {
         if (+$(this).val() < 0) {
             $(this).val("0");
             alert("Liczba kondygnacji nie może być ujemna!");
         }
     });
+    $("#PriceFlat").on("change", function () {
+        var area = Number($("#Area").val().split('m')[0]);
+        var price = Number($(this).val());
+        if (!isNaN(area) && !isNaN(price) && area != 0) {
+            $("#PricePerMeterFlat").val((price / area).toFixed(2));
+        }
+    });
+
+    $("#Area").on("change", function () {
+        var area = Number($(this).val().split('m')[0]);
+        var price = Number($("#PriceFlat").val());
+        if (!isNaN(area) && !isNaN(price) && area != 0) {
+            $("#PricePerMeterFlat").val((price / area).toFixed(2));
+        }
+    });
+
 </script>
 
 <script type="text/javascript">

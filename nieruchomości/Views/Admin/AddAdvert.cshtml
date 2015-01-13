@@ -47,4 +47,13 @@
     $("#AdType").prop("selectedIndex", @TempData["AdType"]);
     var selectedValue = $("#AdType").prop("options")[@TempData["AdType"]].text;
     ShowHide(selectedValue);
+
+    $(".Rooms").on("change", function () {
+        if (+$(this).val() < 0) {
+            $(this).val("0");
+            alert("Liczba pokoi nie może być ujemna!");
+        }
+    });
+
+
 </script>

@@ -61,20 +61,20 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prawidłowy format {0} to: 100, 100.32, 100m2 .
+        /// </summary>
+        internal static string AreaAdvertNotValid {
+            get {
+                return ResourceManager.GetString("AreaAdvertNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Treść wiadomości jest wymagana..
         /// </summary>
         internal static string BodyRequired {
             get {
                 return ResourceManager.GetString("BodyRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Miasto to 40 znaków..
-        /// </summary>
-        internal static string CityMaxLength {
-            get {
-                return ResourceManager.GetString("CityMaxLength", resourceCulture);
             }
         }
         
@@ -88,29 +88,11 @@ namespace Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wartosc powinna byc wieksza anizeli OD.
-        /// </summary>
-        internal static string Clat_To_Wartosc_powinna_byc_wieksza_anizeli_OD {
-            get {
-                return ResourceManager.GetString("Clat_To_Wartosc_powinna_byc_wieksza_anizeli_OD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Opis jest wymagany..
         /// </summary>
         internal static string DescriptionRequired {
             get {
                 return ResourceManager.GetString("DescriptionRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Email to 40 znaków..
-        /// </summary>
-        internal static string EmailMaxLength {
-            get {
-                return ResourceManager.GetString("EmailMaxLength", resourceCulture);
             }
         }
         
@@ -133,29 +115,11 @@ namespace Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Imię to 20 znaków..
-        /// </summary>
-        internal static string FirstNameMaxLength {
-            get {
-                return ResourceManager.GetString("FirstNameMaxLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Imię jest wymagane..
         /// </summary>
         internal static string FirstNameRequired {
             get {
                 return ResourceManager.GetString("FirstNameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Imię i Nazwisko to 40 znaków..
-        /// </summary>
-        internal static string FullNameMaxLength {
-            get {
-                return ResourceManager.GetString("FullNameMaxLength", resourceCulture);
             }
         }
         
@@ -169,20 +133,20 @@ namespace Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość dla pola Nazwisko to 20 znaków..
-        /// </summary>
-        internal static string LastNameMaxLength {
-            get {
-                return ResourceManager.GetString("LastNameMaxLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nazwisko jest wymagane..
         /// </summary>
         internal static string LastNameRequired {
             get {
                 return ResourceManager.GetString("LastNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maksymalna długość dla pola {0} to {1} znaków..
+        /// </summary>
+        internal static string MaxLength {
+            get {
+                return ResourceManager.GetString("MaxLength", resourceCulture);
             }
         }
         
@@ -241,6 +205,15 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} jest wymagane..
+        /// </summary>
+        internal static string Required {
+            get {
+                return ResourceManager.GetString("Required", resourceCulture);
+        }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ilość pokoi musi być pomiędzy {1}, a {2}..
         /// </summary>
         internal static string RoomsRange {
@@ -250,20 +223,101 @@ namespace Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Od&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsFromRange {
+            get {
+                return ResourceManager.GetString("SettingsFromRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Od&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsFromRequired {
+            get {
+                return ResourceManager.GetString("SettingsFromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Max&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsMaxRange {
+            get {
+                return ResourceManager.GetString("SettingsMaxRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Max&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsMaxRequired {
+            get {
+                return ResourceManager.GetString("SettingsMaxRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Procent&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsPercentRange {
+            get {
+                return ResourceManager.GetString("SettingsPercentRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Procent&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsPercentRequired {
+            get {
+                return ResourceManager.GetString("SettingsPercentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Kwota&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsPriceRange {
+            get {
+                return ResourceManager.GetString("SettingsPriceRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Kwota&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsPriceRequired {
+            get {
+                return ResourceManager.GetString("SettingsPriceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wartość &quot;Do&quot; musi znajdować się między {1}, a {2}..
+        /// </summary>
+        internal static string SettingsToRange {
+            get {
+                return ResourceManager.GetString("SettingsToRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Do&quot; jest wymagane..
+        /// </summary>
+        internal static string SettingsToRequired {
+            get {
+                return ResourceManager.GetString("SettingsToRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ilość kondygnacji musi być pomiędzy {1}, a {2}..
         /// </summary>
         internal static string StoreyRange {
             get {
                 return ResourceManager.GetString("StoreyRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maksymalna długość tytułu to 40 znaków..
-        /// </summary>
-        internal static string TitleMaxLength {
-            get {
-                return ResourceManager.GetString("TitleMaxLength", resourceCulture);
             }
         }
         

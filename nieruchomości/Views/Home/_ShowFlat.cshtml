@@ -43,148 +43,151 @@
 
             </div>
         </div>
-    <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number<br /><div class="pull-right" style="font-size: 12px; font-weight:100">Odwiedzin: <span class="badge">@(Model.Counter)</span></div></div>
-    <h4>@Model.Title</h4>
-    <h5>Mieszkanie</h5>
-    <div class="row" style="margin-bottom:20px">
-        <div class="col-md-7">
-            <div class="row">
-                <div class="col-md-12">
-                    @{
-                        if (Model.Pictures == null || Model.Pictures.Count == 0)
-                        {
-                            <img class="custom-head-photo" src="/Content/Photos/NoImageAvailable.jpg" />
+        <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number<br /><div class="pull-right" style="font-size: 12px; font-weight:100">Odwiedzin: <span class="badge">@(Model.Counter)</span></div></div>
+        <h4>@Model.Title</h4>
+        <h5>Mieszkanie</h5>
+        <div class="row" style="margin-bottom:20px">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{
+                            if (Model.Pictures == null || Model.Pictures.Count == 0)
+                            {
+                                <img class="custom-head-photo" src="/Content/Photos/NoImageAvailable.jpg" />
+                            }
+                            else
+                            {
+                                <img class="custom-head-photo" src="/Content/Photos/@Model.Pictures[0].Link" />
+                            }
                         }
-                        else
-                        {
-                            <img class="custom-head-photo" src="/Content/Photos/@Model.Pictures[0].Link" />
-                        }
-                    }
+                    </div>
                 </div>
+
             </div>
+            <div class="col-md-5" style="border-left: 1px solid #8B0808; border-radius: 10px">
+                <div class="list-group" style="margin-top: 20px">
+                    <div class="row custom-advert-type">
+                        <div class="col-md-5">Typ oferty:</div>
+                        <div class="col-md-7">@(Model.ToLet ? "Wynajem" : "Sprzedaż")</div>
+                    </div>
+                    @OwnHelpers.PropertyNotNull("Miasto", @Model.City)
+                    @OwnHelpers.PropertyNotNull("Lokalizacja", @Model.Location)
+                    @OwnHelpers.PropertyNotNull("Pow. całkowita", @Model.Area)
+                    @OwnHelpers.PropertyNotNull("Kondygnacja", @Model.Storey)
+                    @OwnHelpers.PropertyNotNull("Stan techniczny", @Model.TechnicalCondition)
+                    @OwnHelpers.PropertyNotNull("Liczba pokoi", @Model.Rooms)
+                    @OwnHelpers.PropertyNotNull("Ogrzewanie", @Model.Heating)
+                    @OwnHelpers.PropertyNotNull("Czynsz", @Model.Rent)
+                    @OwnHelpers.PropertyNotNull("Forma własności", @Model.Ownership)
+                    @OwnHelpers.PropertyNotNull("Cena za m<sup>2</sup>", @Model.PricePerMeter)
 
-        </div>
-        <div class="col-md-5" style="border-left: 1px solid #8B0808; border-radius: 10px">
-            <div class="list-group" style="margin-top: 20px">
-                <div class="row custom-advert-type">
-                    <div class="col-md-5">Typ oferty:</div>
-                    <div class="col-md-7">@(Model.ToLet ? "Wynajem" : "Sprzedaż")</div>
-                </div>
-                @OwnHelpers.PropertyNotNull("Miasto", @Model.City)
-                @OwnHelpers.PropertyNotNull("Lokalizacja", @Model.Location)
-                @OwnHelpers.PropertyNotNull("Pow. całkowita", @Model.Area)
-                @OwnHelpers.PropertyNotNull("Kondygnacja", @Model.Storey)
-                @OwnHelpers.PropertyNotNull("Stan techniczny", @Model.TechnicalCondition)
-                @OwnHelpers.PropertyNotNull("Liczba pokoi", @Model.Rooms)
-                @OwnHelpers.PropertyNotNull("Ogrzewanie", @Model.Heating)
-                @OwnHelpers.PropertyNotNull("Czynsz", @Model.Rent)
-                @OwnHelpers.PropertyNotNull("Forma własności", @Model.Ownership)
-                @OwnHelpers.PropertyNotNull("Cena za m<sup>2</sup>", @Model.PricePerMeter)
-
-                <div class="row custom-advert-price">
-                    <div class="col-md-5">Cena:</div>
-                    <div class="col-md-7">@Model.Price zł</div>
-                </div>
-                <div class="panel-body ">
-                    @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home",
+                    <div class="row custom-advert-price">
+                        <div class="col-md-5">Cena:</div>
+                        <div class="col-md-7">
+                            @(Model.Price == "Do negocjacji" ? Model.Price : Model.Price + " zł")
+ 
+                        </div>
+                    </div>
+                    <div class="panel-body ">
+                        @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home",
                             new { viewPrice = Model.Price, viewOwnershipForm = Model.Ownership },
                             new { data_modal = "", id = "btnCreate", @class = "btn btn-sm btn-info center-block " })
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="list-group">
-                <div class="custom-advert-panel-title">
-                    Galeria
-                </div>
-                <div class="col-md-12 custom-advert-panel-body">
-                    @{
-                        if (Model.Pictures == null || Model.Pictures.Count == 0)
-                        {
-                            <div style="text-align: center">Brak zdjęć</div>
-                        }
-                        else
-                        {
-                            int counter = 0;
-                            foreach (var picture in Model.Pictures)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    <div class="custom-advert-panel-title">
+                        Galeria
+                    </div>
+                    <div class="col-md-12 custom-advert-panel-body">
+                        @{
+                            if (Model.Pictures == null || Model.Pictures.Count == 0)
                             {
-                                counter++;
-                                <div class="col-md-2" style="padding: 5px">
-                                    <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer; max-height: 100px" class="small-pict" />
-                                </div>
-                                if (counter % 6 == 0)
+                                <div style="text-align: center">Brak zdjęć</div>
+                            }
+                            else
+                            {
+                                int counter = 0;
+                                foreach (var picture in Model.Pictures)
                                 {
-                                    <div class="row"></div>
+                                    counter++;
+                                    <div class="col-md-2" style="padding: 5px">
+                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer; max-height: 100px" class="small-pict" />
+                                    </div>
+                                if (counter % 6 == 0)
+                                    {
+                                        <div class="row"></div>
+                                    }
                                 }
                             }
                         }
-                    }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="list-group">
-                <div class="custom-advert-panel-title">
-                    Opis
-                </div>
-                <p class="custom-advert-panel-body" style="word-wrap: break-word">
-                    @Model.Description
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="list-group">
-                <div class="custom-advert-panel-title">
-                    Szczegóły
-                </div>
-                <p class="custom-advert-panel-body" style="word-wrap: break-word">
-                    @Model.Details
-                </p>
-            </div>
-        </div>
-    </div>
-    @if (Model.Worker != null)
-    {
         <div class="row">
             <div class="col-md-12">
-                <div class="list-group" style="margin-top: 10px">
+                <div class="list-group">
                     <div class="custom-advert-panel-title">
-                        Zapytaj
+                        Opis
                     </div>
-                    <div class="col-md-12 custom-advert-panel-body">
-                        <div class="col-md-6" style="font-size: small; padding-left: 0px">
-                            <b>Ofertę prowadzi:</b>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    @if (Model.Worker.HasPhoto)
-                                    {
-                                        <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%" />
-                                    }
-                                </div>
-                                <div class="col-md-8">
-                                    @Model.Worker.FullName<br />
-                                    tel. 1: @Model.Worker.PhoneFirst<br />
-                                    tel. 2: @Model.Worker.PhoneSecond<br />
-                                    email: @Model.Worker.Email
+                    <p class="custom-advert-panel-body" style="word-wrap: break-word">
+                        @Model.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    <div class="custom-advert-panel-title">
+                        Szczegóły
+                    </div>
+                    <p class="custom-advert-panel-body" style="word-wrap: break-word">
+                        @Model.Details
+                    </p>
+                </div>
+            </div>
+        </div>
+        @if (Model.Worker != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="list-group" style="margin-top: 10px">
+                        <div class="custom-advert-panel-title">
+                            Zapytaj
+                        </div>
+                        <div class="col-md-12 custom-advert-panel-body">
+                            <div class="col-md-6" style="font-size: small; padding-left: 0px">
+                                <b>Ofertę prowadzi:</b>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        @if (Model.Worker.HasPhoto)
+                                        {
+                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%" />
+                                        }
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Model.Worker.FullName<br />
+                                        tel. 1: @Model.Worker.PhoneFirst<br />
+                                        tel. 2: @Model.Worker.PhoneSecond<br />
+                                        email: @Model.Worker.Email
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6" style="border-left: 1px solid #f39c12" id="contactForm">
-                            @{ Html.RenderPartial("_ContactForm", Model.ContactEmail); }
+                            <div class="col-md-6" style="border-left: 1px solid #f39c12" id="contactForm">
+                                @{ Html.RenderPartial("_ContactForm", Model.ContactEmail); }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
 
-</div>
+    </div>
 </div>
 
 <script src="/Scripts/jquery-1.10.2.js"></script>
