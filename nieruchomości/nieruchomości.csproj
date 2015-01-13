@@ -29,6 +29,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="NewConnection1-Deployment" Order="1">
+          <Destination Path="Data Source=nieruchomosci.mssql.somee.com%3bInitial Catalog=nieruchomosci%3bPersist Security Info=False%3bUser ID=laptop_service_SQLLogin_1%3bPassword=bbheneuihw%3bMultipleActiveResultSets=True%3bPacket Size=4096%3bWorkstation ID=nieruchomosci.mssql.somee.com" />
+          <Object Type="DbFullSql">
+            <PreSource Path="" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\NewConnection1-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

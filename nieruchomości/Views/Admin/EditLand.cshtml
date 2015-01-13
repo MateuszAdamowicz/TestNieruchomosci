@@ -107,7 +107,7 @@
                                     }
                                 }
                             </div>
-                            <input type="file" multiple class="form-control" id="Files" name="Files" style="max-width: none" />
+                            <input type="file" multiple class="form-control" id="Files" name="Files" style="max-width: none" accept="image/*" />
                             @Html.ListBoxFor(model => model.ToDeleted, new SelectList(new List<int>()), new { @class = "form-control", @style = "max-width:none; height: 100px" })
                         </div>
                     </div>

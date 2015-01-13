@@ -287,7 +287,7 @@ namespace nieruchomości.Controllers
             {
                 if (paged == null || paged == false)
                 {
-                    advertList = _adminFilterAdvertService.ActiveAdverts(hidden).ToList();
+                    advertList = _adminFilterAdvertService.ActiveAdverts(showHidden).ToList();
                     modelToShow.FilterOptions = new AdListFilter();
                 }
                 else
