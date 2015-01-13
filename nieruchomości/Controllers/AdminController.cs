@@ -270,7 +270,7 @@ namespace nieruchomości.Controllers
         }
 
         [HttpGet]
-        public ActionResult AdList(AdList adList,int? page, bool? changed, bool? hide, bool? hidden, string key, string worker, bool? showHidden, DateTime? dateFrom, DateTime? dateTo, bool? flat, bool? house, bool? land , bool? paged)
+        public ActionResult AdList(AdList adList, int? page, bool? changed, bool? hide, string key, string worker, DateTime? dateFrom, DateTime? dateTo, bool? flat, bool? house, bool? land, bool? paged, bool? hidden, bool? showHidden = false)
         {
             var modelToShow = new AdList();
             int pageSize = 20;
