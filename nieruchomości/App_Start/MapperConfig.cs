@@ -68,6 +68,20 @@ namespace nieruchomości
 
             Mapper.CreateMap<Worker, WorkerAdverts>();
 
+            Mapper.CreateMap<Flat, ShowAdvertList>().ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Flat)).ForMember(dest => dest.Image, opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault()))).ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 12)));
+            Mapper.CreateMap<House, ShowAdvertList>()
+                .ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.House))
+                .ForMember(dest => dest.Image,
+                    opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())))
+                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id*9999, 14)))
+                .ForMember(dest => dest.Area, opts => opts.MapFrom(src => src.LandArea));
+            Mapper.CreateMap<Land, ShowAdvertList>()
+                .ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Land))
+                .ForMember(dest => dest.Image,
+                    opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())))
+                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id*9999, 18)))
+                .ForMember(dest => dest.Area, opts => opts.MapFrom(src => src.Area));
+
             //Mapper.CreateMap<Worker,Flat>().ForMember(dest => src.)
         }
     }

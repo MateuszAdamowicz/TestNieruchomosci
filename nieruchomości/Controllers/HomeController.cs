@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using Context;
 using Models;
-using Models.EntityModels;
 using Models.ViewModels;
 using PagedList;
+using Services.AdvertCitiesService.Implementation;
+using Services.AdvertServices.GetFiltredAdvertsService.Implementation;
 using Services.AdvertServices.GetNextPreviousService;
+using Services.AdvertServices.NewestAdvertService;
 using Services.AdvertServices.ShowAdvertService;
 using Services.CalcService;
 using Services.CreateOfferService;
 using Services.EmailServices.EmailService;
+using Services.FilterIndexService.Implementation;
 using Services.SearchService;
 using Services.StatisticesServices.CounterService;
 
@@ -28,9 +29,13 @@ namespace nieruchomości.Controllers
         private readonly IOfferService _offerService;
         private readonly ICalcService _calcService;
         private readonly IGetNextPreviousService _getNextPreviousService;
+        private readonly INewestAdvertService _newestAdvertService;
+        private readonly IFilterIndexService _filterIndexService;
+        private readonly IGetFiltredAdvertsService _getFiltredAdvertsService;
+        private readonly IAdvertCitiesService _advertCitiesService;
 
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService, ICalcService calcService, IGetNextPreviousService getNextPreviousService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService, ICalcService calcService, IGetNextPreviousService getNextPreviousService, INewestAdvertService newestAdvertService, IFilterIndexService filterIndexService, IGetFiltredAdvertsService getFiltredAdvertsService, IAdvertCitiesService advertCitiesService)
         {
             _context = context;
             _emailService = emailService;
@@ -40,6 +45,10 @@ namespace nieruchomości.Controllers
             _offerService = offerService;
             _calcService = calcService;
             _getNextPreviousService = getNextPreviousService;
+            _newestAdvertService = newestAdvertService;
+            _filterIndexService = filterIndexService;
+            _getFiltredAdvertsService = getFiltredAdvertsService;
+            _advertCitiesService = advertCitiesService;
         }
 
         public ActionResult About()
@@ -76,9 +85,37 @@ namespace nieruchomości.Controllers
             return View("Index");
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page, AdType? adType, string flatCities, int? flatRooms, string houseCities, string landCities, string allCities, int? priceFrom, int? priceTo, SortOption? sortOptions)
         {
-            return View();        
+            var indexFiltred = new IndexFiltred()
+            {
+                Page = (page ?? 1),
+                AdType = adType,
+                FlatCities = flatCities,
+                FlatRooms = flatRooms,
+                HouseCities = houseCities,
+                LandCities = landCities,
+                AllCities = allCities,
+                PriceFrom = priceFrom,
+                PriceTo = priceTo,
+                SortOption = sortOptions
+            };
+
+
+            var model = new IndexViewModel();
+            if (priceFrom != null)
+            {
+                int pageSize = 4;
+                int pageNumber = (page ?? 1);
+
+                var adverts = _getFiltredAdvertsService.GetAdverts(adType, flatCities, flatRooms, houseCities, landCities, allCities,
+                                priceFrom, priceTo, sortOptions);
+                model.AdvertList = adverts.ToPagedList(pageNumber, pageSize);
+            }
+            var options = _filterIndexService.GetOptions();
+            model.IndexFilterOptions = options;
+            model.IndexFiltred = indexFiltred;
+            return View(model);        
         }
         public ActionResult House()
         {
@@ -198,6 +235,20 @@ namespace nieruchomości.Controllers
             var model = _calcService.BuildViewModel(viewPrice, viewOwnershipForm);
 
             return PartialView(model);
+        }
+
+        public ActionResult Cities()
+        {
+            // todo
+            var cities = _advertCitiesService.GetCitiesWithRepeats(4);
+            return PartialView("_Cities",cities);
+        }
+
+        public ActionResult NewestAdverts()
+        {
+
+            var adverts = _newestAdvertService.GetNewest(4);
+            return PartialView("_NewestAdverts", adverts);
         }
     }
 }

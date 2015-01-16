@@ -42,6 +42,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,21 +93,27 @@
     <Compile Include="ViewModels\AdminWorker.cs" />
     <Compile Include="ViewModels\AdType.cs" />
     <Compile Include="ViewModels\AdvertNeighbours.cs" />
+    <Compile Include="ViewModels\AdvertToShow.cs" />
     <Compile Include="ViewModels\CalcViewModel.cs" />
+    <Compile Include="ViewModels\CityCount.cs" />
     <Compile Include="ViewModels\Compartments.cs" />
     <Compile Include="ViewModels\CreateOffer.cs" />
     <Compile Include="ViewModels\EditFlat.cs" />
     <Compile Include="ViewModels\EditHouse.cs" />
     <Compile Include="ViewModels\EditLand.cs" />
+    <Compile Include="ViewModels\IndexFilterOptions.cs" />
+    <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NewestAdvert.cs" />
     <Compile Include="ViewModels\OfferStatus.cs" />
     <Compile Include="ViewModels\Response.cs" />
+    <Compile Include="ViewModels\SelectOption.cs" />
     <Compile Include="ViewModels\Session.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShowAd.cs" />
     <Compile Include="ViewModels\ShowAdvert.cs" />
     <Compile Include="ViewModels\CalcView.cs" />
+    <Compile Include="ViewModels\ShowAdvertList.cs" />
     <Compile Include="ViewModels\ShowFlat.cs" />
     <Compile Include="ViewModels\ShowHouse.cs" />
     <Compile Include="ViewModels\ShowLand.cs" />
@@ -112,6 +122,7 @@
     <Compile Include="ViewModels\ShowListLand.cs" />
     <Compile Include="ViewModels\ShowListPhoto.cs" />
     <Compile Include="ViewModels\ShowWorker.cs" />
+    <Compile Include="ViewModels\SortOption.cs" />
     <Compile Include="ViewModels\Visit.cs" />
     <Compile Include="ViewModels\WorkerAdverts.cs" />
     <Compile Include="ViewModels\WorkersViewModel.cs" />

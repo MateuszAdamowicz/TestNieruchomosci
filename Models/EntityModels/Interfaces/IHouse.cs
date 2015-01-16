@@ -5,8 +5,8 @@ namespace Models.EntityModels.Interfaces
     public interface IHouse
     {
         string Location { get; set; }
-        string LandArea { get; set; }
-        string UsableArea { get; set; }
+        int LandArea { get; set; }
+        int UsableArea { get; set; }
         string TechnicalCondition { get; set; }
         int Rooms { get; set; }
         string Heating { get; set; }
@@ -18,7 +18,7 @@ namespace Models.EntityModels.Interfaces
         string Description { get; set; }
         string Details { get; set; }
         string City { get; set; }
-        string Price { get; set; }
+        int Price { get; set; }
         Worker Worker { get; set; }
         int Id { get; set; }
         DateTime CreatedAt { get; set; }

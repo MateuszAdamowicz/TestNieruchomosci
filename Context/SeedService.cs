@@ -12,7 +12,7 @@ namespace Context
 
         private readonly List<string> _adLocationList;
 
-        private readonly List<string> _adAreaList;
+        private readonly List<int> _adAreaList;
 
         private readonly List<int> _adStoreyList;
 
@@ -34,7 +34,7 @@ namespace Context
 
         private readonly List<string> _adCityList;
 
-        private readonly List<string> _adPriceList;
+        private readonly List<int> _adPriceList;
 
         public SeedService()
         {
@@ -53,14 +53,9 @@ namespace Context
                 "Śródmieście", "Psie Pole", "Zakrzów", "Pawłowice", "Sołtysowice", "Bielany"
             };
 
-            _adAreaList = new List<string>()
+            _adAreaList = new List<int>()
             {
-                "120m2",
-                "110m2",
-                "36m2",
-                "164m2",
-                "283m2",
-                "11m2"
+                120,140,170,180,200,300,400
             };
 
             _adStoreyList = new List<int>()
@@ -140,9 +135,9 @@ namespace Context
                 "Oleśnica"
             };
 
-            _adPriceList = new List<string>()
+            _adPriceList = new List<int>()
             {
-                "140 000zł", "250 000zł", "190 000zł", "550 000zł", "123 000zł", "338 000zł", "1 000 000zł", "2 540 233zł"
+                1000,200000,2000000,300000,40000
             };
         }
 
@@ -150,6 +145,7 @@ namespace Context
         {
             return list[rnd.Next(list.Count)];
         }
+
 
         public int GetRandomInt(List<int> list)
         {
@@ -175,9 +171,9 @@ namespace Context
         {
             var flat = new Flat()
             {
-                Area = GetRandom(_adAreaList),
+                Area = GetRandomInt(_adAreaList),
                 City = GetRandom(_adCityList),
-                Price = GetRandom(_adPriceList),
+                Price = GetRandomInt(_adPriceList),
                 Description = GetRandom(_adDescriptionList),
                 Details = GetRandom(_adDescriptionList),
                 Title = GetRandom(_adTitleList),
@@ -201,9 +197,9 @@ namespace Context
         {
             var house = new House()
             {
-                UsableArea = GetRandom(_adAreaList),
+                UsableArea = GetRandomInt(_adAreaList),
                 City = GetRandom(_adCityList),
-                Price = GetRandom(_adPriceList),
+                Price = GetRandomInt(_adPriceList),
                 Description = GetRandom(_adDescriptionList),
                 Details = GetRandom(_adDescriptionList),
                 Title = GetRandom(_adTitleList),
@@ -212,7 +208,7 @@ namespace Context
                 Ownership = GetRandom(_adOwnershipList),
                 PricePerMeter = GetRandom(_adPricePerList),
                 Rooms = GetRandomInt(_adRoomsList),
-                LandArea = GetRandom(_adAreaList),
+                LandArea = GetRandomInt(_adAreaList),
                 Rent = GetRandom(_adRentList),
                 ToLet = (rnd.Next(10)%2 == 0),
                 Visible = true,
@@ -226,12 +222,13 @@ namespace Context
             var land = new Land()
             {
                 City = GetRandom(_adCityList),
-                Price = GetRandom(_adPriceList),
+                Price = GetRandomInt(_adPriceList),
                 Description = GetRandom(_adDescriptionList),
                 Details = GetRandom(_adDescriptionList),
                 Title = GetRandom(_adTitleList),
                 Location = GetRandom(_adLocationList),
                 Ownership = GetRandom(_adOwnershipList),
+                Area = GetRandomInt(_adAreaList),
                 Visible = true,
             };
 

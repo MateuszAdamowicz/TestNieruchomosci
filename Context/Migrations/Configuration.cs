@@ -164,7 +164,7 @@ namespace Context.Migrations
             //for (int i = 0; i < 40; i++)
             //{
             //    var flat = seedService.GetFlat();
-            //    flat.Worker = workers[i%20];
+            //    flat.Worker = workers[i % 20];
             //    flats.Add(flat);
             //}
 
@@ -172,7 +172,7 @@ namespace Context.Migrations
             //for (int i = 0; i < 40; i++)
             //{
             //    var house = seedService.GetHouse();
-            //    house.Worker = workers[i%20];
+            //    house.Worker = workers[i % 20];
             //    houses.Add(house);
             //}
 
@@ -180,7 +180,7 @@ namespace Context.Migrations
             //for (int i = 0; i < 40; i++)
             //{
             //    var land = seedService.GetLand();
-            //    land.Worker = workers[i%20];
+            //    land.Worker = workers[i % 20];
             //    lands.Add(land);
             //}
 

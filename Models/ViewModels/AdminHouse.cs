@@ -12,14 +12,14 @@ namespace Models.ViewModels
         public string Location { get; set; }
 
         [Display(Name = "Powierzchnia całkowita")]
-        [RegularExpression(@"([0-9]+\.[0-9]+m2?)|([0-9]+m2?)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "AreaAdvertNotValid")]     
+        //[RegularExpression(@"([0-9]+\.[0-9]+m2?)|([0-9]+m2?)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "AreaAdvertNotValid")]     
         [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]
-        public string LandArea { get; set; }
+        public int LandArea { get; set; }
         
         [Display(Name = "Powierzchnia użytkowa")]
-        [RegularExpression(@"([0-9]+\.[0-9]+m2?)|([0-9]+m2?)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "AreaAdvertNotValid")]     
+        //[RegularExpression(@"([0-9]+\.[0-9]+m2?)|([0-9]+m2?)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "AreaAdvertNotValid")]     
         [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]       
-        public string UsableArea { get; set; }
+        public int UsableArea { get; set; }
         
         [Display(Name = "Stan techniczny")]
         [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]        
@@ -68,9 +68,9 @@ namespace Models.ViewModels
 
         [Display(Name = "Cena")]
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceRequired")]
-        [RegularExpression(@"([0-9]+\.[0-9]+)|([0-9]+)|(Do negocjacji)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceAdvertNotValid")]
+        //[RegularExpression(@"([0-9]+\.[0-9]+)|([0-9]+)|(Do negocjacji)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceAdvertNotValid")]
         [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]        
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         public int Worker { get; set; }
         public IEnumerable<HttpPostedFileBase> Files { get; set; }

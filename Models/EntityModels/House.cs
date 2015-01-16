@@ -5,8 +5,8 @@ namespace Models.EntityModels
     public class House: Ad, IHouse
     {
         public string Location { get; set; }
-        public string LandArea { get; set; }
-        public string UsableArea { get; set; }
+        public int LandArea { get; set; }
+        public int UsableArea { get; set; }
         public string TechnicalCondition { get; set; }
         public int Rooms { get; set; }
         public string Heating { get; set; }

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Models.ViewModels.CityCount>
+
+@foreach (var city in Model)
+{
+    <a href="@Url.Action("Index", "Home", new {allCities = city.CityName, priceFrom = 20000, priceTo = 2000000})">
+
+        <div class="menu-subitem">
+            @city.CityName
+            <div class="pull-right  menu-item-counter">(@city.Count)</div>
+        </div>
+
+    </a>
+}

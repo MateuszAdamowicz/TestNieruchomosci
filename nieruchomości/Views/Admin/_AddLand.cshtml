@@ -125,14 +125,14 @@
             totalSize += $(this)[0].files[i].size / 1024 / 1024;
         }
 
-        if (valid == true) {
+        if (valid === true) {
             if (totalSize > 20) {
                 valid = false;
                 errors.push("Łączna wielkość plików jest za duża! (max 20MB)");
             }
         }
 
-        if (valid == false) {
+        if (valid === false) {
             $(this)[0].value = "";
             alert(errors.join("\n"));
         }

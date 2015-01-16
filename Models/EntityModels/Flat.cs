@@ -5,7 +5,7 @@ namespace Models.EntityModels
     public class Flat :Ad, IFlat
     {
         public string Location { get; set; }
-        public string Area { get; set; }
+        public int Area { get; set; }
         public int Storey { get; set; }
         public string TechnicalCondition { get; set; }
         public int Rooms { get; set; }

@@ -17,7 +17,7 @@ namespace Models.EntityModels
         public string Description { get; set; }
         public string Details { get; set; }
         public string City { get; set; }
-        public string Price { get; set; }
+        public int Price { get; set; }
         public virtual Worker Worker { get; set; }
         public bool Visible { get; set; }
         public virtual List<Photo> Pictures { get; set; }

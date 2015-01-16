@@ -42,6 +42,10 @@ using Services.StatisticesServices.StatisticesService.Implementation;
 using Services.WorkerService;
 using Services.AdminSettingsService;
 using Services.AdminSettingsService.Implementation;
+using Services.AdvertCitiesService.Implementation;
+using Services.AdvertServices.GetFiltredAdvertsService.Implementation;
+using Services.AdvertServices.SortAdvertService.Implementation;
+using Services.FilterIndexService.Implementation;
 
 
 namespace nieruchomości
@@ -77,6 +81,10 @@ namespace nieruchomości
             container.RegisterType<IGetAdvertService, GetAdvertService>();
             container.RegisterType<IAdminSettingsService, AdminSettingsService>();
             container.RegisterType<IGetNextPreviousService, GetNextPreviousService>();
+            container.RegisterType<IAdvertCitiesService, AdvertCitiesService>();
+            container.RegisterType<IFilterIndexService, FilterIndexService>();
+            container.RegisterType<IGetFiltredAdvertsService, GetFiltredAdvertsService>();
+            container.RegisterType<ISortAdvertService, SortAdvertService>();
         }
     }
 }

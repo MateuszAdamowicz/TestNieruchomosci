@@ -5,7 +5,7 @@ namespace Models.EntityModels.Interfaces
     public interface IFlat
     {
         string Location { get; set; }
-        string Area { get; set; }
+        int Area { get; set; }
         int Storey { get; set; }
         string TechnicalCondition { get; set; }
         int Rooms { get; set; }
@@ -18,7 +18,7 @@ namespace Models.EntityModels.Interfaces
         string Description { get; set; }
         string Details { get; set; }
         string City { get; set; }
-        string Price { get; set; }
+        int Price { get; set; }
         Worker Worker { get; set; }
         int Id { get; set; }
         DateTime CreatedAt { get; set; }
