@@ -76,6 +76,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -144,8 +145,11 @@
     <Compile Include="DeleteMessageService\IDeleteMessageService.cs" />
     <Compile Include="EnumNameService\IEnumNameService.cs" />
     <Compile Include="GenericRepository\IGenericRepository.cs" />
+    <Compile Include="MaxPriceService\IMaxPriceService.cs" />
+    <Compile Include="MaxPriceService\Implementation\MaxPriceService.cs" />
     <Compile Include="PhotoService\IPhotoService.cs" />
     <Compile Include="AdvertServices\UpdateAdvertService\IUpdateAdvertService.cs" />
+    <Compile Include="ResizeImageService\Implementataion\ResizeImageService.cs" />
     <Compile Include="WorkerService\IWorkerService.cs" />
     <Compile Include="LogService\Implementation\ExceptionLoggingFilter.cs" />
     <Compile Include="PhotoService\Implementation\PhotoService.cs" />

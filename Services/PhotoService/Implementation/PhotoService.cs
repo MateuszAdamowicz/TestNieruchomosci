@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using Context;
 using Models.ApplicationModels;
 using Models.EntityModels;
+using Services.ResizeImageService.Implementataion;
 
 namespace Services.PhotoService.Implementation
 {
     public class PhotoService : IPhotoService
     {
         private readonly IApplicationContext _applicationContext;
+        private readonly IResizeImageService _resizeImageService;
 
-        public PhotoService(IApplicationContext applicationContext)
+        public PhotoService(IApplicationContext applicationContext, IResizeImageService resizeImageService)
         {
             _applicationContext = applicationContext;
+            _resizeImageService = resizeImageService;
         }
 
         public Result<string> AddWorkerPhoto(HttpPostedFileBase file, string fileName)
@@ -24,7 +28,16 @@ namespace Services.PhotoService.Implementation
             {
                 var path = HttpContext.Current.Server.MapPath("~/Content/Photos/Workers/");
                 file.SaveAs(path + fileName + Path.GetExtension(file.FileName));
+
+                var resized =
+                    _resizeImageService.ResizeImage(Image.FromFile(path + fileName + Path.GetExtension(file.FileName)), 170, 120);
+
+                var minPath = path + fileName + "_min" + Path.GetExtension(file.FileName);
+
+                resized.Save(minPath);
+
                 return new Result<string>(true, null, "", fileName + Path.GetExtension(file.FileName));
+            
             }
             return new Result<string>(false, null, "",String.Empty);
         }
@@ -56,7 +69,13 @@ namespace Services.PhotoService.Implementation
                         var fileName = String.Format("{0}_{1}", DateTime.Now.ToString("FFFFFFF"), file.FileName);
                         var path = HttpContext.Current.Server.MapPath("~/Content/Photos/");
                         file.SaveAs(path + fileName);
-                        pictures.Add(new Photo() { Link = fileName });
+                        var resized =
+                   _resizeImageService.ResizeImage(Image.FromFile(path + fileName), 170, 120);
+
+                        var minPath = path + "min_"+fileName;
+
+                        resized.Save(minPath);
+                        pictures.Add(new Photo() { Link = fileName, Min = "min_"+fileName});
                     }
                 }
             }

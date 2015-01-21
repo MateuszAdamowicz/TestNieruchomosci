@@ -13,7 +13,7 @@ namespace Models.ViewModels
 
         [Display(Name = "Powierzchnia")]
         //[RegularExpression(@"([0-9]+\.[0-9]+m2?)|([0-9]+m2?)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "AreaAdvertNotValid")]     
-        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]
+        //[MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]
         public int Area { get; set; }
 
         [Range(0, 100, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "StoreyRange")]
@@ -68,7 +68,7 @@ namespace Models.ViewModels
         [Display(Name="Cena")]
         [Required(ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceRequired")]
         //[RegularExpression(@"([0-9]+\.[0-9]+)|([0-9]+)|(Do negocjacji)", ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "PriceAdvertNotValid")]
-        [MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]
+        //[MaxLength(40, ErrorMessageResourceType = typeof(StringResource), ErrorMessageResourceName = "MaxLength")]
         public int Price { get; set; }
 
         public int Worker { get; set; }

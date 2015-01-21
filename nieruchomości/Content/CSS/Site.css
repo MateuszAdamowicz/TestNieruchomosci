@@ -1,4 +1,5 @@
-﻿footer {
+﻿
+footer {
     background-color: rgb(179, 22, 33);
     padding: 10px;
 }
@@ -7,6 +8,7 @@ body {
     background-color: #757575;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 100;
+    padding-top: 0px;
 }
 
 .body-content {
@@ -18,16 +20,12 @@ body {
 }
 
 .left-newest {
-    padding-top: 30px;
+    padding-top: 0px;
     padding-left: 30px;
     padding-bottom: 10px;
     padding-right: 30px;
     color: white;
-        border-width: 20px 0px 0px;
--moz-border-image: url("/Content/img/searchbox_slant_gray_top.png") 27 stretch;
--webkit-border-image: url("/Content/img/searchbox_slant_gray_top.png") 27 stretch;
--o-border-image: url("/Content/img/searchbox_slant_gray_top.png") 27 stretch;
-border-image: url("/Content/img/searchbox_slant_gray_top.png") 27 fill stretch;
+    background-color: #333333;
 }
 
 h4.akapit {
@@ -53,11 +51,7 @@ p.akapit {
     padding-left: 15px;
     padding-bottom: 10px;
     padding-right: 10px;
-        border-width: 0px 0px 20px 0px;
--moz-border-image: url("/Content/img/box_slant_red_bot.png") 27 stretch;
--webkit-border-image: url("/Content/img/box_slant_red_bot.png") 27 stretch;
--o-border-image: url("/Content/img/box_slant_red_bot.png") 27 stretch;
-border-image: url("/Content/img/box_slant_red_bot.png") 27 fill stretch;
+    background-color: #b61c1c
 }
 
 
@@ -69,9 +63,9 @@ border-image: url("/Content/img/box_slant_red_bot.png") 27 fill stretch;
 }
 
 .menu-item:before {
-        font-family: 'Glyphicons Halflings';
-        font-size: 0.8em;
-        content: "\e080";
+        font: normal normal normal 14px/1 FontAwesome;;
+    font-size: 1.2em;
+        content: "\f105";
         margin-right: 5px;
 }
 
@@ -84,16 +78,16 @@ border-image: url("/Content/img/box_slant_red_bot.png") 27 fill stretch;
 }
 
     .menu-subitem:before {
-        font-family: 'Glyphicons Halflings';
-        font-size: 0.8em;
-        content: "\e080\e080";
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 1.2em;
+        content: "\f101";
         margin-right: 5px;
     }
 
 .menu-item-counter {
     font-weight: normal;
     margin-top: 4px;
-    color: #d48d88;
+    color: #FFD8D5;
     font-size: 12px;
     font-family: none;
 }
@@ -111,6 +105,9 @@ border-image: url("/Content/img/box_slant_red_bot.png") 27 fill stretch;
     width: 100%;
 }
 
+a.menu-item-link:hover{
+    text-decoration: none !important;
+}
 .menu-item-button {
     width: 100%;
     height: 25px;
@@ -215,6 +212,7 @@ border-image: url("/Content/img/box_slant_red_bot.png") 27 fill stretch;
     font-weight: bold;
     margin-top: 20px;
     padding-left: 20px;
+    color: #333333 !important;
 }
 .short-advert-body {
     background-color: #333333;
@@ -249,6 +247,26 @@ small.price {
     font-size: 12px;
     font-weight: 100;
 }
+
+.advert-properties {
+    margin-top: 10px;
+    font-size: 12px;
+}
 .left-last {
     background-color: #333333;
+}
+
+
+.contact-form-input {
+    box-shadow: inset 0px 2px 10px #757575;
+    max-width: none !important;
+    border: 0;
+    width: 100%;
+    color: black;
+    font-size: 12px;
+}
+
+.error-feedback {
+    font-size: 10px;
+    color: #D3D593;
 }

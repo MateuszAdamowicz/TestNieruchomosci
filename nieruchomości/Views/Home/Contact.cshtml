@@ -3,97 +3,82 @@
 @{
     ViewBag.Title = "View";
 }
-<div class="row" style="margin-right: 15px">
-    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
-        <h4>Szybki kontakt</h4>
-
-
+<div class="col-md-12">
+    <div class="row">
         <div class="col-md-12">
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="row" style="padding: 10px" id="danger-panel">
-                    <div class="panel panel-danger">
-                        <button type="button" class="close" data-dismiss="alert" style="margin-right:5px; margin-top: 5px">×</button>
-                        <div class="panel-heading">
-                            Błąd
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3 short-advert-label">
+                        Dodaj ofertę
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12 short-advert-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p style="font-size:12px">
+                                    Drogi Marszałku, Wysoka Izbo. PKB rośnie. Z drugiej strony, skoordynowanie pracy obu urzędów umożliwia w określaniu dalszych poczynań. Nie zapominajmy jednak, że utworzenie komisji śledczej do przeanalizowania form oddziaływania. Do tej sprawy pomaga w tym zakresie rozszerza nam horyzonty kolejnych kroków w określaniu modelu rozwoju. Nie chcę państwu niczego sugerować.
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            @Html.ValidationSummary()
+                        <div class="row">
+                            <div class="col-md-12">
+                                @using (Html.BeginForm("Contact", "Home"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="row" style="font-size: large;">
+                                        <div class="col-md-12">
+                                            <span class="glyphicon glyphicon-user" style="margin-right: 10px;"></span>
+                                            <b>Dane personalne</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">@Html.ValidationMessageFor(x => x.FullName, "", new { @class = "error-feedback" })</div>
+                                        <div class="col-md-4">@Html.ValidationMessageFor(x => x.Email, "", new { @class = "error-feedback" })</div>
+                                        <div class="col-md-4">@Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "error-feedback" })</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">@Html.TextBoxFor(x => x.FullName, new { @class = "contact-form-input", @style = "height:25px;", @placeholder = "Twoje imię i nazwisko" })</div>
+                                        <div class="col-md-4">@Html.TextBoxFor(x => x.PhoneNumber, new { @class = "contact-form-input", @style = "height:25px;", @placeholder = "Twój numer telefonu" })</div>
+                                        <div class="col-md-4">@Html.TextBoxFor(x => x.Email, new { @class = "contact-form-input", @style = "height:25px;", @placeholder = "Twój adres e-mail" })</div>
+                                    </div>
+
+                                    <div class="row" style="font-size: large; margin-top: 10px">
+                                        <div class="col-md-12">
+                                            <span class="glyphicon glyphicon-edit" style="margin-right: 10px;"></span>
+                                            <b>Treść wiadomości</b>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-8">@Html.ValidationMessageFor(x => x.Body, "", new { @class = "error-feedback" })</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="menu-item-button" style="width: 100%; height: 40px; background-color: #B71C1C">Wyślij zapytanie</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">@Html.TextAreaFor(x => x.Body, new { @class = "contact-form-input", @style = "height:100px;", @placeholder = "Napisz czego szukasz" })</div>
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            }
-
-            <div class="row">
-                <div class="col-md-6" style="padding-left:0px">
-                    <div class="custom-advert-panel-title">Jak to działa?</div>
-                    <p class="custom-advert-panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare eros nec quam fringilla, ut hendrerit lacus volutpat. Curabitur lobortis tellus est, at sodales risus luctus ac. Ut mattis ac mi sed rutrum. Suspendisse non gravida libero, sit amet varius dolor. Nunc tincidunt elementum consequat. Proin ultricies turpis lectus, ut rutrum nunc vehicula in. Donec aliquet, elit in tincidunt faucibus, leo nisl viverra augue, ut euismod lacus ligula eu arcu. Vestibulum aliquet urna nisi, et placerat neque ullamcorper at. Suspendisse viverra et ex eget faucibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut varius, nisi a feugiat scelerisque, sem diam bibendum enim, eu pharetra nulla sapien eu libero. Nunc nec maximus eros. Ut et sagittis metus, a bibendum augue. Mauris eleifend ultricies ullamcorper. Sed id ex a orci laoreet vehicula.
-
-                        Integer ornare leo quis egestas eleifend. Aliquam dictum pulvinar mauris et auctor. Praesent aliquam a nisl at pellentesque. Fusce suscipit lorem sit amet quam tincidunt, eget feugiat enim euismod. Sed pretium sit amet urna a condimentum. In tempus, risus vitae hendrerit pellentesque, urna libero fermentum dolor, quis rhoncus lectus lectus nec ligula. Proin sed tellus fringilla, finibus lectus sit amet, molestie arcu. Aliquam condimentum, libero in tristique commodo, tortor dui elementum nisi, sit amet hendrerit lectus turpis lacinia elit. Praesent at blandit turpis. Quisque non faucibus diam.
-
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-group-sm">
-                            <div class="row">
-                                <div class="custom-advert-panel-title">
-                                    Dane klienta
-                                </div>
-                                <div class="custom-advert-panel-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <small>Imię i nazwisko</small>
-                                            <div class="has-feedback">
-                                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("FullName") && ViewData.ModelState["FullName"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
-                                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <small>Email</small>
-                                            <div class="has-feedback">
-                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("Email") && ViewData.ModelState["Email"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
-                                                <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <small>Telefon</small>
-                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @style = "max-width:none" + ((ViewData.ModelState.ContainsKey("PhoneNumber") && ViewData.ModelState["PhoneNumber"].Errors.Count > 0) ? ";border: 2px solid red" : "") } })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="custom-advert-panel-title">
-                                    Napisz czego szukasz
-                                </div>
-                                <div class="custom-advert-panel-body">
-                                    <div class="has-feedback">
-                                        @Html.TextAreaFor(model => model.Body, new { @class = "form-control", @style = "max-width:none; height: 200px" + ((ViewData.ModelState.ContainsKey("Body") && ViewData.ModelState["Body"].Errors.Count > 0) ? ";border: 2px solid red" : "") })
-                                        <span class="glyphicon-small glyphicon-asterisk form-control-feedback" aria-hidden="true" style="right:0"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="text-align:center">
-                                <button type="submit" class="btn btn-sm btn-success" style="width:100px">Wyślij</button>
-                            </div>
-                        </div>
-                    }
-                </div>
             </div>
-
-
         </div>
     </div>
 </div>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script type="text/javascript">
-    $(".close").on("click", function() {
-        $("#danger-panel")[0].remove();
-    });
-</script>

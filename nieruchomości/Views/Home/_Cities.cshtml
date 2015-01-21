@@ -2,7 +2,7 @@
 
 @foreach (var city in Model)
 {
-    <a href="@Url.Action("Index", "Home", new {allCities = city.CityName, priceFrom = 20000, priceTo = 2000000})">
+    <a class="menu-item-link" href="@Url.Action("Index", "Home", new {allCities = city.CityName, priceFrom = 0, priceTo = int.MaxValue})">
 
         <div class="menu-subitem">
             @city.CityName

@@ -22,5 +22,6 @@ namespace Models.ViewModels
         public int? PriceFrom { get; set; }
         public int? PriceTo  { get; set; }
         public SortOption? SortOption { get; set; }
+        public int PriceMax { get; set; }
     }
 }

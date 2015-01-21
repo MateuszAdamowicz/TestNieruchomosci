@@ -31,7 +31,16 @@
             </div>
             <div class="row">
                 <div class="col-md-10">
-                    <img src="http://nieruchomoscijeleniogorskie.somee.com/Content/img/the-palace-of-culture.jpg" style="width: 100%; border: 1px solid white;" />
+                    <a href="/Home/Show?key=@advert.Number">
+                        @if (advert.Picture != null)
+                        {
+                            <img src="/Content/Photos/@advert.Picture.Min" style="width: 100%; border: 1px solid white;" />
+                        }
+                        else
+                        {
+                            <img src="/Content/img/brakzdjecia.png" style="width: 100%; border: 1px solid white;" />
+                        }
+                    </a>
                 </div>
                 <div class="col-md-2">
                     <div class="row">
@@ -47,7 +56,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <small>Cena: <b><span class="price-amount">@advert.Price</span> PLN</b></small>
+                    <small>Cena: <b><span class="pln">@advert.Price</span> PLN</b></small>
                 </div>
             </div>
         </div>

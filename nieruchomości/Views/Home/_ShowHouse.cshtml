@@ -6,196 +6,249 @@
     ViewBag.Title = "ShowFlat";
 }
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/modalform.js"></script>
-
-@*modal fade in function*@
-<div id='myModal' class='modal fade in'>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div id='myModalContent'></div>
-        </div>
-    </div>
-</div>
-
-<div class="row" style="margin-right: 15px">
-    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
-        @if (!Model.Visible)
-        {
-            <div class="alert-danger"><strong>To ogłoszenie jest ukryte.</strong> Nie jest widoczne dla użytkowników</div>
-        }
-        <div class="row" style="margin-bottom:10px">
-            <div class="col-md-6" style="text-align:left">
-                @if (!String.IsNullOrEmpty(Model.Previous))
-                {
-                    <a class="btn btn-xs btn-success" href="/Home/Show?key=@Model.Previous">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                }
-            </div>
-            <div class="col-md-6" style="text-align:right">
-                @if (!String.IsNullOrEmpty(Model.Next))
-                {
-                    <a class="btn btn-xs btn-success" href="/Home/Show?key=@Model.Next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                }
-
-            </div>
-        </div>
-        <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number<br /><div class="pull-right" style="font-size: 12px; font-weight:100">Odwiedzin: <span class="badge">@(Model.Counter)</span></div></div>
-        <h4>@Model.Title</h4>
-        <h5>Dom</h5>
-        <div class="row" style="margin-bottom:20px">
-            <div class="col-md-7">
-                <div class="row">
-                    <div class="col-md-12">
-                        @{
-                            if (Model.Pictures == null || Model.Pictures.Count == 0)
-                            {
-                                @*<div style="text-align: center">Brak zdjęć</div>*@
-                                <img class="custom-head-photo" src="/Content/Photos/NoImageAvailable.jpg" />
-                            }
-                            else
-                            {
-                                <img class="custom-head-photo" src="/Content/Photos/@Model.Pictures[0].Link" />
-                            }
-                        }
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-5" style="border-left: 1px solid #8B0808; border-radius: 10px">
-                <div class="list-group" style="margin-top: 20px">
-                    <div class="row custom-advert-type">
-                        <div class="col-md-5">Typ oferty:</div>
-                        <div class="col-md-7">@(Model.ToLet ? "Wynajem" : "Sprzedaż")</div>
-                    </div>
-                    @OwnHelpers.PropertyNotNull("Miasto", @Model.City)
-                    @OwnHelpers.PropertyNotNull("Lokalizacja", @Model.Location)
-                    @OwnHelpers.PropertyNotNull("Pow. całkowita", @Model.LandArea)
-                    @OwnHelpers.PropertyNotNull("Pow. użytkowa", @Model.UsableArea)
-                    @OwnHelpers.PropertyNotNull("Stan techniczny", @Model.TechnicalCondition)
-                    @OwnHelpers.PropertyNotNull("Liczba pokoi", @Model.Rooms)
-                    @OwnHelpers.PropertyNotNull("Ogrzewanie", @Model.Heating)
-                    @OwnHelpers.PropertyNotNull("Czynsz", @Model.Rent)
-                    @OwnHelpers.PropertyNotNull("Forma własności", @Model.Ownership)
-                    @OwnHelpers.PropertyNotNull("Cena za m<sup>2</sup>", @Model.PricePerMeter)
-
-                    <div class="row custom-advert-price">
-                        <div class="col-md-5">Cena:</div>
-                        <div class="col-md-7">
-                             @(Model.Price == "Do negocjacji" ? Model.Price : Model.Price + " zł")
-                        </div>
-                    </div>
-                    <div class="panel-body ">
-                        @Html.ActionLink("Kalkulator opłat dodatkowych", "CalcView", "Home",
-                            new { viewPrice = Model.Price, viewOwnershipForm = Model.Ownership },
-                            new { data_modal = "", id = "btnCreate", @class = "btn btn-sm btn-info center-block " })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="list-group">
-                    <div class="custom-advert-panel-title">
-                        Galeria
-                    </div>
-                    <div class="col-md-12 custom-advert-panel-body">
-                        @{
-                            if (Model.Pictures == null || Model.Pictures.Count == 0)
-                            {
-                                <div style="text-align: center">Brak zdjęć</div>
-                            }
-                            else
-                            {
-                                int counter = 0;
-                                foreach (var picture in Model.Pictures)
-                                {
-                                    counter ++;
-                                    <div class="col-md-2" style="padding-bottom: 10px">
-                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer; max-height:100px" class="small-pict" />
-                                    </div>
-                                    if (counter%6 == 0)
-                                    {
-                                        <div class="row"></div>
-                                    }
-                                }
-                            }
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="list-group">
-                    <div class="custom-advert-panel-title">
-                        Opis
-                    </div>
-                    <p class="custom-advert-panel-body" style="word-wrap: break-word">
-                        @Model.Description
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="list-group">
-                    <div class="custom-advert-panel-title">
-                        Szczegóły
-                    </div>
-                    <p class="custom-advert-panel-body" style="word-wrap: break-word">
-                        @Model.Details
-                    </p>
-                </div>
-            </div>
-        </div>
-        @if (Model.Worker != null)
-        {
+<div class="col-md-12">
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="list-group" style="margin-top: 10px">
-                        <div class="custom-advert-panel-title">
-                            Zapytaj
+                    <div class="col-md-3 short-advert-label">
+                        @(Model.ToLet ? "Do wynajęcia" : "Do sprzedania")
+                    </div>
+                    <div class="col-md-9 short-advert-title">
+                        @Model.Title
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12 short-advert-body">
+                        <div class="col-md-3" style="padding: 0; padding-right: 15px">
+                            <div class="short-advert-photo">
+                                @if (Model.Pictures != null && Model.Pictures.Any())
+                                {
+                                    <a class="fancybox" rel="gallery1" href="/Content/Photos/@Model.Pictures[0].Link">
+                                        <img src="/Content/Photos/@Model.Pictures[0].Min" width="100%" style="border: 1px solid white" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <img src="/Content/img/brakzdjecia.png" width="100%" />
+                                }
+                            </div>
                         </div>
-                        <div class="col-md-12 custom-advert-panel-body">
-                            <div class="col-md-6" style="font-size: small; padding-left: 0px">
-                                <b>Ofertę prowadzi:</b>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        @if (Model.Worker.HasPhoto)
-                                        {
-                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%" />
-                                        }
-                                    </div>
-                                    <div class="col-md-8">
-                                        @Model.Worker.FullName<br />
-                                        tel. 1: @Model.Worker.PhoneFirst<br />
-                                        tel. 2: @Model.Worker.PhoneSecond<br />
-                                        email: @Model.Worker.Email
+                        <div class="col-md-7">
+                            <div class="short-advert-price">
+                                <span class="pln">@Model.Price</span> PLN <small class="price">
+                                    (<span class="pln">@(Model.Price/Model.LandArea)</span>
+                                    zł/m<sup>2</sup>)
+                                </small>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="short-advert-description">
+                                        @Model.Description
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="border-left: 1px solid #f39c12" id="contactForm">
-                                @{ Html.RenderPartial("_ContactForm", Model.ContactEmail); }
+                            <div class="row">
+                                <div class="col-md-12 advert-properties">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            Lokalizacja:
+                                        </div>
+                                        <div class="col-md-7">
+                                            @if (!String.IsNullOrEmpty(Model.Location))
+                                            {
+                                                @String.Format("{0} - {1}", Model.City, Model.Location)
+                                            }
+                                            else
+                                            {
+                                                @String.Format("{0}", Model.City)
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">Liczba pokoi:</div>
+                                        <div class="col-md-7">
+                                            <b>@Model.Rooms</b> o łącznej powierzchni <b>@Model.UsableArea m<sup>2</sup></b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">Powierzchnia całkowita:</div>
+                                        <div class="col-md-7">
+                                            @Model.LandArea m<sup>2</sup>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">Stan techniczny:</div>
+                                        <div class="col-md-7">
+                                            @Model.TechnicalCondition
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">Ogrzewanie:</div>
+                                        <div class="col-md-7">
+                                            @Model.Heating
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">Forma własności:</div>
+                                        <div class="col-md-7">
+                                            @Model.Ownership
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <b>Czynsz:</b>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <b><span class="pln">@Model.Rent</span> zł</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 short-advert-description" style="margin-top: 10px;">
+                                @Model.Details
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 20px; font-size: large;">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-map-marker" style="margin-right: 10px;"></span>
+                                <b>Zobacz na mapie</b> <small style="font-size: 65%">(mapa wskazuje tylko lokalizację, aktyalny stan pokazuje galeria pod mapą)</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="height: 200px; width: 100%; border: 1px solid white">
+                                    <div id="map"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (Model.Pictures != null && Model.Pictures.Any())
+                        {
+                            <div class="row" style="margin-top: 20px; font-size: large;">
+                                <div class="col-md-12">
+                                    <span class="glyphicon glyphicon-camera" style="margin-right: 10px;"></span>
+                                    <b>Galeria zdjęć</b> <small style="font-size: 65%">(kliknij na wybranym zdjęciu aby je powiększyć)</small>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @foreach (var photo in Model.Pictures)
+                                    {
+                                        <div class="col-md-3">
+                                            <a class="fancybox" rel="gallery1" href="/Content/Photos/@photo.Link">
+                                                <img src="/Content/Photos/@photo.Min" width="100%" style="border:1px solid white" />
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @if (Model.Worker != null)
+                        {
+                            <div class="row" style="margin-top: 20px; font-size: large;">
+                                <div class="col-md-12">
+                                    <span class="glyphicon glyphicon-user" style="margin-right: 10px;"></span>
+                                    <b>Zapytaj o tą nieruchomość</b>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @{Html.RenderPartial("_ContactForm", Model.ContactEmail);}
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3 short-advert-social">
+                        <div class="row">
+                            Okazja? przekaż dalej!
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3" style="padding:0">
+                                    <img src="/Content/img/icons/social-31-facebook.png" />
+                                </div>
+                                <div class="col-md-3" style="padding:0">
+                                    <img src="/Content/img/icons/social-32-twitter.png" />
+                                </div>
+                                <div class="col-md-3" style="padding:0">
+                                    <img src="/Content/img/icons/social-3-google-plus.png" />
+                                </div>
+                                <div class="col-md-3" style="padding:0">
+                                    <img src="/Content/img/icons/social-40-e-mail.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="short-advert-number">Numer oferty: <b>@Model.Number</b></div>
+                            </div>
+                            <div class="col-md-6" style="text-align: right">
+                                <div class="short-advert-date">Data dodania: <b>@Model.CreatedAt.ToShortDateString()</b></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        }
-
+        </div>
     </div>
 </div>
 
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANJktXHK4ntWky3gGMSpM-7AvJeTYxHFk">
+</script>
+<script type="text/javascript">
+    function initialize() {
+        var mapOptions = {
+            center: { lat: 50.905507, lng: 15.733918 },
+            zoom: 14
+        };
+        var map = new google.maps.Map($("#map")[0], mapOptions);
 
-<script src="/Scripts/jquery-1.10.2.js"></script>
+        var marker = new google.maps.Marker({
+            position: { lat: 50.905507, lng: 15.733918 },
+            map: map,
+            title: 'Do zmiany'
+        });
+    }
 
-<script language="javascript">
-    $(".small-pict").on("click", function() {
-        var link = $(this).prop("src");
-        $(".custom-head-photo").prop("src", link);
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    $(document).ready(function () {
+
+        /* This is basic - uses default settings */
+
+        $("a#single_image").fancybox();
+
+        /* Using custom settings */
+
+        $("a#inline").fancybox({
+            'hideOnContentClick': true
+        });
+
+        /* Apply fancybox to multiple items */
+
+        $("a.group").fancybox({
+            'transitionIn': 'elastic',
+            'transitionOut': 'elastic',
+            'speedIn': 600,
+            'speedOut': 200,
+            'overlayShow': false
+        });
+
     });
 </script>

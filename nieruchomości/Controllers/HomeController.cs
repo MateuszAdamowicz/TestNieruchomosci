@@ -14,6 +14,7 @@ using Services.CalcService;
 using Services.CreateOfferService;
 using Services.EmailServices.EmailService;
 using Services.FilterIndexService.Implementation;
+using Services.MaxPriceService;
 using Services.SearchService;
 using Services.StatisticesServices.CounterService;
 
@@ -33,9 +34,10 @@ namespace nieruchomości.Controllers
         private readonly IFilterIndexService _filterIndexService;
         private readonly IGetFiltredAdvertsService _getFiltredAdvertsService;
         private readonly IAdvertCitiesService _advertCitiesService;
+        private readonly IMaxPriceService _maxPriceService;
 
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService, ICalcService calcService, IGetNextPreviousService getNextPreviousService, INewestAdvertService newestAdvertService, IFilterIndexService filterIndexService, IGetFiltredAdvertsService getFiltredAdvertsService, IAdvertCitiesService advertCitiesService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, IOfferService offerService, ICalcService calcService, IGetNextPreviousService getNextPreviousService, INewestAdvertService newestAdvertService, IFilterIndexService filterIndexService, IGetFiltredAdvertsService getFiltredAdvertsService, IAdvertCitiesService advertCitiesService, IMaxPriceService maxPriceService)
         {
             _context = context;
             _emailService = emailService;
@@ -49,6 +51,7 @@ namespace nieruchomości.Controllers
             _filterIndexService = filterIndexService;
             _getFiltredAdvertsService = getFiltredAdvertsService;
             _advertCitiesService = advertCitiesService;
+            _maxPriceService = maxPriceService;
         }
 
         public ActionResult About()
@@ -113,8 +116,10 @@ namespace nieruchomości.Controllers
                 model.AdvertList = adverts.ToPagedList(pageNumber, pageSize);
             }
             var options = _filterIndexService.GetOptions();
+            
             model.IndexFilterOptions = options;
             model.IndexFiltred = indexFiltred;
+            model.IndexFiltred.PriceMax = _maxPriceService.GetMaxPrice();
             return View(model);        
         }
         public ActionResult House()

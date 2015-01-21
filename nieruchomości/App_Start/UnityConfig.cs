@@ -46,6 +46,9 @@ using Services.AdvertCitiesService.Implementation;
 using Services.AdvertServices.GetFiltredAdvertsService.Implementation;
 using Services.AdvertServices.SortAdvertService.Implementation;
 using Services.FilterIndexService.Implementation;
+using Services.MaxPriceService;
+using Services.MaxPriceService.Implementation;
+using Services.ResizeImageService.Implementataion;
 
 
 namespace nieruchomości
@@ -85,6 +88,8 @@ namespace nieruchomości
             container.RegisterType<IFilterIndexService, FilterIndexService>();
             container.RegisterType<IGetFiltredAdvertsService, GetFiltredAdvertsService>();
             container.RegisterType<ISortAdvertService, SortAdvertService>();
+            container.RegisterType<IResizeImageService, ResizeImageService>();
+            container.RegisterType<IMaxPriceService, MaxPriceService>();
         }
     }
 }

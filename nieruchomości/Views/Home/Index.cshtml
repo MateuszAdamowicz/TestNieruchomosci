@@ -125,8 +125,8 @@
                                 </div>
 
                             </div>
-                            @Html.Hidden("PriceFrom", "20000", new {@id = "PriceFrom"})
-                            @Html.Hidden("PriceTo", "2000000", new {@id = "PriceTo"})
+                            @Html.Hidden("PriceFrom", "0", new {@id = "PriceFrom"})
+                            @Html.Hidden("PriceTo", Model.IndexFiltred.PriceMax, new {@id = "PriceTo"})
                     }
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                                 @(advert.ToLet ? "Do wynajęcia" : "Do sprzedania")
                             </div>
                             <div class="col-md-9 short-advert-title">
-                                @EnumNameHelper.GetAdType(advert.AdType), @advert.City, @advert.Area m<sup>2</sup>
+                                <a href="/Home/Show?key=@advert.Number" style="color:#333333">@advert.Title</a>
                             </div>
                         </div>
                     </div>
@@ -189,12 +189,21 @@
                             <div class="col-md-12 short-advert-body">
                                 <div class="col-md-3" style="padding: 0; padding-right: 15px">
                                     <div class="short-advert-photo">
-                                        <img src="http://nieruchomoscijeleniogorskie.somee.com/Content/img/the-palace-of-culture.jpg" style="width: 100%; border: 1px solid white" />
+                                        @if (advert.Image != null)
+                                        {
+                                            <img src="/Content/Photos/@advert.Image.Min" width="100%" style="border: 1px solid white"/>
+                                        }
+                                        else
+                                        {
+                                            <img src="/Content/img/brakzdjecia.png" width="100%" style="border:1px solid white"/>
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-md-7">
-                                    <div class="short-advert-price">
-                                        @advert.Price PLN <small class="price">(@(advert.Price/advert.Area) zł/m<sup>2</sup>)</small>
+                                <div class="short-advert-price">
+                                    <span class="pln">@advert.Price</span> PLN <small class="price">
+                                                          (<span class="pln">@(advert.Price / advert.Area)</span>
+                                 zł/m<sup>2</sup>)</small>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -330,9 +339,9 @@
     $(function () {
         $("#slider-range").slider({
             range: true,
-            min: 20000,
-            max: 2000000,
-            values: [@(Model.IndexFiltred.PriceFrom ?? 20000), @(Model.IndexFiltred.PriceTo ?? 2000000)],
+            min: 0,
+            max: @Model.IndexFiltred.PriceMax,
+            values: [@(Model.IndexFiltred.PriceFrom ?? 0), @(Model.IndexFiltred.PriceTo ?? Model.IndexFiltred.PriceMax)],
                     slide: function (event, ui) {
                         $("#amount").val("PLN " + ui.values[0].formatMoney(0, "", " ") + " - PLN " + ui.values[1].formatMoney(0, "", " "));
                         $("#PriceFrom").val(ui.values[0]);
@@ -344,17 +353,4 @@
                 $("#PriceFrom").val(ui.values[0]);
                 $("#PriceTo").val(ui.values[1]);
             });
-
-
-            Number.prototype.formatMoney = function (places, symbol, thousand, decimal) {
-                places = !isNaN(places = Math.abs(places)) ? places : 2;
-                symbol = symbol !== undefined ? symbol : "$";
-                thousand = thousand || ",";
-                decimal = decimal || ".";
-                var number = this,
-                    negative = number < 0 ? "-" : "",
-                    i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
-                    j = (j = i.length) > 3 ? j % 3 : 0;
-                return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
-            };
         </script>

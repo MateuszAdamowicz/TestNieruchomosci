@@ -9,5 +9,6 @@ namespace Models.EntityModels
         public virtual Flat Flat { get; set; }
         public virtual House House { get; set; }
         public virtual Land Land { get; set; }
+        public string Min { get; set; }
     }
 }
