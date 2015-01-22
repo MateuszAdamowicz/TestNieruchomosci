@@ -59,7 +59,7 @@
                                         @Html.DropDownList("FlatCities", new SelectList(Model.IndexFilterOptions.FlatCities, "Value", "Text"), new {@class = "menu-item-input"})
                                     </div>
                                     <div class="col-md-4" style="padding-right: 5px">
-                                        @Html.DropDownList("Rooms", new SelectList(Model.IndexFilterOptions.Rooms, "Value", "Text"), new {@class = "menu-item-input"})
+                                        @Html.DropDownList("FlatRooms", new SelectList(Model.IndexFilterOptions.Rooms, "Value", "Text"), new {@class = "menu-item-input"})
                                     </div>
                                     <div class="col-md-4" style="padding-right: 5px">
                                         <button class="menu-item-button">Wyczyść filtry</button>
@@ -309,9 +309,10 @@
         <script src="/Scripts/jquery-ui-1.11.2.js">
 
         </script>
-        <script>
-    $("#AdType").on("change", function () {
-        var val = $(this).val();
+<script>
+    
+    var showHide = function() {
+        var val = $("#AdType").val();
 
         if (val === "Flat") {
             $(".flatOptions").show();
@@ -334,7 +335,11 @@
             $(".allOptions").show();
             $(".landOptions").hide();
         }
-    });
+    }
+
+    showHide();
+
+    $("#AdType").on("change", showHide);
 
     $(function () {
         $("#slider-range").slider({
@@ -342,15 +347,15 @@
             min: 0,
             max: @Model.IndexFiltred.PriceMax,
             values: [@(Model.IndexFiltred.PriceFrom ?? 0), @(Model.IndexFiltred.PriceTo ?? Model.IndexFiltred.PriceMax)],
-                    slide: function (event, ui) {
-                        $("#amount").val("PLN " + ui.values[0].formatMoney(0, "", " ") + " - PLN " + ui.values[1].formatMoney(0, "", " "));
-                        $("#PriceFrom").val(ui.values[0]);
-                        $("#PriceTo").val(ui.values[1]);
-                    }
-                });
-                $("#amount").val("PLN " + $("#slider-range").slider("values", 0).formatMoney(0, "", " ") +
-                    " - PLN " + $("#slider-range").slider("values", 1).formatMoney(0, "", " "));
+            slide: function (event, ui) {
+                $("#amount").val("PLN " + ui.values[0].formatMoney(0, "", " ") + " - PLN " + ui.values[1].formatMoney(0, "", " "));
                 $("#PriceFrom").val(ui.values[0]);
                 $("#PriceTo").val(ui.values[1]);
-            });
-        </script>
+            }
+        });
+        $("#amount").val("PLN " + $("#slider-range").slider("values", 0).formatMoney(0, "", " ") +
+            " - PLN " + $("#slider-range").slider("values", 1).formatMoney(0, "", " "));
+        $("#PriceFrom").val(ui.values[0]);
+        $("#PriceTo").val(ui.values[1]);
+    });
+</script>

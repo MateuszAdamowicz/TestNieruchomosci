@@ -11,7 +11,6 @@ namespace Models.ViewModels
             ContactEmail = new ContactEmail();
         }
 
-        public ShowWorker Worker { get; set; }
         public string Location { get; set; }
         public int LandArea { get; set; }
         public int UsableArea { get; set; }

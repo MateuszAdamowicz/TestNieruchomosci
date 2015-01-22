@@ -32,7 +32,7 @@ namespace Services.PhotoService.Implementation
                 var resized =
                     _resizeImageService.ResizeImage(Image.FromFile(path + fileName + Path.GetExtension(file.FileName)), 170, 120);
 
-                var minPath = path + fileName + "_min" + Path.GetExtension(file.FileName);
+                var minPath = path + "min_" + fileName + Path.GetExtension(file.FileName);
 
                 resized.Save(minPath);
 

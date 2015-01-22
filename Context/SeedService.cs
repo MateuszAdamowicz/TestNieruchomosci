@@ -152,20 +152,6 @@ namespace Context
             return list[rnd.Next(list.Count)];
         }
 
-        public Worker GetWorker()
-        {
-            var worker = new Worker()
-            {
-                FirstName = GetRandom(_workerNameList),
-                LastName = GetRandom(_workerNameList),
-                Email = String.Format("{0}_{1}@gmail.com", GetRandom(_workerNameList), GetRandom(_workerNameList)),
-                PhoneFirst = GetRandom(_workerPhoneList),
-                PhoneSecond = GetRandom(_workerPhoneList),
-                HasPhoto = false,
-            };
-
-            return worker;
-        }
 
         public Flat GetFlat()
         {

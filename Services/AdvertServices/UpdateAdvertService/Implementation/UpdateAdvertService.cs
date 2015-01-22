@@ -48,7 +48,6 @@ namespace Services.AdvertServices.UpdateAdvertService.Implementation
                 oldFlat.Rent = editFlat.Rent;
                 oldFlat.Rooms = editFlat.Rooms;
                 oldFlat.Storey = editFlat.Storey;
-                oldFlat.Worker = _applicationContext.Workers.Find(editFlat.Worker);
                 oldFlat.ToLet = editFlat.ToLet;
                 oldFlat.TechnicalCondition = editFlat.TechnicalCondition;
 
@@ -93,7 +92,6 @@ namespace Services.AdvertServices.UpdateAdvertService.Implementation
                 oldHouse.PricePerMeter = editHouse.PricePerMeter;
                 oldHouse.Rent = editHouse.Rent;
                 oldHouse.Rooms = editHouse.Rooms;
-                oldHouse.Worker = _applicationContext.Workers.Find(editHouse.Worker);
                 oldHouse.ToLet = editHouse.ToLet;
                 oldHouse.TechnicalCondition = editHouse.TechnicalCondition;
 
@@ -132,7 +130,6 @@ namespace Services.AdvertServices.UpdateAdvertService.Implementation
                 oldLand.Location = editLand.Location;
                 oldLand.Ownership = editLand.Ownership;
                 oldLand.Price = editLand.Price;
-                oldLand.Worker = _applicationContext.Workers.Find(editLand.Worker);
                 
                 _applicationContext.SaveChanges();
 

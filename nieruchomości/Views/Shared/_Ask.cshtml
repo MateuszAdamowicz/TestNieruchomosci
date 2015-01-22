@@ -1,0 +1,43 @@
+﻿@model Models.ContactEmail
+
+<div class="row" style="margin-top: 20px; font-size: large;">
+    <div class="col-md-12">
+        <span class="glyphicon glyphicon-question-sign" style="margin-right: 10px;"></span>
+        <b>Zapytaj o tą nieruchomość</b>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Show", "Home", new { key = ViewContext.ViewData.ModelState["key"].Value.AttemptedValue }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="font-size:12px">Chętnie odpowiemy na wszystkie Twoje pytania dotyczące tej nieruchomości.<br /> Możesz zadzwonić do nas na numer tel. 570 170 007 lub skorzystać z poniższego formularza kontaktowego.</p>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.ValidationMessageFor(x => x.Body, "", new { @class = "error-feedback" })
+                    @Html.TextAreaFor(x => x.Body, new { @class = "contact-form-input", @style = "height:100px;", @placeholder = "Treść Twojej wiadomości" })
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+                <div class="col-md-4">@Html.ValidationMessageFor(x => x.FullName, "", new { @class = "error-feedback" })</div>
+                <div class="col-md-4">@Html.ValidationMessageFor(x => x.Email, "", new { @class = "error-feedback" })</div>
+                <div class="col-md-4">@Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "error-feedback" })</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">@Html.TextBoxFor(x => x.FullName, new { @class = "contact-form-input", @style = "height:25px;", @placeholder = "Twoje imię i nazwisko" })</div>
+                <div class="col-md-4">@Html.TextBoxFor(x => x.Email, new { @class = "contact-form-input", @style = "height:25px;", @placeholder = "Twój adres e-mail" })</div>
+                <div class="col-md-4">@Html.TextBoxFor(x => x.PhoneNumber, new { @class = "contact-form-input", @style = "height:25px;", @placeholder = "Twój numer telefonu (opcjonalne)" })</div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12" style="text-align: right">
+                    <button type="submit" class="menu-item-button" style="width: 200px; height: 40px; background-color:#B71C1C">Wyślij zapytanie</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

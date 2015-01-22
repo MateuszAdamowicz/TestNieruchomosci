@@ -7,7 +7,6 @@ namespace Context
     public class ApplicationContext: DbContext, IApplicationContext
     {
 
-        public IDbSet<Worker> Workers { get; set; }
         public IDbSet<Flat> Flats { get; set; }
         public IDbSet<House> Houses { get; set; }
         public IDbSet<Land> Lands { get; set; }

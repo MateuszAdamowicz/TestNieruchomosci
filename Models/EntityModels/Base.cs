@@ -1,9 +1,8 @@
 ﻿using System;
-using Models.EntityModels.Interfaces;
 
 namespace Models.EntityModels
 {
-    public class Base : IBase
+    public class Base
     {
         public Base()
         {

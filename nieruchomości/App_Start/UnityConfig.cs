@@ -39,7 +39,6 @@ using Services.StatisticesServices.CounterService;
 using Services.StatisticesServices.CounterService.Implementation;
 using Services.StatisticesServices.StatisticesService;
 using Services.StatisticesServices.StatisticesService.Implementation;
-using Services.WorkerService;
 using Services.AdminSettingsService;
 using Services.AdminSettingsService.Implementation;
 using Services.AdvertCitiesService.Implementation;
@@ -60,7 +59,6 @@ namespace nieruchomości
             container.RegisterType<IApplicationContext, ApplicationContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IAddAdvertService, AddAdvertService>();
             container.RegisterType<IPhotoService, Services.PhotoService.Implementation.PhotoService>();
-            container.RegisterType<IWorkerService, Services.WorkerService.Implementation.WorkerService>();
             container.RegisterType<ITemplateService, TemplateService>();
             container.RegisterType<IEmailService, EmailService>();
             container.RegisterType<ITemplateServiceConfiguration, TemplateServiceConfiguration>();

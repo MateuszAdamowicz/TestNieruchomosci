@@ -10,7 +10,6 @@ namespace Models.ViewModels
             ContactEmail = new ContactEmail();
         }
 
-        public ShowWorker Worker { get; set; }
         public string Location { get; set; }
         public int Area { get; set; }
         public string Storey { get; set; }

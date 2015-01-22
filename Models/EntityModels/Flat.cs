@@ -1,8 +1,8 @@
-﻿using Models.EntityModels.Interfaces;
+﻿
 
 namespace Models.EntityModels
 {
-    public class Flat :Ad, IFlat
+    public class Flat :Ad
     {
         public string Location { get; set; }
         public int Area { get; set; }

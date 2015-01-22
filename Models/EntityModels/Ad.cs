@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Security;
 using System.Text.RegularExpressions;
-using Models.EntityModels.Interfaces;
+using Models.ViewModels;
 
 namespace Models.EntityModels
 {
-    public class Ad : Base, IAd
+    public class Ad : Base
     {
         public Ad()
         {
@@ -18,9 +18,9 @@ namespace Models.EntityModels
         public string Details { get; set; }
         public string City { get; set; }
         public int Price { get; set; }
-        public virtual Worker Worker { get; set; }
         public bool Visible { get; set; }
         public virtual List<Photo> Pictures { get; set; }
         public int Counter { get; set; }
+        public MapCords Cords { get; set; }
     }
 }

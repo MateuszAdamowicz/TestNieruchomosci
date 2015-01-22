@@ -1,8 +1,7 @@
-﻿using Models.EntityModels.Interfaces;
-
+﻿
 namespace Models.EntityModels
 {
-    public class Land: Ad, ILand
+    public class Land: Ad
     {
         public int Area { get; set; }
         public string Ownership { get; set; }

@@ -7,5 +7,6 @@ namespace Models.ViewModels
         public DateTime CreatedAt { get; set; }
         public string Previous { get; set; }
         public string Next { get; set; }
+        public MapCords Cords { get; set; }
     }
 }

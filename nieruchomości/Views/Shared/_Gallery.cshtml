@@ -1,0 +1,24 @@
+﻿@model List<Models.EntityModels.Photo> 
+
+<div class="row" style="margin-top: 20px; font-size: large;">
+    <div class="col-md-12">
+        <span class="glyphicon glyphicon-camera" style="margin-right: 10px;"></span>
+        <b>Galeria zdjęć</b> <small style="font-size: 65%">(kliknij na wybranym zdjęciu aby je powiększyć)</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            @foreach (var photo in Model)
+            {
+                <div class="col-md-3">
+                    <a class="fancybox" rel="gallery1" href="/Content/Photos/@photo.Link">
+                        <img src="/Content/Photos/@photo.Min" width="100%" style="border: 1px solid white" />
+                    </a>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

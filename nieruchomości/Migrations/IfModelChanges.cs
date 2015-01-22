@@ -16,14 +16,6 @@ namespace nieruchomości.Migrations
 
             var seedService = new SeedService();
 
-            var workers = new List<Worker>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                var worker = seedService.GetWorker();
-                workers.Add(worker);
-                context.Workers.Add(worker);
-            }
             context.SaveChanges();
 
             var flats = new List<Flat>();
@@ -31,7 +23,6 @@ namespace nieruchomości.Migrations
             for (int i = 0; i < 20; i++)
             {
                 var flat = seedService.GetFlat();
-                flat.Worker = workers[rnd.Next(workers.Count)];
                 context.Flats.Add(flat);
             }
 
@@ -40,7 +31,6 @@ namespace nieruchomości.Migrations
             for (int i = 0; i < 25; i++)
             {
                 var house = seedService.GetHouse();
-                house.Worker = workers[rnd.Next(workers.Count)];
                 context.Houses.Add(house);
             }
 
@@ -49,7 +39,6 @@ namespace nieruchomości.Migrations
             for (int i = 0; i < 10; i++)
             {
                 var land = seedService.GetLand();
-                land.Worker = workers[rnd.Next(workers.Count)];
                 context.Lands.Add(land);
             }
 

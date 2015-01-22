@@ -24,11 +24,11 @@ namespace nieruchomości
             Bootstrapper.Initialise();
 
 
-            //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
             XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
             ILog logger = LogManager.GetLogger("Log4NetTest.OtherClass");
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, logger);            
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationContext, Context.Migrations.Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationContext, Context.Migrations.Configuration>());
             MapperConfig.Register();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

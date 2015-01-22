@@ -20,7 +20,6 @@ using Services.DeleteMessageService;
 using Services.EmailServices.EmailService;
 using Services.GenericRepository;
 using Services.SearchService;
-using Services.WorkerService;
 
 namespace nieruchomości.Controllers
 {
@@ -29,7 +28,6 @@ namespace nieruchomości.Controllers
     {
         private readonly IApplicationContext _applicationContext;
         private readonly IAddAdvertService _addAdvertService;
-        private readonly IWorkerService _workerService;
         private readonly IUpdateAdvertService _updateAdvertService;
         private readonly IAdminLoginService _adminLoginService;
         private readonly IEmailService _emailService;
@@ -43,11 +41,10 @@ namespace nieruchomości.Controllers
         private readonly IAdminSettingsService _adminSettingsService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository, ISearchService searchService, IChangeAdvertVisibility changeAdvertVisibility, ICalcService calcService, IAdminSettingsService adminSettingsService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService, IAdminFilterAdvertService adminFilterAdvertService, IOfferService offerService, IDeleteMessageService deleteMessageService, IGenericRepository genericRepository, ISearchService searchService, IChangeAdvertVisibility changeAdvertVisibility, ICalcService calcService, IAdminSettingsService adminSettingsService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
-            _workerService = workerService;
             _updateAdvertService = updateAdvertService;
             _adminLoginService = adminLoginService;
             _emailService = emailService;
@@ -83,16 +80,6 @@ namespace nieruchomości.Controllers
         }
 
 
-        public ActionResult DeleteWorker(int id)
-        {
-            var worker = _genericRepository.GetSet<Worker>().FirstOrDefault(x => x.Id == id);
-            if (worker != null) worker.Deleted = true;
-
-            _genericRepository.SaveChanges();
-
-            return RedirectToAction("Workers");
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -125,7 +112,6 @@ namespace nieruchomości.Controllers
             {
                 TempData["AdType"] = 0;
             }
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
             return View(new AdminAdvertToAdd());
         }
 
@@ -145,7 +131,6 @@ namespace nieruchomości.Controllers
                 var result = _addAdvertService.AddFlat(adminFlat);
                 return RedirectToAction("Show", "Home", new { key = result.Data});
             }
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
             TempData["AdType"] = 0;
             return View("AddAdvert", new AdminAdvertToAdd() { Flat = adminFlat });
         }
@@ -166,7 +151,6 @@ namespace nieruchomości.Controllers
                 var result = _addAdvertService.AddHouse(adminHouse);
                 return RedirectToAction("Show", "Home", new { key = result.Data });
             }
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
             TempData["AdType"] = 1;
             return View("AddAdvert", new AdminAdvertToAdd() { House = adminHouse });
         }
@@ -186,88 +170,10 @@ namespace nieruchomości.Controllers
                 var result = _addAdvertService.AddLand(adminLand);
                 return RedirectToAction("Show", "Home", new { key = result.Data });
             }
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
             TempData["AdType"] = 2;
             return View("AddAdvert", new AdminAdvertToAdd() { Land = adminLand });
         }
 
-        public ActionResult Workers(int? page)
-        {
-            int pageSize = 20;
-            int pageNumber = (page ?? 1);
-
-            var workers = _genericRepository.GetSet<Worker>().OrderByDescending(x => x.CreatedAt).ToList();
-            //var workersVm = new WorkersViewModel() { Workers = workers.ToPagedList(pageNumber, pageSize) };
-            return View(workers.ToPagedList(pageNumber, pageSize));
-        }
-
-        public ActionResult Worker(int id)
-        {
-            var worker = _genericRepository.GetSet<Worker>().FirstOrDefault(x => x.Id == id);
-            var model = AutoMapper.Mapper.Map<WorkerAdverts>(worker);
-
-            var flats = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Flat>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
-            var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<House>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
-            var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_genericRepository.GetSet<Land>().Where(x => x.Worker != null && x.Worker.Id == id).ToList());
-
-            model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt).ToList();
-
-            return View(model);
-        }
-
-
-        public ActionResult AddWorker()
-        {
-            return View(new AdminWorker());
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult AddWorker(AdminWorker adminWorker)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = _workerService.AddWorker(adminWorker);
-
-                if (result.Success == true)
-                {
-                    var workers = _genericRepository.GetSet<Worker>().ToList();
-                    var response = new Response()
-                    {
-                        Message = "Dodano nowego pracownika!",
-                        Success = true
-                    };
-                    return RedirectToAction("Workers");
-                }
-                return View(adminWorker);
-            }
-            return View(adminWorker);
-        }
-
-        public ActionResult EditWorker(int id)
-        {
-            var worker = _genericRepository.GetSet<Worker>().FirstOrDefault(x => x.Id == id);
-
-            var adminWorker = AutoMapper.Mapper.Map<AdminWorker>(worker);
-
-            return View(adminWorker);
-        }
-
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult EditWorker(AdminWorker adminWorker, int id)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = _workerService.EditWorker(adminWorker, id);
-                if (result.Success == true)
-                {
-                    return RedirectToAction("Worker", new {id});
-                }
-                return View(adminWorker);
-            }
-            return View(adminWorker);
-        }
 
         [HttpGet]
         public ActionResult AdList(AdList adList, int? page, bool? changed, bool? hide, string key, string worker, DateTime? dateFrom, DateTime? dateTo, bool? flat, bool? house, bool? land, bool? paged, bool? hidden, bool? showHidden = false)
@@ -350,7 +256,6 @@ namespace nieruchomości.Controllers
             {
                 editFlat.Pictures = flat.Pictures;
             }
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
             return View(editFlat);
         }
 
@@ -358,7 +263,6 @@ namespace nieruchomości.Controllers
         {
             var flat = _genericRepository.GetSet<Flat>().FirstOrDefault(x => x.Id == id);
             var flatToEdit = AutoMapper.Mapper.Map<EditFlat>(flat);
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
 
             return View(flatToEdit);
         }
@@ -380,14 +284,12 @@ namespace nieruchomości.Controllers
             {
                 editHouse.Pictures = house.Pictures;
             }
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
             return View(editHouse);
         }
         public ActionResult EditHouse(int id)
         {
             var house = _genericRepository.GetSet<House>().FirstOrDefault(x => x.Id == id);
             var houseToEdit = AutoMapper.Mapper.Map<EditHouse>(house);
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
 
             return View(houseToEdit);
         }
@@ -396,7 +298,6 @@ namespace nieruchomości.Controllers
         {
             var land = _genericRepository.GetSet<Land>().FirstOrDefault(x => x.Id == id);
             var landToEdit = AutoMapper.Mapper.Map<EditLand>(land);
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
 
             return View(landToEdit);
         }
@@ -417,7 +318,6 @@ namespace nieruchomości.Controllers
             {
                 editLand.Pictures = land.Pictures;
             }
-            ViewData["Workers"] = _genericRepository.GetSet<Worker>().ToList();
             return View(editLand);
         }
 

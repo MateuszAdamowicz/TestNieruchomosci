@@ -74,5 +74,7 @@ namespace Models.ViewModels
 
         public int Worker { get; set; }
         public IEnumerable<HttpPostedFileBase> Files { get; set; }
+
+        public MapCords Cords { get; set; }
     }
 }

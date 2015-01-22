@@ -23,11 +23,6 @@ namespace Services.AdvertServices.AddAdvertService.Implementation
         public Result<string> AddFlat(AdminFlat adminFlat)
         {
             var flat = Mapper.Map<Flat>(adminFlat);
-            if (adminFlat.Worker != 0)
-            {
-                var worker = _context.Workers.FirstOrDefault(x => x.Id == adminFlat.Worker);
-                flat.Worker = worker;
-            }
             flat.Pictures = _photoService.AddAdvertPhotos(adminFlat.Files);
             foreach (var photo in flat.Pictures)
             {
@@ -45,9 +40,6 @@ namespace Services.AdvertServices.AddAdvertService.Implementation
         public Result<string> AddLand(AdminLand adminLand)
         {
             var land = Mapper.Map<Land>(adminLand);
-            var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminLand.Worker));
-
-            land.Worker = worker;
             land.Pictures = _photoService.AddAdvertPhotos(adminLand.Files);
             foreach (var photo in land.Pictures)
             {
@@ -65,9 +57,6 @@ namespace Services.AdvertServices.AddAdvertService.Implementation
         public Result<string> AddHouse(AdminHouse adminHouse)
         {
             var house = Mapper.Map<House>(adminHouse);
-            var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminHouse.Worker));
-
-            house.Worker = worker;
             house.Pictures = _photoService.AddAdvertPhotos(adminHouse.Files);
             foreach (var photo in house.Pictures)
             {

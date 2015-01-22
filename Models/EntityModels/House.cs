@@ -1,8 +1,8 @@
-﻿using Models.EntityModels.Interfaces;
+﻿
 
 namespace Models.EntityModels
 {
-    public class House: Ad, IHouse
+    public class House: Ad
     {
         public string Location { get; set; }
         public int LandArea { get; set; }

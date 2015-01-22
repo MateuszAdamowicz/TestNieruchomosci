@@ -30,11 +30,6 @@ namespace Services.AdvertServices.AdminFilterAdvertService.Implementation
                 advertsToShow = advertsToShow.Where(x => x.Title.Contains(key) || x.City.Contains(key) || x.Number == key);
             }
 
-            if (!String.IsNullOrEmpty(worker))
-            {
-                advertsToShow = advertsToShow.Where(x =>x.Worker != null &&(x.Worker.FirstName == worker || x.Worker.LastName == worker || x.Worker.FullName.Contains(worker)));
-            }
-
             if (showHidden == false)
             {
                 advertsToShow = advertsToShow.Where(x => x.Visible);

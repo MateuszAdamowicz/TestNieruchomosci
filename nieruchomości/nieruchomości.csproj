@@ -32,9 +32,9 @@
     <PublishDatabaseSettings>
       <Objects>
         <ObjectGroup Name="NewConnection1-Deployment" Order="1">
-          <Destination Path="Data Source=nieruchomosci.mssql.somee.com%3bInitial Catalog=nieruchomosci%3bPersist Security Info=False%3bUser ID=laptop_service_SQLLogin_1%3bPassword=bbheneuihw%3bMultipleActiveResultSets=True%3bPacket Size=4096%3bWorkstation ID=nieruchomosci.mssql.somee.com" />
-          <Object Type="DbFullSql">
-            <PreSource Path="" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+          <Destination Path="Data Source=nieruchomosci.mssql.somee.com%3bInitial Catalog=nieruchomosci%3bPersist Security Info=False%3bUser ID=laptop_service_SQLLogin_2%3bPassword=dcojemwgyh%3bPacket Size=4096%3bWorkstation ID=nieruchomosci.mssql.somee.com" />
+          <Object Type="DbFullSql" Enabled="False">
+            <PreSource Path="Data Source=nieruchomosci.mssql.somee.com%3bInitial Catalog=nieruchomosci%3bPersist Security Info=False%3bUser ID=laptop_service_SQLLogin_2%3bPassword=dcojemwgyh%3bPacket Size=4096%3bWorkstation ID=nieruchomosci.mssql.somee.com" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
             <Source Path="obj\Debug\AutoScripts\NewConnection1-Deployment_SchemaOnly.sql" Transacted="True" />
           </Object>
         </ObjectGroup>
@@ -329,7 +329,6 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\mainmenu_slant.png" />
     <Content Include="Content\img\searchbox_slant_gray_top.png" />
-    <Content Include="Content\img\the-palace-of-culture.jpg" />
     <Content Include="Content\ng-grid.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Photos\1373914_phpThumb_generated_thumbnailjpg %281%29.jpg" />
@@ -1302,6 +1301,10 @@
     <Content Include="Views\Admin\AddClatTable.cshtml" />
     <Content Include="Views\Home\_Cities.cshtml" />
     <Content Include="Views\Home\_NewestAdverts.cshtml" />
+    <Content Include="Views\Shared\_Map.cshtml" />
+    <Content Include="Views\Shared\_Gallery.cshtml" />
+    <Content Include="Views\Shared\_Ask.cshtml" />
+    <Content Include="Views\Shared\_Worker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

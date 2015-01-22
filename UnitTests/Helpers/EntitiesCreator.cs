@@ -17,7 +17,6 @@ namespace UnitTests.Helpers
                 Details = "details",
                 City = "city",
                 Price = 1,
-                Worker = null,
                 Visible = true,
                 Pictures = null,
                 Counter = 1,
@@ -61,7 +60,6 @@ namespace UnitTests.Helpers
                 ToLet = true,
                 UsableArea = 30,
                 Visible = true,
-                Worker = null
                 
             };
 
@@ -85,28 +83,9 @@ namespace UnitTests.Helpers
                 Ownership = "ownership",
                 Pictures = null,
                 Visible = true,
-                Worker = null,
                 Area = 40
             };
             return land;
-        }
-
-        public static Worker GetWorker()
-        {
-            var worker = new Worker
-            {
-                CreatedAt = new DateTime(2015, 1, 1),
-                Deleted = false,
-                Id = 1,
-                Email = "test@email.com",
-                FirstName = "firstName",
-                HasPhoto = false,
-                LastName = "lastName",
-                PhoneFirst = "phoneFirst",
-                PhoneSecond = "phoneSecond",
-                Photo = String.Empty
-            };
-            return worker;
         }
     }
 }

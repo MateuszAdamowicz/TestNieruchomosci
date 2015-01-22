@@ -32,7 +32,6 @@ namespace UnitTests.MapperTest
             Assert.AreEqual(flat.Title, result.Title);
             Assert.AreEqual(flat.City, result.City);
             Assert.AreEqual(flat.Visible, result.Visible);
-            Assert.AreEqual(flat.Worker, result.Worker);
             Assert.AreEqual(result.AdType, AdType.Flat);
         }
 
@@ -51,7 +50,6 @@ namespace UnitTests.MapperTest
             Assert.AreEqual(result.CreatedAt, house.CreatedAt);
             Assert.AreEqual(result.Deleted, house.Deleted);
             Assert.AreEqual(result.Id, house.Id);
-            Assert.AreEqual(result.Worker, house.Worker);
             Assert.AreEqual(result.Visible, house.Visible);
             Assert.AreEqual(result.Title,house.Title);
         }
@@ -73,7 +71,6 @@ namespace UnitTests.MapperTest
             Assert.AreEqual(result.Id, land.Id);
             Assert.AreEqual(result.Title, land.Title);
             Assert.AreEqual(result.Visible, land.Visible);
-            Assert.AreEqual(result.Worker, land.Worker);
         }
 
         [TestMethod]

@@ -19,6 +19,14 @@ body {
     
 }
 
+
+#map {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+}
+
 .left-newest {
     padding-top: 0px;
     padding-left: 30px;

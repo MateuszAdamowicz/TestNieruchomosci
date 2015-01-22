@@ -6,7 +6,7 @@
     ViewBag.Title = "ShowFlat";
 }
 <div class="col-md-12">
-    <div class="row" style="margin-top: 20px">
+    <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
@@ -88,56 +88,17 @@
                             </div>
                         </div>
 
-                        <div class="row" style="margin-top: 20px; font-size: large;">
-                            <div class="col-md-12">
-                                <span class="glyphicon glyphicon-map-marker" style="margin-right: 10px;"></span>
-                                <b>Zobacz na mapie</b> <small style="font-size: 65%">(mapa wskazuje tylko lokalizację, aktyalny stan pokazuje galeria pod mapą)</small>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div style="height: 200px; width: 100%; border: 1px solid white">
-                                    <div id="map"></div>
-                                </div>
-                            </div>
-                        </div>
-
+                        @if (Model.Cords != null)
+                        {
+                            Html.RenderPartial("_Map", Model.Cords);
+                        }
 
                         @if (Model.Pictures != null && Model.Pictures.Any())
                         {
-                            <div class="row" style="margin-top: 20px; font-size: large;">
-                                <div class="col-md-12">
-                                    <span class="glyphicon glyphicon-camera" style="margin-right: 10px;"></span>
-                                    <b>Galeria zdjęć</b> <small style="font-size: 65%">(kliknij na wybranym zdjęciu aby je powiększyć)</small>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @foreach (var photo in Model.Pictures)
-                                    {
-                                        <div class="col-md-3">
-                                            <a class="fancybox" rel="gallery1" href="/Content/Photos/@photo.Link">
-                                                <img src="/Content/Photos/@photo.Min" width="100%" style="border:1px solid white" />
-                                            </a>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
+                            Html.RenderPartial("_Gallery", Model.Pictures);
                         }
-                        @if (Model.Worker != null)
-                        {
-                            <div class="row" style="margin-top: 20px; font-size: large;">
-                                <div class="col-md-12">
-                                    <span class="glyphicon glyphicon-user" style="margin-right: 10px;"></span>
-                                    <b>Zapytaj o tą nieruchomość</b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @{Html.RenderPartial("_ContactForm", Model.ContactEmail);}
-                                </div>
-                            </div>
+                        @{
+                            Html.RenderPartial("_Ask", Model.ContactEmail);
                         }
                     </div>
                 </div>

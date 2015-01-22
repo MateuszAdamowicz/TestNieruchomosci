@@ -150,11 +150,9 @@
     <Compile Include="PhotoService\IPhotoService.cs" />
     <Compile Include="AdvertServices\UpdateAdvertService\IUpdateAdvertService.cs" />
     <Compile Include="ResizeImageService\Implementataion\ResizeImageService.cs" />
-    <Compile Include="WorkerService\IWorkerService.cs" />
     <Compile Include="LogService\Implementation\ExceptionLoggingFilter.cs" />
     <Compile Include="PhotoService\Implementation\PhotoService.cs" />
     <Compile Include="AdvertServices\UpdateAdvertService\Implementation\UpdateAdvertService.cs" />
-    <Compile Include="WorkerService\Implementation\WorkerService.cs" />
     <Compile Include="StatisticesServices\CounterService\Implementation\CounterService.cs" />
     <Compile Include="CreateOfferService\Implementation\CreateOfferService.cs" />
     <Compile Include="EmailServices\EmailSenderService\Implementation\EmailSenderService.cs" />
